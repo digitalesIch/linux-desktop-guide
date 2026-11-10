@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import { ASTRO_CONFIG_PATH, DOCS_ROOT } from '../lib/config.mjs';
@@ -91,7 +92,7 @@ test('rejects an unknown section', () => {
 });
 
 test('detects source changes and reloads the index', () => {
-	const root = mkdtempSync(join('/tmp/opencode', 'docs-mcp-'));
+	const root = mkdtempSync(join(tmpdir(), 'docs-mcp-'));
 	const file = join(root, 'start', 'one.md');
 
 	try {

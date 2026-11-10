@@ -22,4 +22,5 @@
 - [x] 4.1 Run `npm run check:docs`; verify the feedback page builds, is indexed, and all internal links and anchors pass.
 - [x] 4.2 Run `npm run check:quality -- --no-build`; verify Lighthouse remains at the existing thresholds.
 - [x] 4.3 Validate the issue form and workflow YAML with Node; verify both parse without errors.
-- [x] 4.4 Commit and push; verify the repository is still private, the default branch is `main`, and the workflow file is present.
+- [x] 4.4 Fix the MCP page test to use the system temp directory so the workflow runs on a clean runner; verify `npm run test:docs-mcp` passes.
+- [x] 4.5 Commit and push; verify the repository is still private, the default branch is `main`, and the workflow passes on GitHub Actions.
