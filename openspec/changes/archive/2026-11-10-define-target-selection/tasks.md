@@ -34,4 +34,4 @@
 - [x] 5.1 Run `npm run check:docs`.
 - [x] 5.2 Run `npm run check:quality`.
 - [x] 5.3 Validate every source link and target claim.
-- [ ] 5.4 Commit, merge to `main`, and archive the change.
+- [x] 5.4 Commit, merge to `main`, and archive the change.

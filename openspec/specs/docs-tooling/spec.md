@@ -12,7 +12,7 @@ The project SHALL provide one local command that runs the deterministic document
 #### Scenario: Run the default gate
 
 - **WHEN** a maintainer runs `npm run check:docs`
-- **THEN** the command verifies the baseline, checks tutorial/example consistency, builds the site, validates generated agent docs, runs the MCP tests, and checks internal links and anchors
+- **THEN** the command verifies the baseline, checks tutorial/example consistency, validates the target matrix, builds the site, validates generated agent docs, runs the MCP tests, and checks internal links and anchors
 
 #### Scenario: A check fails
 
@@ -55,7 +55,7 @@ The project SHALL provide a local Lighthouse check for the built documentation.
 #### Scenario: Representative pages meet the budgets
 
 - **WHEN** a maintainer runs `npm run check:quality` on a machine with Chrome
-- **THEN** the command builds the site, serves `dist/` on a loopback port, audits the landing, start, engineering, accessibility, and packaging pages, and exits zero only when accessibility, best practices, and SEO are 100 and performance is at least 90
+- **THEN** the command builds the site, serves `dist/` on a loopback port, audits the landing, start, target-matrix, engineering, accessibility, and packaging pages, and exits zero only when accessibility, best practices, and SEO are 100 and performance is at least 90
 
 #### Scenario: A budget is missed
 
@@ -95,3 +95,22 @@ The documentation gate SHALL verify that the first-app tutorial and the runnable
 
 - **WHEN** a mismatch is found
 - **THEN** the check prints the file, the tutorial line, and a unified diff
+
+### Requirement: Target matrix validation
+
+The documentation gate SHALL validate the curated target matrix as structured data.
+
+#### Scenario: Default documentation gate
+
+- **WHEN** a maintainer runs `npm run check:docs`
+- **THEN** the gate runs `check:targets` and fails if the target data is incomplete or inconsistent
+
+#### Scenario: Target data is invalid
+
+- **WHEN** a target is missing a source, has an invalid role, or uses an out-of-range score
+- **THEN** `check:targets` reports the target and field and exits non-zero
+
+#### Scenario: Coverage gates are enforced
+
+- **WHEN** the target matrix no longer contains a reference GTK target, a reference Qt target, an LTS or stable target, a current or rolling target, and both deb- and rpm-based distributions
+- **THEN** `check:targets` fails with the missing coverage dimension
