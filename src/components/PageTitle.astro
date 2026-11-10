@@ -13,14 +13,20 @@ const sections: Record<string, string> = {
 };
 
 const sectionLabel = sections[section];
+const markdownHref = id === '404' || id === 'index' ? undefined : `/${id}.md`;
 ---
 
 <div class="page-header">
-	{sectionLabel && (
-		<p class="page-eyebrow">
-			<span>{sectionLabel}</span>
-		</p>
-	)}
+	<div class="page-meta">
+		{sectionLabel && (
+			<p class="page-eyebrow">
+				<span>{sectionLabel}</span>
+			</p>
+		)}
+		{markdownHref && (
+			<a class="page-markdown" href={markdownHref}>Markdown</a>
+		)}
+	</div>
 	<h1 id="_top">{entry.data.title}</h1>
 	{description && <p class="page-lede">{description}</p>}
 </div>
@@ -30,11 +36,19 @@ const sectionLabel = sections[section];
 		margin-block: 0.25rem 1.25rem;
 	}
 
+	.page-meta {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.95rem;
+	}
+
 	.page-eyebrow {
 		display: flex;
 		align-items: center;
 		gap: 0.6rem;
-		margin: 0 0 0.95rem;
+		margin: 0;
 		font-family: var(--sl-font-mono);
 		font-size: 0.68rem;
 		font-weight: 600;
@@ -62,6 +76,21 @@ const sectionLabel = sections[section];
 		text-wrap: balance;
 	}
 
+	.page-markdown {
+		font-family: var(--sl-font-mono);
+		font-size: 0.64rem;
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--sl-color-gray-3);
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.page-markdown:hover {
+		color: var(--sl-color-accent);
+	}
+
 	.page-lede {
 		max-width: 66ch;
 		margin: 1.05rem 0 0;
@@ -76,7 +105,22 @@ const sectionLabel = sections[section];
 			margin-bottom: 0.75rem;
 		}
 
-		.page-lede {
+		.page-markdown {
+		font-family: var(--sl-font-mono);
+		font-size: 0.64rem;
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--sl-color-gray-3);
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.page-markdown:hover {
+		color: var(--sl-color-accent);
+	}
+
+	.page-lede {
 			font-size: 0.97rem;
 		}
 	}

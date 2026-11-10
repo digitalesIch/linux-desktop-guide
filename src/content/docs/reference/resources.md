@@ -158,6 +158,17 @@ The Linux desktop has excellent documentation. It is also spread across a dozen 
 | GUADEC | [guadec.org](https://guadec.org/) |
 | Akademy | [akademy.kde.org](https://akademy.kde.org/) |
 
+## Agent access
+
+The guide is published for human readers and agents from the same source. The agent-facing files are generated at build time, so they cannot drift from the HTML.
+
+- [llms.txt](/llms.txt) — curated index grouped by section, with links to every Markdown page.
+- [llms-full.txt](/llms-full.txt) — the complete guide in one Markdown file.
+- **Per-page Markdown** — append `.md` to a route: `/start/why-linux.md`, `/platform/ubuntu.md`, `/reference/baseline.md`.
+- **Discovery** — every HTML page advertises its Markdown sibling with `<link rel="alternate" type="text/markdown">` and points to `/llms.txt` with `rel="describedby"`.
+
+Content negotiation (`Accept: text/markdown`) depends on host or CDN support and is not enabled by the static site. The `.md` endpoints work on any static host.
+
 ## How to keep this current
 
 - Prefer primary documentation over blog posts.

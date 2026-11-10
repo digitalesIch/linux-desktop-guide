@@ -105,6 +105,23 @@ python3 src/main.py
 
 See `examples/notes/README.md` for Meson and Flatpak instructions.
 
+## Agent docs
+
+The build generates agent-friendly documentation from the same HTML:
+
+- `/llms.txt` — curated index grouped by section.
+- `/llms-full.txt` — the complete guide in one Markdown file.
+- `/<route>.md` — a clean Markdown version of every page, e.g. `/start/why-linux.md`.
+- Every HTML page advertises its Markdown sibling via `rel="alternate"` and `/llms.txt` via `rel="describedby"`.
+
+These files are build artifacts in `dist/`, not committed duplicates. Verify them with:
+
+```bash
+npm run check:agent-docs
+```
+
+Content negotiation (`Accept: text/markdown`) is intentionally left to a future host/CDN rule.
+
 ## Design tokens
 
 The site's tokens live at the top of `src/styles/custom.css`:

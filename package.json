@@ -10,7 +10,9 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"check:baseline": "node scripts/check-baseline.mjs"
+		"check:baseline": "node scripts/check-baseline.mjs",
+		"postbuild": "node scripts/generate-agent-docs.mjs",
+		"check:agent-docs": "node scripts/check-agent-docs.mjs"
 	},
 	"dependencies": {
 		"@astrojs/starlight": "^0.42.10",
@@ -19,5 +21,10 @@
 		"@fontsource-variable/space-grotesk": "^5.3.0",
 		"astro": "^7.3.6",
 		"sharp": "^0.35.3"
+	},
+	"devDependencies": {
+		"linkedom": "^0.18.15",
+		"turndown": "^7.2.5",
+		"turndown-plugin-gfm": "^1.0.2"
 	}
 }

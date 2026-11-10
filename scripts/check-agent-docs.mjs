@@ -1,0 +1,76 @@
+#!/usr/bin/env node
+
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { dirname, join, relative, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = dirname(dirname(fileURLToPath(import.meta.url)));
+const docsRoot = join(root, 'src', 'content', 'docs');
+const dist = join(root, 'dist');
+
+function walk(dir) {
+	const files = [];
+	for (const name of readdirSync(dir)) {
+		const path = join(dir, name);
+		const stat = statSync(path);
+		if (stat.isDirectory()) files.push(...walk(path));
+		else if (/\.mdx?$/.test(name)) files.push(path);
+	}
+	return files;
+}
+
+const expected = walk(docsRoot)
+	.map((file) => relative(docsRoot, file).split(sep).join('/'))
+	.map((file) => file.replace(/\.mdx?$/, ''))
+	.filter((slug) => slug !== '404' && slug !== 'index')
+	.map((slug) => (slug === 'index' ? 'index' : slug));
+
+const errors = [];
+const llmsPath = join(dist, 'llms.txt');
+const fullPath = join(dist, 'llms-full.txt');
+
+if (!existsSync(llmsPath)) errors.push('dist/llms.txt is missing');
+if (!existsSync(fullPath)) errors.push('dist/llms-full.txt is missing');
+
+let llms = '';
+if (existsSync(llmsPath)) {
+	llms = readFileSync(llmsPath, 'utf8');
+	const h1Count = llms.split('\n').filter((line) => /^# /.test(line)).length;
+	if (h1Count !== 1) errors.push(`llms.txt must contain exactly one H1, found ${h1Count}`);
+	if (!llms.startsWith('# Linux Desktop Guide')) errors.push('llms.txt must start with the site H1');
+	for (const slug of expected) {
+		if (!llms.includes(`/${slug}.md`)) errors.push(`llms.txt is missing /${slug}.md`);
+		const mdPath = join(dist, slug === 'index' ? 'index.md' : `${slug}.md`);
+		if (!existsSync(mdPath)) errors.push(`Missing generated page: ${mdPath}`);
+	}
+
+	for (const match of llms.matchAll(/\]\((https?:\/\/[^)]+\.md)\)/g)) {
+		const pathname = new URL(match[1]).pathname.replace(/^\//, '');
+		if (!existsSync(join(dist, pathname))) {
+			errors.push(`llms.txt link target is missing: /${pathname}`);
+		}
+	}
+
+	if (!llms.includes('## Optional')) errors.push('llms.txt is missing the Optional section');
+}
+
+if (existsSync(fullPath)) {
+	const full = readFileSync(fullPath, 'utf8');
+	if (full.length < 10000) errors.push('llms-full.txt looks too small');
+	for (const slug of expected) {
+		const mdPath = join(dist, slug === 'index' ? 'index.md' : `${slug}.md`);
+		if (!existsSync(mdPath)) continue;
+		const title = readFileSync(mdPath, 'utf8').match(/^# (.+)$/m)?.[1];
+		if (title && !full.includes(title)) errors.push(`llms-full.txt is missing title: ${title}`);
+	}
+}
+
+if (existsSync(join(dist, '404.md'))) errors.push('dist/404.md should not be generated');
+
+if (errors.length) {
+	console.error('Agent docs validation failed:');
+	for (const error of errors) console.error(`- ${error}`);
+	process.exit(1);
+}
+
+console.log(`Agent docs OK: ${expected.length} Markdown pages, llms.txt, and llms-full.txt.`);

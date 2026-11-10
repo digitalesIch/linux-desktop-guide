@@ -1,0 +1,13 @@
+---
+const { head, id } = Astro.locals.starlightRoute;
+const markdownHref = id === '404' || id === 'index' ? undefined : `/${id}.md`;
+---
+
+{head.map(({ tag: Tag, attrs, content }) => (
+	<Tag {...attrs} set:html={content} />
+))}
+
+{markdownHref && (
+	<link rel="alternate" type="text/markdown" href={markdownHref} title="Markdown version" />
+)}
+{id !== '404' && <link rel="describedby" href="/llms.txt" />}
