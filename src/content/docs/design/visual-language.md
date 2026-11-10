@@ -202,4 +202,13 @@ Avoid:
 - ☐ Empty states explain the next step.
 - ☐ Screenshots show the real app in both color schemes.
 
+
+## Sources
+
+- [GNOME HIG](https://developer.gnome.org/hig/)
+- [libadwaita CSS variables](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.9/css-variables.html)
+- [libadwaita style classes](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.9/style-classes.html)
+- [GTK CSS overview](https://docs.gtk.org/gtk4/css-overview.html)
+- [Adw.get_enable_animations](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.9/func.get_enable_animations.html)
+
 Next: [Layout & Navigation](/design/layout/) — choosing the right adaptive structure for your app.

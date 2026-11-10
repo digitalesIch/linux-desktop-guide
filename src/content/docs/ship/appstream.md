@@ -5,7 +5,7 @@ description: How to write AppStream metainfo, screenshots, release notes, and de
 
 A software center does not see your app the way you do. It sees a name, a summary, an icon, screenshots, categories, a license, release notes, and a permission set. If any of those are missing or inconsistent, the app looks unfinished — or never appears at all.
 
-**AppStream** is the metadata standard behind GNOME Software, KDE Discover, Flathub, and most distribution catalogs. The file is small, but it is part of the product.
+**[AppStream](https://www.freedesktop.org/software/appstream/docs/)** is the metadata standard behind GNOME Software, KDE Discover, Flathub, and most distribution catalogs. The file is small, but it is part of the product.
 
 ## Where the file goes
 
@@ -102,7 +102,7 @@ Legacy `.appdata.xml` files are still accepted, but new apps should use `.metain
 | `<keywords>` | Improves search; use real user terms |
 | `<screenshots>` | The single biggest factor in install conversion; tag non-English captures with `xml:lang` |
 | `<releases>` | Version history and user-facing notes |
-| `<content_rating>` | Required for many catalogs; OARS 1.1 |
+| `<content_rating>` | Required for many catalogs; [OARS 1.1](https://hughsie.github.io/oars/generate.html) |
 | `<provides>` | Declares binaries, MIME types, or libraries |
 | `<url>` | Homepage, bug tracker, donation, translate |
 | `<translation>` | Declares the gettext/Qt translation domain so software centers can show available languages |
@@ -225,5 +225,15 @@ Icon and desktop-file consistency checks happen in `appstreamcli compose` and Fl
 - ☐ If the app is translated, `<translation type="gettext">` or `<translation type="qt">` is present and the `.mo`/`.qm` files are installed.
 - ☐ The metainfo passes `appstreamcli validate --no-net` and `flatpak-builder-lint appstream`.
 - ☐ The icon is installed and legible at 16 px.
+
+
+## Sources
+
+- [AppStream documentation](https://www.freedesktop.org/software/appstream/docs/)
+- [Flathub metainfo guidelines](https://docs.flathub.org/docs/for-app-authors/metainfo-guidelines)
+- [Flathub quality guidelines](https://docs.flathub.org/docs/for-app-authors/metainfo-guidelines/quality-guidelines)
+- [Desktop Entry specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/)
+- [Icon Theme specification](https://specifications.freedesktop.org/icon-theme-spec/latest/)
+- [OARS](https://hughsie.github.io/oars/generate.html)
 
 Next: [Flathub](/ship/flathub/) — the submission and maintenance process.

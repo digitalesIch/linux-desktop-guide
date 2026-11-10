@@ -180,4 +180,14 @@ For a release, add these checks:
 
 If any check fails, fix it before you announce.
 
+
+## Sources
+
+- [AppStream](https://www.freedesktop.org/software/appstream/docs/)
+- [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements)
+- [Debian Policy](https://www.debian.org/doc/debian-policy/)
+- [Snapcraft](https://snapcraft.io/docs/)
+- [Reproducible Builds](https://reproducible-builds.org/)
+- [Quality Signals](/reference/quality-signals/)
+
 Next: [The Quality Bar](/ship/quality-bar/) — a scorecard for the whole product.

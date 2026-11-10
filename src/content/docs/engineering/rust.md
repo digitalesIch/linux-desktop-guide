@@ -5,9 +5,9 @@ description: Rust desktop options compared — gtk-rs, Relm4, Iced, Slint, libco
 
 Rust is a strong choice for Linux desktop apps. GNOME's Loupe and Resources are written in Rust, COSMIC is built on Rust, and the gtk-rs bindings are mature enough for production. You get memory safety, fearless concurrency, and a packaging story that fits Flatpak well.
 
-The trade-offs are real: longer compile times, a smaller pool of UI contributors, and a toolkit object model that does not map cleanly to Rust's ownership rules. None of them are blockers if you choose the right layer.
+The [gtk-rs](https://gtk-rs.org/gtk4-rs/stable/latest/book/) and [Relm4](https://relm4.org/book/stable/) ecosystems are active; the trade-offs are real: longer compile times, a smaller pool of UI contributors, and a toolkit object model that does not map cleanly to Rust's ownership rules. None of them are blockers if you choose the right layer.
 
-Ubuntu documents both the archive Rust toolchain and the `rustup` path, along with the versions available in each release. Use the [Ubuntu Rust guide](https://ubuntu.com/developers/docs/toolchains/rust/) when you need an install path, and the [version reference](https://documentation.ubuntu.com/ubuntu-for-developers/reference/availability/rust/) before you promise support for an older LTS.
+Ubuntu documents both the archive Rust toolchain and the `rustup` path, along with the versions available in each release. Use the [Ubuntu Rust guide](https://ubuntu.com/developers/docs/toolchains/rust/) when you need an install path, and the [version reference](https://ubuntu.com/developers/docs/reference/availability/rust/) before you promise support for an older LTS.
 
 ## The options
 
@@ -237,7 +237,7 @@ modules:
       - cargo-sources.json
 ```
 
-`type: dir` is for local development. A Flathub submission uses a `git` source pinned to a tag/commit or an `archive` source with a checksum. The runtime does not include the Rust toolchain; the SDK extension and `CARGO_HOME` above are required for an offline build.
+[`type: dir`](https://docs.flatpak.org/en/latest/module-sources.html#dir) is for local development. A Flathub submission uses a `git` source pinned to a tag/commit or an `archive` source with a checksum. The runtime does not include the Rust toolchain; the SDK extension and `CARGO_HOME` above are required for an offline build.
 
 Use the `org.gnome.Platform` runtime for gtk-rs/libadwaita apps. The runtime includes GTK and libadwaita; your binary links against them.
 
@@ -266,5 +266,16 @@ Use the `org.gnome.Platform` runtime for gtk-rs/libadwaita apps. The runtime inc
 | Long compile times in CI | Cache `target/`, use `sccache` |
 | Assuming `Send` for UI state | Keep UI state local; use messages across threads |
 | Ignoring accessibility | gtk-rs exposes GTK semantics; set labels and roles |
+
+
+## Sources
+
+- [gtk-rs book](https://gtk-rs.org/gtk4-rs/stable/latest/book/)
+- [gtk4 crate](https://docs.rs/gtk4/)
+- [libadwaita crate](https://docs.rs/libadwaita/)
+- [Relm4 book](https://relm4.org/book/stable/)
+- [Flatpak Rust sources](https://github.com/flatpak/flatpak-builder-tools/blob/master/cargo/README.md)
+- [cargo-audit](https://rustsec.org/)
+- [cargo-deny](https://embarkstudios.github.io/cargo-deny/)
 
 Next: [Performance](/engineering/performance/) — how to measure and defend the numbers users feel.

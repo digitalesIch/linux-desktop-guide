@@ -59,8 +59,8 @@ Guidance:
 - Use the archive toolchain for code that links against system libraries and ships as a deb.
 - Use a snap or a project-local toolchain for compilers and language runtimes that must be newer than the archive.
 - Pin the toolchain version in CI. "Whatever is installed on the runner" is not a version policy.
-- Check the [toolchain availability reference](https://documentation.ubuntu.com/ubuntu-for-developers/reference/availability/) before promising support for an older release.
-- IDE setup and installation commands are collected in the [IDE reference](https://documentation.ubuntu.com/ubuntu-for-developers/reference/ides/).
+- Check the [toolchain availability reference](https://ubuntu.com/developers/docs/reference/availability/) before promising support for an older release.
+- IDE setup and installation commands are collected in the [IDE reference](https://ubuntu.com/developers/docs/reference/ides/).
 
 ## Packaging paths
 
@@ -85,10 +85,10 @@ sudo apt update
 sudo apt install notes
 ```
 
-- Follow the [Ubuntu packaging guide](https://packaging.ubuntu.com/html/) and the [new-package guide](https://documentation.ubuntu.com/project/contributors/new-package/create-a-new-package/).
+- Follow the [Ubuntu packaging guide](https://ubuntu.com/project/docs/) and the [new-package guide](https://ubuntu.com/project/docs/contributors/new-package/create-a-new-package/).
 - Build packages in a clean chroot; validate with `lintian`.
 - Use a PPA for upstream deb distribution; use the Ubuntu archive only when you can maintain the package for the release lifecycle.
-- See [Build packages in a PPA](https://documentation.ubuntu.com/project/contributors/bug-fix/build-packages-in-a-ppa/).
+- See [Build packages in a PPA](https://ubuntu.com/project/docs/contributors/bug-fix/build-packages-in-a-ppa/).
 
 ### Snap and Snapcraft
 
@@ -102,7 +102,7 @@ snap connections notes
 - `confinement: strict` is the default for a new app. `classic` is for tools that genuinely need full system access and is reviewed manually.
 - Declare the smallest set of [interfaces](https://snapcraft.io/docs/interfaces) you need.
 - Use XDG Desktop Portals inside the snap where possible; the Snap documentation has a dedicated [XDG desktop portals](https://snapcraft.io/docs/xdg-desktop-portals) page.
-- Build with [Snapcraft](https://documentation.ubuntu.com/snapcraft/stable/) and follow the [Craft a snap](https://documentation.ubuntu.com/snapcraft/stable/tutorials/craft-a-snap/) tutorial.
+- Build with [Snapcraft](https://ubuntu.com/docs/snapcraft/stable/) and follow the [Craft a snap](https://ubuntu.com/docs/snapcraft/stable/tutorials/craft-a-snap/) tutorial.
 - For snapd automation, use the [REST API](https://snapcraft.io/docs/snapd-api), not the `snap` CLI from inside a confined app.
 
 ### Flatpak
@@ -115,7 +115,7 @@ Flatpak is covered in [Flatpak & Portals](/platform/flatpak-portals/) and [Flath
 
 ### OCI images and Rockcraft
 
-Use [Rockcraft](https://documentation.ubuntu.com/rockcraft/stable/) when the deliverable is a container image, not a desktop app. Rocks are Ubuntu-based, minimal OCI images with a supported build path. They are not a way to package a GUI application for the desktop.
+Use [Rockcraft](https://ubuntu.com/containers/rockcraft/docs/stable/) when the deliverable is a container image, not a desktop app. Rocks are Ubuntu-based, minimal OCI images with a supported build path. They are not a way to package a GUI application for the desktop.
 
 ## System services
 
@@ -178,7 +178,7 @@ Sources: [Ubuntu Desktop accessibility stack](https://documentation.ubuntu.com/d
 
 ## Where to get help
 
-- [Ubuntu for Developers](https://documentation.ubuntu.com/ubuntu-for-developers/) — toolchains, IDEs, packaging.
+- [Ubuntu for Developers](https://ubuntu.com/developers/docs/) — toolchains, IDEs, packaging.
 - [Ubuntu Desktop documentation](https://documentation.ubuntu.com/desktop/en/latest/) — desktop behavior, accessibility, snap/deb policy.
 - [Ubuntu Discourse](https://discourse.ubuntu.com/) — platform and desktop discussion.
 - [Ubuntu Desktop Matrix](https://matrix.to/#/#desktop-dev:ubuntu.com) — desktop development chat.

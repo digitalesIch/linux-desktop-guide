@@ -39,16 +39,16 @@ The Linux desktop has excellent documentation. It is also spread across a dozen 
 
 | Resource | Why it matters |
 | --- | --- |
-| [Ubuntu for Developers](https://documentation.ubuntu.com/ubuntu-for-developers/) | Toolchains, IDEs, packaging, and support |
+| [Ubuntu for Developers](https://ubuntu.com/developers/docs/) | Toolchains, IDEs, packaging, and support |
 | [Ubuntu Desktop documentation](https://documentation.ubuntu.com/desktop/en/latest/) | Desktop behavior, accessibility, and snap/deb policy |
 | [Ubuntu 26.04 release notes](https://documentation.ubuntu.com/release-notes/26.04/) | The baseline for this guide |
 | [Ubuntu Pro Client](https://documentation.ubuntu.com/pro-client/en/latest/) | `pro`, ESM, Livepatch, FIPS, CIS |
 | [Snap documentation](https://snapcraft.io/docs/) | snapd, confinement, interfaces, updates |
-| [Snapcraft](https://documentation.ubuntu.com/snapcraft/stable/) | Building snaps |
-| [Rockcraft](https://documentation.ubuntu.com/rockcraft/stable/) | Ubuntu-based OCI images |
-| [Ubuntu packaging guide](https://packaging.ubuntu.com/html/) | deb packaging |
-| [New package guide](https://documentation.ubuntu.com/project/contributors/new-package/create-a-new-package/) | Ubuntu archive process |
-| [Build packages in a PPA](https://documentation.ubuntu.com/project/contributors/bug-fix/build-packages-in-a-ppa/) | PPA upload and signing |
+| [Snapcraft](https://ubuntu.com/docs/snapcraft/stable/) | Building snaps |
+| [Rockcraft](https://ubuntu.com/containers/rockcraft/docs/stable/) | Ubuntu-based OCI images |
+| [Ubuntu packaging guide](https://ubuntu.com/project/docs/) | deb packaging |
+| [New package guide](https://ubuntu.com/project/docs/contributors/new-package/create-a-new-package/) | Ubuntu archive process |
+| [Build packages in a PPA](https://ubuntu.com/project/docs/contributors/bug-fix/build-packages-in-a-ppa/) | PPA upload and signing |
 | [Ubuntu accessibility stack](https://documentation.ubuntu.com/desktop/en/latest/explanation/accessibility-stack/) | AT-SPI, GTK, Orca, BRLTTY |
 | [AppArmor](https://apparmor.net/) | Confinement profiles and auditing |
 | [Polkit](https://www.freedesktop.org/software/polkit/docs/latest/) | Privileged actions |
@@ -128,8 +128,8 @@ The Linux desktop has excellent documentation. It is also spread across a dozen 
 | [AppStream validator issue tags](https://github.com/ximion/appstream/blob/main/src/as-validator-issue-tag.h) | Exact `appstreamcli` issue names |
 | [Debian Policy](https://www.debian.org/doc/debian-policy/) | The deb package contract |
 | [Debian packaging tutorial](https://www.debian.org/doc/manuals/debmake-doc/) | Practical deb building |
-| [Ubuntu packaging](https://packaging.ubuntu.com/html/) | Ubuntu-specific packaging |
-| [Launchpad PPAs](https://help.launchpad.net/Packaging/PPA) | Personal package archives |
+| [Ubuntu packaging](https://ubuntu.com/project/docs/) | Ubuntu-specific packaging |
+| [Launchpad PPAs](https://ubuntu.com/docs/launchpad/user/Packaging/PPA) | Personal package archives |
 | [Snapcraft documentation](https://snapcraft.io/docs) | Snap packaging and confinement |
 | [AppImage documentation](https://docs.appimage.org/) | Portable single-file apps |
 

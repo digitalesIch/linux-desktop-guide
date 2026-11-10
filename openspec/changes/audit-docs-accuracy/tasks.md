@@ -87,7 +87,7 @@
 ## 5. Sources and baseline
 
 - [x] 5.1 Update `reference/resources.md` with: Ubuntu 26.04 release notes and release cycle, GNOME 50/GTK 4.22/libadwaita 1.9 release notes and NEWS, Qt 6.10 release/high-contrast notes, KDE Frameworks 6.24 and Plasma 6.6, KNotifications/KDBusService docs, current Snapcraft/Snap docs (`snapcraft.io/docs`), Snapcraft `core26` and Python migration, Flathub requirements/metainfo/linter/quality guidelines, AppStream validator docs, WCAG 2.2/EN 301 549/EAA, AT-SPI, Meson i18n, CMake/GNUInstallDirs, GStreamer, Security Center/permission prompting, App Center, Ubuntu Insights, Mutter Devkit, `xdg-activation`, XDG User Dirs, systemd user units, Flatpak runtimes/permissions, Flathub Rust SDK extension, xdg-desktop-portal Secret/Usb/Settings docs, Debian Policy, GApplication D-Bus activation, GTK4 running/debugging and window docs, GMemoryMonitor, OverlaySplitView/Breakpoint docs, reproducible-builds/OSV/OpenSSF.
-- [ ] 5.2 Add inline source links to every version, support, and platform claim that can change.
+- [x] 5.2 Add page-level Sources blocks to every guide page and inline links for the version/support/platform claims that can change.
 - [x] 5.3 Add a short "content review" checklist covering sources, baseline fields, affected pages, and validation commands.
 - [x] 5.4 Update `README.md` and `AGENTS.md` if the review process or commands change.
 

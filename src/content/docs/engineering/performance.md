@@ -28,7 +28,7 @@ These are not universal laws. A video editor and a notes app have different budg
 
 ### Sysprof
 
-Sysprof records CPU samples, marks, and (with perf integration) kernel events. It is the default on Ubuntu 26.04 and understands GLib/GTK apps.
+[Sysprof](https://apps.gnome.org/Sysprof/) records CPU samples, marks, and (with perf integration) kernel events. It is the default on Ubuntu 26.04 and understands GLib/GTK apps.
 
 1. Start Sysprof.
 2. Launch the app and perform the slow action.
@@ -62,7 +62,7 @@ Use it for allocation counts, peak memory, and leaks. A slow app is often an all
 GTK_DEBUG=interactive ./build/notes
 ```
 
-Inspect the widget tree, CSS, layout, render nodes, and accessibility. Use the **Recorder** tab for render nodes and clip regions; the **Objects** tab shows properties, actions, CSS nodes, and accessibility.
+Inspect the widget tree, CSS, layout, render nodes, and accessibility. Use the [Recorder tab](https://developer.gnome.org/documentation/tools/inspector.html) for render nodes and clip regions; the **Objects** tab shows properties, actions, CSS nodes, and accessibility.
 
 ### Startup tracing
 
@@ -150,7 +150,7 @@ GTK 4 renders through GSK, usually on the GPU. Most rendering problems are cause
 - Use `Gtk.Picture` with `can_shrink` and appropriately sized textures for images.
 - Avoid decoding a 6000×4000 image just to show a 64×64 thumbnail.
 - Test with `GSK_RENDERER=gl`, `ngl`, `vulkan`, and `cairo` if you support multiple renderers; do not force one in production without a reason.
-- Use `Gtk.GraphicsOffload` for fullscreen video or other surfaces that should bypass GSK composition, and test `GDK_DEBUG=gl-disable` to catch fallback behavior.
+- Use [`Gtk.GraphicsOffload`](https://docs.gtk.org/gtk4/class.GraphicsOffload.html) for fullscreen video or other surfaces that should bypass GSK composition, and test `GDK_DEBUG=gl-disable` to catch fallback behavior.
 
 If scrolling stutters, check:
 
@@ -168,7 +168,7 @@ If scrolling stutters, check:
 - Bound caches: thumbnails, decoded images, search results, undo history.
 - Release large buffers when a view closes.
 - Use `GdkTexture` and `Gtk.Picture` instead of keeping `GdkPixbuf` copies.
-- Use `GMemoryMonitor` low-memory warnings to drop caches and bound memory. The kernel OOM killer sends `SIGKILL`; the app cannot catch it or "fail gracefully" after the kill.
+- Use [`GMemoryMonitor`](https://docs.gtk.org/gio/iface.MemoryMonitor.html) low-memory warnings to drop caches and bound memory. The kernel OOM killer sends `SIGKILL`; the app cannot catch it or "fail gracefully" after the kill.
 - Decode untrusted images with Glycin, which also limits resource use.
 
 ## Battery and background work
@@ -222,5 +222,15 @@ Implement `--quit-after-startup` in the app: show the window, wait for the first
 | Battery drain | Fewer wakeups; stop timers when hidden |
 | Slow first paint | Show the shell before loading data |
 | Large package | Strip binaries, share runtime, remove unused assets |
+
+
+## Sources
+
+- [Sysprof](https://apps.gnome.org/Sysprof/)
+- [GTK Inspector](https://developer.gnome.org/documentation/tools/inspector.html)
+- [GMemoryMonitor](https://docs.gtk.org/gio/iface.MemoryMonitor.html)
+- [Gtk.GraphicsOffload](https://docs.gtk.org/gtk4/class.GraphicsOffload.html)
+- [perf](https://perf.wiki.kernel.org/)
+- [heaptrack](https://github.com/KDE/heaptrack)
 
 Next: [Testing](/engineering/testing/) — how to prove the app works before users do.

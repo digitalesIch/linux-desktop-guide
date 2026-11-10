@@ -98,7 +98,7 @@ If a dependency fails several gates, write down the risk and the migration path.
 - [OSV](https://osv.dev/) — open-source vulnerability database
 - [Reproducible Builds](https://reproducible-builds.org/) — build verification
 - [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements) and [runtimes](https://docs.flathub.org/docs/for-app-authors/runtimes)
-- [Snapcraft bases](https://documentation.ubuntu.com/snapcraft/stable/reference/bases/) and [support schedule](https://documentation.ubuntu.com/snapcraft/stable/reference/support-schedule/)
-- [Debian Policy](https://www.debian.org/doc/debian-policy/) and [Ubuntu packaging guide](https://packaging.ubuntu.com/html/)
+- [Snapcraft bases](https://ubuntu.com/docs/snapcraft/stable/reference/bases/) and [support schedule](https://ubuntu.com/docs/snapcraft/stable/reference/support-schedule/)
+- [Debian Policy](https://www.debian.org/doc/debian-policy/) and [Ubuntu packaging guide](https://ubuntu.com/project/docs/)
 - [AppStream documentation](https://www.freedesktop.org/software/appstream/docs/)
 - [XDG specifications](https://specifications.freedesktop.org/)

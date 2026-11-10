@@ -5,7 +5,7 @@ description: "Internationalization and localization for Linux desktop apps: gett
 
 An app that only works in English is an app that excludes most of the world. Localization is not a late-stage translation pass; it is a set of decisions about strings, layout, formatting, and fonts that you make while writing the first screen.
 
-The Linux ecosystem has strong translation infrastructure: gettext, Weblate, GNOME's Damned Lies, KDE's Lokalize, and distribution translation teams. Use it instead of inventing a JSON translation format.
+The Linux ecosystem has strong translation infrastructure: [gettext](https://www.gnu.org/software/gettext/manual/), Weblate, GNOME's Damned Lies, KDE's Lokalize, and distribution translation teams. Use it instead of inventing a JSON translation format.
 
 ## Internationalization vs localization
 
@@ -151,7 +151,7 @@ Install `.mo` files to `$prefix/share/locale/<lang>/LC_MESSAGES/notes.mo`.
 
 ### Qt
 
-Use `lupdate` to extract `tr()` strings into `.ts` files, translate them in Qt Linguist, and `lrelease` them into `.qm` files. With CMake, `qt_add_translations()` wires the build and install steps. Load the `.qm` with `QTranslator` before creating the UI, or install them under `$prefix/share/<app>/translations/`.
+Use `lupdate` to extract `tr()` strings into `.ts` files, translate them in [Qt Linguist](https://doc.qt.io/qt-6/qtlinguist-index.html), and `lrelease` them into `.qm` files. With CMake, `qt_add_translations()` wires the build and install steps. Load the `.qm` with `QTranslator` before creating the UI, or install them under `$prefix/share/<app>/translations/`.
 
 ## Dates, numbers, and currency
 
@@ -255,5 +255,15 @@ Do not machine-translate the UI and ship it unreviewed. Flathub explicitly rejec
 - ☐ English is complete; additional languages are reviewed.
 - ☐ The app runs in an RTL locale.
 - ☐ Translators are credited.
+
+
+## Sources
+
+- [GNU gettext](https://www.gnu.org/software/gettext/manual/)
+- [Meson i18n module](https://mesonbuild.com/i18n-module.html)
+- [Qt Linguist](https://doc.qt.io/qt-6/qtlinguist-index.html)
+- [ICU4X](https://icu4x.unicode.org/)
+- [Flathub localisation policy](https://docs.flathub.org/docs/for-app-authors/requirements#localisation-policy)
+- [AppStream metadata](https://www.freedesktop.org/software/appstream/docs/chap-Metadata.html)
 
 Next: [Architecture](/engineering/architecture/) — how to structure the code so the UI stays fast and the app stays maintainable.

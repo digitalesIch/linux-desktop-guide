@@ -196,4 +196,15 @@ If you can defend that sentence in a code review, you are building native softwa
 - Use it to push back on shortcuts that will cost more later.
 - Use the [Quality Bar](/ship/quality-bar/) to score an app across its seven dimensions.
 
+
+## Sources
+
+- [Baseline](/reference/baseline/)
+- [Quality Signals](/reference/quality-signals/)
+- [Wayland](https://wayland.freedesktop.org/)
+- [XDG specifications](https://specifications.freedesktop.org/)
+- [XDG Desktop Portals](https://flatpak.github.io/xdg-desktop-portal/docs/)
+- [AppStream](https://www.freedesktop.org/software/appstream/docs/)
+- [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+
 Next: [Design Principles](/design/principles/) — how the standard becomes an interface.

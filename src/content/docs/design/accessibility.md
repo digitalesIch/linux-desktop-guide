@@ -5,7 +5,7 @@ description: Keyboard access, screen-reader semantics, contrast, text scaling, r
 
 Accessibility is not a feature for a minority of users. It is the quality of the interface under constraints: no mouse, small screen, low vision, motor impairment, cognitive load, bright sunlight, or a noisy train. Most people benefit from accessible design at some point, and many rely on it permanently.
 
-It is also a legal requirement. The **European Accessibility Act** applies to many digital products and services from 28 June 2025. WCAG 2.2 AA is the common reference; EN 301 549 is the European harmonized standard; Section 508 applies in the United States. If you ship to the public, accessibility is part of compliance, not a nice-to-have.
+It is also a legal requirement. The **European Accessibility Act** applies to many digital products and services from 28 June 2025. [WCAG 2.2 AA](https://www.w3.org/TR/WCAG22/) is the common reference; [EN 301 549](https://www.etsi.org/deliver/etsi_en/301500_301599/301549/04.01.01_60/en_301549v040101p.pdf) is the European harmonized standard; Section 508 applies in the United States. If you ship to the public, accessibility is part of compliance, not a nice-to-have.
 
 ## The Linux accessibility stack
 
@@ -183,5 +183,15 @@ Automated accessibility checks catch missing labels. They do not catch a confusi
 - ☐ Third-party components are checked for accessibility.
 - ☐ The team has access to Orca, Accerciser, and a high-contrast environment.
 - ☐ Accessibility bugs are prioritized like other user-facing bugs.
+
+
+## Sources
+
+- [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+- [EN 301 549 v4.1.1](https://www.etsi.org/deliver/etsi_en/301500_301599/301549/04.01.01_60/en_301549v040101p.pdf)
+- [European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en)
+- [Ubuntu accessibility stack](https://documentation.ubuntu.com/desktop/en/latest/explanation/accessibility-stack/)
+- [AT-SPI](https://www.freedesktop.org/wiki/Accessibility/AT-SPI2/)
+- [libadwaita get_enable_animations](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.9/func.get_enable_animations.html)
 
 Next: [Localization](/design/localization/) — making the app work in every language, locale, and writing direction.

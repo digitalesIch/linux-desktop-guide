@@ -120,3 +120,14 @@ Terms are grouped by area. Links point to the canonical specification or documen
 - [GTK & libadwaita](/engineering/gtk/)
 - [Qt & Kirigami](/engineering/qt/)
 - [Resources](/reference/resources/)
+
+## Sources
+
+- [XDG specifications](https://specifications.freedesktop.org/)
+- [Wayland](https://wayland.freedesktop.org/)
+- [D-Bus](https://www.freedesktop.org/wiki/Software/dbus/)
+- [XDG Desktop Portals](https://flatpak.github.io/xdg-desktop-portal/docs/)
+- [AppStream](https://www.freedesktop.org/software/appstream/docs/)
+- [Flatpak](https://docs.flatpak.org/)
+- [Snapcraft](https://snapcraft.io/docs/)
+- [AT-SPI](https://www.freedesktop.org/wiki/Accessibility/AT-SPI2/)

@@ -19,7 +19,7 @@ Ubuntu documents two supported package formats: **deb** and **Snap**. Flatpak is
 | **Snap** | Ubuntu App Center, confined apps | snapd, automatic refresh | Yes, AppArmor | Medium |
 | **Distro archive** | System components, long-lived packages | Distro updates | Varies | High |
 
-Ubuntu's App Center recommends snaps for third-party apps because they are sandboxed and update independently of the release. It also manages debs from the Ubuntu archive and can install third-party debs, but third-party debs are discouraged: they have full access to the user's resources and may add their own repositories.
+Ubuntu's [App Center recommends snaps](https://ubuntu.com/desktop/docs/en/26.04/explanation/snap-and-deb-packages) for third-party apps because they are sandboxed and update independently of the release. It also manages debs from the Ubuntu archive and can install third-party debs, but third-party debs are discouraged: they have full access to the user's resources and may add their own repositories.
 
 ### Cross-distro and alternative paths
 
@@ -88,7 +88,7 @@ The sandbox cannot replace its own deployment. Ship updates through Flathub/Flat
 
 ## deb packages
 
-A Debian package is a directory tree plus metadata. The [Ubuntu packaging guide](https://packaging.ubuntu.com/html/) and the [new-package guide](https://documentation.ubuntu.com/project/contributors/new-package/create-a-new-package/) cover the archive process; the example below is the minimal local layout.
+A Debian package is a directory tree plus metadata. The [Ubuntu packaging guide](https://ubuntu.com/project/docs/) and the [new-package guide](https://ubuntu.com/project/docs/contributors/new-package/create-a-new-package/) cover the archive process; the example below is the minimal local layout.
 
 The minimum source package layout is:
 
@@ -177,7 +177,7 @@ debuild -S -sa
 dput ppa:yourname/notes ../notes_0.1.0-1_source.changes
 ```
 
-A PPA is a good stepping stone. It is not a substitute for the Ubuntu archive, and users still need to add it manually. Follow [Build packages in a PPA](https://documentation.ubuntu.com/project/contributors/bug-fix/build-packages-in-a-ppa/) for the upload and signing flow.
+A PPA is a good stepping stone. It is not a substitute for the Ubuntu archive, and users still need to add it manually. Follow [Build packages in a PPA](https://ubuntu.com/project/docs/contributors/bug-fix/build-packages-in-a-ppa/) for the upload and signing flow.
 
 ### What goes in the package
 
@@ -195,7 +195,7 @@ Do not install into `/opt` unless the app is genuinely self-contained and you un
 
 ## Snap
 
-A Snap is a squashfs image with an AppArmor confinement profile and a `snapcraft.yaml` recipe. `core26` is the recommended base for Ubuntu 26.04.
+A Snap is a squashfs image with an AppArmor confinement profile and a `snapcraft.yaml` recipe. [`core26`](https://ubuntu.com/docs/snapcraft/stable/reference/bases/) is the recommended base for Ubuntu 26.04.
 
 ```yaml title="snapcraft.yaml"
 name: notes
@@ -249,7 +249,7 @@ snapcraft lint
 ```
 
 :::note[core26 and Python]
-`core26` does not bundle Python. A strictly confined Python snap must stage its own runtime, as the `python-runtime` part above does. The GNOME extension supports `core26` from Snapcraft 9.2 onward and no longer adds the `gsettings` plug automatically; add it only when the app needs host settings.
+`core26` does not bundle Python. A strictly confined Python snap must stage its own runtime, as the `python-runtime` part above does. The [GNOME extension](https://ubuntu.com/docs/snapcraft/stable/how-to/extensions/use-the-gnome-extension/) supports `core26` from Snapcraft 9.2 onward and no longer adds the `gsettings` plug automatically; add it only when the app needs host settings.
 :::
 
 - `command` is relative to the snap root. With `--prefix=/usr`, the binary is `usr/bin/notes`, not `bin/notes`.
@@ -260,11 +260,11 @@ snapcraft lint
 
 Snap's automatic refresh is a feature, not a bug. Do not add a self-updater; test the app across a refresh, including with unsaved work.
 
-For the full build and review flow, use the [Snapcraft documentation](https://documentation.ubuntu.com/snapcraft/stable/) and the [Craft a snap](https://documentation.ubuntu.com/snapcraft/stable/tutorials/craft-a-snap/) tutorial. Read the current [interfaces reference](https://snapcraft.io/docs/interfaces) and [XDG desktop portals guidance](https://snapcraft.io/docs/xdg-desktop-portals). For automation, use the [snapd REST API](https://snapcraft.io/docs/snapd-api) rather than shelling out to `snap`.
+For the full build and review flow, use the [Snapcraft documentation](https://ubuntu.com/docs/snapcraft/stable/) and the [Craft a snap](https://ubuntu.com/docs/snapcraft/stable/tutorials/craft-a-snap/) tutorial. Read the current [interfaces reference](https://snapcraft.io/docs/interfaces) and [XDG desktop portals guidance](https://snapcraft.io/docs/xdg-desktop-portals). For automation, use the [snapd REST API](https://snapcraft.io/docs/snapd-api) rather than shelling out to `snap`.
 
 ## OCI images with Rockcraft
 
-If the deliverable is a service or cloud workload rather than a desktop app, build it as an OCI image with [Rockcraft](https://documentation.ubuntu.com/rockcraft/stable/). Rocks are minimal, Ubuntu-based images with a supported build path. Do not use them as a desktop packaging format.
+If the deliverable is a service or cloud workload rather than a desktop app, build it as an OCI image with [Rockcraft](https://ubuntu.com/containers/rockcraft/docs/stable/). Rocks are minimal, Ubuntu-based images with a supported build path. Do not use them as a desktop packaging format.
 
 ## AppImage
 
@@ -377,5 +377,16 @@ Never replace your own binary from inside the app. It breaks package ownership, 
 - ☐ Release notes and screenshots are current.
 - ☐ The license and copyright are installed.
 - ☐ The uninstall path removes app data only with consent.
+
+
+## Sources
+
+- [Snapcraft bases](https://ubuntu.com/docs/snapcraft/stable/reference/bases/)
+- [Core24 to core26](https://ubuntu.com/docs/snapcraft/stable/how-to/change-bases/change-from-core24-to-core26/)
+- [GNOME extension](https://ubuntu.com/docs/snapcraft/stable/how-to/extensions/use-the-gnome-extension/)
+- [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements)
+- [Debian Policy](https://www.debian.org/doc/debian-policy/)
+- [AppImage documentation](https://docs.appimage.org/)
+- [snapd REST API](https://snapcraft.io/docs/snapd-api)
 
 Next: [Security & Privacy](/platform/security/) — the threat model behind the sandbox, secrets, and permissions.

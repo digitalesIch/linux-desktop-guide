@@ -89,11 +89,26 @@ The baseline is the **tested reference environment**. It is not a claim that old
 
 The review date is a trigger, not a guarantee. When it passes, re-check the primary sources below, update `src/data/baseline.json`, and run the verification steps. The future freshness pipeline will open an issue when the date or an upstream source changes.
 
+## Local validation
+
+On Ubuntu 26.04.1, the following were checked directly while preparing this baseline:
+
+- `gnome-shell --version` → GNOME Shell 50.1
+- `apt-cache policy libgtk-4-1 libadwaita-1-0` → GTK 4.22.4, libadwaita 1.9.1
+- `apt-cache policy qt6-base-dev` → Qt 6.10.2
+- `apt-cache policy dotnet10 openjdk-25-jdk zig` → dotnet10, openjdk-25-jdk, and zig are available
+- `snap info core26` → core26 is available in the Snap Store
+- `flatpak --version` → Flatpak 1.16.6
+- `snap --version` → snapd 2.78
+- `desktop-file-validate` and `appstreamcli validate --no-net` on the first-app examples → pass
+
+These checks supplement the upstream sources; they do not replace them. Re-run the commands when the baseline is reviewed.
+
 ## Primary sources
 
 - [Ubuntu 26.04 LTS release notes](https://documentation.ubuntu.com/release-notes/26.04/)
 - [Ubuntu Desktop documentation](https://documentation.ubuntu.com/desktop/en/latest/)
-- [Ubuntu for Developers](https://documentation.ubuntu.com/ubuntu-for-developers/)
+- [Ubuntu for Developers](https://ubuntu.com/developers/docs/)
 - [GNOME 50 release notes](https://release.gnome.org/50/)
 - [GTK 4 documentation](https://docs.gtk.org/gtk4/)
 - [libadwaita documentation](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/)
@@ -104,8 +119,8 @@ The review date is a trigger, not a guarantee. When it passes, re-check the prim
 - [Flatpak documentation](https://docs.flatpak.org/)
 - [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements)
 - [Snap documentation](https://snapcraft.io/docs/)
-- [Snapcraft bases](https://documentation.ubuntu.com/snapcraft/stable/reference/bases/)
-- [Snapcraft core24 to core26](https://documentation.ubuntu.com/snapcraft/stable/how-to/change-bases/change-from-core24-to-core26/)
+- [Snapcraft bases](https://ubuntu.com/docs/snapcraft/stable/reference/bases/)
+- [Snapcraft core24 to core26](https://ubuntu.com/docs/snapcraft/stable/how-to/change-bases/change-from-core24-to-core26/)
 
 ## Updating the baseline
 

@@ -212,4 +212,13 @@ Rules:
 - ☐ Sound is optional and off by default.
 - ☐ Notifications are actionable and rate-limited.
 
+
+## Sources
+
+- [GNOME HIG](https://developer.gnome.org/hig/)
+- [KDE HIG](https://develop.kde.org/hig/)
+- [Adw.ShortcutsDialog](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.9/class.ShortcutsDialog.html)
+- [Gtk.CustomFilter](https://docs.gtk.org/gtk4/class.CustomFilter.html)
+- [Gtk.FilterListModel](https://docs.gtk.org/gtk4/class.FilterListModel.html)
+
 Next: [Accessibility](/design/accessibility/) — the legal, ethical, and technical baseline for software that works for everyone.

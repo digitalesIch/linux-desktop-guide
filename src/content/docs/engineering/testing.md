@@ -327,4 +327,15 @@ Before a release, require:
 - ☐ Performance budgets are checked.
 - ☐ No known critical security issue is open.
 
+
+## Sources
+
+- [pytest](https://docs.pytest.org/)
+- [GLib testing](https://docs.gtk.org/glib/testing.html)
+- [Qt Test](https://doc.qt.io/qt-6/qtest-overview.html)
+- [dogtail](https://gitlab.com/dogtail/dogtail)
+- [Flathub linter](https://docs.flathub.org/docs/for-app-authors/linter)
+- [Flatpak Builder](https://docs.flatpak.org/en/latest/flatpak-builder.html)
+- [Weston](https://wayland.freedesktop.org/)
+
 Next: [Reliability & Logging](/engineering/reliability/) — what happens when the disk is full, the network is down, and the compositor restarts.

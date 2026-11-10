@@ -8,7 +8,7 @@ This tutorial builds **Notes**, a small but real GTK 4 + libadwaita application.
 The code is Python to keep the example readable. The structure maps directly to C, Rust, or Vala; the toolkit behaves the same.
 
 :::note[What you need]
-Ubuntu 26.04 LTS (or a recent Fedora/Arch with GTK 4.22 and libadwaita 1.9), `python3-gi`, `gir1.2-gtk-4.0`, `gir1.2-adw-1`, `meson`, `flatpak`, and `flatpak-builder`.
+[Ubuntu 26.04 LTS](/reference/baseline/) (or a recent Fedora/Arch with GTK 4.22 and libadwaita 1.9), `python3-gi`, `gir1.2-gtk-4.0`, `gir1.2-adw-1`, `meson`, `flatpak`, and `flatpak-builder`.
 :::
 
 ## 1. Install the toolchain
@@ -25,6 +25,8 @@ Install the GNOME runtime and SDK used by the manifest:
 flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install --user flathub org.gnome.Platform//50 org.gnome.Sdk//50
 ```
+
+The runtime branch is documented in [Flatpak runtimes](https://docs.flatpak.org/en/latest/available-runtimes.html).
 
 ## 2. Create the project
 
@@ -451,5 +453,15 @@ This tutorial is intentionally minimal. A real app needs:
 - **A Flathub submission.** See [Flathub](/ship/flathub/) for the review requirements.
 
 The full example is available in the `examples/notes` directory of this guide's repository. Copy it, rename the app ID, and start replacing the placeholder logic.
+
+
+## Sources
+
+- [GTK 4 documentation](https://docs.gtk.org/gtk4/)
+- [libadwaita 1.9](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.9/)
+- [Flatpak documentation](https://docs.flatpak.org/)
+- [AppStream documentation](https://www.freedesktop.org/software/appstream/docs/)
+- [Desktop Entry specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/)
+- [Meson](https://mesonbuild.com/)
 
 Next: [The Native Standard](/start/native-standard/) — the ten rules that separate a working app from one that belongs.

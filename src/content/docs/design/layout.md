@@ -198,4 +198,13 @@ If you are building for KDE:
 - ☐ Primary actions are visible; secondary actions are in a menu with shortcuts.
 - ☐ The layout works at 200% text and display scaling.
 
+
+## Sources
+
+- [GNOME HIG](https://developer.gnome.org/hig/)
+- [Adw.OverlaySplitView](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.9/class.OverlaySplitView.html)
+- [Adw.NavigationSplitView](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.9/class.NavigationSplitView.html)
+- [Adw.Breakpoint](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.9/class.Breakpoint.html)
+- [Gtk.Window default-width](https://docs.gtk.org/gtk4/property.Window.default-width.html)
+
 Next: [Interaction & Feedback](/design/interaction/) — keyboard, focus, undo, search, and the small behaviors that make an app feel alive.

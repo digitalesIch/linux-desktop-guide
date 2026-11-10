@@ -50,7 +50,7 @@ Everything in this guide hangs off four contracts. They are also the four sectio
 
 ### 1. Display: render through the compositor
 
-The Ubuntu Desktop session on 26.04 LTS is Wayland-only; XWayland still runs X11 applications. The compositor owns the screen, input, and the security boundary. Your app renders its own surfaces and talks to the compositor through protocols. It does not position windows at absolute screen coordinates, synthesize input, or capture the screen behind the compositor's back.
+The [Ubuntu Desktop session on 26.04 LTS](https://documentation.ubuntu.com/release-notes/26.04/) is Wayland-only; XWayland still runs X11 applications. The compositor owns the screen, input, and the security boundary. Your app renders its own surfaces and talks to the compositor through protocols. It does not position windows at absolute screen coordinates, synthesize input, or capture the screen behind the compositor's back.
 
 This is not a restriction to work around. It is what makes fractional scaling, per-monitor DPI, input methods, and secure screen sharing possible.
 
@@ -64,7 +64,7 @@ Notifications, file dialogs, secrets, screen capture, global shortcuts, and open
 
 ### 3. Data: follow the XDG layout
 
-There is no single per-user application-support directory. Configuration, data, state, cache, and runtime files have separate homes defined by the XDG Base Directory specification. Writing to the right place is not bureaucracy; it is what makes backup, reset, migration, and sandboxing work.
+There is no single per-user application-support directory. Configuration, data, state, cache, and runtime files have separate homes defined by the [XDG Base Directory specification](https://specifications.freedesktop.org/basedir-spec/latest/). Writing to the right place is not bureaucracy; it is what makes backup, reset, migration, and sandboxing work.
 
 → [The XDG Contract](/platform/xdg/)
 
@@ -113,5 +113,16 @@ The Linux model is a bet on shared ownership.
 - **You can choose your stack.** The ecosystem rewards maintenance and good citizenship.
 
 The cost is that you must take standards seriously. The reward is software that belongs on the desktop rather than merely running on it.
+
+
+## Sources
+
+- [Ubuntu 26.04 release notes](https://documentation.ubuntu.com/release-notes/26.04/)
+- [Ubuntu release cycle](https://ubuntu.com/about/release-cycle)
+- [Wayland](https://wayland.freedesktop.org/)
+- [XDG specifications](https://specifications.freedesktop.org/)
+- [XDG Desktop Portals](https://flatpak.github.io/xdg-desktop-portal/docs/)
+- [AppStream](https://www.freedesktop.org/software/appstream/docs/)
+- [Flatpak](https://docs.flatpak.org/)
 
 Next: [Choose Your Stack](/start/choose-stack/) — a practical comparison of the toolkits and languages you can build on.

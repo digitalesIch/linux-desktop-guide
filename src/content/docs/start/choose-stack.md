@@ -21,7 +21,7 @@ GTK and Qt are both excellent. Rust is a strong default for new apps, but not a 
 
 For most new Linux-first apps in 2026, the strongest default is:
 
-> **GTK 4.22 + libadwaita 1.9 + Blueprint + Meson + Flatpak**, written in Rust or C.
+> **[GTK 4.22 + libadwaita 1.9](/reference/baseline/) + Blueprint + Meson + Flatpak**, written in Rust or C.
 
 It is the stack used by GNOME's own apps, it has the deepest accessibility and portal integration, and it is what Ubuntu 26.04 LTS ships. If you are targeting KDE first, replace GTK/libadwaita with Qt 6.10 + Kirigami/KDE Frameworks 6.
 
@@ -51,7 +51,7 @@ It is the stack used by GNOME's own apps, it has the deepest accessibility and p
 
 ### Qt 6 + Kirigami
 
-**What it is:** Qt is a mature C++/QML application framework. Kirigami is KDE's adaptive UI framework built on Qt Quick. Kubuntu 26.04 ships Plasma 6.6, Qt 6.10, and KDE Frameworks 6.24.
+**What it is:** Qt is a mature C++/QML application framework. Kirigami is KDE's adaptive UI framework built on Qt Quick. [Kubuntu 26.04](https://kubuntu.org/news/kubuntu-26-04-release-notes/) ships Plasma 6.6, Qt 6.10, and KDE Frameworks 6.24.
 
 **Strengths**
 
@@ -138,10 +138,10 @@ Do not let a language preference force you into a toolkit that fights the deskto
 
 Ubuntu publishes supported setup and version-availability guides for Python, Go, Rust, GCC, Clang, .NET, Java, and Zig. Use them as the source of truth when you need to know what an LTS release ships, or when you need a supported install path:
 
-- [Ubuntu for Developers](https://documentation.ubuntu.com/ubuntu-for-developers/) — overview and tutorials.
+- [Ubuntu for Developers](https://ubuntu.com/developers/docs/) — overview and tutorials.
 - [Toolchains](https://ubuntu.com/developers/docs/toolchains/) — per-language setup and first-program guides.
-- [Toolchain availability](https://documentation.ubuntu.com/ubuntu-for-developers/reference/availability/) — what each Ubuntu release provides.
-- [IDEs](https://documentation.ubuntu.com/ubuntu-for-developers/reference/ides/) — supported editors and install commands.
+- [Toolchain availability](https://ubuntu.com/developers/docs/reference/availability/) — what each Ubuntu release provides.
+- [IDEs](https://ubuntu.com/developers/docs/reference/ides/) — supported editors and install commands.
 
 For GTK apps, use the archive toolchain when you link against system libraries. For compilers or language runtimes that must be newer than the archive, use a project-local toolchain or a snap and pin the version in CI. Do not mix an archive library with a newer runtime ABI without testing the combination.
 
@@ -161,5 +161,17 @@ The validated version set lives in [Baseline](/reference/baseline/). It records 
 :::caution[Do not target the newest API by default]
 A Flatpak app can bundle a newer runtime, but a deb must work with the libraries in the archive. If you ship both, target the oldest library version you support and use compile-time version checks (`GTK_CHECK_VERSION`, `QT_VERSION_CHECK`) or feature flags for newer APIs.
 :::
+
+
+## Sources
+
+- [Baseline](/reference/baseline/)
+- [GTK 4 documentation](https://docs.gtk.org/gtk4/)
+- [libadwaita 1.9](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.9/)
+- [Qt 6.10 release](https://www.qt.io/blog/qt-6.10-released)
+- [KDE Frameworks 6.24](https://kde.org/announcements/frameworks/6/6.24.0/)
+- [gtk-rs book](https://gtk-rs.org/gtk4-rs/stable/latest/book/)
+- [Relm4 book](https://relm4.org/book/stable/)
+- [Quality Signals](/reference/quality-signals/)
 
 Next: [Build Your First App](/start/first-app/) — a complete, minimal GTK 4 app with packaging.

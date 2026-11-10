@@ -233,4 +233,14 @@ A diagnostic bundle should be a single file the user can review before sending. 
 - ☐ Background work is cancellable and cleaned up.
 - ☐ Support has a diagnostic bundle path.
 
+
+## Sources
+
+- [systemd-coredump](https://www.freedesktop.org/software/systemd/man/latest/systemd-coredump.html)
+- [journald](https://www.freedesktop.org/software/systemd/man/latest/systemd-journald.service.html)
+- [GMemoryMonitor](https://docs.gtk.org/gio/iface.MemoryMonitor.html)
+- [SQLite WAL](https://www.sqlite.org/wal.html)
+- [SQLite integrity_check](https://www.sqlite.org/pragma.html#pragma_integrity_check)
+- [systemd user units](https://www.freedesktop.org/software/systemd/man/latest/systemd.special.html)
+
 Next: [AppStream & Metadata](/ship/appstream/) — how the software center sees your app.

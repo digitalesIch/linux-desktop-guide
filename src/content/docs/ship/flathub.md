@@ -189,4 +189,15 @@ Verified apps show a badge and can use the verified developer portal. Verificati
 - ☐ The PR targets `new-pr` and follows the template.
 - ☐ A maintainer is committed to updates.
 
+
+## Sources
+
+- [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements)
+- [Flathub submission](https://docs.flathub.org/docs/for-app-authors/submission)
+- [Flathub maintenance](https://docs.flathub.org/docs/for-app-authors/maintenance)
+- [Flathub runtimes](https://docs.flathub.org/docs/for-app-authors/runtimes)
+- [Flathub verification](https://docs.flathub.org/docs/for-app-authors/verification)
+- [Flathub linter](https://docs.flathub.org/docs/for-app-authors/linter)
+- [Flatpak documentation](https://docs.flatpak.org/)
+
 Next: [Release Checklist](/ship/release-checklist/) — the final pass before users install.

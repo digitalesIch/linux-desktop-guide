@@ -158,4 +158,13 @@ The fastest way to make a Linux app feel foreign is to import another platform's
 | Hover-only controls | Unusable with keyboard and touch |
 | Custom file picker | Breaks sandboxing, bookmarks, and recent files |
 
+
+## Sources
+
+- [GNOME HIG](https://developer.gnome.org/hig/)
+- [KDE HIG](https://develop.kde.org/hig/)
+- [elementary HIG](https://docs.elementary.io/hig/)
+- [COSMIC design](https://system76.com/cosmic)
+- [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+
 Next: [Visual Language](/design/visual-language/) — typography, color, spacing, icons, and motion that adapt to the host.

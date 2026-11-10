@@ -238,4 +238,14 @@ When a report arrives: reproduce, contain, patch, release, notify. Do not argue 
 - ☐ `SECURITY.md` exists and is current.
 - ☐ Dependencies are pinned and monitored.
 
+
+## Sources
+
+- [AppArmor](https://apparmor.net/)
+- [Polkit](https://www.freedesktop.org/software/polkit/docs/latest/)
+- [fwupd / LVFS](https://fwupd.org/)
+- [Ubuntu Pro](https://ubuntu.com/pro)
+- [Permissions prompting](https://discourse.ubuntu.com/t/permissions-prompting-a-deep-dive/81785)
+- [Glycin](https://gitlab.gnome.org/GNOME/glycin)
+
 Next: [Design Principles](/design/principles/) — how to make the app feel calm, fast, and native across Linux desktops.

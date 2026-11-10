@@ -138,10 +138,10 @@ For non-KDE deployments, `QSettings` is the portable equivalent. Do not write IN
 
 ## Notifications and integration
 
-- **KNotification** for desktop notifications, with actions and urgency.
+- **[KNotification](https://api.kde.org/knotification.html)** for desktop notifications, with actions and urgency.
 - **KIO** for network-transparent file access, trash, and remote URLs. Do not assume every `QUrl` is a local file.
 - **KWallet** / Secret Service for credentials.
-- **KDBusService** for single-instance behavior and activation. `QApplication` alone does not register a D-Bus name; use `KDBusService(KDBusService::Unique)` for KDE/Qt, or `QLockFile`/a custom D-Bus name for non-KDE Qt.
+- **[KDBusService](https://api.kde.org/kdbusservice.html)** for single-instance behavior and activation. `QApplication` alone does not register a D-Bus name; use `KDBusService(KDBusService::Unique)` for KDE/Qt, or `QLockFile`/a custom D-Bus name for non-KDE Qt.
 - **MPRIS** via Qt DBus for media apps.
 - **XDG portals** for file dialogs, screen capture, and global shortcuts, especially in Flatpak.
 
@@ -160,9 +160,9 @@ KDE notifications also need a `.notifyrc` file that declares the event, its icon
 
 ## Qt 6.10: high contrast, vector, and models
 
-Qt 6.10 adds accessibility and UI features that are relevant on Ubuntu 26.04:
+[Qt 6.10](https://www.qt.io/blog/qt-6.10-released) adds accessibility and UI features that are relevant on Ubuntu 26.04:
 
-- **High contrast:** `QStyleHints::accessibility()->contrastPreference()` reports the platform preference, and the Fusion/Basic styles strengthen control outlines when it is enabled.
+- **High contrast:** [`QStyleHints::accessibility()->contrastPreference()`](https://www.qt.io/blog/high-contrast-mode-in-qt-6.10) reports the platform preference, and the Fusion/Basic styles strengthen control outlines when it is enabled.
 - **Animated vector graphics:** `VectorImage` renders animated SVG and Lottie in the Qt Quick scene graph; use `svgtoqml`/`lottietoqml` for precompiled assets. Treat user-supplied vector files as untrusted.
 - **Models and controls:** `SearchField`, `QRangeModel`, `Synchronizer` (tech preview), `TreeModel`, `SortFilterProxyModel`, and `delegateModelAccess` reduce C++/QML boilerplate.
 - **QML performance:** compile QML ahead of time (`qmlcachegen`), run `qmllint`, inspect the scene graph with `QSG_INFO=1`, and choose the render loop deliberately (`QSG_RENDER_LOOP`).
@@ -173,7 +173,7 @@ Qt 6.10 adds accessibility and UI features that are relevant on Ubuntu 26.04:
 
 ## Build and package
 
-A minimal CMake setup for Qt Quick:
+A minimal CMake setup for Qt Quick. The example uses [GNUInstallDirs](https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html) so `${CMAKE_INSTALL_BINDIR}` is defined:
 
 ```cmake title="CMakeLists.txt"
 cmake_minimum_required(VERSION 3.21)
@@ -267,5 +267,16 @@ The KDE runtime includes Kirigami and the KDE Frameworks, so you do not need to 
 | No high-DPI support | Qt 6 handles it; test and avoid manual scaling |
 | File access outside the sandbox | Use KIO/portals and XDG paths |
 | No accessible names on custom items | Set `Accessible.name` and role |
+
+
+## Sources
+
+- [Qt 6.10 release](https://www.qt.io/blog/qt-6.10-released)
+- [Qt 6.10 high contrast](https://www.qt.io/blog/high-contrast-mode-in-qt-6.10)
+- [Qt 6 documentation](https://doc.qt.io/qt-6/)
+- [KDE Frameworks 6.24](https://kde.org/announcements/frameworks/6/6.24.0/)
+- [KNotifications](https://api.kde.org/knotification.html)
+- [KDBusService](https://api.kde.org/kdbusservice.html)
+- [GNUInstallDirs](https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html)
 
 Next: [Rust on the Desktop](/engineering/rust/) — memory safety without giving up native GTK.

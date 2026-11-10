@@ -184,4 +184,13 @@ For a new app that wants to reach "native":
 - Set up crash reporting (opt-in) and a support path.
 - Schedule the first patch release.
 
+
+## Sources
+
+- [Quality Signals](/reference/quality-signals/)
+- [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+- [AppStream](https://www.freedesktop.org/software/appstream/docs/)
+- [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements)
+- [XDG specifications](https://specifications.freedesktop.org/)
+
 Next: [Checklists](/reference/checklists/) — the condensed, copy-paste version for daily use.

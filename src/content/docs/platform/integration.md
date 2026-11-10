@@ -62,9 +62,9 @@ Name=io.github.yourname.Notes
 Exec=/usr/bin/notes --gapplication-service
 ```
 
-`Gtk.Application` implements `org.freedesktop.Application` for you. Do not invent a second activation protocol.
+[`Gtk.Application`](https://docs.gtk.org/gio/class.Application.html) implements `org.freedesktop.Application` for you. Do not invent a second activation protocol.
 
-On Wayland, activation is also subject to focus-stealing prevention. `Gtk.Application` and Qt handle the activation token for you. If you use a custom toolkit, implement `xdg_activation_v1` and pass the `XDG_ACTIVATION_TOKEN` from the launching process; `Gio.AppInfo` and `Gtk.FileLauncher` already do this. Do not use `wmctrl`, `xdotool`, or X11 activation hacks.
+On Wayland, activation is also subject to focus-stealing prevention. `Gtk.Application` and Qt handle the activation token for you. If you use a custom toolkit, implement [`xdg_activation_v1`](https://wayland.app/protocols/xdg-activation-v1) and pass the `XDG_ACTIVATION_TOKEN` from the launching process; `Gio.AppInfo` and `Gtk.FileLauncher` already do this. Do not use `wmctrl`, `xdotool`, or X11 activation hacks.
 
 ## Notifications
 
@@ -203,7 +203,7 @@ Do not daemonize manually, fork into the background, or write PID files. systemd
 A desktop entry declares what the app can open and how it is launched:
 
 - Add the types to `MimeType=` and use `%U` (URLs) or `%F` (files) in `Exec`.
-- For custom URL schemes, add `x-scheme-handler/<scheme>` to `MimeType=` and handle the URI in `Gio.Application`'s `open` signal.
+- For custom URL schemes, add `x-scheme-handler/<scheme>` to `MimeType=` ([Desktop Entry spec](https://specifications.freedesktop.org/desktop-entry-spec/latest/)) and handle the URI in `Gio.Application`'s `open` signal.
 - Run `update-desktop-database` after installing the desktop file so the MIME cache sees it.
 - Set the default with `xdg-mime default io.github.yourname.Notes.desktop text/markdown` and verify with `xdg-mime query default`.
 - For "Show in folder", use `org.freedesktop.FileManager1.ShowItems`/`ShowItemProperties` instead of shelling out to a file manager.
@@ -226,8 +226,8 @@ Use D-Bus APIs instead of parsing `/proc`, `/sys`, or shelling out to command-li
 | BlueZ | `org.bluez` | Bluetooth devices and adapters |
 | NetworkManager | `org.freedesktop.NetworkManager` | Connectivity, Wi-Fi, VPN state |
 | UDisks2 | `org.freedesktop.UDisks2` | Disks, partitions, mounts |
-| PipeWire | PipeWire API / GStreamer | Audio/video streams; there is no general `org.pipewire` D-Bus API |
-| CUPS | IPP / libcups | Printing |
+| PipeWire | [PipeWire API](https://docs.pipewire.org/) / GStreamer | Audio/video streams; there is no general `org.pipewire` D-Bus API |
+| CUPS | [IPP / libcups](https://openprinting.github.io/cups/) | Printing |
 | GeoClue | `org.freedesktop.GeoClue2` | Location (with permission) |
 
 In a sandbox, many of these are proxied by portals or unavailable by design. Check for the service, handle its absence, and explain the limitation to the user instead of crashing.
@@ -257,5 +257,17 @@ Desktop-integrated preferences belong in GSettings, with a schema and an `Adw.Pr
 - ☐ Hardware state comes from D-Bus services, not `/proc` parsing.
 - ☐ File and URL handlers declare `MimeType=`/`%U`, update the desktop database, and use the FileManager1 interface for "Show in folder".
 - ☐ Settings are in GSettings with a schema and a reset path.
+
+
+## Sources
+
+- [D-Bus](https://www.freedesktop.org/wiki/Software/dbus/)
+- [GApplication](https://docs.gtk.org/gio/class.Application.html)
+- [Desktop Notifications](https://specifications.freedesktop.org/notification-spec/latest/)
+- [XDG Desktop Portals](https://flatpak.github.io/xdg-desktop-portal/docs/)
+- [Secret Service](https://specifications.freedesktop.org/secret-service-spec/latest/)
+- [MPRIS](https://specifications.freedesktop.org/mpris-spec/latest/)
+- [systemd user units](https://www.freedesktop.org/software/systemd/man/latest/systemd.special.html)
+- [XDG activation](https://wayland.app/protocols/xdg-activation-v1)
 
 Next: [Flatpak & Portals](/platform/flatpak-portals/) — the sandbox model and the mediation layer that makes integration safe.

@@ -331,7 +331,7 @@ Do not target internal widget nodes or ship a full theme. libadwaita 1.9 depreca
 
 ## SVG and image decoding
 
-GTK 4.22 includes `Gtk.Svg`, an in-process SVG paintable for **trusted** assets such as app icons and resources. It supports SVG animations and integrates with GSK.
+GTK 4.22 includes [`Gtk.Svg`](https://docs.gtk.org/gtk4/class.Svg.html), an in-process SVG paintable for **trusted** assets such as app icons and resources. It supports SVG animations and integrates with GSK.
 
 ```python title="Rendering a trusted SVG"
 svg = Gtk.Svg.new_from_resource("/io/github/yourname/Notes/icon.svg")
@@ -370,5 +370,15 @@ Use the Inspector to check CSS, layout, accessibility, and render nodes. It is t
 | Missing accessible label | Set `Gtk.AccessibleProperty.LABEL` |
 | Custom titlebar breaks tiling | Use `Adw.HeaderBar` and toolkit window controls |
 | Rebuilding rows on scroll | Use `Gtk.ListView` + a factory |
+
+
+## Sources
+
+- [GTK 4 documentation](https://docs.gtk.org/gtk4/)
+- [libadwaita 1.9 documentation](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.9/)
+- [GtkSvg](https://docs.gtk.org/gtk4/class.Svg.html)
+- [Glycin](https://gitlab.gnome.org/GNOME/glycin)
+- [Blueprint](https://gnome.pages.gitlab.gnome.org/blueprint-compiler/)
+- [Gtk.SignalListItemFactory](https://docs.gtk.org/gtk4/class.SignalListItemFactory.html)
 
 Next: [Qt & Kirigami](/engineering/qt/) — the KDE-native stack with the same architectural discipline.

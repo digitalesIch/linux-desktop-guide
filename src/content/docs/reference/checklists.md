@@ -158,3 +158,12 @@ If you have ten minutes:
 9. Uninstall; did it leave junk behind?
 10. Read the release notes; would you install it?
 Back to [The Quality Bar](/ship/quality-bar/) or [Resources](/reference/resources/).
+
+## Sources
+
+- [XDG specifications](https://specifications.freedesktop.org/)
+- [AppStream](https://www.freedesktop.org/software/appstream/docs/)
+- [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements)
+- [Ubuntu 26.04 release notes](https://documentation.ubuntu.com/release-notes/26.04/)
+- [Quality Signals](/reference/quality-signals/)
+- [WCAG 2.2](https://www.w3.org/TR/WCAG22/)

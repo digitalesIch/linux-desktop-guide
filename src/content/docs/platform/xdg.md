@@ -250,4 +250,16 @@ When moving from `~/.myapp` to XDG paths, look for the old directory once, copy 
 - ☐ Recent files and trash use the desktop APIs.
 - ☐ A reset removes config and state but not user data without confirmation.
 
+
+## Sources
+
+- [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/latest/)
+- [Desktop Entry](https://specifications.freedesktop.org/desktop-entry-spec/latest/)
+- [Shared MIME-info](https://specifications.freedesktop.org/shared-mime-info-spec/latest/)
+- [Icon Theme](https://specifications.freedesktop.org/icon-theme-spec/latest/)
+- [Autostart](https://specifications.freedesktop.org/autostart-spec/latest/)
+- [XDG User Dirs](https://www.freedesktop.org/wiki/Software/xdg-user-dirs/)
+- [Debian Policy](https://www.debian.org/doc/debian-policy/)
+- [GSettings](https://docs.gtk.org/gio/class.Settings.html)
+
 Next: [System Integration](/platform/integration/) — D-Bus, notifications, secrets, search, and the services that make an app feel part of the desktop.

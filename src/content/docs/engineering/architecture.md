@@ -237,4 +237,12 @@ The UI calls `NotesService`; tests use an in-memory `NoteRepository`. The databa
 | Custom IPC when D-Bus exists | Reinvented discovery, auth, and lifecycle |
 | Silent exception handling | Data loss with no diagnosis |
 
+
+## Sources
+
+- [GApplication](https://docs.gtk.org/gio/class.Application.html)
+- [KDBusService](https://api.kde.org/kdbusservice.html)
+- [systemd user units](https://www.freedesktop.org/software/systemd/man/latest/systemd.special.html)
+- [GLib main loop](https://docs.gtk.org/glib/main-loop.html)
+
 Next: [GTK & libadwaita](/engineering/gtk/) — the deep dive into the Ubuntu-native toolkit.

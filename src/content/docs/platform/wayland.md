@@ -186,4 +186,14 @@ For GNOME-specific behavior, Mutter Devkit in GNOME 50 can simulate HiDPI, fract
 | App steals focus | X11 activation hack | Use `Gtk.Application` activation |
 | Clipboard empty after copy | Asynchronous read not awaited | Use async clipboard APIs and handle failure |
 
+
+## Sources
+
+- [Wayland](https://wayland.freedesktop.org/)
+- [XDG Desktop Portals](https://flatpak.github.io/xdg-desktop-portal/docs/)
+- [GTK Wayland](https://docs.gtk.org/gtk4/wayland.html)
+- [Mutter](https://gitlab.gnome.org/GNOME/mutter)
+- [wayland-utils](https://gitlab.freedesktop.org/wayland/wayland-utils)
+- [Ubuntu 26.04 release notes](https://documentation.ubuntu.com/release-notes/26.04/)
+
 Next: [The XDG Contract](/platform/xdg/) — where apps put their data, and why it matters.

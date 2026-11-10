@@ -43,7 +43,7 @@ The goal is simple: **the app should need almost no static permissions**.
 | File chooser | `org.freedesktop.portal.FileChooser` | Open/save files chosen by the user |
 | Open URI | `org.freedesktop.portal.OpenURI` | Open a file or URL in the default app |
 | Notification | `org.freedesktop.portal.Notification` | Send desktop notifications |
-| Secret | `org.freedesktop.portal.Secret` | Per-app master secret for app-local encrypted storage; libsecret uses it transparently |
+| Secret | [`org.freedesktop.portal.Secret`](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Secret.html) | Per-app master secret for app-local encrypted storage; libsecret uses it transparently |
 | ScreenCast | `org.freedesktop.portal.ScreenCast` | Record/share the screen or a window |
 | Screenshot | `org.freedesktop.portal.Screenshot` | Take a screenshot |
 | GlobalShortcuts | `org.freedesktop.portal.GlobalShortcuts` | User-approved global hotkeys |
@@ -51,13 +51,13 @@ The goal is simple: **the app should need almost no static permissions**.
 | Camera | `org.freedesktop.portal.Camera` | Camera access |
 | Location | `org.freedesktop.portal.Location` | Geolocation |
 | Print | `org.freedesktop.portal.Print` | Printing |
-| USB | `org.freedesktop.portal.Usb` | USB device access |
-| Settings | `org.freedesktop.portal.Settings` | Read color scheme, accent, contrast, and reduced-motion preference; fonts come from the toolkit |
+| USB | [`org.freedesktop.portal.Usb`](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Usb.html) | USB device access |
+| Settings | [`org.freedesktop.portal.Settings`](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Settings.html) | Read color scheme, accent, contrast, and reduced-motion preference; fonts come from the toolkit |
 
 Most GTK apps do not call the portal directly. `Gtk.FileDialog`, `Gtk.PrintDialog`, `Gio.Notification`, and libsecret use the portal when the app is sandboxed. That is exactly what you want: the same code works inside and outside Flatpak.
 
 :::tip[Test outside the sandbox too]
-Portals are available on the host as well. For GTK 4, set `GDK_DEBUG=portals` while developing to force portal-backed dialogs and catch permission/UI differences before packaging. (`GTK_USE_PORTAL` is a GTK 3-era compatibility switch.)
+Portals are available on the host as well. For GTK 4, set [`GDK_DEBUG=portals`](https://docs.gtk.org/gtk4/running.html) while developing to force portal-backed dialogs and catch permission/UI differences before packaging. (`GTK_USE_PORTAL` is a GTK 3-era compatibility switch.)
 :::
 
 ## A minimal manifest
@@ -98,7 +98,7 @@ The `finish-args` above are a good starting point for a local-first document app
 | Permission | Grants | Verdict |
 | --- | --- | --- |
 | `--socket=wayland` | Wayland display | Required |
-| `--socket=fallback-x11` | X11 only when Wayland is unavailable | Acceptable for systems without Wayland; does nothing on a Wayland session |
+| [`--socket=fallback-x11`](https://docs.flatpak.org/en/latest/sandbox-permissions.html) | X11 only when Wayland is unavailable | Acceptable for systems without Wayland; does nothing on a Wayland session |
 | `--share=ipc` | Shared memory with X11 | Usually needed with X11/fallback X11 |
 | `--device=dri` | GPU rendering | Needed for hardware acceleration |
 | `--share=network` | Full network access | Only if the app needs it; no portal equivalent for arbitrary sockets |
@@ -164,13 +164,13 @@ Do not ship a manifest that relies on user overrides. If a feature only works af
 
 ## Runtime lifecycle and permission persistence
 
-A runtime is a dependency with its own support window. Track the `runtime-version` branch, rebase before the runtime reaches end-of-life, run `flatpak update`, and remove unused runtimes with `flatpak uninstall --unused`. Do not assume an Ubuntu LTS support window applies to a GNOME or KDE runtime.
+A runtime is a dependency with its own support window. Track the [`runtime-version`](https://docs.flatpak.org/en/latest/available-runtimes.html) branch, rebase before the runtime reaches end-of-life, run `flatpak update`, and remove unused runtimes with `flatpak uninstall --unused`. Do not assume an Ubuntu LTS support window applies to a GNOME or KDE runtime.
 
 Portal grants are persistent user decisions, not manifest settings. Inspect them with `flatpak permissions`, set or reset them with `flatpak permission-set`/`flatpak permission-reset`, and use `--persist=` only for app-specific paths that genuinely cannot go through a portal. Users can also review portal permissions in the desktop's app settings.
 
 ## Snap and portals
 
-Snap is not Flatpak, but Ubuntu 26.04 improves the same portal path for confined snaps. Snap applications can use XDG Desktop Portals for files, camera, notifications, USB, and other resources, and users can manage Snap portal permissions in GNOME Settings. If you ship a Snap, test the portal flows and the `snap connections` output; do not assume a Snap interface can replace a portal for a user-chosen file or device.
+Snap is not Flatpak, but Ubuntu 26.04 improves the same portal path for confined snaps. Snap applications can use [XDG Desktop Portals](https://flatpak.github.io/xdg-desktop-portal/docs/) for files, camera, notifications, USB, and other resources, and users can manage Snap portal permissions in GNOME Settings. If you ship a Snap, test the portal flows and the `snap connections` output; do not assume a Snap interface can replace a portal for a user-chosen file or device.
 
 ## Flatpak vs Snap vs deb
 
@@ -213,5 +213,16 @@ Flathub is curated. Before you submit:
 - Screenshots, release notes, and a valid AppStream file are required.
 
 The full process is covered in [Flathub](/ship/flathub/).
+
+
+## Sources
+
+- [xdg-desktop-portal](https://flatpak.github.io/xdg-desktop-portal/docs/)
+- [Secret portal](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Secret.html)
+- [Usb portal](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Usb.html)
+- [Settings portal](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Settings.html)
+- [Flatpak sandbox permissions](https://docs.flatpak.org/en/latest/sandbox-permissions.html)
+- [Flatpak runtimes](https://docs.flatpak.org/en/latest/available-runtimes.html)
+- [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements)
 
 Next: [Packaging & Distribution](/platform/packaging/) — how the formats differ, and how to ship each one without losing your sanity.
