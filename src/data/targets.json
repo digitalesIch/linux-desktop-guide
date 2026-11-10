@@ -1,0 +1,398 @@
+{
+  "validated_on": "2026-11-10",
+  "review_due": "2027-05-10",
+  "weights": {
+    "adoption": 0.25,
+    "momentum": 0.25,
+    "developer_environment": 0.2,
+    "platform_quality": 0.2,
+    "longevity": 0.1
+  },
+  "stacks": [
+    {
+      "id": "gnome-gtk",
+      "name": "GNOME + GTK 4 / libadwaita",
+      "scores": {
+        "adoption": 3,
+        "momentum": 3,
+        "developer_environment": 3,
+        "platform_quality": 3,
+        "longevity": 3
+      },
+      "weighted_score": 3.0,
+      "role": "reference",
+      "why": "The default desktop on Ubuntu LTS and Fedora Workstation, with a mature HIG, AT-SPI/Orca accessibility, Wayland by default, and first-class Flatpak and AppStream support.",
+      "sources": [
+        "https://release.gnome.org/51/",
+        "https://developer.gnome.org/",
+        "https://docs.gtk.org/gtk4/",
+        "https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/",
+        "https://gitlab.gnome.org/GNOME/xdg-desktop-portal-gnome"
+      ]
+    },
+    {
+      "id": "kde-qt",
+      "name": "KDE Plasma + Qt 6 / Kirigami",
+      "scores": {
+        "adoption": 3,
+        "momentum": 3,
+        "developer_environment": 3,
+        "platform_quality": 3,
+        "longevity": 3
+      },
+      "weighted_score": 3.0,
+      "role": "reference",
+      "why": "A first-class Plasma 6 stack with Qt 6 and Kirigami, Wayland by default, QAccessible/Orca, a published HIG, and strong momentum: Fedora KDE countme sample hits rose 25.8% between April and October 2026.",
+      "sources": [
+        "https://kde.org/announcements/plasma/6/6.8.0/",
+        "https://develop.kde.org/",
+        "https://doc.qt.io/qt-6/",
+        "https://doc.qt.io/qt-6/qaccessible.html",
+        "https://invent.kde.org/plasma/xdg-desktop-portal-kde"
+      ]
+    },
+    {
+      "id": "cosmic-libcosmic",
+      "name": "COSMIC + libcosmic",
+      "scores": {
+        "adoption": 1,
+        "momentum": 3,
+        "developer_environment": 2,
+        "platform_quality": 1,
+        "longevity": 1
+      },
+      "weighted_score": 1.7,
+      "role": "watch",
+      "why": "Wayland-native and shipping across many distributions, but the accessibility feature is marked experimental, the toolkit is young, and the support end is not verified.",
+      "sources": [
+        "https://system76.com/cosmic",
+        "https://github.com/pop-os/libcosmic",
+        "https://github.com/pop-os/xdg-desktop-portal-cosmic"
+      ]
+    },
+    {
+      "id": "cinnamon-gtk3",
+      "name": "Cinnamon + GTK 3",
+      "scores": {
+        "adoption": 2,
+        "momentum": 2,
+        "developer_environment": 1,
+        "platform_quality": 1,
+        "longevity": 2
+      },
+      "weighted_score": 1.6,
+      "role": "watch",
+      "why": "Linux Mint has strong interest proxies, but Cinnamon is GTK 3, the reviewed release materials do not declare Wayland the default, and no dedicated Cinnamon SDK or official container was verified.",
+      "sources": [
+        "https://linuxmint.com/rel_zena_whatsnew.php",
+        "https://github.com/linuxmint/xdg-desktop-portal-xapp"
+      ]
+    },
+    {
+      "id": "xfce-gtk3",
+      "name": "Xfce + GTK 3",
+      "scores": {
+        "adoption": 1,
+        "momentum": 1,
+        "developer_environment": 2,
+        "platform_quality": 1,
+        "longevity": 1
+      },
+      "weighted_score": 1.2,
+      "role": "watch",
+      "why": "X11 remains the default, Wayland support is experimental, GTK 3 is the stack, and the stable cadence is irregular. It is not a reference for the Wayland-native native standard.",
+      "sources": [
+        "https://xfce.org/about/news",
+        "https://docs.xfce.org/"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "id": "ubuntu-gnome",
+      "name": "Ubuntu 26.04 LTS + GNOME",
+      "role": "reference",
+      "stack": "gtk",
+      "base": "deb",
+      "release_model": "lts",
+      "distro": "Ubuntu 26.04 LTS",
+      "desktop": "GNOME 50",
+      "toolkit": "GTK 4.22 + libadwaita 1.9",
+      "display": "Wayland",
+      "packaging": "Flatpak/Flathub recommended; deb and Snap secondary",
+      "support": "5 years standard; 10 with Ubuntu Pro; 15 with the Legacy add-on",
+      "last_validated": "2026-11-10",
+      "scores": {
+        "adoption": 3,
+        "momentum": 2,
+        "developer_environment": 3,
+        "platform_quality": 3,
+        "longevity": 3
+      },
+      "weighted_score": 2.75,
+      "why": "The stable GNOME reference: an LTS base, Wayland-only GNOME session, mature HIG and accessibility, official containers and cloud images, and the longest support window in the set.",
+      "sources": [
+        "https://ubuntu.com/about/release-cycle",
+        "https://documentation.ubuntu.com/release-notes/26.04/",
+        "https://release.gnome.org/50/",
+        "https://flathub.org/en/setup/Ubuntu",
+        "https://packages.ubuntu.com/search?keywords=libgtk-4-1&searchon=names&suite=all&section=all"
+      ]
+    },
+    {
+      "id": "fedora-kde",
+      "name": "Fedora 45 KDE Plasma + Qt",
+      "role": "reference",
+      "stack": "qt",
+      "base": "rpm",
+      "release_model": "current",
+      "distro": "Fedora 45 KDE Plasma Desktop",
+      "desktop": "KDE Plasma 6.7 or newer (Fedora 45)",
+      "toolkit": "Qt 6.11 + KDE Frameworks 6.30 or newer + Kirigami",
+      "display": "Wayland",
+      "packaging": "Flatpak/Flathub preconfigured; rpm secondary",
+      "support": "Approximately 13 months",
+      "last_validated": "2026-11-10",
+      "scores": {
+        "adoption": 2,
+        "momentum": 3,
+        "developer_environment": 3,
+        "platform_quality": 3,
+        "longevity": 1
+      },
+      "weighted_score": 2.55,
+      "why": "The upstream-current KDE reference: Fedora KDE is a flagship edition, Plasma 6 is Wayland-only, Flatpak and Flathub are ready out of the box, and the KDE stack has strong momentum and a published HIG.",
+      "sources": [
+        "https://fedoramagazine.org/announcing-fedora-linux-45/",
+        "https://docs.fedoraproject.org/en-US/releases/lifecycle/",
+        "https://kde.org/announcements/plasma/6/6.8.0/",
+        "https://kde.org/announcements/frameworks/6/6.31.0/",
+        "https://flathub.org/en/setup/Fedora",
+        "https://develop.kde.org/"
+      ]
+    },
+    {
+      "id": "fedora-gnome",
+      "name": "Fedora 45 Workstation + GNOME",
+      "role": "validation",
+      "stack": "gtk",
+      "base": "rpm",
+      "release_model": "current",
+      "distro": "Fedora 45 Workstation",
+      "desktop": "GNOME 51",
+      "toolkit": "GTK 4.24 + libadwaita 1.10",
+      "display": "Wayland",
+      "packaging": "Flatpak/Flathub preconfigured; rpm secondary",
+      "support": "Approximately 13 months",
+      "last_validated": "2026-11-10",
+      "scores": {
+        "adoption": 2,
+        "momentum": 3,
+        "developer_environment": 3,
+        "platform_quality": 3,
+        "longevity": 1
+      },
+      "weighted_score": 2.55,
+      "why": "The upstream-current GNOME validation target. It catches GTK, libadwaita, GNOME HIG, and portal drift before the next Ubuntu LTS, and Fedora ships Flatpak and Flathub ready to use.",
+      "sources": [
+        "https://fedoramagazine.org/announcing-fedora-linux-45/",
+        "https://release.gnome.org/51/",
+        "https://release.gnome.org/51/developers/",
+        "https://flathub.org/en/setup/Fedora"
+      ]
+    },
+    {
+      "id": "arch-rolling",
+      "name": "Arch Linux (rolling)",
+      "role": "validation",
+      "stack": "both",
+      "base": "pacman",
+      "release_model": "rolling",
+      "distro": "Arch Linux",
+      "desktop": "GNOME or KDE Plasma, current",
+      "toolkit": "GTK 4.24 / Qt 6.12",
+      "display": "Wayland when using GNOME or Plasma",
+      "packaging": "Flatpak/Flathub manual; pacman",
+      "support": "No EOL; no support promise",
+      "last_validated": "2026-11-10",
+      "scores": {
+        "adoption": 2,
+        "momentum": 2,
+        "developer_environment": 3,
+        "platform_quality": 2,
+        "longevity": 0
+      },
+      "weighted_score": 2.0,
+      "why": "The rolling validation target. It carries the newest GTK and Qt packages, has an official container image, and catches upstream breakage early. It is not a support baseline.",
+      "sources": [
+        "https://archlinux.org/about/",
+        "https://archlinux.org/releng/releases/",
+        "https://archlinux.org/packages/search/json/?name=gtk4",
+        "https://archlinux.org/packages/search/json/?name=qt6-base",
+        "https://pkgstats.archlinux.de/fun/Desktop%20Environments/current",
+        "https://flathub.org/en/setup/Arch"
+      ]
+    },
+    {
+      "id": "debian-stable",
+      "name": "Debian 13 (trixie)",
+      "role": "compatibility",
+      "stack": "both",
+      "base": "deb",
+      "release_model": "stable",
+      "distro": "Debian 13 (trixie)",
+      "desktop": "GNOME or KDE Plasma",
+      "toolkit": "GTK 4.18 + libadwaita 1.7; Qt 6.8",
+      "display": "Wayland for GNOME and Plasma",
+      "packaging": "Flatpak/Flathub manual; deb",
+      "support": "EOL 2028; LTS to 2030; ELTS to 2035",
+      "last_validated": "2026-11-10",
+      "scores": {
+        "adoption": 2,
+        "momentum": 2,
+        "developer_environment": 2,
+        "platform_quality": 2,
+        "longevity": 3
+      },
+      "weighted_score": 2.1,
+      "why": "The conservative compatibility target: a stable base with long support, reproducible-build infrastructure, and older GTK/Qt libraries. Use Flatpak when you need a newer stack.",
+      "sources": [
+        "https://www.debian.org/releases/",
+        "https://packages.debian.org/search?keywords=libgtk-4-1&searchon=names&suite=trixie&section=all",
+        "https://packages.debian.org/search?keywords=qt6-base-dev&searchon=names&suite=trixie&section=all",
+        "https://flathub.org/en/setup/Debian",
+        "https://tests.reproducible-builds.org/debian/"
+      ]
+    }
+  ],
+  "watch": [
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint 22.3 + Cinnamon",
+      "stack": "GTK 3 / Cinnamon",
+      "reason": "High interest and Steam proxies, but Cinnamon is GTK 3, the reviewed release materials do not declare Wayland the default, and no dedicated Cinnamon SDK or official container was verified. Re-evaluate when the Cinnamon Wayland story and developer tooling mature.",
+      "scores": {
+        "adoption": 3,
+        "momentum": 2,
+        "developer_environment": 1,
+        "platform_quality": 1,
+        "longevity": 3
+      },
+      "weighted_score": 1.95,
+      "sources": [
+        "https://blog.linuxmint.com/?p=4981",
+        "https://linuxmint.com/rel_zena_whatsnew.php",
+        "https://store.steampowered.com/hwsurvey/"
+      ]
+    },
+    {
+      "id": "pop-os-cosmic",
+      "name": "Pop!_OS 24.04 LTS + COSMIC",
+      "stack": "COSMIC / libcosmic",
+      "reason": "Strong momentum and a Wayland-native Rust toolkit, but libcosmic marks accessibility as experimental, the toolkit is young, there is no official Pop!_OS container, and the support end is not verified.",
+      "scores": {
+        "adoption": 1,
+        "momentum": 3,
+        "developer_environment": 2,
+        "platform_quality": 1,
+        "longevity": 1
+      },
+      "weighted_score": 1.7,
+      "sources": [
+        "https://system76.com/cosmic",
+        "https://system76.com/blog/post/cosmic-1-0-8-released",
+        "https://github.com/pop-os/libcosmic"
+      ]
+    },
+    {
+      "id": "opensuse-tumbleweed",
+      "name": "openSUSE Tumbleweed",
+      "stack": "GNOME / KDE Plasma",
+      "reason": "A healthy rolling KDE and GNOME base with OBS and openQA, but the reviewed adoption proxies did not show a distinct signal and the GTK/Qt versions were not verified. Fedora and Arch already cover the current/rolling roles.",
+      "scores": {
+        "adoption": 1,
+        "momentum": 2,
+        "developer_environment": 2,
+        "platform_quality": 2,
+        "longevity": 1
+      },
+      "weighted_score": 1.65,
+      "sources": [
+        "https://get.opensuse.org/tumbleweed/",
+        "https://distrowatch.com/dwres.php?resource=popularity"
+      ]
+    },
+    {
+      "id": "nixos",
+      "name": "NixOS 26.05",
+      "stack": "GNOME / KDE Plasma",
+      "reason": "Exceptional reproducibility and contributor activity, but the support window is short, adoption proxies are weak, and Flatpak is optional. A promising future reproducibility target, not a reference target yet.",
+      "scores": {
+        "adoption": 1,
+        "momentum": 3,
+        "developer_environment": 2,
+        "platform_quality": 2,
+        "longevity": 1
+      },
+      "weighted_score": 1.9,
+      "sources": [
+        "https://nixos.org/blog/announcements/2026/nixos-2605/",
+        "https://reproducible.nixos.org/"
+      ]
+    },
+    {
+      "id": "manjaro",
+      "name": "Manjaro 26.1",
+      "stack": "GNOME / KDE / Xfce",
+      "reason": "Arch-based rolling with commercial backing, but no official Manjaro container or SDK was verified and it does not add coverage beyond Arch.",
+      "scores": {
+        "adoption": 1,
+        "momentum": 1,
+        "developer_environment": 1,
+        "platform_quality": 2,
+        "longevity": 0
+      },
+      "weighted_score": 1.1,
+      "sources": [
+        "https://manjaro.org/products/download/x86",
+        "https://distrowatch.com/dwres.php?resource=popularity"
+      ]
+    },
+    {
+      "id": "elementary-os",
+      "name": "elementary OS 8.1",
+      "stack": "Pantheon / GTK",
+      "reason": "A distinct HIG and AppCenter, but niche adoption, no official container verified, and an unverified support end. It is not a reference target for the general native standard.",
+      "scores": {
+        "adoption": 1,
+        "momentum": 2,
+        "developer_environment": 1,
+        "platform_quality": 2,
+        "longevity": 1
+      },
+      "weighted_score": 1.45,
+      "sources": [
+        "https://blog.elementary.io/os-8-1-available-now/",
+        "https://docs.elementary.io/develop/"
+      ]
+    },
+    {
+      "id": "xfce",
+      "name": "Xfce 4.20",
+      "stack": "GTK 3 / Xfce",
+      "reason": "X11 remains the default, Wayland support is experimental, GTK 3 is the stack, and the stable cadence is irregular. It is outside the Wayland-native reference standard.",
+      "scores": {
+        "adoption": 1,
+        "momentum": 1,
+        "developer_environment": 2,
+        "platform_quality": 1,
+        "longevity": 1
+      },
+      "weighted_score": 1.2,
+      "sources": [
+        "https://xfce.org/about/news",
+        "https://xfce.org/download"
+      ]
+    }
+  ]
+}

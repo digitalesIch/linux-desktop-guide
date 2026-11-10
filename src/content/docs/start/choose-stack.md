@@ -1,11 +1,24 @@
 ---
-title: Choose Your Stack
-description: GTK 4 + libadwaita, Qt 6 + Kirigami, Rust, Python, or web tech? A practical comparison of Linux desktop stacks, what they are good at, and where they stop feeling native.
+title: Choose Your Target and Stack
+description: Choose a platform target first, then the default stack for that target. A practical comparison of GTK 4 + libadwaita, Qt 6 + Kirigami, Rust, Python, and web tech.
 ---
 
 There is no single "Linux SDK". There are several mature stacks, each with a different center of gravity. The right choice is the one your team can maintain for five years, on the desktop your users actually run.
 
 GTK and Qt are both excellent. Rust is a strong default for new apps, but not a requirement. Web technology can be the right answer when the product is genuinely web-shaped — and the wrong answer when it is used to avoid learning the platform.
+
+The guide does not pretend there is one stack for every Linux desktop. It pairs each **reference target** with a default stack, a HIG, and a packaging path. Choose the target first; the stack follows.
+
+## Choose a target first
+
+| Target | Default stack | HIG | Start |
+| --- | --- | --- | --- |
+| [Ubuntu 26.04 LTS + GNOME](/targets/ubuntu-gnome/) | GTK 4 + libadwaita | GNOME HIG | [GTK & libadwaita](/engineering/gtk/) |
+| [Fedora 45 KDE + Qt](/targets/fedora-kde/) | Qt 6 + Kirigami + KDE Frameworks | KDE HIG | [Qt & Kirigami](/engineering/qt/) |
+| [Debian 13](/targets/#compatibility-target) | The target stack, usually through Flatpak | GNOME or KDE HIG | Use the target's HIG |
+| [Arch Linux](/targets/#validation-targets) | Either stack, for validation | The chosen desktop's HIG | Validation only, no support promise |
+
+If you have not chosen a target, start with [Platform Targets](/targets/). If your product is genuinely cross-distro, pick one primary target, ship Flatpak, and test on the validation targets. Do not build a different UI for every distribution.
 
 ## At a glance
 
@@ -19,11 +32,13 @@ GTK and Qt are both excellent. Rust is a strong default for new apps, but not a 
 | You are building a game or a custom-rendered canvas | **SDL3**, **Godot**, or **Qt Quick** |
 | You need a single binary for many distros with minimal runtime | **Rust + Iced/Slint**, or **Qt** with static deployment |
 
-For most new Linux-first apps in 2026, the strongest default is:
+The guide has one default **per target**, not one universal default:
 
-> **[GTK 4.22 + libadwaita 1.9](/reference/baseline/) + Blueprint + Meson + Flatpak**, written in Rust or C.
+> **GNOME target:** **[GTK 4.22 + libadwaita 1.9](/reference/baseline/) + Blueprint + Meson + Flatpak**, written in C, Rust, Python, or Vala.
 
-It is the stack used by GNOME's own apps, it has the deepest accessibility and portal integration, and it is what Ubuntu 26.04 LTS ships. If you are targeting KDE first, replace GTK/libadwaita with Qt 6.10 + Kirigami/KDE Frameworks 6.
+> **KDE target:** **Qt 6.11 + Kirigami + KDE Frameworks 6.30+ + CMake + Flatpak**, written in C++ and QML.
+
+GTK is the direct path to GNOME-native behavior, and it is what Ubuntu 26.04 LTS ships. Qt/Kirigami is the direct path to KDE-native behavior, and it is what the Fedora KDE reference target ships. A cross-distro product can share code, but it still has to choose which HIG it follows first.
 
 ## The comparison
 
@@ -51,7 +66,7 @@ It is the stack used by GNOME's own apps, it has the deepest accessibility and p
 
 ### Qt 6 + Kirigami
 
-**What it is:** Qt is a mature C++/QML application framework. Kirigami is KDE's adaptive UI framework built on Qt Quick. [Kubuntu 26.04](https://kubuntu.org/news/kubuntu-26-04-release-notes/) ships Plasma 6.6, Qt 6.10, and KDE Frameworks 6.24.
+**What it is:** Qt is a mature C++/QML application framework. Kirigami is KDE's adaptive UI framework built on Qt Quick. The guide's KDE reference target is [Fedora 45 KDE Plasma](/targets/fedora-kde/); [Kubuntu 26.04](https://kubuntu.org/news/kubuntu-26-04-release-notes/) is a valid Ubuntu-based alternative, but it is a validation option, not a reference target.
 
 **Strengths**
 
@@ -134,10 +149,12 @@ A useful rule:
 
 Do not let a language preference force you into a toolkit that fights the desktop, and do not let a toolkit force you into a language your team cannot staff.
 
-## Ubuntu toolchains
+## Target toolchains
 
-Ubuntu publishes supported setup and version-availability guides for Python, Go, Rust, GCC, Clang, .NET, Java, and Zig. Use them as the source of truth when you need to know what an LTS release ships, or when you need a supported install path:
+The two reference targets have their own setup paths. Ubuntu publishes supported setup and version-availability guides for Python, Go, Rust, GCC, Clang, .NET, Java, and Zig. Use them as the source of truth when you need to know what the LTS ships, or when you need a supported install path:
 
+- [Ubuntu + GNOME target](/targets/ubuntu-gnome/) — the complete environment and golden path.
+- [Fedora + KDE target](/targets/fedora-kde/) — the complete environment and golden path.
 - [Ubuntu for Developers](https://ubuntu.com/developers/docs/) — overview and tutorials.
 - [Toolchains](https://ubuntu.com/developers/docs/toolchains/) — per-language setup and first-program guides.
 - [Toolchain availability](https://ubuntu.com/developers/docs/reference/availability/) — what each Ubuntu release provides.
@@ -156,7 +173,7 @@ For GTK apps, use the archive toolchain when you link against system libraries. 
 
 ## Versions to target in 2026
 
-The validated version set lives in [Baseline](/reference/baseline/). It records the current Ubuntu LTS, GNOME, GTK, libadwaita, Qt, KDE Frameworks, Flatpak runtimes, and the review date. Use it as the reference for examples and screenshots; define a separate minimum-version policy when you support an older release.
+The validated version set for the GNOME target lives in [Baseline](/reference/baseline/); the full matrix lives in [Platform Targets](/targets/). The targets record the distribution, toolkit, Flatpak runtime, support window, and review date. Use them as the reference for examples and screenshots; define a separate minimum-version policy when you support an older release.
 
 :::caution[Do not target the newest API by default]
 A Flatpak app can bundle a newer runtime, but a deb must work with the libraries in the archive. If you ship both, target the oldest library version you support and use compile-time version checks (`GTK_CHECK_VERSION`, `QT_VERSION_CHECK`) or feature flags for newer APIs.
@@ -165,6 +182,8 @@ A Flatpak app can bundle a newer runtime, but a deb must work with the libraries
 
 ## Sources
 
+- [Platform Targets](/targets/)
+- [How Targets Are Chosen](/targets/selection/)
 - [Baseline](/reference/baseline/)
 - [GTK 4 documentation](https://docs.gtk.org/gtk4/)
 - [libadwaita 1.9](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.9/)
@@ -174,4 +193,4 @@ A Flatpak app can bundle a newer runtime, but a deb must work with the libraries
 - [Relm4 book](https://relm4.org/book/stable/)
 - [Quality Signals](/reference/quality-signals/)
 
-Next: [Build Your First App](/start/first-app/) — a complete, minimal GTK 4 app with packaging.
+Next: [Build Your First App](/start/first-app/) for the GNOME path, or [Qt & Kirigami](/engineering/qt/) for the KDE path. If you have not chosen a target yet, start with [Platform Targets](/targets/).

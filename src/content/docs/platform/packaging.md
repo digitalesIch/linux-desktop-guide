@@ -264,7 +264,7 @@ For the full build and review flow, use the [Snapcraft documentation](https://ub
 
 ## OCI images with Rockcraft
 
-If the deliverable is a service or cloud workload rather than a desktop app, build it as an OCI image with [Rockcraft](https://ubuntu.com/containers/rockcraft/docs/stable/). Rocks are minimal, Ubuntu-based images with a supported build path. Do not use them as a desktop packaging format.
+If the deliverable is a service or cloud workload rather than a desktop app, build it as an OCI image with [Rockcraft](https://github.com/canonical/rockcraft). Rocks are minimal, Ubuntu-based images with a supported build path. Do not use them as a desktop packaging format.
 
 ## AppImage
 

@@ -1,6 +1,6 @@
 ---
 title: Baseline
-description: "The validated reference environment for this guide: Ubuntu 26.04 LTS, GNOME 50, GTK 4.22, libadwaita 1.9, Qt 6.10, and the packaging toolchain the examples are tested against."
+description: "The validated Ubuntu 26.04 LTS + GNOME reference baseline: GNOME 50, GTK 4.22, libadwaita 1.9, Qt 6.10, and the packaging toolchain the examples are tested against. The full target matrix is in Platform Targets."
 ---
 
 import baseline from '../../../data/baseline.json';
@@ -25,9 +25,9 @@ export const reviewDue = new Intl.DateTimeFormat('en', {
   timeZone: 'UTC',
 }).format(new Date(`${baseline.review_due}T00:00:00Z`));
 
-This page is the single source of truth for the versions this guide is validated against. Other pages describe how to build on the platform; this page records what “the platform” means at the current review.
+This page is the validated **Ubuntu 26.04 LTS + GNOME** reference baseline. It is one target in a larger matrix, not the whole guide. The other targets and their roles are documented in [Platform Targets](/targets/).
 
-The values are also stored in `src/data/baseline.json`. The page imports that file, and the local documentation MCP server (`docs`) reads the same data.
+The values are stored in `src/data/baseline.json`. The page imports that file, and the local documentation MCP server (`docs`) reads the same data.
 
 ## Validated baseline
 
@@ -135,6 +135,8 @@ The update is a normal OpenSpec change. It should explain which upstream release
 
 ## See also
 
+- [Platform Targets](/targets/)
+- [How Targets Are Chosen](/targets/selection/)
 - [Ubuntu Platform](/platform/ubuntu/)
 - [Choose Your Stack](/start/choose-stack/)
 - [GTK & libadwaita](/engineering/gtk/)

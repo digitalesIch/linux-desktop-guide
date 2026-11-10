@@ -74,7 +74,7 @@ test('lists pages by section', () => {
 	assert.equal(all.count, corpus.pages.length);
 	assert.deepEqual(
 		all.sections.map((section) => section.id),
-		['start', 'platform', 'design', 'engineering', 'ship', 'reference'],
+		['targets', 'start', 'platform', 'design', 'engineering', 'ship', 'reference'],
 	);
 
 	const platform = listPages(corpus.pages, 'platform');

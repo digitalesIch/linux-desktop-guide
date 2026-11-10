@@ -120,9 +120,10 @@ test('list_pages returns the table of contents', async () => {
 	assert.ok(payload.count >= 30);
 	assert.deepEqual(
 		payload.sections.map((section) => section.id),
-		['start', 'platform', 'design', 'engineering', 'ship', 'reference'],
+		['targets', 'start', 'platform', 'design', 'engineering', 'ship', 'reference'],
 	);
-	assert.ok(payload.sections[0].pages[0].slug === 'start/why-linux');
+	assert.equal(payload.sections[0].id, 'targets');
+	assert.ok(payload.sections.find((section) => section.id === 'targets').pages.length >= 4);
 });
 
 test('get_related recommends other pages', async () => {

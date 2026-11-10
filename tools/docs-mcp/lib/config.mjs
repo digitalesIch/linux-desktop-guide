@@ -12,6 +12,7 @@ export const SERVER_NAME = 'linux-desktop-guide-docs';
 export const SERVER_VERSION = '1.0.0';
 
 export const SECTION_LABELS = Object.freeze({
+	targets: 'Targets',
 	start: 'Start Here',
 	platform: 'Platform',
 	design: 'Design',

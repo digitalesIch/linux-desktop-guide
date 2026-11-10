@@ -26,7 +26,7 @@ Do not mix the two paradigms in one window unless you have a specific reason. A 
 
 ## Project skeleton
 
-A small Qt/Kirigami app keeps the model in C++ and the view in QML:
+The [Fedora + KDE target](/targets/fedora-kde/) is the reference environment for this chapter. A small Qt/Kirigami app keeps the model in C++ and the view in QML:
 
 ```text
 notes/

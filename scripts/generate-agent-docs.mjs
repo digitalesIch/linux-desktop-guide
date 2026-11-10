@@ -13,6 +13,7 @@ const config = readFileSync(join(root, 'astro.config.mjs'), 'utf8');
 const site = (config.match(/site:\s*'([^']+)'/)?.[1] ?? 'https://linux-desktop.guide').replace(/\/$/, '');
 
 const sectionLabels = {
+	targets: 'Targets',
 	start: 'Start Here',
 	platform: 'Platform',
 	design: 'Design',
@@ -21,7 +22,7 @@ const sectionLabels = {
 	reference: 'Reference',
 };
 
-const sectionOrder = ['start', 'platform', 'design', 'engineering', 'ship', 'reference'];
+const sectionOrder = ['targets', 'start', 'platform', 'design', 'engineering', 'ship', 'reference'];
 
 const turndown = new TurndownService({
 	headingStyle: 'atx',
@@ -148,7 +149,7 @@ for (const list of bySection.values()) list.sort((a, b) => a.title.localeCompare
 const indexLines = [
 	'# Linux Desktop Guide',
 	'',
-	'> A practical field guide to building fast, accessible, deeply integrated native apps for Ubuntu and the wider Linux desktop.',
+	'> A practical field guide to building fast, accessible, deeply integrated native apps for the Linux desktops that matter, with a curated target matrix, a default stack for each target, and a shared quality bar.',
 	'',
 ];
 
@@ -174,7 +175,7 @@ writeFileSync(join(dist, 'llms.txt'), indexLines.join('\n'), 'utf8');
 const fullLines = [
 	'# Linux Desktop Guide — Full Text',
 	'',
-	'> A practical field guide to building fast, accessible, deeply integrated native apps for Ubuntu and the wider Linux desktop.',
+	'> A practical field guide to building fast, accessible, deeply integrated native apps for the Linux desktops that matter, with a curated target matrix, a default stack for each target, and a shared quality bar.',
 	'',
 	`Canonical site: ${site}/`,
 	'',

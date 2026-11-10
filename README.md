@@ -1,6 +1,6 @@
 # Linux Desktop Guide
 
-A field guide to building fast, accessible, deeply integrated native apps for Ubuntu 26.04 and the wider Linux desktop.
+A field guide to building fast, accessible, deeply integrated native apps for the Linux desktops that matter. It defines a small, evidence-based set of platform targets, a default stack for each, and a shared quality bar.
 
 The project is both:
 
@@ -9,12 +9,23 @@ The project is both:
 
 The companion app in `examples/notes/` is a complete GTK 4 + libadwaita reference implementation with Meson and Flatpak packaging.
 
+## Platform targets
+
+The guide is not a distro-agnostic tutorial. It supports a small, evidence-based target matrix:
+
+- **Reference:** Ubuntu 26.04 LTS + GNOME (GTK 4 / libadwaita) and Fedora 45 KDE + Qt (Qt 6 / Kirigami).
+- **Validation:** Fedora 45 Workstation + GNOME (upstream GTK/GNOME) and Arch Linux (rolling GTK/Qt).
+- **Compatibility:** Debian 13 (stable base, older GTK/Qt; Flatpak for newer stacks).
+
+Start at `src/content/docs/targets/index.md`; the method and evidence are in `targets/selection.md`; the machine-readable matrix is `src/data/targets.json`. `npm run check:targets` enforces dates, sources, scores, roles, and coverage.
+
 ## Structure
 
 ```text
 .
 ├── src/
 │   ├── content/docs/          # Markdown/MDX source of truth
+│   │   ├── targets/           # Curated platform targets and selection method
 │   │   ├── start/             # Why Linux, stack choice, tutorial, standard
 │   │   ├── platform/          # Ubuntu, Wayland, XDG, integration, Flatpak, packaging, security
 │   │   ├── design/            # Principles, visual language, layout, interaction, a11y, i18n
@@ -22,7 +33,8 @@ The companion app in `examples/notes/` is a complete GTK 4 + libadwaita referenc
 │   │   ├── ship/              # AppStream, Flathub, release checklist, quality bar
 │   │   └── reference/         # Baseline, quality signals, checklists, glossary, resources
 │   ├── components/            # PageTitle override and other Starlight overrides
-│   ├── data/baseline.json     # Validated versions, imported by the baseline page
+│   ├── data/baseline.json     # Ubuntu/GNOME reference baseline
+│   ├── data/targets.json      # Curated target matrix and evidence scores
 │   ├── styles/custom.css      # Design tokens and site styling
 │   └── assets/                # Logo and hero artwork
 ├── scripts/                   # Baseline and maintenance checks
@@ -77,10 +89,11 @@ It runs, in order:
 
 1. baseline validation;
 2. tutorial/example consistency checking;
-3. a full Astro build (including agent docs and Pagefind);
-4. agent-doc validation;
-5. the MCP server tests;
-6. internal link and anchor checking against `dist/`.
+3. target-matrix validation;
+4. a full Astro build (including agent docs and Pagefind);
+5. agent-doc validation;
+6. the MCP server tests;
+7. internal link and anchor checking against `dist/`.
 
 The default gate is offline and repeatable. External URLs are checked separately:
 
@@ -90,7 +103,7 @@ npm run check:links:external
 
 Unreachable hosts are warnings, because a local network or a site blocking automated requests is not proof of a broken link. Use `npm run check:links:external:strict` when the network is reliable and warnings should fail the check.
 
-`npm run check:links` runs only the fast internal check. `npm run check:examples` compares the file blocks in the first-app tutorial with `examples/notes`; it fails on drift and prints a line diff.
+`npm run check:links` runs only the fast internal check. `npm run check:examples` compares the file blocks in the first-app tutorial with `examples/notes`; it fails on drift and prints a line diff. `npm run check:targets` validates the curated target matrix: dates, scores, sources, roles, and coverage gates.
 
 Browser-based quality checks are separate because they need a local Chrome installation:
 
@@ -132,7 +145,7 @@ description: One sentence for search results and social previews.
 - Use tables for comparisons and checklists for release gates.
 - Keep the tone opinionated but fair: GTK and Qt are both first-class.
 - Do not use Apple/macOS/Windows as the reference point or promote proprietary/non-standard vendors. Name an alternative only as a sourced example when it is open source, actively maintained, widely accepted, and compared on quality signals.
-- Mention the tested baseline: Ubuntu 26.04 LTS, GNOME 50, GTK 4.22, libadwaita 1.9, Qt 6.10, KDE Frameworks 6.24.
+- Mention the tested target and its baseline: Ubuntu 26.04 LTS + GNOME (GTK 4.22, libadwaita 1.9) or Fedora 45 KDE + Qt (Qt 6.11, KDE Frameworks 6.30+). The full matrix is in `/targets/`.
 - When a behavior is desktop-specific, say so and give the portable baseline.
 
 ## Reference app

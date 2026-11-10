@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const external = process.argv.includes('--external');
-const steps = ['check:baseline', 'check:examples', 'build', 'check:agent-docs', 'test:docs-mcp', 'check:links'];
+const steps = ['check:baseline', 'check:examples', 'check:targets', 'build', 'check:agent-docs', 'test:docs-mcp', 'check:links'];
 if (external) steps.push('check:links:external');
 
 for (const step of steps) {

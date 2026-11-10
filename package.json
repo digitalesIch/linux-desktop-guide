@@ -20,7 +20,8 @@
 		"check:docs": "node scripts/check-docs.mjs",
 		"check:links:external:strict": "node scripts/check-links.mjs --external --strict",
 		"check:quality": "node scripts/check-quality.mjs",
-		"check:examples": "node scripts/check-examples.mjs"
+		"check:examples": "node scripts/check-examples.mjs",
+		"check:targets": "node scripts/check-targets.mjs"
 	},
 	"dependencies": {
 		"@astrojs/starlight": "^0.42.10",

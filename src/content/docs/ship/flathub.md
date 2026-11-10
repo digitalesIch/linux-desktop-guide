@@ -3,7 +3,7 @@ title: Flathub
 description: "The complete Flathub submission and maintenance workflow: app IDs, manifests, linting, pull requests, review, runtime updates, verification, and the mistakes that get submissions rejected."
 ---
 
-Flathub is a major vendor-neutral app store for Linux. It gives users a trusted place to install Flatpak apps, gives developers delta updates and a software-center listing, and gives the ecosystem a shared runtime model.
+Flathub is a major vendor-neutral app store for Linux. It gives users a trusted place to install Flatpak apps, gives developers delta updates and a software-center listing, and gives the ecosystem a shared runtime model. It is the common delivery channel for the guide's [Platform Targets](/targets/); the target pages record the runtime and the quality gates.
 
 It is also curated. A Flathub listing is a signal that the app builds from source, respects the sandbox, ships valid metadata, and has a maintainer who will keep it working. Treat the submission as a product launch, not a pull request.
 

@@ -50,7 +50,8 @@ export function slugFromFile(root, path) {
 		.split(sep)
 		.join('/')
 		.replace(/\.md$/, '');
-	return slug === 'index' ? null : slug;
+	if (slug === 'index') return null;
+	return slug.endsWith('/index') ? slug.slice(0, -'/index'.length) : slug;
 }
 
 /**

@@ -26,10 +26,19 @@ export default defineConfig({
 			},
 			sidebar: [
 				{
+					label: 'Targets',
+					items: [
+						{ label: 'Platform Targets', slug: 'targets' },
+						{ label: 'How Targets Are Chosen', slug: 'targets/selection' },
+						{ label: 'Ubuntu + GNOME', slug: 'targets/ubuntu-gnome' },
+						{ label: 'Fedora + KDE', slug: 'targets/fedora-kde' },
+					],
+				},
+				{
 					label: 'Start Here',
 					items: [
 						{ label: 'Why Linux Is Different', slug: 'start/why-linux' },
-						{ label: 'Choose Your Stack', slug: 'start/choose-stack' },
+						{ label: 'Choose Target & Stack', slug: 'start/choose-stack' },
 						{ label: 'Build Your First App', slug: 'start/first-app' },
 						{ label: 'The Native Standard', slug: 'start/native-standard' },
 					],

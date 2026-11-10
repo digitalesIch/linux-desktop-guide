@@ -1,11 +1,15 @@
 ---
 title: Build Your First App
-description: A complete, minimal GTK 4 + libadwaita app for Ubuntu 26.04 — with adaptive layout, XDG storage, keyboard shortcuts, AppStream metadata, and a Flatpak manifest.
+description: A complete, minimal GTK 4 + libadwaita app for the Ubuntu 26.04 LTS + GNOME target — with adaptive layout, XDG storage, keyboard shortcuts, AppStream metadata, and a Flatpak manifest.
 ---
 
 This tutorial builds **Notes**, a small but real GTK 4 + libadwaita application. It is deliberately incomplete as a product and complete as a *platform citizen*: adaptive layout, XDG storage, a keyboard shortcut, a proper about dialog, AppStream metadata, and a sandboxed Flatpak build with no unnecessary permissions.
 
 The code is Python to keep the example readable. The structure maps directly to C, Rust, or Vala; the toolkit behaves the same.
+
+:::note[Choosing KDE?]
+This tutorial builds the GNOME target with GTK 4 + libadwaita. If you chose [Fedora 45 KDE + Qt](/targets/fedora-kde/), start with the [Qt & Kirigami](/engineering/qt/) chapter instead; it contains the complete C++/QML project for that target.
+:::
 
 :::note[What you need]
 [Ubuntu 26.04 LTS](/reference/baseline/) (or a recent Fedora/Arch with GTK 4.22 and libadwaita 1.9), `python3-gi`, `gir1.2-gtk-4.0`, `gir1.2-adw-1`, `meson`, `flatpak`, and `flatpak-builder`.

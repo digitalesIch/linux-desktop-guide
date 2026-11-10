@@ -45,7 +45,7 @@ The Linux desktop has excellent documentation. It is also spread across a dozen 
 | [Ubuntu Pro Client](https://documentation.ubuntu.com/pro-client/en/latest/) | `pro`, ESM, Livepatch, FIPS, CIS |
 | [Snap documentation](https://snapcraft.io/docs/) | snapd, confinement, interfaces, updates |
 | [Snapcraft](https://ubuntu.com/docs/snapcraft/stable/) | Building snaps |
-| [Rockcraft](https://ubuntu.com/containers/rockcraft/docs/stable/) | Ubuntu-based OCI images |
+| [Rockcraft](https://github.com/canonical/rockcraft) | Ubuntu-based OCI images |
 | [Ubuntu packaging guide](https://ubuntu.com/project/docs/) | deb packaging |
 | [New package guide](https://ubuntu.com/project/docs/contributors/new-package/create-a-new-package/) | Ubuntu archive process |
 | [Build packages in a PPA](https://ubuntu.com/project/docs/contributors/bug-fix/build-packages-in-a-ppa/) | PPA upload and signing |

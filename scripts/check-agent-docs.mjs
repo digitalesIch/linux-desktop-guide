@@ -23,7 +23,7 @@ const expected = walk(docsRoot)
 	.map((file) => relative(docsRoot, file).split(sep).join('/'))
 	.map((file) => file.replace(/\.mdx?$/, ''))
 	.filter((slug) => slug !== '404' && slug !== 'index')
-	.map((slug) => (slug === 'index' ? 'index' : slug));
+	.map((slug) => (slug.endsWith('/index') ? slug.slice(0, -'/index'.length) : slug));
 
 const errors = [];
 const llmsPath = join(dist, 'llms.txt');

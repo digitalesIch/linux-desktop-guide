@@ -16,6 +16,7 @@ const dist = join(root, 'dist');
 const pages = [
 	{ path: '/', name: 'landing' },
 	{ path: '/start/why-linux/', name: 'start' },
+	{ path: '/targets/', name: 'targets' },
 	{ path: '/engineering/gtk/', name: 'engineering' },
 	{ path: '/design/accessibility/', name: 'design' },
 	{ path: '/platform/packaging/', name: 'platform' },

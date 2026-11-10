@@ -5,7 +5,7 @@ description: How to design Linux desktop apps that feel calm, fast, and native a
 
 Linux design is plural. GNOME, KDE Plasma, and elementary publish human-interface guidelines; COSMIC publishes its own design guidance. Each has a coherent language, but they do not agree on every pattern. There is no single authority that can settle every question, so the app has to make a choice: **pick a primary desktop, follow its conventions deeply, and adapt gracefully elsewhere.**
 
-That is not a limitation. It is what lets a Linux app feel like it belongs in more than one place without feeling imported from another platform.
+That is not a limitation. It is what lets a Linux app feel like it belongs in more than one place without feeling imported from another platform. The [Platform Targets](/targets/) page chooses the default HIG for each target; this chapter explains the principles behind that choice.
 
 ## The principles
 

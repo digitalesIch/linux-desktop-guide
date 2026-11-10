@@ -3,7 +3,7 @@ title: Ubuntu Platform
 description: "Release support, toolchains, packaging paths, system services, security, and Ubuntu Pro for desktop developers."
 ---
 
-Ubuntu is the reference platform for this guide, but it is not a single SDK. It is an LTS release with a supported toolchain set, two first-class package formats, a set of privileged system services, and a security-maintenance model that extends beyond the standard support window.
+Ubuntu 26.04 LTS is the guide's GNOME reference target, but it is not a single SDK. It is an LTS release with a supported toolchain set, two first-class package formats, a set of privileged system services, and a security-maintenance model that extends beyond the standard support window.
 
 This page is the map. It tells you which Ubuntu sources to trust, which packaging path fits which audience, and which system APIs an app should use instead of shelling out to a command-line tool. The exact validated component versions are recorded in [Baseline](/reference/baseline/). The other Platform pages go deeper on Wayland, XDG, integration, Flatpak, packaging, and security.
 
@@ -115,7 +115,7 @@ Flatpak is covered in [Flatpak & Portals](/platform/flatpak-portals/) and [Flath
 
 ### OCI images and Rockcraft
 
-Use [Rockcraft](https://ubuntu.com/containers/rockcraft/docs/stable/) when the deliverable is a container image, not a desktop app. Rocks are Ubuntu-based, minimal OCI images with a supported build path. They are not a way to package a GUI application for the desktop.
+Use [Rockcraft](https://github.com/canonical/rockcraft) when the deliverable is a container image, not a desktop app. Rocks are Ubuntu-based, minimal OCI images with a supported build path. They are not a way to package a GUI application for the desktop.
 
 ## System services
 
@@ -208,6 +208,7 @@ Sources: [Ubuntu Desktop accessibility stack](https://documentation.ubuntu.com/d
 - [Flatpak & Portals](/platform/flatpak-portals/)
 - [Packaging & Distribution](/platform/packaging/)
 - [Security & Privacy](/platform/security/)
+- [Ubuntu + GNOME target](/targets/ubuntu-gnome/) — the full target profile, development environment, and quality gates.
 - [Glossary](/reference/glossary/) — definitions for the platform and toolkit terms used here.
 
 Next: [Wayland & Display](/platform/wayland/) — how the compositor, input, and scaling model change what the app can do.

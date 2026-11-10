@@ -13,7 +13,7 @@ GTK 4.22, libadwaita 1.9, GNOME 50. GTK 4 is the stable line; GTK 3 is maintenan
 
 ## Project skeleton
 
-The [first-app tutorial](/start/first-app/) builds the complete GTK 4 + libadwaita project, and `examples/notes` in the guide repository is the runnable version. The structure is deliberately small:
+The [Ubuntu + GNOME target](/targets/ubuntu-gnome/) is the reference environment for this chapter. The [first-app tutorial](/start/first-app/) builds the complete GTK 4 + libadwaita project, and `examples/notes` in the guide repository is the runnable version. The structure is deliberately small:
 
 ```text
 notes/

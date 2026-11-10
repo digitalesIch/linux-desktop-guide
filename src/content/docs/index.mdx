@@ -1,15 +1,15 @@
 ---
 title: Build Linux apps that feel inevitable
-description: A practical field guide to building fast, accessible, deeply integrated native apps for Ubuntu and the wider Linux desktop.
+description: A practical field guide to building fast, accessible, deeply integrated native apps for the Linux desktops that matter — with curated targets, default stacks, and a quality bar.
 template: splash
 hero:
   title: Build Linux apps that feel inevitable.
-  tagline: A field guide to fast, accessible, native apps for Ubuntu 26.04 and every Linux desktop.
+  tagline: A field guide to fast, accessible, native apps for the Linux desktops that matter — with a curated target and a default stack for each.
   image:
     html: '<img class="ldg-hero-art" src="/hero-window.svg" width="980" height="620" alt="A native Linux notes app with a sidebar, note cards, and integration badges for Wayland, Portals, and Flatpak." />'
   actions:
-    - text: Start the path
-      link: /start/why-linux/
+    - text: Choose your target
+      link: /targets/
       icon: right-arrow
     - text: Read the native standard
       link: /start/native-standard/
@@ -19,21 +19,20 @@ hero:
 import LandingFX from '../../components/LandingFX.astro';
 
 <div class="ldg-baseline" aria-label="Platform baseline">
-  <span class="ldg-baseline-label">Baseline</span>
+  <span class="ldg-baseline-label">Targets</span>
   <span>Ubuntu 26.04 LTS</span>
-  <span>GNOME 50</span>
-  <span>GTK 4.22</span>
-  <span>Wayland</span>
-  <span>Flatpak</span>
+  <span>Fedora 45</span>
+  <span>Debian 13</span>
+  <span>Arch Linux</span>
 </div>
 
 <div class="ldg-ticker" aria-hidden="true">
   <div class="ldg-ticker-track">
     <div class="ldg-ticker-set">
-      <span>WAYLAND</span><span>XDG</span><span>D-BUS</span><span>APPSTREAM</span><span>PORTALS</span><span>FLATPAK</span><span>GTK 4.22</span><span>QT 6.10</span>
+      <span>WAYLAND</span><span>XDG</span><span>D-BUS</span><span>APPSTREAM</span><span>PORTALS</span><span>FLATPAK</span><span>GTK 4</span><span>QT 6</span>
     </div>
     <div class="ldg-ticker-set" aria-hidden="true">
-      <span>WAYLAND</span><span>XDG</span><span>D-BUS</span><span>APPSTREAM</span><span>PORTALS</span><span>FLATPAK</span><span>GTK 4.22</span><span>QT 6.10</span>
+      <span>WAYLAND</span><span>XDG</span><span>D-BUS</span><span>APPSTREAM</span><span>PORTALS</span><span>FLATPAK</span><span>GTK 4</span><span>QT 6</span>
     </div>
   </div>
 </div>
@@ -85,6 +84,28 @@ import LandingFX from '../../components/LandingFX.astro';
 </div>
 
 <div class="ldg-section">
+  <p class="ldg-eyebrow">The target model</p>
+  <h2 class="ldg-title">Linux has no default. This guide does.</h2>
+  <p class="ldg-lede">A vendor-controlled platform can define one screen, one toolkit and one store. Linux cannot. This guide closes the gap with a small, evidence-based target set: a distribution, a desktop, a default stack, a HIG and a packaging path for each.</p>
+
+  <div class="ldg-grid-3">
+    <div class="ldg-card ldg-card--feature">
+      <h3>Reference targets</h3>
+      <p><strong>Ubuntu 26.04 LTS + GNOME</strong> for GTK/libadwaita, and <strong>Fedora 45 KDE + Qt</strong> for Qt/Kirigami. These get the full golden path and quality gates.</p>
+      <p class="ldg-after"><a class="ldg-textlink" href="/targets/">See the target matrix <span aria-hidden="true">→</span></a></p>
+    </div>
+    <div class="ldg-card ldg-card--cyan">
+      <h3>Validation targets</h3>
+      <p>Fedora Workstation + GNOME and Arch Linux catch upstream GTK, libadwaita and Qt drift before your users do. They are test environments, not support promises.</p>
+    </div>
+    <div class="ldg-card ldg-card--lime">
+      <h3>Compatibility target</h3>
+      <p>Debian 13 keeps the conservative, long-support path visible — with older GTK/Qt libraries and Flatpak for apps that need a newer stack.</p>
+    </div>
+  </div>
+</div>
+
+<div class="ldg-section">
   <p class="ldg-eyebrow">The four contracts</p>
   <h2 class="ldg-title">Native is a promise, not a theme.</h2>
   <p class="ldg-lede">Every quality you want — speed, polish, reliability, that indefinable “it belongs here” feeling — comes from honoring four contracts with the platform.</p>
@@ -121,17 +142,17 @@ import LandingFX from '../../components/LandingFX.astro';
   <h2 class="ldg-title">From first window to Flathub.</h2>
 
   <div class="ldg-path">
-    <a class="ldg-step" href="/start/choose-stack/">
+    <a class="ldg-step" href="/targets/">
       <span class="ldg-step-num">01</span>
-      <h3>Choose a stack</h3>
-      <p>GTK 4 + libadwaita, Qt 6 + Kirigami, or Rust. Pick the ecosystem that matches your desktop and your team.</p>
-      <span class="ldg-textlink">Choose your stack <span aria-hidden="true">→</span></span>
+      <h3>Choose a target</h3>
+      <p>Ubuntu + GNOME or Fedora + KDE. Pick the environment whose HIG, toolkit and users match your product.</p>
+      <span class="ldg-textlink">Platform targets <span aria-hidden="true">→</span></span>
     </a>
-    <a class="ldg-step" href="/start/first-app/">
+    <a class="ldg-step" href="/start/choose-stack/">
       <span class="ldg-step-num">02</span>
-      <h3>Build the native way</h3>
-      <p>Start with the platform's widgets, then add your product's character. Keyboard, accessibility and responsiveness are not polish.</p>
-      <span class="ldg-textlink">Build your first app <span aria-hidden="true">→</span></span>
+      <h3>Choose a stack and build</h3>
+      <p>GTK 4 + libadwaita for GNOME, Qt 6 + Kirigami for KDE. The target decides the default; the tutorial gets you to the first window.</p>
+      <span class="ldg-textlink">Choose your stack <span aria-hidden="true">→</span></span>
     </a>
     <a class="ldg-step" href="/ship/release-checklist/">
       <span class="ldg-step-num">03</span>
@@ -166,10 +187,10 @@ import LandingFX from '../../components/LandingFX.astro';
       <h3>Understand the platform before the toolkit.</h3>
       <p>What changes when there is no single vendor — and why that is good news for your app.</p>
     </a>
-    <a class="ldg-linkcard" href="/start/choose-stack/">
-      <span class="ldg-linkcard-kicker">Porting an app?</span>
-      <h3>Choose a stack you can maintain.</h3>
-      <p>A practical comparison of GTK, Qt, Rust and web-tech options, including where each one stops feeling native.</p>
+    <a class="ldg-linkcard" href="/targets/">
+      <span class="ldg-linkcard-kicker">Choosing a target?</span>
+      <h3>Start with the environment, not the toolkit.</h3>
+      <p>Two reference targets, two validation targets and a compatibility path — with the evidence behind each choice.</p>
     </a>
     <a class="ldg-linkcard" href="/design/principles/">
       <span class="ldg-linkcard-kicker">Designing for GNOME?</span>

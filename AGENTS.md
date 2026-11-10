@@ -8,6 +8,10 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+## Scope and targets
+
+This is a target-based field guide, not a distro-agnostic tutorial. The supported matrix is in `src/data/targets.json`; the selection method and evidence are in `src/content/docs/targets/selection.md`. Do not add a distribution/toolkit combination without evidence and without updating the matrix. Each reference target has one default stack and HIG; alternatives are secondary and must be documented as trade-offs. The full evidence report is in `research/target-selection.md`; it is internal and not published.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build
@@ -29,7 +33,7 @@ The public guide is published for agents as well as humans. After `npm run build
 - `/llms-full.txt` — the complete guide in one file.
 - Append `.md` to a page route for a clean Markdown version, for example `/start/why-linux.md`.
 
-Run `npm run check:docs` before releasing. It performs baseline validation, tutorial/example consistency checking, a full build, agent-doc validation, MCP tests, and internal link/anchor checking. The default gate is offline. External link checks are opt-in with `npm run check:links:external`; unreachable hosts are warnings unless `check:links:external:strict` is used.
+Run `npm run check:docs` before releasing. It performs baseline validation, tutorial/example consistency checking, target-matrix validation, a full build, agent-doc validation, MCP tests, and internal link/anchor checking. The default gate is offline. External link checks are opt-in with `npm run check:links:external`; unreachable hosts are warnings unless `check:links:external:strict` is used.
 
 Run `npm run check:quality` for the browser-based gate. It serves `dist/`, runs Lighthouse on representative pages, requires accessibility, best practices, and SEO at 100, and keeps performance at or above 90. It needs a local Chrome and is intentionally separate from the offline `check:docs` gate. Add `-- --no-build` to reuse an existing build.
 
@@ -41,10 +45,10 @@ The project registers a local, read-only MCP server named `docs` in `opencode.js
 
 1. Call `search_docs` first.
 2. Pass a returned slug to `get_page`.
-3. Use `list_pages` to browse, `get_related` after a page, and `get_baseline` for validated versions.
+3. Use `list_pages` to browse, `get_related` after a page, and `get_baseline` for the Ubuntu/GNOME reference baseline. The full target matrix is in `src/data/targets.json`.
 
 The server runs over stdio with `npm run mcp:docs`. It indexes `src/content/docs/**/*.md`, rejects path traversal, writes nothing, and makes no network requests. Run `npm run test:docs-mcp` after changing the server or its index.
 
 ## Editorial policy
 
-Do not use Apple/macOS/Windows as the reference point or promote proprietary or non-standard vendors. Name a third-party alternative only as a sourced example when it is open source, actively maintained, widely accepted, and compared on the quality signals in `reference/quality-signals.md`. Packaging channels are compared on sandboxing, updates, metadata, review, support, and maintenance burden, not on vendor preference.
+Do not use Apple/macOS/Windows as the reference point or promote proprietary or non-standard vendors. The guide borrows the clarity and opinionation of vendor platform documentation, but it explains Linux directly; another OS is not the baseline. Name a third-party alternative only as a sourced example when it is open source, actively maintained, widely accepted, and compared on the quality signals in `reference/quality-signals.md`. Packaging channels are compared on sandboxing, updates, metadata, review, support, and maintenance burden, not on vendor preference.
