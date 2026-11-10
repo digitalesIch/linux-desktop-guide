@@ -39,7 +39,7 @@ Start at `src/content/docs/targets/index.md`; the method and evidence are in `ta
 │   └── assets/                # Logo and hero artwork
 ├── scripts/                   # Baseline and maintenance checks
 ├── tools/docs-mcp/            # Read-only stdio MCP server for agents
-├── public/                    # Favicon and the hero SVG
+├── public/                    # Favicon, hero SVG, PWA manifest, service worker, icons, offline page
 ├── examples/notes/            # Runnable GTK 4 reference app
 ├── astro.config.mjs           # Site title, sidebar, Starlight options
 └── package.json
@@ -77,6 +77,18 @@ The site uses:
 - a custom ink / lime / cyan palette with a dark hero stage;
 - local fonts via `@fontsource` (no external font requests).
 
+## Install as an app
+
+The site is an installable Progressive Web App on the deployed HTTPS site:
+
+- **Android:** Chrome menu → **Install app**. Chrome uses a WebAPK, so the installed guide can appear in the app launcher.
+- **iOS:** Safari → Share → **Add to Home Screen**. The installed app uses the Apple touch icon and standalone display.
+- **Offline:** the shell, icons, and previously visited pages are cached. Full-text search still needs a network connection.
+
+Installation and service workers require HTTPS or `localhost`. The LAN preview over `http://192.168.178.38:4330/` is not a secure context on a phone; use the deployed site or an HTTPS tunnel for device testing.
+
+`npm run check:pwa` validates the manifest, icons, service worker, offline page, and install meta tags. Regenerate the icons with `npm run generate:pwa-icons`. Bump `CACHE_VERSION` in `public/sw.js` when the shell or cache strategy changes.
+
 ## Documentation checks
 
 Run the deterministic local gate before releasing:
@@ -91,9 +103,10 @@ It runs, in order:
 2. tutorial/example consistency checking;
 3. target-matrix validation;
 4. a full Astro build (including agent docs and Pagefind);
-5. agent-doc validation;
-6. the MCP server tests;
-7. internal link and anchor checking against `dist/`.
+5. PWA validation;
+6. agent-doc validation;
+7. the MCP server tests;
+8. internal link and anchor checking against `dist/`.
 
 The default gate is offline and repeatable. External URLs are checked separately:
 
@@ -103,7 +116,7 @@ npm run check:links:external
 
 Unreachable hosts are warnings, because a local network or a site blocking automated requests is not proof of a broken link. Use `npm run check:links:external:strict` when the network is reliable and warnings should fail the check.
 
-`npm run check:links` runs only the fast internal check. `npm run check:examples` compares the file blocks in the first-app tutorial with `examples/notes`; it fails on drift and prints a line diff. `npm run check:targets` validates the curated target matrix: dates, scores, sources, roles, and coverage gates.
+`npm run check:links` runs only the fast internal check. `npm run check:examples` compares the file blocks in the first-app tutorial with `examples/notes`; it fails on drift and prints a line diff. `npm run check:targets` validates the curated target matrix: dates, scores, sources, roles, and coverage gates. `npm run check:pwa` validates the manifest, icons, service worker, offline page, and install meta tags.
 
 Browser-based quality checks are separate because they need a local Chrome installation:
 

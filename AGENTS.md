@@ -25,6 +25,10 @@ Consult these guides before working on related tasks:
 - [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
 - [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
 
+## PWA
+
+The site is installable. The manifest, service worker, offline page, and icons live in `public/`; the head tags and production-only registration live in `src/components/Head.astro`. Run `npm run check:pwa` after changing any of them; regenerate the PNGs with `npm run generate:pwa-icons`. Installation and service workers require HTTPS or `localhost`; the LAN preview over plain HTTP is not a secure context on phones. Bump `CACHE_VERSION` in `public/sw.js` when the shell or cache strategy changes.
+
 ## Documentation for agents
 
 The public guide is published for agents as well as humans. After `npm run build`:
@@ -33,7 +37,7 @@ The public guide is published for agents as well as humans. After `npm run build
 - `/llms-full.txt` — the complete guide in one file.
 - Append `.md` to a page route for a clean Markdown version, for example `/start/why-linux.md`.
 
-Run `npm run check:docs` before releasing. It performs baseline validation, tutorial/example consistency checking, target-matrix validation, a full build, agent-doc validation, MCP tests, and internal link/anchor checking. The default gate is offline. External link checks are opt-in with `npm run check:links:external`; unreachable hosts are warnings unless `check:links:external:strict` is used.
+Run `npm run check:docs` before releasing. It performs baseline validation, tutorial/example consistency checking, target-matrix validation, a full build, PWA validation, agent-doc validation, MCP tests, and internal link/anchor checking. The default gate is offline. External link checks are opt-in with `npm run check:links:external`; unreachable hosts are warnings unless `check:links:external:strict` is used.
 
 Run `npm run check:quality` for the browser-based gate. It serves `dist/`, runs Lighthouse on representative pages, requires accessibility, best practices, and SEO at 100, and keeps performance at or above 90. It needs a local Chrome and is intentionally separate from the offline `check:docs` gate. Add `-- --no-build` to reuse an existing build.
 

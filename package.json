@@ -21,7 +21,9 @@
 		"check:links:external:strict": "node scripts/check-links.mjs --external --strict",
 		"check:quality": "node scripts/check-quality.mjs",
 		"check:examples": "node scripts/check-examples.mjs",
-		"check:targets": "node scripts/check-targets.mjs"
+		"check:targets": "node scripts/check-targets.mjs",
+		"check:pwa": "node scripts/check-pwa.mjs",
+		"generate:pwa-icons": "node scripts/generate-pwa-icons.mjs"
 	},
 	"dependencies": {
 		"@astrojs/starlight": "^0.42.10",

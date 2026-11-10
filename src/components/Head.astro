@@ -13,3 +13,24 @@ const markdownHref = id === '404' || id === 'index' ? undefined : `/${id}.md`;
 	<link rel="alternate" type="text/markdown" href={markdownHref} title="Markdown version" />
 )}
 {id !== '404' && <link rel="describedby" href="/llms.txt" />}
+
+<link rel="manifest" href="/manifest.webmanifest" />
+<meta name="theme-color" content="#06100b" />
+<meta name="application-name" content="Linux Desktop Guide" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-title" content="Linux Desktop Guide" />
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
+
+{import.meta.env.PROD && (
+	<script is:inline>
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', () => {
+				navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(() => {});
+			});
+		}
+	</script>
+)}
