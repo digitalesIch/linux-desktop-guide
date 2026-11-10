@@ -12,7 +12,7 @@ The project SHALL provide one local command that runs the deterministic document
 #### Scenario: Run the default gate
 
 - **WHEN** a maintainer runs `npm run check:docs`
-- **THEN** the command verifies the baseline, builds the site, validates generated agent docs, runs the MCP tests, and checks internal links and anchors
+- **THEN** the command verifies the baseline, checks tutorial/example consistency, builds the site, validates generated agent docs, runs the MCP tests, and checks internal links and anchors
 
 #### Scenario: A check fails
 
@@ -76,3 +76,22 @@ The project SHALL provide a local Lighthouse check for the built documentation.
 
 - **WHEN** the quality check finishes or fails
 - **THEN** its HTTP server and Chrome process are closed and no background server remains
+
+### Requirement: Example consistency check
+
+The documentation gate SHALL verify that the first-app tutorial and the runnable example agree.
+
+#### Scenario: Default documentation gate
+
+- **WHEN** a maintainer runs `npm run check:docs`
+- **THEN** the gate runs `check:examples` before the build and fails if a tutorial file block differs from `examples/notes`
+
+#### Scenario: Check runs offline
+
+- **WHEN** `check:examples` runs without network access or GUI tooling
+- **THEN** it completes using only the repository files and Node.js
+
+#### Scenario: Drift is actionable
+
+- **WHEN** a mismatch is found
+- **THEN** the check prints the file, the tutorial line, and a unified diff

@@ -31,4 +31,4 @@
 - [x] 5.2 Run `npm run check:docs`.
 - [x] 5.3 Run `npm run check:quality`.
 - [x] 5.4 Validate the example with `python3 -m py_compile`, `desktop-file-validate`, `appstreamcli validate --no-net`, and Meson.
-- [ ] 5.5 Commit on `workspace`, merge to `main`, and archive the change.
+- [x] 5.5 Commit on `workspace`, merge to `main`, and archive the change.
