@@ -1,0 +1,141 @@
+---
+title: Resources
+description: A curated, link-checked set of specifications, documentation, tooling, design assets, and communities for building native Linux desktop apps.
+---
+
+The Linux desktop has excellent documentation. It is also spread across a dozen projects. This page collects the sources worth bookmarking, with a bias toward primary documentation and maintained projects.
+
+## Specifications
+
+| Resource | Why it matters |
+| --- | --- |
+| [freedesktop.org specifications](https://specifications.freedesktop.org/) | The index of XDG, desktop entry, MIME, icon, trash, notification, and MPRIS specs |
+| [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/latest/) | Where config, data, state, cache, and runtime files belong |
+| [Desktop Entry](https://specifications.freedesktop.org/desktop-entry-spec/latest/) | The `.desktop` file format |
+| [Shared MIME-info](https://specifications.freedesktop.org/shared-mime-info-spec/latest/) | File type detection and `MimeType=` |
+| [Icon Theme](https://specifications.freedesktop.org/icon-theme-spec/latest/) | hicolor and icon naming |
+| [Trash](https://specifications.freedesktop.org/trash/latest/) | Safe deletion |
+| [Autostart](https://specifications.freedesktop.org/autostart-spec/latest/) | Login startup entries |
+| [Notifications](https://specifications.freedesktop.org/notification-spec/latest/) | Desktop notification protocol |
+| [MPRIS](https://specifications.freedesktop.org/mpris-spec/latest/) | Media player controls |
+| [Secret Service](https://specifications.freedesktop.org/secret-service-spec/latest/) | Keyring access |
+| [Wayland](https://wayland.freedesktop.org/) | Protocol documentation and compositor architecture |
+| [XDG Desktop Portal](https://flatpak.github.io/xdg-desktop-portal/docs/) | Portal interfaces and usage |
+| [AppStream](https://www.freedesktop.org/software/appstream/docs/) | Metadata for software centers |
+| [systemd](https://systemd.io/) | User services, timers, journald, coredump |
+| [systemd user session](https://wiki.archlinux.org/title/systemd/User) | Running background services per user |
+
+## GNOME and GTK
+
+| Resource | Why it matters |
+| --- | --- |
+| [GNOME Human Interface Guidelines](https://developer.gnome.org/hig/) | The design language behind libadwaita |
+| [GTK 4 documentation](https://docs.gtk.org/gtk4/) | Widgets, layout, actions, accessibility |
+| [libadwaita documentation](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/) | Adaptive widgets and GNOME patterns |
+| [Blueprint](https://gnome.pages.gitlab.gnome.org/blueprint-compiler/) | Declarative UI language for GTK |
+| [GNOME Builder](https://apps.gnome.org/Builder/) | IDE with Flatpak and GNOME integration |
+| [Workbench](https://apps.gnome.org/Workbench/) | Rapid GTK prototyping |
+| [GNOME Icon Library](https://gitlab.gnome.org/Teams/Design/icon-library) | Consistent symbolic and full-color icons |
+| [GNOME apps](https://apps.gnome.org/) | Reference implementations |
+| [GNOME developer documentation](https://developer.gnome.org/documentation/) | Tutorials, guides, and API docs |
+| [GTK Inspector](https://docs.gtk.org/gtk4/running.html) | Interactive debugging |
+| [Sysprof](https://apps.gnome.org/Sysprof/) | System-wide profiling |
+| [Accerciser](https://wiki.gnome.org/Apps/Accerciser) | Accessibility tree inspector |
+| [Orca](https://wiki.gnome.org/Projects/Orca) | Screen reader |
+| [Glycin](https://gitlab.gnome.org/GNOME/glycin) | Sandboxed image decoding for untrusted images |
+
+## KDE and Qt
+
+| Resource | Why it matters |
+| --- | --- |
+| [KDE Human Interface Guidelines](https://develop.kde.org/hig/) | Plasma design conventions |
+| [Kirigami documentation](https://develop.kde.org/docs/getting-started/kirigami/) | Adaptive Qt Quick apps |
+| [Qt 6 documentation](https://doc.qt.io/qt-6/) | Qt Widgets, Qt Quick, Qt Test |
+| [Qt QML applications](https://doc.qt.io/qt-6/qmlapplications.html) | QML application structure |
+| [KDE Frameworks API](https://api.kde.org/) | KConfig, KIO, KNotification, KWallet |
+| [Qt Creator](https://doc.qt.io/qtcreator/) | IDE and profiler |
+| [Breeze icons](https://invent.kde.org/plasma/breeze) | KDE icon theme |
+| [GammaRay](https://github.com/KDAB/GammaRay) | Qt/QML runtime inspection |
+| [KDE Discuss](https://discuss.kde.org/) | Community support |
+
+## Rust
+
+| Resource | Why it matters |
+| --- | --- |
+| [gtk-rs book](https://gtk-rs.org/gtk4-rs/stable/latest/book/) | GTK 4 bindings for Rust |
+| [gtk-rs documentation](https://gtk-rs.org/gtk4-rs/) | API docs and version support |
+| [Relm4 book](https://relm4.org/book/stable/) | Component architecture on gtk-rs |
+| [Iced](https://iced.rs/) | Elm-inspired cross-platform GUI |
+| [Slint](https://slint.dev/) | Declarative UI for embedded and desktop |
+| [libcosmic](https://github.com/pop-os/libcosmic) | COSMIC toolkit |
+| [COSMIC](https://system76.com/cosmic) | Rust-native desktop environment |
+
+## Packaging and distribution
+
+| Resource | Why it matters |
+| --- | --- |
+| [Flatpak documentation](https://docs.flatpak.org/) | Sandbox, manifests, runtimes, portals |
+| [Flatpak Builder](https://docs.flatpak.org/en/latest/flatpak-builder.html) | Manifest format and build workflow |
+| [Flathub documentation](https://docs.flathub.org/) | Submission, maintenance, verification |
+| [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements) | What gets accepted |
+| [Flathub submission](https://docs.flathub.org/docs/for-app-authors/submission) | The PR process |
+| [AppStream documentation](https://www.freedesktop.org/software/appstream/docs/) | Metadata, validation, screenshots |
+| [Debian Policy](https://www.debian.org/doc/debian-policy/) | The deb package contract |
+| [Debian packaging tutorial](https://www.debian.org/doc/manuals/debmake-doc/) | Practical deb building |
+| [Ubuntu packaging](https://packaging.ubuntu.com/html/) | Ubuntu-specific packaging |
+| [Launchpad PPAs](https://help.launchpad.net/Packaging/PPA) | Personal package archives |
+| [Snapcraft documentation](https://snapcraft.io/docs) | Snap packaging and confinement |
+| [AppImage documentation](https://docs.appimage.org/) | Portable single-file apps |
+
+## Tools
+
+| Tool | Use |
+| --- | --- |
+| [Sysprof](https://apps.gnome.org/Sysprof/) | CPU, marks, and system profiling |
+| [heaptrack](https://github.com/KDE/heaptrack) | Heap allocation profiling |
+| [Valgrind](https://valgrind.org/) | Memory errors and callgrind |
+| [perf](https://perf.wiki.kernel.org/) | Linux perf events |
+| [dogtail](https://gitlab.com/dogtail/dogtail) | AT-SPI UI automation |
+| [Accerciser](https://wiki.gnome.org/Apps/Accerciser) | Accessibility inspection |
+| [GammaRay](https://github.com/KDAB/GammaRay) | Qt/QML inspection |
+| [GTK Inspector](https://docs.gtk.org/gtk4/running.html) | GTK layout, CSS, and accessibility |
+| [Workbench](https://apps.gnome.org/Workbench/) | GTK prototyping |
+| [Blueprint](https://gnome.pages.gitlab.gnome.org/blueprint-compiler/) | GTK UI language |
+
+## Design assets
+
+| Resource | Use |
+| --- | --- |
+| [GNOME HIG](https://developer.gnome.org/hig/) | Patterns, spacing, typography |
+| [GNOME Icon Library](https://gitlab.gnome.org/Teams/Design/icon-library) | Symbolic and full-color icons |
+| [libadwaita CSS variables](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/css-variables.html) | Semantic colors and spacing |
+| [KDE HIG](https://develop.kde.org/hig/) | Plasma patterns |
+| [Breeze icons](https://invent.kde.org/plasma/breeze) | KDE icon set |
+| [elementary HIG](https://docs.elementary.io/hig/) | Minimal, structured design |
+| [Inter](https://rsms.me/inter/) | UI font used by many Linux apps |
+| [Cantarell](https://gitlab.gnome.org/GNOME/cantarell-fonts) | GNOME UI font |
+| [JetBrains Mono](https://www.jetbrains.com/lp/mono/) | Monospace font for code |
+
+## Community
+
+| Community | Where |
+| --- | --- |
+| GNOME | [discourse.gnome.org](https://discourse.gnome.org/) |
+| KDE | [discuss.kde.org](https://discuss.kde.org/) |
+| Flathub | [Matrix](https://matrix.to/#/#flathub:matrix.org) |
+| freedesktop | [Mailing lists](https://lists.freedesktop.org/) |
+| GNOME development | [gitlab.gnome.org](https://gitlab.gnome.org/) |
+| KDE development | [invent.kde.org](https://invent.kde.org/) |
+| Linux App Summit | [linuxappsummit.org](https://linuxappsummit.org/) |
+| GUADEC | [guadec.org](https://guadec.org/) |
+| Akademy | [akademy.kde.org](https://akademy.kde.org/) |
+
+## How to keep this current
+
+- Prefer primary documentation over blog posts.
+- Check the release notes for the toolkit version you target.
+- Re-test links and commands at least once per release cycle.
+- If a tool is unmaintained, say so and point to the replacement.
+- When in doubt, read the specification. It is shorter than the argument.
+
+Back to [The Native Standard](/start/native-standard/) or [Checklists](/reference/checklists/).

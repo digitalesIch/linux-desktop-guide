@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.yourname.Notes</id>
+  <name>Notes</name>
+  <summary>Write and organize notes</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <description>
+    <p>Notes is a small, fast note-taking app for the Linux desktop with a calm, keyboard-first interface.</p>
+    <p>It stores your notes locally, works offline, and integrates with the desktop through standard XDG interfaces.</p>
+  </description>
+
+  <launchable type="desktop-id">io.github.yourname.Notes.desktop</launchable>
+  <url type="homepage">https://example.org/notes</url>
+  <developer id="org.example">
+    <name>Your Name</name>
+  </developer>
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="0.1.0" date="2026-11-10"/>
+  </releases>
+</component>

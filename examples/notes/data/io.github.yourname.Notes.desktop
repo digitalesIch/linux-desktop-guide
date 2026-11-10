@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Notes
+GenericName=Note Taking
+Comment=Write and organize notes
+Exec=notes
+Icon=io.github.yourname.Notes
+Terminal=false
+Type=Application
+Categories=Office;
+Keywords=notes;writing;markdown;
+StartupNotify=true
+StartupWMClass=io.github.yourname.Notes

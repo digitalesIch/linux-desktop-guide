@@ -1,0 +1,18 @@
+id: io.github.yourname.Notes
+runtime: org.gnome.Platform
+runtime-version: '50'
+sdk: org.gnome.Sdk
+command: notes
+
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+
+modules:
+  - name: notes
+    buildsystem: meson
+    sources:
+      - type: dir
+        path: .

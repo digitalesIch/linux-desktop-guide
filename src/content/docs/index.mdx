@@ -1,0 +1,153 @@
+---
+title: Build Linux apps that feel inevitable
+description: A practical field guide to building fast, accessible, deeply integrated native apps for Ubuntu and the wider Linux desktop.
+template: splash
+hero:
+  title: Build Linux apps that feel inevitable.
+  tagline: A field guide to fast, accessible, deeply integrated desktop software — for Ubuntu 26.04 and every Linux desktop that follows the same contracts.
+  image:
+    html: '<img class="ldg-hero-art" src="/hero-window.svg" alt="A native Linux notes app with a sidebar, note cards, and integration badges for Wayland, Portals, and Flatpak." />'
+  actions:
+    - text: Start the path
+      link: /start/why-linux/
+      icon: right-arrow
+    - text: Read the native standard
+      link: /start/native-standard/
+      variant: minimal
+---
+
+<div class="ldg-section">
+  <p class="ldg-eyebrow">The Linux difference</p>
+  <h2 class="ldg-title">No single vendor. One set of contracts.</h2>
+  <p class="ldg-lede">macOS gives you one framework, one HIG, one store. Linux gives you something different: a small number of open standards, several excellent toolkits, and users who expect to stay in control. That is not a weakness to work around. It is the design brief.</p>
+
+  <div class="ldg-grid-3">
+    <div class="ldg-card">
+      <span class="ldg-card-icon ldg-icon-orange">◎</span>
+      <h3>Standards are the API</h3>
+      <p>Wayland, XDG, D-Bus, AppStream and Portals are the stable surface. Learn them once; your app works across GNOME, KDE and every distribution.</p>
+    </div>
+    <div class="ldg-card">
+      <span class="ldg-card-icon ldg-icon-green">◈</span>
+      <h3>The desktop is the user's</h3>
+      <p>Respect themes, fonts, scaling, shortcuts and privacy settings. Native software adapts to the host instead of importing another platform's habits.</p>
+    </div>
+    <div class="ldg-card">
+      <span class="ldg-card-icon ldg-icon-blue">⬡</span>
+      <h3>Distribution is the product</h3>
+      <p>Flatpak, deb, Snap and AppImage are not afterthoughts. Reproducible builds, signed updates and honest metadata are how trust is earned.</p>
+    </div>
+  </div>
+
+  <p class="ldg-after"><a class="ldg-textlink" href="/start/why-linux/">Why Linux is different <span aria-hidden="true">→</span></a></p>
+</div>
+
+<div class="ldg-section">
+  <p class="ldg-eyebrow">The four contracts</p>
+  <h2 class="ldg-title">Native is a promise, not a theme.</h2>
+  <p class="ldg-lede">Every quality you want — speed, polish, reliability, that indefinable “it belongs here” feeling — comes from honoring four contracts with the platform.</p>
+
+  <div class="ldg-grid-4">
+    <a class="ldg-contract" href="/platform/wayland/">
+      <span class="ldg-num">01</span>
+      <h3>Display</h3>
+      <p>Render on Wayland. Handle scaling, input methods and screen capture through the compositor — never by reaching around it.</p>
+      <span class="ldg-contract-link">Wayland &amp; display <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="ldg-contract" href="/platform/integration/">
+      <span class="ldg-num">02</span>
+      <h3>Desktop</h3>
+      <p>Use the host's widgets, HIG, icons, notifications, file dialogs and settings. Integrate through D-Bus and XDG portals.</p>
+      <span class="ldg-contract-link">System integration <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="ldg-contract" href="/platform/xdg/">
+      <span class="ldg-num">03</span>
+      <h3>Data</h3>
+      <p>Store config, state, cache and user data where the XDG spec says. Write atomically. Never assume the app owns the home directory.</p>
+      <span class="ldg-contract-link">The XDG contract <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="ldg-contract" href="/platform/packaging/">
+      <span class="ldg-num">04</span>
+      <h3>Distribution</h3>
+      <p>Ship a reproducible build with valid AppStream metadata, minimal permissions and an update path you don't have to hand-roll.</p>
+      <span class="ldg-contract-link">Packaging &amp; distribution <span aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</div>
+
+<div class="ldg-section">
+  <p class="ldg-eyebrow">The path</p>
+  <h2 class="ldg-title">From first window to Flathub.</h2>
+
+  <div class="ldg-path">
+    <a class="ldg-step" href="/start/choose-stack/">
+      <span class="ldg-step-num">01</span>
+      <h3>Choose a stack</h3>
+      <p>GTK 4 + libadwaita, Qt 6 + Kirigami, or Rust. Pick the ecosystem that matches your desktop and your team.</p>
+      <span class="ldg-textlink">Choose your stack <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="ldg-step" href="/start/first-app/">
+      <span class="ldg-step-num">02</span>
+      <h3>Build the native way</h3>
+      <p>Start with the platform's widgets, then add your product's character. Keyboard, accessibility and responsiveness are not polish.</p>
+      <span class="ldg-textlink">Build your first app <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="ldg-step" href="/ship/release-checklist/">
+      <span class="ldg-step-num">03</span>
+      <h3>Ship with evidence</h3>
+      <p>Validate metadata, permissions, startup time, accessibility and upgrades before you ask anyone to install it.</p>
+      <span class="ldg-textlink">Release checklist <span aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</div>
+
+<div class="ldg-section ldg-bar-section">
+  <div class="ldg-bar">
+    <div>
+      <p class="ldg-eyebrow">The bar</p>
+      <h2 class="ldg-title ldg-title-sm">Budgets, not absolutes.</h2>
+      <p class="ldg-lede ldg-lede-sm">Measure on the oldest hardware you support. These are the numbers a focused desktop app should be able to defend.</p>
+    </div>
+    <div class="ldg-metrics">
+      <div><strong>&lt; 1 s</strong><span>cold start</span></div>
+      <div><strong>60 fps</strong><span>under interaction</span></div>
+      <div><strong>0</strong><span>needless permissions</span></div>
+      <div><strong>100%</strong><span>keyboard reachable</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ldg-section">
+  <p class="ldg-eyebrow">Pick your entry point</p>
+  <h2 class="ldg-title">Start where you are.</h2>
+
+  <div class="ldg-grid-2">
+    <a class="ldg-linkcard" href="/start/why-linux/">
+      <span class="ldg-linkcard-kicker">New to Linux?</span>
+      <h3>Understand the platform before the toolkit.</h3>
+      <p>What changes when there is no single vendor — and why that is good news for your app.</p>
+    </a>
+    <a class="ldg-linkcard" href="/start/choose-stack/">
+      <span class="ldg-linkcard-kicker">Porting an app?</span>
+      <h3>Choose a stack you can maintain.</h3>
+      <p>An honest comparison of GTK, Qt, Rust and web-tech options, including where each one stops feeling native.</p>
+    </a>
+    <a class="ldg-linkcard" href="/design/principles/">
+      <span class="ldg-linkcard-kicker">Designing for GNOME?</span>
+      <h3>Make it quiet, fast and keyboard-first.</h3>
+      <p>The principles behind libadwaita, adaptive layouts and interactions that disappear into the task.</p>
+    </a>
+    <a class="ldg-linkcard" href="/ship/flathub/">
+      <span class="ldg-linkcard-kicker">Ready to ship?</span>
+      <h3>Publish without sanding off the edges.</h3>
+      <p>Metadata, permissions, manifests and the review details that decide whether an app feels trustworthy.</p>
+    </a>
+  </div>
+</div>
+
+<div class="ldg-section ldg-quote-section">
+  <blockquote class="ldg-quote">
+    <p>The best Linux app is not the one that looks most like macOS. It is the one that makes the desktop feel more like itself.</p>
+  </blockquote>
+  <p class="ldg-footnote">Linux Desktop Guide · Version 1.0 · November 2026</p>
+</div>
