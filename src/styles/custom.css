@@ -306,6 +306,24 @@ site-search button[data-open-modal] > kbd {
 	background: color-mix(in srgb, var(--sl-color-gray-7) 45%, transparent);
 }
 
+.sl-markdown-content table.baseline-table {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.sl-markdown-content table.baseline-table th:first-child,
+.sl-markdown-content table.baseline-table td:first-child {
+	width: 34%;
+}
+
+@media (max-width: 40rem) {
+	.sl-markdown-content table.baseline-table {
+		display: block;
+	}
+}
+
+
 .sl-markdown-content blockquote {
 	border-inline-start-color: var(--sl-color-accent);
 	background: color-mix(in srgb, var(--sl-color-accent) 5%, transparent);

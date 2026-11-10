@@ -5,7 +5,7 @@ description: "Release support, toolchains, packaging paths, system services, sec
 
 Ubuntu is the reference platform for this guide, but it is not a single SDK. It is an LTS release with a supported toolchain set, two first-class package formats, a set of privileged system services, and a security-maintenance model that extends beyond the standard support window.
 
-This page is the map. It tells you which Ubuntu sources to trust, which packaging path fits which audience, and which system APIs an app should use instead of shelling out to a command-line tool. The other Platform pages go deeper on Wayland, XDG, integration, Flatpak, packaging, and security.
+This page is the map. It tells you which Ubuntu sources to trust, which packaging path fits which audience, and which system APIs an app should use instead of shelling out to a command-line tool. The exact validated component versions are recorded in [Baseline](/reference/baseline/). The other Platform pages go deeper on Wayland, XDG, integration, Flatpak, packaging, and security.
 
 ## Release and support
 

@@ -8,7 +8,7 @@ Qt is the other great Linux desktop stack. It is mature, fast, cross-platform, a
 If your primary audience is KDE, Qt + Kirigami is the shortest path to native. If you need one codebase across desktop, mobile, and embedded targets, Qt is often the pragmatic choice — provided you still do the platform integration work.
 
 :::note[Versions in Ubuntu 26.04]
-Qt 6.10.2, KDE Frameworks 6.24, KDE Plasma 6.6. Qt 6.8 LTS is a conservative target if you need broader distribution support. Target Qt 6.8+ APIs and guard newer ones at runtime.
+Qt 6.10.2, KDE Frameworks 6.24, KDE Plasma 6.6. Qt 6.8 LTS is a conservative target if you need broader distribution support. Target Qt 6.8+ APIs and guard newer ones at runtime. The full validated set is in [Baseline](/reference/baseline/).
 :::
 
 ## QML or Qt Widgets?

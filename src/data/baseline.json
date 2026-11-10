@@ -1,0 +1,37 @@
+{
+  "validated_on": "2026-11-10",
+  "review_due": "2027-05-10",
+  "ubuntu": {
+    "release": "26.04 LTS",
+    "codename": "Resolute Raccoon",
+    "standard_support_end": "2031-05",
+    "pro_support_end": "2036-05",
+    "legacy_support_end": "2041-05"
+  },
+  "desktop": {
+    "gnome": "50",
+    "gtk": "4.22",
+    "libadwaita": "1.9",
+    "session": "Wayland"
+  },
+  "qt": {
+    "version": "6.10.2",
+    "kde_frameworks": "6.24",
+    "plasma": "6.6"
+  },
+  "toolchains": {
+    "python": "3.14",
+    "gcc": "15.2",
+    "llvm": "21"
+  },
+  "packaging": {
+    "flatpak_runtime": "org.gnome.Platform//50",
+    "kde_runtime": "org.kde.Platform//6.10",
+    "snap_base": "core24"
+  },
+  "site": {
+    "astro": "7.3.6",
+    "starlight": "0.42.10",
+    "node": "24"
+  }
+}

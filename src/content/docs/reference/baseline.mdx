@@ -1,0 +1,114 @@
+---
+title: Baseline
+description: "The validated reference environment for this guide: Ubuntu 26.04 LTS, GNOME 50, GTK 4.22, libadwaita 1.9, Qt 6.10, and the packaging toolchain the examples are tested against."
+---
+
+import baseline from '../../../data/baseline.json';
+
+export const month = (value) => {
+  const [year, monthNumber] = value.split('-');
+  return new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+    .format(new Date(`${year}-${monthNumber}-01T00:00:00Z`));
+};
+
+export const reviewed = new Intl.DateTimeFormat('en', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(new Date(`${baseline.validated_on}T00:00:00Z`));
+
+export const reviewDue = new Intl.DateTimeFormat('en', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(new Date(`${baseline.review_due}T00:00:00Z`));
+
+This page is the single source of truth for the versions this guide is validated against. Other pages describe how to build on the platform; this page records what “the platform” means at the current review.
+
+The values are also stored in `src/data/baseline.json`. The page imports that file, and the future documentation MCP server will read the same data.
+
+## Validated baseline
+
+<table class="baseline-table">
+  <thead>
+    <tr><th>Area</th><th>Validated value</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Ubuntu</td><td>{baseline.ubuntu.release} ({baseline.ubuntu.codename})</td></tr>
+    <tr><td>Display session</td><td>{baseline.desktop.session}</td></tr>
+    <tr><td>GNOME</td><td>{baseline.desktop.gnome}</td></tr>
+    <tr><td>GTK</td><td>{baseline.desktop.gtk}</td></tr>
+    <tr><td>libadwaita</td><td>{baseline.desktop.libadwaita}</td></tr>
+    <tr><td>Qt</td><td>{baseline.qt.version}</td></tr>
+    <tr><td>KDE Frameworks</td><td>{baseline.qt.kde_frameworks}</td></tr>
+    <tr><td>KDE Plasma</td><td>{baseline.qt.plasma}</td></tr>
+    <tr><td>GNOME Flatpak runtime</td><td><code>{baseline.packaging.flatpak_runtime}</code></td></tr>
+    <tr><td>KDE Flatpak runtime</td><td><code>{baseline.packaging.kde_runtime}</code></td></tr>
+    <tr><td>Snap base</td><td><code>{baseline.packaging.snap_base}</code></td></tr>
+    <tr><td>Python</td><td>{baseline.toolchains.python}</td></tr>
+    <tr><td>GCC</td><td>{baseline.toolchains.gcc}</td></tr>
+    <tr><td>LLVM/Clang</td><td>{baseline.toolchains.llvm}</td></tr>
+    <tr><td>Astro</td><td>{baseline.site.astro}</td></tr>
+    <tr><td>Starlight</td><td>{baseline.site.starlight}</td></tr>
+    <tr><td>Node.js</td><td>{baseline.site.node}</td></tr>
+  </tbody>
+</table>
+
+## Ubuntu support window
+
+| Support | Ends |
+| --- | --- |
+| Standard support | {month(baseline.ubuntu.standard_support_end)} |
+| Ubuntu Pro | {month(baseline.ubuntu.pro_support_end)} |
+| Legacy add-on | {month(baseline.ubuntu.legacy_support_end)} |
+
+Ubuntu Pro is optional for app development. The baseline records the support window so readers can judge whether a release is a reasonable target; it does not make Pro a requirement.
+
+## Baseline is not minimum support
+
+The baseline is the **tested reference environment**. It is not a claim that older releases are unsupported, and it is not a promise that every combination of components works together.
+
+- Use the baseline when you need the current, validated target for examples, screenshots, and recommendations.
+- Define a separate minimum-version policy when you ship a library or a package for an older LTS.
+- Guard newer APIs at runtime when you support more than one release.
+- A component can be newer than the baseline in a Flatpak runtime; record that difference in the manifest, not by rewriting this page.
+
+## Review
+
+- Validated on: <time dateTime={baseline.validated_on}>{reviewed}</time>
+- Next review due: <time dateTime={baseline.review_due}>{reviewDue}</time>
+
+The review date is a trigger, not a guarantee. When it passes, re-check the primary sources below, update `src/data/baseline.json`, and run the verification steps. The future freshness pipeline will open an issue when the date or an upstream source changes.
+
+## Primary sources
+
+- [Ubuntu 26.04 LTS release notes](https://documentation.ubuntu.com/release-notes/26.04/)
+- [Ubuntu Desktop documentation](https://documentation.ubuntu.com/desktop/en/latest/)
+- [Ubuntu for Developers](https://documentation.ubuntu.com/ubuntu-for-developers/)
+- [GNOME 50 release notes](https://release.gnome.org/50/)
+- [GTK 4 documentation](https://docs.gtk.org/gtk4/)
+- [libadwaita documentation](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/)
+- [Qt 6 documentation](https://doc.qt.io/qt-6/)
+- [KDE Frameworks](https://develop.kde.org/products/frameworks/)
+- [Flatpak documentation](https://docs.flatpak.org/)
+- [Snap documentation](https://canonical-snap.readthedocs-hosted.com/)
+
+## Updating the baseline
+
+1. Update `src/data/baseline.json`.
+2. Move `validated_on` to the review date and set `review_due` six months later.
+3. Run `npm run check:baseline`.
+4. Run `npm run build` and check the pages that link here.
+5. Update the primary-source links if a source moved.
+6. Commit the change and note the upstream release in the commit message.
+
+The update is a normal OpenSpec change. It should explain which upstream release triggered it and which pages were re-checked.
+
+## See also
+
+- [Ubuntu Platform](/platform/ubuntu/)
+- [Choose Your Stack](/start/choose-stack/)
+- [GTK & libadwaita](/engineering/gtk/)
+- [Qt & Kirigami](/engineering/qt/)

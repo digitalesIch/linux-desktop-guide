@@ -151,15 +151,7 @@ For GTK apps, use the archive toolchain when you link against system libraries. 
 
 ## Versions to target in 2026
 
-| Component | Ubuntu 26.04 LTS | Notes |
-| --- | --- | --- |
-| GTK | 4.22 | GTK 4 is the stable line; GTK 3 is maintenance-only |
-| libadwaita | 1.9 | GNOME 50 design system |
-| Qt | 6.10.2 | Qt 6.8 LTS is a conservative alternative for broader distro support |
-| KDE Frameworks | 6.24 | KDE Plasma 6.6 |
-| Python | 3.14 | PyGObject available in the archive |
-| Rust | Current stable via rustup | Use a pinned toolchain in CI |
-| Flatpak runtime | `org.gnome.Platform` 50 / `org.kde.Platform` 6.10 | Match the runtime to your toolkit |
+The validated version set lives in [Baseline](/reference/baseline/). It records the current Ubuntu LTS, GNOME, GTK, libadwaita, Qt, KDE Frameworks, Flatpak runtimes, and the review date. Use it as the reference for examples and screenshots; define a separate minimum-version policy when you support an older release.
 
 :::caution[Do not target the newest API by default]
 A Flatpak app can bundle a newer runtime, but a deb must work with the libraries in the archive. If you ship both, target the oldest library version you support and guard newer APIs at runtime.

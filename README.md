@@ -20,10 +20,12 @@ The companion app in `examples/notes/` is a complete GTK 4 + libadwaita referenc
 │   │   ├── design/            # Principles, visual language, layout, interaction, a11y, i18n
 │   │   ├── engineering/       # Architecture, GTK, Qt, Rust, performance, testing, reliability
 │   │   ├── ship/              # AppStream, Flathub, release checklist, quality bar
-│   │   └── reference/         # Checklists, glossary, resources
+│   │   └── reference/         # Baseline, checklists, glossary, resources
 │   ├── components/            # PageTitle override and other Starlight overrides
+│   ├── data/baseline.json     # Validated versions, imported by the baseline page
 │   ├── styles/custom.css      # Design tokens and site styling
 │   └── assets/                # Logo and hero artwork
+├── scripts/                   # Baseline and maintenance checks
 ├── public/                    # Favicon and the hero SVG
 ├── examples/notes/            # Runnable GTK 4 reference app
 ├── astro.config.mjs           # Site title, sidebar, Starlight options
@@ -48,6 +50,7 @@ astro dev stop
 ## Build and preview
 
 ```bash
+npm run check:baseline
 npm run build
 npm run preview
 ```
@@ -123,8 +126,8 @@ The palette is intentionally warm and low-glare for long reading sessions, with 
 
 ## Status
 
-- 30 content pages plus the landing page.
-- 32 HTML pages including the 404.
+- 32 content pages plus the landing page.
+- 34 HTML pages including the 404.
 - All internal links checked; external links checked against primary sources at the time of writing.
 - Reference app syntax-checked, built with Meson, validated with `desktop-file-validate` and `appstreamcli`, and launched successfully in a headless GNOME 50 Wayland session.
 

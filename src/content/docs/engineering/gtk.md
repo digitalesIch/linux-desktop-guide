@@ -8,7 +8,7 @@ GTK 4 is the toolkit behind GNOME and the default native stack on Ubuntu 26.04 L
 The combination is opinionated, and that is the point. If you are building for GNOME/Ubuntu, it gives you the shortest path to native behavior: accessibility, input methods, Wayland, portals, and a coherent visual language.
 
 :::note[Versions in Ubuntu 26.04]
-GTK 4.22, libadwaita 1.9, GNOME 50. GTK 4 is the stable line; GTK 3 is maintenance-only. Target GTK 4.10+ APIs unless you need to support an older distro, and guard newer APIs at runtime.
+GTK 4.22, libadwaita 1.9, GNOME 50. GTK 4 is the stable line; GTK 3 is maintenance-only. Target GTK 4.10+ APIs unless you need to support an older distro, and guard newer APIs at runtime. The full validated set is in [Baseline](/reference/baseline/).
 :::
 
 ## The application skeleton
