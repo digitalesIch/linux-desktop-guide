@@ -100,7 +100,7 @@ Have one source of truth. Widgets render state; they do not own it.
 
 - Relm4's message/update model, or a plain struct with explicit `update` methods.
 - Avoid `Rc<RefCell<>>` webs; prefer ownership plus messages.
-- Use `Arc<Mutex<>>` only across threads, not as a default.
+- Use `Arc<Mutex<T>>` only across threads, not as a default.
 
 ## Async and cancellation
 
@@ -151,7 +151,7 @@ Rules:
 
 ## Single instance and IPC
 
-Use `Gtk.Application` / `QApplication` for single-instance behavior and file-open activation. If the app needs a custom service:
+`Gtk.Application` handles single-instance behavior and file-open activation through D-Bus. `QApplication` does not register a bus name; use `KDBusService(KDBusService::Unique)` for KDE/Qt, or `QLockFile`/a custom D-Bus name for non-KDE Qt. If the app needs a custom service:
 
 - Own a well-known D-Bus name.
 - Export a small, versioned interface.
@@ -171,6 +171,13 @@ Errors should be handled at the layer that can do something about them:
 - **Logging** records the technical detail with context.
 
 Never swallow an error silently. Never show a raw exception to the user. Never use a crash as control flow.
+
+## Trust boundaries and observability
+
+- Treat files, images, D-Bus messages, portal responses, and command-line arguments as untrusted input.
+- Decode untrusted images with Glycin; reserve `GtkSvg` for trusted app resources.
+- Log through structured journald fields or a correlation ID so a user report can be tied to a specific operation.
+- Keep secrets out of logs, crash reports, and command-line arguments.
 
 ## Testing seams
 

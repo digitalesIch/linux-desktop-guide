@@ -27,7 +27,7 @@ export const reviewDue = new Intl.DateTimeFormat('en', {
 
 This page is the single source of truth for the versions this guide is validated against. Other pages describe how to build on the platform; this page records what “the platform” means at the current review.
 
-The values are also stored in `src/data/baseline.json`. The page imports that file, and the future documentation MCP server will read the same data.
+The values are also stored in `src/data/baseline.json`. The page imports that file, and the local documentation MCP server (`docs`) reads the same data.
 
 ## Validated baseline
 
@@ -47,9 +47,16 @@ The values are also stored in `src/data/baseline.json`. The page imports that fi
     <tr><td>GNOME Flatpak runtime</td><td><code>{baseline.packaging.flatpak_runtime}</code></td></tr>
     <tr><td>KDE Flatpak runtime</td><td><code>{baseline.packaging.kde_runtime}</code></td></tr>
     <tr><td>Snap base</td><td><code>{baseline.packaging.snap_base}</code></td></tr>
+    <tr><td>Flatpak</td><td>{baseline.packaging.flatpak}</td></tr>
+    <tr><td>snapd</td><td>{baseline.packaging.snapd}</td></tr>
     <tr><td>Python</td><td>{baseline.toolchains.python}</td></tr>
     <tr><td>GCC</td><td>{baseline.toolchains.gcc}</td></tr>
     <tr><td>LLVM/Clang</td><td>{baseline.toolchains.llvm}</td></tr>
+    <tr><td>Rust</td><td>{baseline.toolchains.rust}</td></tr>
+    <tr><td>Go</td><td>{baseline.toolchains.go}</td></tr>
+    <tr><td>.NET</td><td>{baseline.toolchains.dotnet}</td></tr>
+    <tr><td>Java</td><td>{baseline.toolchains.java}</td></tr>
+    <tr><td>Zig</td><td>{baseline.toolchains.zig}</td></tr>
     <tr><td>Astro</td><td>{baseline.site.astro}</td></tr>
     <tr><td>Starlight</td><td>{baseline.site.starlight}</td></tr>
     <tr><td>Node.js</td><td>{baseline.site.node}</td></tr>
@@ -72,7 +79,7 @@ The baseline is the **tested reference environment**. It is not a claim that old
 
 - Use the baseline when you need the current, validated target for examples, screenshots, and recommendations.
 - Define a separate minimum-version policy when you ship a library or a package for an older LTS.
-- Guard newer APIs at runtime when you support more than one release.
+- Use compile-time version checks (`GTK_CHECK_VERSION`, `QT_VERSION_CHECK`) or Rust feature flags, and guard newer APIs only when you genuinely support older releases.
 - A component can be newer than the baseline in a Flatpak runtime; record that difference in the manifest, not by rewriting this page.
 
 ## Review
@@ -90,10 +97,15 @@ The review date is a trigger, not a guarantee. When it passes, re-check the prim
 - [GNOME 50 release notes](https://release.gnome.org/50/)
 - [GTK 4 documentation](https://docs.gtk.org/gtk4/)
 - [libadwaita documentation](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/)
+- [Qt 6.10 release](https://www.qt.io/blog/qt-6.10-released)
 - [Qt 6 documentation](https://doc.qt.io/qt-6/)
-- [KDE Frameworks](https://develop.kde.org/products/frameworks/)
+- [KDE Frameworks 6.24](https://kde.org/announcements/frameworks/6/6.24.0/)
+- [KDE Plasma 6.6](https://kde.org/announcements/plasma/6/6.6.0/)
 - [Flatpak documentation](https://docs.flatpak.org/)
-- [Snap documentation](https://canonical-snap.readthedocs-hosted.com/)
+- [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements)
+- [Snap documentation](https://snapcraft.io/docs/)
+- [Snapcraft bases](https://documentation.ubuntu.com/snapcraft/stable/reference/bases/)
+- [Snapcraft core24 to core26](https://documentation.ubuntu.com/snapcraft/stable/how-to/change-bases/change-from-core24-to-core26/)
 
 ## Updating the baseline
 

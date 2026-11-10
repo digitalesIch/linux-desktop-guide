@@ -7,7 +7,7 @@ Ubuntu 26.04 LTS ships a Wayland-only GNOME session. XWayland still runs X11 app
 
 Wayland is not "X11 with a different socket". It is a different security model. The compositor is the display server, the window manager, the input router, and the policy layer. Clients render their own buffers and describe their surfaces; they do not get to inspect or control the rest of the session.
 
-That model is why fractional scaling, per-monitor DPI, input methods, and secure screen sharing can work at all. It is also why apps that rely on global coordinates, synthetic input, or framebuffer capture stop working.
+That model is what makes fractional scaling, per-monitor DPI, input methods, and secure screen sharing tractable and secure. It is also why apps that rely on global coordinates, synthetic input, or framebuffer capture stop working.
 
 ## The architecture in one diagram
 
@@ -61,7 +61,7 @@ GTK 4 and Qt 6 draw client-side decorations by default. A `Adw.HeaderBar` or a Q
 
 **Do:** use `Adw.ApplicationWindow` + `Adw.HeaderBar`, or `QMainWindow` with the platform theme. If you need a custom header, keep the toolkit's window controls and drag handling.
 
-**Avoid:** hiding the system close button, drawing fake traffic lights, or implementing window dragging with raw pointer events.
+**Avoid:** hiding the system close button, drawing fake window controls, or implementing window dragging with raw pointer events.
 
 ### Handle fractional scaling
 
@@ -169,7 +169,7 @@ Release the inhibitor as soon as the work finishes. An app that holds an inhibit
 | Mutter Devkit | Test nested GNOME Shell with simulated monitors and scaling |
 | `weston --backend=headless` | Run a headless Wayland compositor for tests |
 | `wev` | Inspect input events on Wayland |
-| `wl-info` / `wayland-info` | List globals and protocol support |
+| `wayland-info` | List globals and protocol support (`wayland-utils`) |
 
 For GNOME-specific behavior, Mutter Devkit in GNOME 50 can simulate HiDPI, fractional scaling, multiple monitors, and clipboard sharing. It is the fastest way to test layout without physical hardware.
 

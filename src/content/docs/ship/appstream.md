@@ -93,18 +93,19 @@ Legacy `.appdata.xml` files are still accepted, but new apps should use `.metain
 | Field | Why it matters |
 | --- | --- |
 | `<id>` | Must match the desktop file, icon, Flatpak ID, and D-Bus name |
-| `<name>` | The display name, not the binary name |
-| `<summary>` | One line, under ~80 characters, no trailing period |
+| `<name>` | The display name, not the binary name; keep it short (Flathub quality guidance prefers under 20 characters) |
+| `<summary>` | One line, no trailing period; Flathub quality guidance targets 10–25 characters, max ~35 |
 | `<description>` | 1–3 short paragraphs; use `<ul>` for features |
-| `<launchable>` | Tells the software center how to launch the app |
+| `<launchable>` | The installed desktop-file ID (`<id>.desktop`), not the executable command |
 | `<developer>` | The human or organization behind the app |
 | `<categories>` | Controls menu placement and discovery |
 | `<keywords>` | Improves search; use real user terms |
-| `<screenshots>` | The single biggest factor in install conversion |
+| `<screenshots>` | The single biggest factor in install conversion; tag non-English captures with `xml:lang` |
 | `<releases>` | Version history and user-facing notes |
 | `<content_rating>` | Required for many catalogs; OARS 1.1 |
 | `<provides>` | Declares binaries, MIME types, or libraries |
 | `<url>` | Homepage, bug tracker, donation, translate |
+| `<translation>` | Declares the gettext/Qt translation domain so software centers can show available languages |
 
 ## Screenshots
 
@@ -113,8 +114,9 @@ Screenshots are not decoration. They are how users decide whether the app is for
 - Use the real app, not a mockup.
 - Show the primary workflow, not a settings page.
 - Provide light and dark variants when the app supports both.
-- Use 16:9 at 1600×900 or larger; 4:3 is also accepted.
-- Avoid transparent backgrounds, drop shadows, and fake window frames.
+- For Flathub, capture the app window at 1000×700 or smaller (2000×1400 for HiDPI) so text stays legible in the store UI.
+- Keep the real native window shadow, title bar, and rounded corners; do not crop them out, and do not use transparent backgrounds or fake window frames.
+- Tag screenshots with the language they show (`xml:lang`), and keep captions to one sentence without a trailing period.
 - Include a caption that explains what the user is looking at.
 - Localize captions and images where practical.
 - Keep the screenshots current; an outdated UI is a trust signal in the wrong direction.
@@ -155,8 +157,8 @@ Release notes are user-facing. Write them for the person deciding whether to upd
 
 ```xml
 <branding>
-  <color type="primary" scheme_preference="light">#3f7d20</color>
-  <color type="primary" scheme_preference="dark">#c6ff3d</color>
+  <color type="primary" scheme_preference="light">#c6ff3d</color>
+  <color type="primary" scheme_preference="dark">#3f7d20</color>
 </branding>
 ```
 
@@ -166,8 +168,8 @@ The metainfo and desktop file must agree:
 
 | Metainfo | Desktop file |
 | --- | --- |
-| `<id>` | Filename and `StartupWMClass` |
-| `<launchable>` | `Exec` |
+| `<id>` | Filename; `StartupWMClass` must match the actual `WM_CLASS` (test it) |
+| `<launchable>` | Installed desktop-file ID (`<id>.desktop`); `Exec` is the command, not the launchable |
 | `<name>` | `Name` |
 | `<summary>` | `Comment` |
 | `<categories>` | `Categories` |
@@ -195,30 +197,33 @@ flatpak-builder-lint manifest io.github.yourname.Notes.yml
 
 | Error | Cause | Fix |
 | --- | --- | --- |
-| `id-mismatch` | ID differs from filename/desktop/Flatpak | Use one ID everywhere |
-| `missing-launchable` | No `<launchable>` | Add `desktop-id` |
-| `description-markup` | Invalid HTML/XML in description | Use `<p>`, `<ul>`, `<li>` only |
+| `metainfo-filename-cid-mismatch` | ID differs from filename/Flatpak | Use one ID everywhere |
+| `missing-launchable` | No `<launchable>` | Add the desktop-file ID |
+| `description-markup` | Invalid HTML/XML in description | Use `<p>`, `<ul>`, `<li>`, `<em>`, `<code>` only |
 | `screenshot-no-media` | No image URL | Add a stable HTTPS screenshot |
 | `releases-info-missing` | No `<releases>` | Add at least one release |
-| `developer-name-missing` | No developer | Add `<developer><name>` |
-| `license-missing` | No project license | Add a valid SPDX license |
+| `developer-info-missing` | No developer | Add `<developer><name>` |
+| `metadata-license-missing` | No metadata license | Add a valid metadata license |
+| `url-homepage-missing` | No homepage | Add `<url type="homepage">` |
 | `category-invalid` | Unknown category | Use the AppStream category list |
-| `summary-too-long` | Summary is a paragraph | Keep it under ~80 characters |
-| `icon-missing` | No installed icon | Install to hicolor and match `Icon=` |
+| `summary-too-long` | Summary is a paragraph | Keep it short; Flathub quality guidance targets 10–25 characters |
+
+Icon and desktop-file consistency checks happen in `appstreamcli compose` and Flathub's linter, not in the raw `validate` output. Run both.
 
 ## Metadata checklist
 
 - ☐ ID matches everywhere: metainfo, desktop, icon, Flatpak, D-Bus.
 - ☐ Name and summary are user-facing and concise.
 - ☐ Description explains the value, not the implementation.
-- ☐ At least two screenshots, light and dark, with captions.
+- ☐ At least one screenshot, light/dark variants where useful, with captions and `xml:lang` tags.
 - ☐ Release notes for the current version, newest first.
 - ☐ License is valid SPDX and matches the source.
 - ☐ Developer and contact URL are present.
 - ☐ Categories and keywords are accurate.
-- ☐ Content rating is present.
+- ☐ Content rating is present and accurate.
 - ☐ The desktop file passes validation.
-- ☐ The metainfo passes validation.
+- ☐ If the app is translated, `<translation type="gettext">` or `<translation type="qt">` is present and the `.mo`/`.qm` files are installed.
+- ☐ The metainfo passes `appstreamcli validate --no-net` and `flatpak-builder-lint appstream`.
 - ☐ The icon is installed and legible at 16 px.
 
 Next: [Flathub](/ship/flathub/) — the submission and maintenance process.

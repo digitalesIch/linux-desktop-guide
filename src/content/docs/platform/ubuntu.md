@@ -7,9 +7,21 @@ Ubuntu is the reference platform for this guide, but it is not a single SDK. It 
 
 This page is the map. It tells you which Ubuntu sources to trust, which packaging path fits which audience, and which system APIs an app should use instead of shelling out to a command-line tool. The exact validated component versions are recorded in [Baseline](/reference/baseline/). The other Platform pages go deeper on Wayland, XDG, integration, Flatpak, packaging, and security.
 
+## What changed in Ubuntu 26.04
+
+- The Ubuntu Desktop session is **Wayland-only**. XWayland still runs X11 applications, but there is no Xorg GNOME session.
+- **GNOME 50** ships Reduced Motion, improved Orca, fractional scaling on by default, better VRR/HDR, and a more accessible remote desktop.
+- The **App Center** manages snaps and debs from the Ubuntu archive, and can install third-party debs (with a warning). Snaps remain the recommended third-party path.
+- **Permission prompting** is experimental and snap-focused; users enable it in **Security Center** and manage portal permissions in Settings.
+- **Snap base `core26`** is the recommended base. It no longer bundles Python, so Python snaps must add a runtime explicitly.
+- **.NET 10** and **OpenJDK 25** are the current archive defaults; **Zig 0.15.2** is available in the archive.
+- **Glycin** now handles sandboxed image decoding for many apps, **GStreamer 1.28** is the media stack with **VA-API**, and **Sysprof** is installed by default.
+- **NVIDIA + Wayland** is supported; use the drivers installed by `ubuntu-drivers` and test the Wayland session. Official ARM64 desktop images are available for VMs, ACPI/EFI hardware, and Snapdragon devices.
+- **Ubuntu Insights** is opt-in system telemetry; keep app telemetry separate and opt-in.
+
 ## Release and support
 
-Target an LTS release unless you have a reason not to. LTS releases are what users and organizations run, and they are what Flatpak runtimes and Ubuntu archives are built around.
+Target an LTS release unless you have a reason not to. LTS releases are what users and organizations run, and they are what the Ubuntu archive and Snap bases are built around. Flatpak runtimes follow their own Freedesktop, GNOME, and KDE release schedules; they do not track Ubuntu LTS.
 
 | Release | Type | Standard support | Ubuntu Pro | Legacy add-on |
 | --- | --- | --- | --- | --- |
@@ -17,6 +29,8 @@ Target an LTS release unless you have a reason not to. LTS releases are what use
 | **24.04 LTS** (Noble Numbat) | LTS | May 2029 | May 2034 | May 2039 |
 | **22.04 LTS** (Jammy Jellyfish) | LTS | May 2027 | May 2032 | May 2037 |
 | **26.10** (Stonking Stingray) | Interim | Jul 2027 | — | — |
+
+The 26.04 release notes say the standard support window ends in April 2031, while the release-cycle table says May 2031. This guide uses the release-cycle table and records the discrepancy rather than hiding it.
 
 - **LTS** is the baseline for app development, CI, and support statements.
 - **Interim releases** are for testing new kernels, toolchains, and desktop features. Do not make them your only supported target.
@@ -31,14 +45,14 @@ Ubuntu documents a supported toolchain set with installation guides, version ava
 
 | Toolchain | Install path | Ubuntu documentation |
 | --- | --- | --- |
-| Python | `apt install python3` / `uv` for project environments | [Python on Ubuntu](https://documentation.ubuntu.com/ubuntu-for-developers/toolchains/python/) |
-| Go | `apt install golang-go` or the official tarball | [Go on Ubuntu](https://documentation.ubuntu.com/ubuntu-for-developers/toolchains/go/) |
-| Rust | `apt install rustc cargo` or `rustup` for current stable | [Rust on Ubuntu](https://documentation.ubuntu.com/ubuntu-for-developers/toolchains/rust/) |
-| GCC | `apt install build-essential` | [GCC on Ubuntu](https://documentation.ubuntu.com/ubuntu-for-developers/toolchains/gcc/) |
-| Clang/LLVM | `apt install clang lld` | [Clang on Ubuntu](https://documentation.ubuntu.com/ubuntu-for-developers/toolchains/clang/) |
-| .NET | `apt install dotnet-sdk-8.0` or the Microsoft feed | [.NET on Ubuntu](https://documentation.ubuntu.com/ubuntu-for-developers/toolchains/dotnet/) |
-| Java | `apt install openjdk-21-jdk` | [Java on Ubuntu](https://documentation.ubuntu.com/ubuntu-for-developers/toolchains/java/) |
-| Zig | Snap or upstream tarball | [Zig on Ubuntu](https://documentation.ubuntu.com/ubuntu-for-developers/toolchains/zig/) |
+| Python | `apt install python3` / `uv` for project environments | [Python on Ubuntu](https://ubuntu.com/developers/docs/toolchains/python/) |
+| Go | `apt install golang-go` or the official tarball | [Go on Ubuntu](https://ubuntu.com/developers/docs/toolchains/go/) |
+| Rust | `apt install rustc cargo` or `rustup` for current stable | [Rust on Ubuntu](https://ubuntu.com/developers/docs/toolchains/rust/) |
+| GCC | `apt install build-essential` | [GCC on Ubuntu](https://ubuntu.com/developers/docs/toolchains/gcc/) |
+| Clang/LLVM | `apt install clang lld` | [Clang on Ubuntu](https://ubuntu.com/developers/docs/toolchains/clang/) |
+| .NET | `apt install dotnet10` (26.04 default); .NET 8/9 via the backports PPA or the .NET snap | [.NET on Ubuntu](https://ubuntu.com/developers/docs/toolchains/dotnet/) |
+| Java | `apt install openjdk-25-jdk` (26.04 default); `openjdk-21-jdk` for older compatibility | [Java on Ubuntu](https://ubuntu.com/developers/docs/toolchains/java/) |
+| Zig | `apt install zig` (0.15.2); snap or upstream tarball only for a newer version | [Zig on Ubuntu](https://ubuntu.com/developers/docs/toolchains/zig/) |
 
 Guidance:
 
@@ -56,10 +70,12 @@ Ubuntu supports two first-class package formats: **deb** and **snap**. Flatpak r
 | --- | --- | --- | --- | --- |
 | **deb + PPA** | Ubuntu archive integration, system tools, libraries | apt, unattended-upgrades | No | Full system access; tied to release |
 | **Snap** | Third-party desktop apps in the Ubuntu App Center | snapd, automatic refresh | Yes, AppArmor | Larger install; confinement interfaces |
-| **Flatpak / Flathub** | Cross-distro upstream desktop apps | OSTree deltas | Yes, portals | Separate runtime model |
+| **Flatpak / Flathub** | Cross-distro upstream desktop apps; not installed by Ubuntu by default | OSTree deltas | Yes, portals | Separate runtime model; the user or upstream must install Flatpak and add Flathub |
 | **OCI / Rockcraft** | Services and cloud workloads | Container registry | Container | Not a desktop app format |
 
-Ubuntu's own guidance recommends snaps for third-party apps in the App Center because they are sandboxed and updated independently of the release. A deb has full access to the user's resources, so it is the right choice only when you need system integration or are maintaining an archive package.
+Ubuntu's own guidance recommends snaps for third-party apps in the App Center because they are sandboxed and updated independently of the release. The App Center also manages debs from the Ubuntu archive and can install third-party debs, but third-party debs are discouraged: they have full access to the user's resources and may add their own repositories. Use a deb when you need archive/system integration or are maintaining an Ubuntu package; use a Snap when you want the App Center's confined, auto-updating path.
+
+Flatpak is a different case. Ubuntu does not ship Flatpak or the Flathub remote by default, and Canonical does not list it as a supported Ubuntu package format. It is still a mature, open-source, cross-distribution channel that many users install deliberately. If you target those users, treat Flatpak as a first-class build target and document the `flatpak`/`flatpak-builder` install and Flathub setup; do not imply that it is part of a stock Ubuntu installation.
 
 ### deb and PPA
 
@@ -84,8 +100,8 @@ snap connections notes
 ```
 
 - `confinement: strict` is the default for a new app. `classic` is for tools that genuinely need full system access and is reviewed manually.
-- Declare the smallest set of [interfaces](https://canonical-snap.readthedocs-hosted.com/reference/interfaces/) you need.
-- Use XDG Desktop Portals inside the snap where possible; the Snap documentation has a dedicated [XDG desktop portals](https://canonical-snap.readthedocs-hosted.com/explanation/snap-development/xdg-desktop-portals/) page.
+- Declare the smallest set of [interfaces](https://snapcraft.io/docs/interfaces) you need.
+- Use XDG Desktop Portals inside the snap where possible; the Snap documentation has a dedicated [XDG desktop portals](https://snapcraft.io/docs/xdg-desktop-portals) page.
 - Build with [Snapcraft](https://documentation.ubuntu.com/snapcraft/stable/) and follow the [Craft a snap](https://documentation.ubuntu.com/snapcraft/stable/tutorials/craft-a-snap/) tutorial.
 - For snapd automation, use the [REST API](https://snapcraft.io/docs/snapd-api), not the `snap` CLI from inside a confined app.
 
@@ -93,8 +109,8 @@ snap connections notes
 
 Flatpak is covered in [Flatpak & Portals](/platform/flatpak-portals/) and [Flathub](/ship/flathub/). Keep the distinction clear:
 
-- **Ubuntu App Center** recommends snaps for third-party desktop apps.
-- **Flathub** is the vendor-neutral upstream store for Flatpak apps across distributions.
+- **Ubuntu App Center** recommends snaps for third-party desktop apps and also manages debs from the Ubuntu archive; third-party debs are supported but discouraged.
+- **Flathub** is the vendor-neutral upstream store for Flatpak apps across distributions. It is not part of a stock Ubuntu installation, so document the Flatpak setup separately.
 - Shipping both is legitimate if you can maintain both. Do not treat one as a drop-in replacement for the other.
 
 ### OCI images and Rockcraft
@@ -121,6 +137,7 @@ Ubuntu's desktop services expose stable D-Bus APIs. Use the API, not the command
 | **PackageKit** | `org.freedesktop.PackageKit` | Do not install packages from an app; use the software center/PackageKit | [PackageKit](https://www.freedesktop.org/software/PackageKit/) |
 | **snapd** | REST API on `/run/snapd.socket` | Do not manage snaps from inside a snap; let snapd/the store update them | [snapd REST API](https://snapcraft.io/docs/snapd-api) |
 | **AT-SPI** | D-Bus accessibility interfaces | Use native widgets and `Gtk.Accessible`; do not draw inaccessible controls | [Ubuntu accessibility stack](https://documentation.ubuntu.com/desktop/en/latest/explanation/accessibility-stack/) |
+| **Security Center / permission prompting** | snapd prompting API, AppArmor | Use portals and minimal Snap interfaces; users manage experimental prompts in Security Center | [Permissions prompting deep dive](https://discourse.ubuntu.com/t/permissions-prompting-a-deep-dive/81785) |
 
 Two rules cover most of the table:
 
@@ -154,7 +171,7 @@ Ubuntu Desktop's accessibility stack is built on AT-SPI over D-Bus. GTK 4 expose
 
 - Use GTK or Qt widgets that expose AT-SPI semantics.
 - Test with Orca and the accessibility inspector, not only with an automated checker.
-- Flutter has known AT-SPI compatibility limitations on Ubuntu; if you use it, test with Orca and budget for custom accessibility work.
+- Custom-rendered or web-rendered UI does not inherit AT-SPI semantics automatically; test it with Orca and budget for explicit accessibility work.
 - Follow [Accessibility](/design/accessibility/) for the product-level checklist.
 
 Sources: [Ubuntu Desktop accessibility stack](https://documentation.ubuntu.com/desktop/en/latest/explanation/accessibility-stack/), [AT-SPI D-Bus interfaces](https://documentation.ubuntu.com/desktop/en/latest/reference/accessibility/dbus/).
@@ -174,7 +191,9 @@ Sources: [Ubuntu Desktop accessibility stack](https://documentation.ubuntu.com/d
 - ☐ Pin the toolchain version used in CI and packaging.
 - ☐ Choose deb, snap, Flatpak, or OCI deliberately; do not ship all four by default.
 - ☐ Use portals or toolkit APIs for files, printing, notifications, secrets, and screen capture.
-- ☐ Use D-Bus APIs instead of shelling out to `nmcli`, `udisksctl`, `snap`, or `fwupdmgr`.
+- ☐ Use D-Bus APIs or the snapd REST API instead of shelling out to `nmcli`, `udisksctl`, `snap`, or `fwupdmgr`.
+- ☐ State whether the app ships through Ubuntu-supported deb/Snap or an alternative channel; document the Flatpak setup separately if you use it.
+- ☐ Test the Wayland-only Ubuntu Desktop session and XWayland only for legacy X11 apps.
 - ☐ Never require `sudo` at runtime; define a Polkit action if privileged work is unavoidable.
 - ☐ Do not require Ubuntu Pro; detect optional services and degrade gracefully.
 - ☐ Test with Orca and the Ubuntu accessibility stack.

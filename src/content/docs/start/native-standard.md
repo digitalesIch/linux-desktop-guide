@@ -5,7 +5,7 @@ description: Ten rules for building Linux desktop apps that are fast, accessible
 
 Platforms do not feel native because of a color palette. They feel native because the software keeps a set of promises consistently enough that users stop thinking about the software and start thinking about their task.
 
-This is the standard this guide uses. It is toolkit-neutral: GTK, Qt, Rust, and even a web runtime can meet it. Most apps fail on three or four of these rules, not all ten. Fixing those three or four is usually the difference between "a Linux build" and "a Linux app".
+This is the standard this guide uses. It is toolkit-neutral: GTK, Qt, Rust, and even a web runtime can meet it. In practice, teams usually have three or four weak rules rather than all ten. Fixing those is often the difference between "a Linux build" and "a Linux app".
 
 ## 1. Respect the compositor
 
@@ -194,6 +194,6 @@ If you can defend that sentence in a code review, you are building native softwa
 - Use it as a design review checklist before the first release.
 - Use it as a code review lens for porting work.
 - Use it to push back on shortcuts that will cost more later.
-- Use the [Quality Bar](/ship/quality-bar/) to score an app across all ten dimensions.
+- Use the [Quality Bar](/ship/quality-bar/) to score an app across its seven dimensions.
 
 Next: [Design Principles](/design/principles/) — how the standard becomes an interface.

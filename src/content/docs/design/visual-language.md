@@ -123,16 +123,25 @@ Rules:
 
 - Animate transform and opacity, not layout properties.
 - Do not animate more than one thing at a time unless they are part of the same transition.
-- Respect reduced motion. libadwaita 1.9 applies the system setting to most widgets automatically; custom animations must check it.
+- Respect reduced motion. libadwaita widgets handle the system setting; GTK 4.22 core widgets and custom animations must be checked explicitly with `Adw.get_enable_animations(widget)`.
 - Never use motion to hide latency. Fix the latency or show progress.
 
-```css title="Custom animation with reduced-motion fallback"
-@media (prefers-reduced-motion: no-preference) {
-  .pulse {
-    transition: opacity 180ms ease-out;
-  }
+```python title="Gate a custom animation"
+from gi.repository import Adw
+
+if Adw.get_enable_animations(widget):
+    widget.add_css_class("pulse")
+else:
+    widget.remove_css_class("pulse")
+```
+
+```css title="The animation itself"
+.pulse {
+  transition: opacity 180ms ease-out;
 }
 ```
+
+GTK CSS does not support the web `prefers-reduced-motion` media query; use the libadwaita API or `Gtk.Settings` to decide whether to add the class.
 
 ## Imagery and empty states
 

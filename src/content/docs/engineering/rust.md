@@ -3,11 +3,11 @@ title: Rust on the Desktop
 description: Rust desktop options compared — gtk-rs, Relm4, Iced, Slint, libcosmic — with async patterns, memory ownership, Flatpak packaging, testing, and profiling.
 ---
 
-Rust is a first-class language for Linux desktop apps. GNOME's Loupe and Resources are written in Rust, COSMIC is built on Rust, and the gtk-rs bindings are mature enough for production. You get memory safety, fearless concurrency, and a packaging story that fits Flatpak well.
+Rust is a strong choice for Linux desktop apps. GNOME's Loupe and Resources are written in Rust, COSMIC is built on Rust, and the gtk-rs bindings are mature enough for production. You get memory safety, fearless concurrency, and a packaging story that fits Flatpak well.
 
 The trade-offs are real: longer compile times, a smaller pool of UI contributors, and a toolkit object model that does not map cleanly to Rust's ownership rules. None of them are blockers if you choose the right layer.
 
-Ubuntu documents both the archive Rust toolchain and the `rustup` path, along with the versions available in each release. Use the [Ubuntu Rust guide](https://documentation.ubuntu.com/ubuntu-for-developers/toolchains/rust/) when you need an install path, and the [version reference](https://documentation.ubuntu.com/ubuntu-for-developers/reference/availability/rust/) before you promise support for an older LTS.
+Ubuntu documents both the archive Rust toolchain and the `rustup` path, along with the versions available in each release. Use the [Ubuntu Rust guide](https://ubuntu.com/developers/docs/toolchains/rust/) when you need an install path, and the [version reference](https://documentation.ubuntu.com/ubuntu-for-developers/reference/availability/rust/) before you promise support for an older LTS.
 
 ## The options
 
@@ -18,9 +18,21 @@ Ubuntu documents both the archive Rust toolchain and the `rustup` path, along wi
 | **Iced** | Elm-inspired, custom renderer | Cross-platform tools, games-adjacent UIs | Not GNOME-native; smaller ecosystem |
 | **Slint** | Declarative UI, custom renderer | Embedded and cross-platform products | Licensing depends on use |
 | **libcosmic** | COSMIC toolkit | COSMIC-native apps | Young, tied to System76's ecosystem |
-| **Tauri** | Webview + Rust backend | Web-shaped products | Not native widgets; see the web-tech caveats |
 
 For a GNOME/Ubuntu app, use **gtk-rs + libadwaita-rs**, or **Relm4** if you want a structured message loop. For a custom-rendered cross-platform tool, evaluate Iced or Slint before committing.
+
+### Version and feature matrix
+
+| Crate | Version in the 2026 stack | Features to enable |
+| --- | --- | --- |
+| `gtk4` | 0.11.x | `v4_22` or `gnome_50` |
+| `libadwaita` | 0.9.x | `v1_9` |
+| `relm4` | 0.11.x | Match the gtk4 feature set |
+| `iced` | 0.14.x | Default renderer; evaluate accessibility yourself |
+| `slint` | 1.18.x | Check the license for your use |
+| `libcosmic` | git-pinned | Track the COSMIC release you target |
+
+Feature flags are compile-time. If you enable `v4_22`/`v1_9`, the binary will not run against an older GTK/libadwaita; use runtime checks only if you build separate compatibility paths.
 
 ## A minimal gtk-rs app
 
@@ -79,8 +91,8 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-gtk = { package = "gtk4", version = "0.11", features = ["v4_10"] }
-libadwaita = { version = "0.9", features = ["v1_5"] }
+gtk = { package = "gtk4", version = "0.11", features = ["v4_22"] }
+libadwaita = { version = "0.9", features = ["v1_9"] }
 ```
 
 Version numbers move; use the latest compatible releases and the feature flags for the minimum GTK/libadwaita version you support. Do not enable a feature you cannot run on your target distro.
@@ -174,7 +186,8 @@ Rust async runtimes and the GLib main loop are separate worlds. Bridge them deli
 - Use `async-channel` or `tokio::sync::mpsc` to send results from a Tokio runtime to the main thread.
 - Do not block the main loop with `block_on`.
 - Use `gio` async APIs for file and network I/O where possible.
-- Cancel work when the view closes; drop the future or use a cancellation token.
+- Cancel work when the view closes; use `gio::Cancellable`, a `CancellationToken`, or drop the future.
+- Send results back with `async-channel` or a similar channel; do not share GTK objects across threads.
 
 ```rust title="Spawning UI-bound async work"
 glib::MainContext::default().spawn_local(async move {
@@ -200,6 +213,15 @@ python3 flatpak-cargo-generator.py Cargo.lock -o cargo-sources.json
 ```
 
 ```yaml title="Flatpak module"
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/notes/cargo
+    CARGO_NET_OFFLINE: "true"
+
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+
 modules:
   - name: notes
     buildsystem: simple
@@ -215,6 +237,8 @@ modules:
       - cargo-sources.json
 ```
 
+`type: dir` is for local development. A Flathub submission uses a `git` source pinned to a tag/commit or an `archive` source with a checksum. The runtime does not include the Rust toolchain; the SDK extension and `CARGO_HOME` above are required for an offline build.
+
 Use the `org.gnome.Platform` runtime for gtk-rs/libadwaita apps. The runtime includes GTK and libadwaita; your binary links against them.
 
 ## Testing and profiling
@@ -227,6 +251,8 @@ Use the `org.gnome.Platform` runtime for gtk-rs/libadwaita apps. The runtime inc
 - `cargo llvm-cov` for coverage.
 - `perf`, `heaptrack`, and `cargo flamegraph` for profiling.
 - `cargo clippy -- -D warnings` and `cargo fmt --check` in CI.
+- `cargo audit`/`cargo deny` for advisories and license policy; generate an SBOM for releases.
+- Pin the Rust toolchain (`rust-toolchain.toml`) and the Flatpak SDK extension version.
 
 ## Common pitfalls
 

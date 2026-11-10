@@ -208,6 +208,28 @@ On CI, a headless Wayland compositor (`weston --backend=headless`) or Xvfb is us
 - Test at 200% text scaling and in high-contrast mode.
 - Add accessibility checks to the release checklist, not just the test suite.
 
+## Headless Wayland
+
+A headless compositor gives you a real Wayland session without a physical display:
+
+```bash title="Terminal"
+export XDG_RUNTIME_DIR=$(mktemp -d)
+chmod 700 "$XDG_RUNTIME_DIR"
+weston --backend=headless --socket=wayland-test &
+export WAYLAND_DISPLAY=wayland-test
+export GDK_BACKEND=wayland
+dbus-run-session -- ./build/notes
+```
+
+`weston` is the simplest starting point. For GNOME-specific behavior, use Mutter Devkit or a nested GNOME session. `grim` is wlroots-only; on GNOME use the Shell or portal screenshot path instead.
+
+## Sanitizers, fuzzing, and reproducibility
+
+- Build C/C++ with ASan/UBSan in CI; run the parser and protocol tests under `cargo-fuzz` or AFL++.
+- Use `SOURCE_DATE_EPOCH` and a reproducible build environment; compare artifacts with `diffoscope` or `reprotest`.
+- Generate an SBOM and run `cargo audit`/`cargo deny`, `pip-audit`, or the equivalent for your ecosystem.
+- Test the upgrade path and the uninstall path, not just a fresh install.
+
 ## Packaging tests
 
 The artifact is part of the product. Test it.
@@ -221,11 +243,13 @@ flatpak info --show-permissions io.github.yourname.Notes
 # Metadata
 desktop-file-validate data/io.github.yourname.Notes.desktop
 appstreamcli validate --no-net data/io.github.yourname.Notes.metainfo.xml
-flatpak-builder-lint manifest io.github.yourname.Notes.yml
+flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install --user -y flathub org.flatpak.Builder
+flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest io.github.yourname.Notes.yml
 
 # deb
 dpkg-buildpackage -b -us -uc
-lintian ../notes_0.1.0-1_amd64.changes
+lintian ../*.changes
 
 # Snap
 snapcraft pack
@@ -247,14 +271,11 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.14'
       - run: sudo apt-get update
-      - run: sudo apt-get install -y python3-gi gir1.2-gtk-4.0 gir1.2-adw-1 \
+      - run: sudo apt-get install -y python3 python3-gi gir1.2-gtk-4.0 gir1.2-adw-1 \
           meson ninja-build flatpak flatpak-builder desktop-file-utils appstream \
           python3-pytest
-      - run: python3 -m pytest -q
+      - run: /usr/bin/python3 -m pytest -q
       - run: desktop-file-validate data/io.github.yourname.Notes.desktop
       - run: appstreamcli validate --no-net data/io.github.yourname.Notes.metainfo.xml
   flatpak:
@@ -265,7 +286,7 @@ jobs:
         with:
           bundle: notes.flatpak
           manifest-path: io.github.yourname.Notes.yml
-          cache-key: flatpak-builder-${{ github.sha }}
+          cache-key: flatpak-builder-${{ hashFiles('**/*.yml', '**/*.json') }}
 ```
 
 Cache dependencies, pin the runner image, and upload the built artifact. A CI job that builds a different app than the one you ship is worse than no CI.

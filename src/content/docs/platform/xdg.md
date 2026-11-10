@@ -3,7 +3,7 @@ title: The XDG Contract
 description: Where Linux apps put configuration, data, state, caches, desktop entries, icons, MIME types, and autostart files — and why the XDG specs are the closest thing the desktop has to a stable API.
 ---
 
-Linux has no `~/Library/Application Support`. It has a small set of environment variables and directory conventions maintained by [freedesktop.org](https://specifications.freedesktop.org/). They are boring, underspecified in places, and absolutely essential.
+Linux has no single per-user application-support directory. It has a small set of environment variables and directory conventions maintained by [freedesktop.org](https://specifications.freedesktop.org/). They are boring, underspecified in places, and absolutely essential.
 
 If your app writes to the right place, backups include it, resets remove it, sandboxes map it, and users can find it. If it writes next to the binary, into `~/.myapp`, or into the current working directory, all of that breaks — often silently, often only after a user upgrades.
 
@@ -85,11 +85,21 @@ Do not mix all four. Pick one primary store and document the migration path.
 </schemalist>
 ```
 
-```python title="Binding settings in Python"
-settings = Gio.Settings.new(APP_ID)
-settings.bind("window-width", self, "default-width", Gio.SettingsBindFlags.DEFAULT)
-settings.bind("window-height", self, "default-height", Gio.SettingsBindFlags.DEFAULT)
+```python title="Persisting window size in Python"
+self.settings = Gio.Settings.new(APP_ID)
+
+# On startup: default-width/default-height are the initial size.
+self.settings.bind("window-width", self, "default-width", Gio.SettingsBindFlags.DEFAULT)
+self.settings.bind("window-height", self, "default-height", Gio.SettingsBindFlags.DEFAULT)
+
+# On close: save the actual size, not the initial size.
+def on_close_request(self, _window):
+    self.settings.set_int("window-width", self.get_width())
+    self.settings.set_int("window-height", self.get_height())
+    return False
 ```
+
+`default-width`/`default-height` are not updated when the user resizes the window; save `get_width()`/`get_height()` on close and restore them with `set_default_size()` or the bindings above.
 
 Install the schema to `$datadir/glib-2.0/schemas/` and run `glib-compile-schemas`. For local development, set `GSETTINGS_SCHEMA_DIR` to the directory containing your compiled schema.
 
@@ -110,7 +120,7 @@ Categories=Office;
 MimeType=text/markdown;text/plain;
 Keywords=notes;writing;markdown;
 StartupNotify=true
-StartupWMClass=io.github.yourname.Notes
+StartupWMClass=notes
 DBusActivatable=true
 ```
 
@@ -121,8 +131,8 @@ DBusActivatable=true
 | `Categories` | Used by menus and software centers; follow the spec |
 | `MimeType` | Declares what the app can open; use `xdg-mime` to verify |
 | `StartupNotify` | Lets the compositor show a launch indicator |
-| `StartupWMClass` | Matches the window to the desktop entry on X11 |
-| `DBusActivatable` | Lets the desktop start the app through D-Bus |
+| `StartupWMClass` | Matches the window to the desktop entry; GTK derives `WM_CLASS` from the program name unless you set it, so test with `xprop WM_CLASS` |
+| `DBusActivatable` | Lets the desktop start the app through D-Bus; ship a matching service file with `--gapplication-service` |
 | `NoDisplay` | Hides helper entries from menus |
 | `OnlyShowIn` / `NotShowIn` | Restricts to specific desktops; use sparingly |
 
@@ -132,7 +142,7 @@ Validate it:
 desktop-file-validate io.github.yourname.Notes.desktop
 ```
 
-Do not put shell pipelines or environment-specific paths in `Exec`. If you need environment variables, use a wrapper script or `Exec=env FOO=bar notes`. Keep the command absolute and simple.
+Do not put shell pipelines or environment-specific paths in `Exec`. If you need environment variables, use a wrapper script or `Exec=env FOO=bar notes`. Keep the command simple and consistent with the installed binary; `%U` passes files or URLs.
 
 ## MIME types
 
@@ -177,7 +187,7 @@ Install icons into the hicolor theme:
 
 ## Autostart
 
-Autostart entries live in `$XDG_CONFIG_HOME/autostart/`. They are normal desktop files with `Hidden=true` to disable them.
+Autostart entries live in `$XDG_CONFIG_HOME/autostart/`. They are normal desktop files. A user can disable one by creating an override with `Hidden=true`; do not ship `Hidden=true` in the app's own autostart file, because that disables it for everyone.
 
 ```ini title="~/.config/autostart/io.github.yourname.Notes.desktop"
 [Desktop Entry]
@@ -194,8 +204,8 @@ Autostart is a user choice, not a default. If the app needs to run in the backgr
 ## Trash, recent files, and user directories
 
 - **Trash:** use `Gio.File.trash()` or the Trash portal. Never permanently delete a user file without an explicit confirmation.
-- **Recent files:** use `Gtk.RecentManager` / `QRecentFiles` so the file appears in the desktop's recent list. Do not maintain a private recent-files list.
-- **User directories:** read `XDG_DOCUMENTS_DIR`, `XDG_DOWNLOAD_DIR`, etc. from `~/.config/user-dirs.dirs`. Do not assume `~/Documents` exists or is named that way in another locale.
+- **Recent files:** use `Gtk.RecentManager` on GTK or `KRecentFilesAction` on KDE so the file appears in the desktop's recent list. Do not maintain a private recent-files list.
+- **User directories:** use `g_get_user_special_dir()` or `xdg-user-dir` instead of assuming `~/Documents`. The localized paths are defined in `~/.config/user-dirs.dirs`, but the API is the stable interface.
 
 ## System-wide installation
 
@@ -211,7 +221,7 @@ Autostart is a user choice, not a default. If the app needs to run in the backgr
 | systemd user unit | `$prefix/lib/systemd/user` |
 | Translations | `$prefix/share/locale` |
 | Documentation | `$prefix/share/doc/$app-id` |
-| License | `$prefix/share/licenses/$app-id` |
+| License | `$prefix/share/doc/<package>/copyright` |
 
 Use your build system's install directories (`get_option('datadir')` in Meson, `GNUInstallDirs` in CMake) instead of hardcoding `/usr/share`.
 

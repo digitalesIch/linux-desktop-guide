@@ -40,3 +40,7 @@ The project registers a local, read-only MCP server named `docs` in `opencode.js
 3. Use `list_pages` to browse, `get_related` after a page, and `get_baseline` for validated versions.
 
 The server runs over stdio with `npm run mcp:docs`. It indexes `src/content/docs/**/*.md`, rejects path traversal, writes nothing, and makes no network requests. Run `npm run test:docs-mcp` after changing the server or its index.
+
+## Editorial policy
+
+Do not use Apple/macOS/Windows as the reference point or promote proprietary or non-standard vendors. Name a third-party alternative only as a sourced example when it is open source, actively maintained, widely accepted, and compared on the quality signals in `reference/quality-signals.md`. Packaging channels are compared on sandboxing, updates, metadata, review, support, and maintenance burden, not on vendor preference.

@@ -82,6 +82,7 @@ export default defineConfig({
 					label: 'Reference',
 					items: [
 						{ label: 'Baseline', slug: 'reference/baseline' },
+						{ label: 'Quality Signals', slug: 'reference/quality-signals' },
 						{ label: 'Checklists', slug: 'reference/checklists' },
 						{ label: 'Glossary', slug: 'reference/glossary' },
 						{ label: 'Resources', slug: 'reference/resources' },

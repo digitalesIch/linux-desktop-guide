@@ -65,9 +65,43 @@ The guide already has a platform section, but the 26.04 changes are spread acros
 
 The guide may still recommend GTK/libadwaita for Ubuntu-first apps, Flatpak for upstream distribution, and minimal permissions. It must not present an unsourced version claim or a competitor comparison as fact.
 
-### 8. Remove competitor comparisons; keep channel comparisons
+### 8. Replace the blanket competitor rule with a criteria-based editorial policy
 
-The editorial rule forbids Apple/macOS/Windows and named competitor comparisons. This removes the Electron/Tauri/Flutter/Wails table and the Flutter AT-SPI claims. Comparisons of Flatpak, Snap, deb, and AppImage are packaging-channel comparisons and remain valid.
+The old rule was too blunt. The guide may name an alternative when it is necessary to explain a platform decision, but only if the alternative is open source, actively maintained, widely accepted, and compared on verifiable criteria. It must not promote a proprietary or non-standard vendor, and it must not use Apple/macOS/Windows as the reference point.
+
+Concretely:
+
+- Platform guidance still prefers open standards and the Ubuntu-supported stack.
+- Flatpak, Snap, deb, AppImage, and source/tarball are installation channels, not competitors; compare them on sandboxing, update model, metadata, review, and maintenance.
+- Web/custom-render runtimes may be discussed as a category. A named runtime appears only as an example, never as a recommendation, and only if it passes the quality signals in Decision 11.
+- Remove the Electron/Tauri/Flutter/Wails recommendation table and the Flutter AT-SPI claim. Replace them with neutral criteria and, where useful, a small "examples, not endorsements" note.
+- No Apple/macOS/Windows comparisons; remove `Application Support`, "traffic lights", and similar references.
+
+### 10. Ubuntu-supported paths first, then high-quality alternatives
+
+Ubuntu officially supports deb and Snap. Flatpak is not installed by default and is not Canonical's recommended path, but it is a mature, widely used, open-source cross-distribution channel. The guide must say this plainly instead of presenting Flatpak as the default for every Ubuntu user.
+
+The packaging guidance becomes a two-layer decision:
+
+1. **Ubuntu-native:** deb in the archive/PPA, or Snap in the App Center. These are the paths Ubuntu documents and supports.
+2. **Cross-distro/alternative:** Flatpak/Flathub, AppImage, source tarball, or a self-hosted repository. These are legitimate when the product needs one build across distributions, a vendor-neutral store, or a portable artifact.
+
+The guide should recommend a combination based on audience and maintenance capacity, not pretend there is one universal winner.
+
+### 11. Quality signals, not popularity
+
+Every stack, runtime, and packaging channel gets the same health check. The metrics must be observable and sourced, and they are signals rather than a single score:
+
+- **Release recency:** date of the last stable release and the stated support/EOL policy.
+- **Activity:** commits and distinct authors in the last 90 and 365 days.
+- **Bus factor:** share of commits from the top contributor and the number of active maintainers/reviewers.
+- **Responsiveness:** median time to first response on issues/PRs and the share of issues closed within 90 days.
+- **Security:** `SECURITY.md`, disclosure policy, OpenSSF Scorecard, OSV/CVE history, dependency-update automation.
+- **Release engineering:** CI status, signed tags/checksums, reproducible-build status, package/metadata validation.
+- **Governance and funding:** foundation/company backing, maintainer count, roadmap, conflict-of-interest policy.
+- **Standards and adoption:** freedesktop/XDG/portal compliance, AppStream metadata, distro inclusion, Flathub/Snap verification. Download counts are secondary and never the sole signal.
+
+Sources: repository hosting APIs (GitHub/GitLab), OpenSSF Scorecard, OSV, Reproducible Builds, distro package pages, Flathub/Snap metadata. A project that fails several signals should be described as a risk, not recommended as a default.
 
 ### 9. Freshness stays manual and free
 

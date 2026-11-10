@@ -22,15 +22,22 @@
   "toolchains": {
     "python": "3.14",
     "gcc": "15.2",
-    "llvm": "21"
+    "llvm": "21",
+    "rust": "1.93.1",
+    "go": "1.26",
+    "dotnet": "10",
+    "java": "25",
+    "zig": "0.15.2"
   },
   "packaging": {
     "flatpak_runtime": "org.gnome.Platform//50",
     "kde_runtime": "org.kde.Platform//6.10",
-    "snap_base": "core24"
+    "snap_base": "core26",
+    "flatpak": "1.16.6",
+    "snapd": "2.78"
   },
   "site": {
-    "astro": "7.3.6",
+    "astro": "7.4.8",
     "starlight": "0.42.10",
     "node": "24"
   }

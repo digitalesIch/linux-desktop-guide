@@ -84,17 +84,26 @@ breakpoint.add_setter(split, "collapsed", True)
 self.add_breakpoint(breakpoint)
 ```
 
-Do not use breakpoints for everything. Prefer widgets that are adaptive by design (`Adw.OverlaySplitView`, `Adw.NavigationSplitView`, `Adw.ViewStack`) and use breakpoints for the remaining adjustments.
+Do not use breakpoints for everything. Prefer widgets that provide the adaptive primitives (`Adw.OverlaySplitView`, `Adw.NavigationSplitView`, `Adw.ViewStack`), and pair them with a breakpoint when they need to collapse or change structure.
 
 ## Window size and state
 
 Wayland does not let apps position windows. Save the size, maximized state, and fullscreen state; let the compositor decide where the window goes.
 
 ```python title="Persisting window size with GSettings"
-settings = Gio.Settings.new("io.github.yourname.Notes")
-settings.bind("window-width", self, "default-width", Gio.SettingsBindFlags.DEFAULT)
-settings.bind("window-height", self, "default-height", Gio.SettingsBindFlags.DEFAULT)
+self.settings = Gio.Settings.new("io.github.yourname.Notes")
+
+# Restore the initial size.
+self.set_default_size(self.settings.get_int("window-width"), self.settings.get_int("window-height"))
+
+# Save the actual size when the window closes.
+def on_close_request(self, _window):
+    self.settings.set_int("window-width", self.get_width())
+    self.settings.set_int("window-height", self.get_height())
+    return False
 ```
+
+`default-width`/`default-height` bindings only set the initial size; they do not track a user resize.
 
 Provide a sensible default size for the first launch, and a minimum size that still works at 200% scaling. Do not force a size that only fits your monitor.
 

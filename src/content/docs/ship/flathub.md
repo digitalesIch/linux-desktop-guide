@@ -3,7 +3,7 @@ title: Flathub
 description: "The complete Flathub submission and maintenance workflow: app IDs, manifests, linting, pull requests, review, runtime updates, verification, and the mistakes that get submissions rejected."
 ---
 
-Flathub is the largest vendor-neutral app store for Linux. It gives users a trusted place to install Flatpak apps, gives developers delta updates and a software-center listing, and gives the ecosystem a shared runtime model.
+Flathub is a major vendor-neutral app store for Linux. It gives users a trusted place to install Flatpak apps, gives developers delta updates and a software-center listing, and gives the ecosystem a shared runtime model.
 
 It is also curated. A Flathub listing is a signal that the app builds from source, respects the sandbox, ships valid metadata, and has a maintainer who will keep it working. Treat the submission as a product launch, not a pull request.
 
@@ -46,7 +46,7 @@ Flathub requires the manifest at the top level, named after the app ID, with `.j
 ```yaml title="io.github.yourname.Notes.yml"
 id: io.github.yourname.Notes
 runtime: org.gnome.Platform
-runtime-version: '50'
+runtime-version: '50' # Ubuntu 26.04 baseline; rebase when the runtime moves
 sdk: org.gnome.Sdk
 command: notes
 
@@ -60,9 +60,13 @@ modules:
   - name: notes
     buildsystem: meson
     sources:
-      - type: dir
-        path: .
+      - type: git
+        url: https://github.com/yourname/notes.git
+        tag: v0.1.0
+        commit: 0123456789abcdef0123456789abcdef01234567
 ```
+
+`type: dir` is for local tutorials only. A Flathub submission must point at a public source (or include local sources in the PR when that is explicitly allowed); pin a tag and commit, and use an `archive` source with a checksum if you distribute a tarball.
 
 Rules:
 
@@ -79,8 +83,8 @@ Rules:
 Use the official builder:
 
 ```bash title="Terminal"
-flatpak install -y flathub org.flatpak.Builder
 flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install --user -y flathub org.flatpak.Builder
 
 flatpak run --command=flathub-build org.flatpak.Builder --install io.github.yourname.Notes.yml
 flatpak run io.github.yourname.Notes
@@ -142,7 +146,7 @@ After the first build is published, the listing appears on flathub.org. Screensh
 
 ## Maintenance
 
-- **Runtime updates:** move to a new runtime before the old one is EOL. Test the app on the new runtime.
+- **Runtime updates:** move to a new runtime before the old one is EOL. Check the runtime support window, rebase the manifest, run `flatpak update`, and test the app on the new runtime. Do not assume an Ubuntu LTS window applies to a GNOME or KDE runtime.
 - **App updates:** open a PR against your app's Flathub repository, not the main `flathub/flathub` repo.
 - **Beta channel:** create a `beta` branch after the stable app is accepted.
 - **Architectures:** Flathub builds `x86_64` and `aarch64` by default. Use `flathub.json` only if you must restrict.

@@ -19,7 +19,7 @@ It is also a legal requirement. The **European Accessibility Act** applies to ma
 
 If you use native widgets, you get most of this for free. If you draw your own controls, you must implement the semantics yourself — and that is usually a bad trade.
 
-On Ubuntu, the stack is documented in the [Ubuntu Desktop accessibility guide](https://documentation.ubuntu.com/desktop/en/latest/explanation/accessibility-stack/). GTK 4 apps expose semantics through `Gtk.Accessible`; GTK 3 uses ATK. Orca is the default screen reader, with BRLTTY for Braille and Speech Dispatcher/eSpeak for speech. Flutter has known AT-SPI compatibility limitations, so test it with Orca and budget for custom accessibility work. The [AT-SPI D-Bus interfaces](https://documentation.ubuntu.com/desktop/en/latest/reference/accessibility/dbus/) are the reference for custom assistive tooling.
+On Ubuntu, the stack is documented in the [Ubuntu Desktop accessibility guide](https://documentation.ubuntu.com/desktop/en/latest/explanation/accessibility-stack/). GTK 4 apps expose semantics through `Gtk.Accessible`; GTK 3 uses ATK. Orca is the default screen reader, with BRLTTY for Braille and Speech Dispatcher/eSpeak for speech. Custom-rendered or web-rendered UI does not inherit AT-SPI semantics automatically; test it with Orca and budget for explicit accessibility work. The [AT-SPI D-Bus interfaces](https://documentation.ubuntu.com/desktop/en/latest/reference/accessibility/dbus/) are the reference for custom assistive tooling.
 
 ## The baseline: WCAG 2.2 AA
 
@@ -35,6 +35,10 @@ The four principles are **perceivable, operable, understandable, and robust**. F
 - Forms have labels, instructions, and error messages.
 - Media has captions/transcripts where applicable.
 - The app does not rely on color alone.
+
+WCAG 2.2 adds several criteria that matter for desktop apps: **2.4.11 Focus Not Obscured (Minimum)**, **2.5.7 Dragging Movements**, **2.5.8 Target Size (Minimum)**, **3.2.6 Consistent Help**, **3.3.7 Redundant Entry**, and **3.3.8 Accessible Authentication (Minimum)**. Treat them as part of the AA baseline, not as optional polish.
+
+EN 301 549 v4.1.1 adopts WCAG 2.2, but procurement documents may still cite v3.2.1 (WCAG 2.1 AA). Check which harmonised standard your market or customer requires.
 
 ## Semantics: use native widgets
 
@@ -114,10 +118,13 @@ Users can increase the system font size or set a display scale of 200%. The app 
 - Do not autoplay video or looping animations.
 - Provide a way to pause or stop motion in media.
 
-```python title="Checking the GTK animation setting"
-settings = Gtk.Settings.get_default()
-animations_enabled = settings.get_property("gtk-enable-animations")
+```python title="Checking reduced motion for a widget"
+from gi.repository import Adw
+
+animations_enabled = Adw.get_enable_animations(self)
 ```
+
+libadwaita widgets honor the system setting. GTK 4.22 core widgets and custom animations still need verification; do not assume every animation is disabled automatically.
 
 ## Forms and errors
 
@@ -141,7 +148,7 @@ animations_enabled = settings.get_property("gtk-enable-animations")
 ## Testing
 
 1. **Keyboard-only:** complete the main tasks with no mouse.
-2. **Orca:** enable the screen reader and walk through the app. Listen for missing labels, duplicate announcements, and focus jumps.
+2. **Orca:** enable the screen reader and walk through the app. `orca --replace` starts it; `Super+Alt+S` toggles it on GNOME. Listen for missing labels, duplicate announcements, and focus jumps.
 3. **Accerciser:** inspect roles, names, states, and relations. Fix anything that reads as "unknown" or "panel".
 4. **High contrast:** switch the desktop to high contrast and check every custom style.
 5. **Large text:** set 200% text scaling and 200% display scaling; check clipping and overflow.
@@ -174,7 +181,7 @@ Automated accessibility checks catch missing labels. They do not catch a confusi
 - ☐ Keyboard and screen-reader tests are part of release QA.
 - ☐ The accessibility statement names known limitations and a contact.
 - ☐ Third-party components are checked for accessibility.
-- ☐ The team has access to Orca and a high-contrast environment.
+- ☐ The team has access to Orca, Accerciser, and a high-contrast environment.
 - ☐ Accessibility bugs are prioritized like other user-facing bugs.
 
 Next: [Localization](/design/localization/) — making the app work in every language, locale, and writing direction.

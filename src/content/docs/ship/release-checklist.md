@@ -12,7 +12,7 @@ Use it as a living document. Delete items that do not apply; add the ones your u
 - ☐ The version number is final and follows semantic versioning.
 - ☐ The version matches the AppStream release, the package version, and `--version`.
 - ☐ The changelog/release notes are written for users.
-- ☐ Translations are complete for the release; string freeze is over.
+- ☐ Translations are complete for the release; the string freeze is in effect until release.
 - ☐ The git tag is signed and points to the release commit.
 - ☐ The build is reproducible from the tag in a clean environment.
 
@@ -72,7 +72,7 @@ Test the app in each of these states, not just your development setup.
 | Power | Battery, suspend/resume, low-power mode |
 | Files | Empty, large, read-only, permission denied, corrupt |
 | Locale | English, German (long words), Arabic (RTL), Japanese |
-| Session | Wayland, XWayland fallback if supported |
+| Session | Wayland-only Ubuntu Desktop; XWayland only for legacy X11 apps |
 
 Also test:
 
@@ -121,7 +121,9 @@ Also test:
 
 ### Snap
 
-- ☐ `snapcraft pack` succeeds.
+- ☐ `snapcraft pack` succeeds with `core26` and Snapcraft 9.2+ for the GNOME extension.
+- ☐ Python apps stage their own runtime; `gsettings` is declared only when needed.
+- ☐ `snapcraft lint` passes.
 - ☐ `confinement: strict` is used.
 - ☐ The app installs and launches on a clean VM.
 - ☐ Interfaces are minimal; portals work.
@@ -148,9 +150,10 @@ Also test:
 
 - ☐ Smoke-test the published artifact, not the local build.
 - ☐ Install from the store/package manager as a user would.
-- ☐ Check the software-center listing (name, icon, screenshots, version).
+- ☐ Check the App Center and Flathub listings (name, icon, screenshots, version, permissions).
 - ☐ Verify the update path from the previous version.
-- ☐ Monitor crash reports and issue tracker for the first 24 hours.
+- ☐ Monitor `coredumpctl`/crash reports and the issue tracker for the first 24 hours.
+- ☐ Publish an SBOM, signed checksums, and provenance; verify a reproducible build where practical.
 - ☐ Have a rollback plan:
   - ☐ previous artifact still available;
   - ☐ store/package rollback procedure documented;

@@ -30,11 +30,16 @@ label = gtk_label_new(_("Open note"));
 
 ```python
 import gettext
+
+gettext.bindtextdomain("notes", "/usr/share/locale")
+gettext.textdomain("notes")
 _ = gettext.gettext
 ngettext = gettext.ngettext
 
 label.set_text(_("Open note"))
 ```
+
+Inside a Flatpak, install `.mo` files under `$FLATPAK_DEST/share/locale/` and keep the same domain name.
 
 **Qt / C++:**
 
@@ -109,9 +114,19 @@ _("Delete note?")
 
 ### Meson + gettext
 
-```python title="meson.build"
+```python title="meson.build (root)"
+subdir('po')
+```
+
+```python title="po/meson.build"
 i18n = import('i18n')
 i18n.gettext('notes', preset: 'glib')
+```
+
+`i18n.gettext()` resolves `POTFILES.in` and `LINGUAS` relative to the directory that calls it, so keep the call in `po/meson.build` or move the files to the root.
+
+```text title="po/POTFILES.in"
+src/main.py
 ```
 
 ```text title="po/LINGUAS"
@@ -123,7 +138,7 @@ pt_BR
 
 ```bash title="Terminal"
 # Extract strings into a POT template
-xgettext --from-code=UTF-8 -o po/notes.pot src/*.py
+xgettext --from-code=UTF-8 --add-comments=TRANSLATORS -o po/notes.pot src/*.py
 
 # Merge the template into existing translations
 msgmerge --update po/de.po po/notes.pot
@@ -136,7 +151,7 @@ Install `.mo` files to `$prefix/share/locale/<lang>/LC_MESSAGES/notes.mo`.
 
 ### Qt
 
-Use `lupdate` to extract `tr()` strings into `.ts` files, translate them in Qt Linguist, and `lrelease` them into `.qm` files. Install them under `$prefix/share/<app>/translations/` or embed them in resources.
+Use `lupdate` to extract `tr()` strings into `.ts` files, translate them in Qt Linguist, and `lrelease` them into `.qm` files. With CMake, `qt_add_translations()` wires the build and install steps. Load the `.qm` with `QTranslator` before creating the UI, or install them under `$prefix/share/<app>/translations/`.
 
 ## Dates, numbers, and currency
 
@@ -145,7 +160,7 @@ Never format dates and numbers by hand.
 - **GLib:** `GDateTime` with locale-aware format strings; use `g_date_time_format()` for display, ISO 8601 for storage.
 - **Qt:** `QLocale` for dates, numbers, currency, and measurement units.
 - **Python:** `datetime` + `locale` or `babel`; prefer `babel` for explicit locale control.
-- **Rust:** `chrono` + `time` with locale support, or ICU4X for full CLDR data.
+- **Rust:** ICU4X for full CLDR data; `chrono`/`time` alone do not provide complete locale-aware formatting.
 
 Store timestamps in UTC (or with an explicit offset) and convert for display. Do not assume the first day of the week is Sunday or Monday; read the locale.
 
@@ -156,7 +171,7 @@ Right-to-left languages (Arabic, Hebrew, Persian, Urdu) require more than mirror
 - Use start/end layout APIs (`set_margin_start`, `set_margin_end`) instead of left/right.
 - Let the toolkit mirror the layout automatically.
 - Mirror directional icons (arrows, back/forward) but not universal symbols (play, check, warning).
-- Test with `LANG=ar_EG.UTF-8` and a full RTL desktop session.
+- Test with a generated RTL locale (for example `LANG=ar_EG.UTF-8`) and a full RTL desktop session; `locale -a` shows what the machine actually has.
 - Avoid absolute positioning and hardcoded x-coordinates.
 - Check that progress bars, sliders, and timelines make sense in RTL.
 
@@ -172,6 +187,16 @@ GTK and Qt handle most mirroring when the locale is RTL. Your job is to avoid as
 - Check line height for scripts with tall glyphs and diacritics.
 
 Ubuntu ships Noto fonts for broad coverage. If you bundle a font for branding, pair it with the system fallback rather than replacing the UI font entirely.
+
+## Input methods and bidirectional text
+
+Wayland routes text input through the `text-input` and `input-method` protocols. Do not hardcode a single input-method framework:
+
+- Use the toolkit's text widgets and let the compositor's input method handle Compose, dead keys, and CJK input.
+- On Wayland, do not set `GTK_IM_MODULE` or `QT_IM_MODULE`; the compositor and portal select the input method. On X11, the user's session decides.
+- Test with IBus and Fcitx5, at least one CJK input method, and Compose sequences.
+- For user-supplied bidirectional text, wrap the embedded value in Unicode isolate characters (U+2068 FSI and U+2069 PDI) or let the toolkit's bidi-aware widget handle it.
+- Do not assume the UI direction equals the direction of user content.
 
 ## Metadata and desktop entry
 

@@ -22,8 +22,8 @@ sudo apt install python3-gi gir1.2-gtk-4.0 gir1.2-adw-1 \
 Install the GNOME runtime and SDK used by the manifest:
 
 ```bash title="Terminal"
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub org.gnome.Platform//50 org.gnome.Sdk//50
+flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install --user flathub org.gnome.Platform//50 org.gnome.Sdk//50
 ```
 
 ## 2. Create the project
@@ -80,7 +80,7 @@ class NotesWindow(Adw.ApplicationWindow):
         self.set_title("Notes")
         self.set_default_size(980, 680)
 
-        self.data_file = pathlib.Path(GLib.get_user_data_dir()) / "notes" / "notes.json"
+        self.data_file = pathlib.Path(GLib.get_user_data_dir()) / APP_ID / "notes.json"
         self.notes = self.load_notes()
         self.rows = {}
 
@@ -98,6 +98,7 @@ class NotesWindow(Adw.ApplicationWindow):
 
         new_button = Gtk.Button(icon_name="list-add-symbolic")
         new_button.set_tooltip_text("New note (Ctrl+N)")
+        new_button.update_property([Gtk.AccessibleProperty.LABEL], ["New note"])
         new_button.set_action_name("win.new-note")
         new_button.add_css_class("suggested-action")
         header.pack_start(new_button)
@@ -106,6 +107,7 @@ class NotesWindow(Adw.ApplicationWindow):
         menu.append("About Notes", "win.about")
         menu_button = Gtk.MenuButton(icon_name="open-menu-symbolic", menu_model=menu)
         menu_button.set_tooltip_text("Main menu")
+        menu_button.update_property([Gtk.AccessibleProperty.LABEL], ["Main menu"])
         header.pack_end(menu_button)
 
         # Sidebar --------------------------------------------------------
@@ -124,7 +126,7 @@ class NotesWindow(Adw.ApplicationWindow):
         self.title_label.add_css_class("title-2")
 
         self.body_label = Gtk.Label(xalign=0, wrap=True, selectable=True)
-        self.body_label.add_css_class("body")
+        self.body_label.add_css_class("document")
 
         content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
         content_box.set_margin_top(30)
@@ -158,6 +160,12 @@ class NotesWindow(Adw.ApplicationWindow):
         split.set_min_sidebar_width(240)
         split.set_max_sidebar_width(320)
         split.set_show_sidebar(True)
+
+        breakpoint = Adw.Breakpoint.new(
+            Adw.BreakpointCondition.parse("max-width: 600sp")
+        )
+        breakpoint.add_setter(split, "collapsed", True)
+        self.add_breakpoint(breakpoint)
 
         # Layout ---------------------------------------------------------
         toolbar = Adw.ToolbarView()
@@ -197,11 +205,7 @@ class NotesWindow(Adw.ApplicationWindow):
         temp.replace(self.data_file)
 
     def refresh(self):
-        child = self.listbox.get_first_child()
-        while child is not None:
-            self.listbox.remove(child)
-            child = self.listbox.get_first_child()
-
+        self.listbox.remove_all()
         self.rows.clear()
         for index, note in enumerate(self.notes):
             row = Adw.ActionRow(title=note["title"], subtitle=note["body"].splitlines()[0])
@@ -236,6 +240,9 @@ class NotesWindow(Adw.ApplicationWindow):
             version="0.1.0",
             developers=["Your Name <you@example.com>"],
             copyright="© 2026 Your Name",
+            license_type=Gtk.License.GPL_3_0,
+            website="https://example.org/notes",
+            issue_url="https://example.org/notes/issues",
         )
         about.present(self)
 
@@ -270,10 +277,11 @@ Exec=notes
 Icon=io.github.yourname.Notes
 Terminal=false
 Type=Application
-Categories=Office;
+Categories=Office;Utility;
 Keywords=notes;writing;markdown;
 StartupNotify=true
-StartupWMClass=io.github.yourname.Notes
+StartupWMClass=notes
+DBusActivatable=true
 ```
 
 Validate it:
@@ -281,6 +289,8 @@ Validate it:
 ```bash title="Terminal"
 desktop-file-validate data/io.github.yourname.Notes.desktop
 ```
+
+`DBusActivatable=true` needs a matching D-Bus service file when the app is installed outside Flatpak; see [System Integration](/platform/integration/#single-instance-and-activation). Flatpak exports the application ID for you.
 
 ## 5. Add AppStream metadata
 
@@ -302,6 +312,15 @@ Create `data/io.github.yourname.Notes.metainfo.xml`:
 
   <launchable type="desktop-id">io.github.yourname.Notes.desktop</launchable>
   <url type="homepage">https://example.org/notes</url>
+  <categories>
+    <category>Office</category>
+    <category>Utility</category>
+  </categories>
+  <keywords>
+    <keyword>notes</keyword>
+    <keyword>writing</keyword>
+    <keyword>markdown</keyword>
+  </keywords>
   <developer id="org.example">
     <name>Your Name</name>
   </developer>
@@ -328,7 +347,7 @@ Install an SVG icon as `data/io.github.yourname.Notes.svg`. It must be a square,
 ```xml title="data/io.github.yourname.Notes.svg"
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
   <rect width="128" height="128" rx="28" fill="#c6ff3d"/>
-  <rect x="26" y="30" width="76" height="68" rx="10" fill="#160b04"/>
+  <rect x="26" y="30" width="76" height="68" rx="10" fill="#06100b"/>
   <path d="M26 46h76" stroke="#c6ff3d" stroke-width="4"/>
   <path d="M42 62h44M42 76h30" stroke="#5eead4" stroke-width="5" stroke-linecap="round"/>
 </svg>
@@ -393,6 +412,8 @@ modules:
       - type: dir
         path: .
 ```
+
+`type: dir` is for local development only. A Flathub submission uses a `git` source pinned to a tag/commit or an `archive` source with a checksum.
 
 Build and install it for your user:
 

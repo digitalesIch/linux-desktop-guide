@@ -61,6 +61,12 @@ Ubuntu layers four services on top of the sandbox model. They are covered in mor
 | **fwupd / LVFS** | Firmware updates and device status | Write firmware directly |
 | **Ubuntu Pro** | ESM, Livepatch, FIPS, CIS for users who subscribe | Require Pro for core app functionality |
 
+### Permission prompting and Security Center
+
+Ubuntu 26.04 includes an experimental permission-prompting system on top of AppArmor 4.0. It is snap-focused: users enable it in **Security Center**, and prompts can grant one-time or persistent access to files, camera, microphone, and similar resources. Flatpak apps use XDG Desktop Portals instead, and debs are managed through AppArmor and the app's own privilege model.
+
+Do not build a feature that depends on prompting being enabled. Use portals and the smallest Snap interfaces you need, handle denial as a normal state, and test with prompting both on and off. The user's decision is authoritative; never retry a denied prompt in a loop.
+
 ### AppArmor
 
 AppArmor is the default mandatory-access-control layer on Ubuntu. It mediates filesystem access, capabilities, network sockets, D-Bus, and IPC for confined programs. If you ship a system service, include an AppArmor profile and test it:
@@ -186,6 +192,7 @@ Privacy is a product decision, not a legal footnote.
 - **No unique identifiers** unless necessary. If you need one, rotate it and document it.
 - **Redact logs and crash reports.** Remove paths, usernames, tokens, document contents, and IP addresses.
 - **Respect the desktop's privacy settings.** Do not infer location or identity from unrelated data.
+- **Keep system telemetry separate.** Ubuntu Insights is opt-in system telemetry; it is not consent for your app's analytics. Ask separately and never bundle the two.
 - **Make deletion real.** "Delete account" must delete the data, not just hide it.
 
 If you add telemetry, publish the schema and a sample payload. Users should be able to audit what is sent.
@@ -221,7 +228,8 @@ When a report arrives: reproduce, contain, patch, release, notify. Do not argue 
 - ☐ Untrusted images are decoded with Glycin or an equivalent sandbox.
 - ☐ Network requests use TLS, timeouts, and cancellation.
 - ☐ No shell interpolation of untrusted data.
-- ☐ Crash reports and telemetry are opt-in and redacted.
+- ☐ Crash reports and telemetry are opt-in and redacted; app telemetry is separate from Ubuntu Insights.
+- ☐ Snap/Flatpak permission prompting and denial paths are tested.
 - ☐ Updates come from a signed channel; no self-updater in a sandbox.
 - ☐ AppArmor profiles are shipped for system services and tested with `aa-status`.
 - ☐ Privileged operations use a named Polkit action, not `sudo` or `pkexec`.

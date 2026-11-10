@@ -94,17 +94,60 @@ The guide SHALL document the Ubuntu 26.04 changes that materially affect desktop
 
 ### Requirement: Editorial consistency
 
-The guide SHALL follow its English, self-confident editorial voice and SHALL NOT use Apple/macOS/Windows or named competitor comparisons.
+The guide SHALL follow its English, self-confident editorial voice and SHALL NOT use Apple/macOS/Windows as the reference point or promote proprietary or non-standard vendors.
 
-#### Scenario: Competitor comparison
+#### Scenario: Named alternative
 
-- **WHEN** a page compares the guide's recommended native stack with a named competing framework or operating system
-- **THEN** the comparison is removed or rewritten as neutral criteria, unless it is a packaging-channel comparison such as Flatpak vs Snap vs deb
+- **WHEN** a page needs to name a third-party stack, runtime, or tool
+- **THEN** it is presented as an example, not an endorsement, and only when the project is open source, actively maintained, widely accepted, and compared on verifiable quality signals
+
+#### Scenario: Apple/macOS/Windows comparison
+
+- **WHEN** a page uses an Apple/macOS/Windows convention as the explanatory contrast
+- **THEN** the comparison is removed and the Linux behavior is described directly
+
+#### Scenario: Vendor promotion
+
+- **WHEN** a page recommends a proprietary or non-standard vendor solution
+- **THEN** the recommendation is removed or replaced with the open standard, the distro-supported path, or neutral selection criteria
 
 #### Scenario: Unsourced absolute claim
 
 - **WHEN** a page makes a version, support, security, or platform claim that could change
 - **THEN** the claim links to a primary source or is moved into the baseline with a review date
+
+### Requirement: Installation channel coverage
+
+The guide SHALL present the Ubuntu-supported installation paths first and SHALL also cover high-quality cross-distribution alternatives without presenting any single channel as universal.
+
+#### Scenario: Ubuntu-supported paths
+
+- **WHEN** a reader asks how to install an app on Ubuntu 26.04
+- **THEN** the guide explains deb/archive and Snap/App Center as the paths Ubuntu documents and supports
+
+#### Scenario: Flatpak is intentionally separate
+
+- **WHEN** the guide discusses Flatpak
+- **THEN** it states that Flatpak is not installed or supported by default on Ubuntu, that it is a mature open-source cross-distribution channel, and how to install it and add Flathub deliberately
+
+#### Scenario: Alternative channels
+
+- **WHEN** the guide compares Flatpak, AppImage, source/tarball, or self-hosted repositories
+- **THEN** each channel has explicit trade-offs for sandboxing, updates, metadata, review, support, and maintenance burden
+
+### Requirement: Maintainer and community health signals
+
+The guide SHALL evaluate stacks, runtimes, and packaging channels with observable maintenance and community-health signals rather than popularity alone.
+
+#### Scenario: Project health check
+
+- **WHEN** a reader is choosing between maintained alternatives
+- **THEN** the guide provides a repeatable check covering release recency, activity, bus factor, issue responsiveness, security process, release engineering, governance, standards compliance, and adoption
+
+#### Scenario: Signals are sourced
+
+- **WHEN** the guide cites a health signal
+- **THEN** the reader can verify it through repository APIs, OpenSSF Scorecard, OSV, Reproducible Builds, distro package pages, or Flathub/Snap metadata
 
 ### Requirement: Source-backed resources
 

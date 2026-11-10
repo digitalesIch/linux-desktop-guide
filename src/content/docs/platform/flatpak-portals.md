@@ -43,7 +43,7 @@ The goal is simple: **the app should need almost no static permissions**.
 | File chooser | `org.freedesktop.portal.FileChooser` | Open/save files chosen by the user |
 | Open URI | `org.freedesktop.portal.OpenURI` | Open a file or URL in the default app |
 | Notification | `org.freedesktop.portal.Notification` | Send desktop notifications |
-| Secret | `org.freedesktop.portal.Secret` | Store secrets in the keyring |
+| Secret | `org.freedesktop.portal.Secret` | Per-app master secret for app-local encrypted storage; libsecret uses it transparently |
 | ScreenCast | `org.freedesktop.portal.ScreenCast` | Record/share the screen or a window |
 | Screenshot | `org.freedesktop.portal.Screenshot` | Take a screenshot |
 | GlobalShortcuts | `org.freedesktop.portal.GlobalShortcuts` | User-approved global hotkeys |
@@ -51,13 +51,13 @@ The goal is simple: **the app should need almost no static permissions**.
 | Camera | `org.freedesktop.portal.Camera` | Camera access |
 | Location | `org.freedesktop.portal.Location` | Geolocation |
 | Print | `org.freedesktop.portal.Print` | Printing |
-| USB | `org.freedesktop.portal.USB` | USB device access |
-| Settings | `org.freedesktop.portal.Settings` | Read desktop color scheme, fonts, accent |
+| USB | `org.freedesktop.portal.Usb` | USB device access |
+| Settings | `org.freedesktop.portal.Settings` | Read color scheme, accent, contrast, and reduced-motion preference; fonts come from the toolkit |
 
 Most GTK apps do not call the portal directly. `Gtk.FileDialog`, `Gtk.PrintDialog`, `Gio.Notification`, and libsecret use the portal when the app is sandboxed. That is exactly what you want: the same code works inside and outside Flatpak.
 
 :::tip[Test outside the sandbox too]
-Portals are available on the host as well. Set `GTK_USE_PORTAL=1` to force GTK to use them while developing, so you catch permission and UI differences before packaging.
+Portals are available on the host as well. For GTK 4, set `GDK_DEBUG=portals` while developing to force portal-backed dialogs and catch permission/UI differences before packaging. (`GTK_USE_PORTAL` is a GTK 3-era compatibility switch.)
 :::
 
 ## A minimal manifest
@@ -78,6 +78,8 @@ finish-args:
 
   # No network, no home directory, no session bus.
   # File access goes through the FileChooser portal.
+  # fallback-x11 only exposes X11 when Wayland is unavailable;
+  # use --socket=x11 instead if you must run under XWayland on Wayland.
 
 modules:
   - name: notes
@@ -89,13 +91,15 @@ modules:
 
 The `finish-args` above are a good starting point for a local-first document app. Every additional line should be justified by a feature that cannot use a portal.
 
+`type: dir` is a local-development source. For a Flathub submission, replace it with a `git` source pinned to a tag/commit or an `archive` source with a checksum; Flathub does not accept the application source code inside the submission pull request.
+
 ### Permission cheat sheet
 
 | Permission | Grants | Verdict |
 | --- | --- | --- |
 | `--socket=wayland` | Wayland display | Required |
-| `--socket=fallback-x11` | X11 via XWayland | Acceptable for compatibility |
-| `--share=ipc` | Shared memory with X11 | Usually needed with fallback X11 |
+| `--socket=fallback-x11` | X11 only when Wayland is unavailable | Acceptable for systems without Wayland; does nothing on a Wayland session |
+| `--share=ipc` | Shared memory with X11 | Usually needed with X11/fallback X11 |
 | `--device=dri` | GPU rendering | Needed for hardware acceleration |
 | `--share=network` | Full network access | Only if the app needs it; no portal equivalent for arbitrary sockets |
 | `--filesystem=xdg-documents` | All documents | Prefer the FileChooser portal |
@@ -111,8 +115,12 @@ The `finish-args` above are a good starting point for a local-first document app
 ## Building and running
 
 ```bash title="Terminal"
+# Ubuntu does not ship Flatpak by default; install it and add Flathub first
+sudo apt install flatpak flatpak-builder
+flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
 # Install the runtime and SDK
-flatpak install flathub org.gnome.Platform//50 org.gnome.Sdk//50
+flatpak install --user flathub org.gnome.Platform//50 org.gnome.Sdk//50
 
 # Build and install for the current user
 flatpak-builder --user --install --force-clean build-dir io.github.yourname.Notes.yml
@@ -154,19 +162,29 @@ Do not ship a manifest that relies on user overrides. If a feature only works af
 6. **No bundling system libraries.** Use the runtime; add modules only when necessary.
 7. **No silent network access.** If the app needs the network, declare it and tell the user why.
 
+## Runtime lifecycle and permission persistence
+
+A runtime is a dependency with its own support window. Track the `runtime-version` branch, rebase before the runtime reaches end-of-life, run `flatpak update`, and remove unused runtimes with `flatpak uninstall --unused`. Do not assume an Ubuntu LTS support window applies to a GNOME or KDE runtime.
+
+Portal grants are persistent user decisions, not manifest settings. Inspect them with `flatpak permissions`, set or reset them with `flatpak permission-set`/`flatpak permission-reset`, and use `--persist=` only for app-specific paths that genuinely cannot go through a portal. Users can also review portal permissions in the desktop's app settings.
+
+## Snap and portals
+
+Snap is not Flatpak, but Ubuntu 26.04 improves the same portal path for confined snaps. Snap applications can use XDG Desktop Portals for files, camera, notifications, USB, and other resources, and users can manage Snap portal permissions in GNOME Settings. If you ship a Snap, test the portal flows and the `snap connections` output; do not assume a Snap interface can replace a portal for a user-chosen file or device.
+
 ## Flatpak vs Snap vs deb
 
 | Dimension | Flatpak | Snap | deb |
 | --- | --- | --- | --- |
 | Cross-distro | Excellent | Good (snapd on many distros) | Debian/Ubuntu family |
 | Sandbox | bubblewrap + portals | AppArmor + interfaces | Traditional, optional hardening |
-| Runtime | Shared runtime, frequent updates | Base snap per app | System libraries |
+| Runtime | Shared runtime, frequent updates | Shared base snap plus bundled dependencies | System libraries |
 | Store | Flathub | Snap Store | Ubuntu archive/PPA |
 | System integration | Portals; some host limits | Interfaces; good Ubuntu integration | Full host access |
 | Best for | Upstream apps, Flathub | Ubuntu App Center, server tools | Distro packages, system components |
 | Review burden | Flathub review + lint | Store review | Archive review |
 
-For a new upstream desktop app that needs one build across distributions, **Flatpak/Flathub is the default**. Add a deb when you want to be in the Ubuntu archive or need tight system integration. Add a Snap when the Ubuntu App Center is a priority.
+For a new upstream desktop app that needs one build across distributions, **Flatpak/Flathub is a strong option**, but it is not part of a stock Ubuntu installation and is not Canonical's supported path. Add a deb when you want Ubuntu archive integration; add a Snap when the App Center is a priority. The right combination depends on your audience and maintenance capacity.
 
 ## Common mistakes
 

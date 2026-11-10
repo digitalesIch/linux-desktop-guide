@@ -50,7 +50,7 @@ Everything in this guide hangs off four contracts. They are also the four sectio
 
 ### 1. Display: render through the compositor
 
-Wayland is the default on Ubuntu 26.04 LTS. The compositor owns the screen, input, and the security boundary. Your app renders its own surfaces and talks to the compositor through protocols. It does not position windows at absolute screen coordinates, synthesize input, or capture the screen behind the compositor's back.
+The Ubuntu Desktop session on 26.04 LTS is Wayland-only; XWayland still runs X11 applications. The compositor owns the screen, input, and the security boundary. Your app renders its own surfaces and talks to the compositor through protocols. It does not position windows at absolute screen coordinates, synthesize input, or capture the screen behind the compositor's back.
 
 This is not a restriction to work around. It is what makes fractional scaling, per-monitor DPI, input methods, and secure screen sharing possible.
 
@@ -64,7 +64,7 @@ Notifications, file dialogs, secrets, screen capture, global shortcuts, and open
 
 ### 3. Data: follow the XDG layout
 
-There is no single "Application Support" directory. Configuration, data, state, cache, and runtime files have separate homes defined by the XDG Base Directory specification. Writing to the right place is not bureaucracy; it is what makes backup, reset, migration, and sandboxing work.
+There is no single per-user application-support directory. Configuration, data, state, cache, and runtime files have separate homes defined by the XDG Base Directory specification. Writing to the right place is not bureaucracy; it is what makes backup, reset, migration, and sandboxing work.
 
 → [The XDG Contract](/platform/xdg/)
 
@@ -94,7 +94,7 @@ These are the most common ways a ported or hastily built app stops feeling nativ
 | --- | --- | --- |
 | Hardcoding `~/.myapp` | Breaks backups, sandboxing, and multi-user setups | Use XDG directories |
 | Requiring `sudo` at runtime | Violates least privilege and desktop expectations | Use a user service or a portal |
-| Bundling a full Chromium for a form | Wastes memory, battery, and startup time | Use the native toolkit unless web tech is essential |
+| Bundling a full web runtime for a form | Wastes memory, battery, and startup time | Use the native toolkit unless web tech is essential |
 | Drawing a custom titlebar | Fights tiling, gestures, and accessibility | Use the toolkit's headerbar/window frame |
 | Ignoring the file chooser portal | Breaks in Flatpak and Snap | Use `Gtk.FileDialog` or the portal API |
 | Polling every second | Wastes battery | Use event-driven APIs and D-Bus signals |
@@ -106,9 +106,9 @@ These are the most common ways a ported or hastily built app stops feeling nativ
 
 The Linux model is a bet on shared ownership.
 
-- **You can ship without a gatekeeper.** Flathub, a PPA, a `.deb`, or a tarball are all legitimate paths.
+- **You can ship without an OS-vendor gatekeeper.** Flathub, a PPA, a `.deb`, or a tarball are all legitimate paths, though stores still review submissions.
 - **You can integrate deeper.** D-Bus, portals, and the XDG specifications expose capabilities the desktop already provides.
-- **You can support older hardware.** A well-written GTK or Qt app can run on a decade-old laptop and still feel responsive.
+- **You can support older hardware.** A well-written GTK or Qt app can run on older laptops that still meet your baseline, provided the graphics stack and drivers are supported.
 - **You can be inspected.** Users and distributors can read the source, verify the build, and patch the package.
 - **You can choose your stack.** The ecosystem rewards maintenance and good citizenship.
 

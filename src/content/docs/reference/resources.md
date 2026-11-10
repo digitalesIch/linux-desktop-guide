@@ -23,7 +23,17 @@ The Linux desktop has excellent documentation. It is also spread across a dozen 
 | [XDG Desktop Portal](https://flatpak.github.io/xdg-desktop-portal/docs/) | Portal interfaces and usage |
 | [AppStream](https://www.freedesktop.org/software/appstream/docs/) | Metadata for software centers |
 | [systemd](https://systemd.io/) | User services, timers, journald, coredump |
-| [systemd user session](https://wiki.archlinux.org/title/systemd/User) | Running background services per user |
+| [systemd user units](https://www.freedesktop.org/software/systemd/man/latest/systemd.special.html) | Running background services per user |
+
+## Project health
+
+| Resource | Why it matters |
+| --- | --- |
+| [Quality Signals](/reference/quality-signals/) | The guide's repeatable maintenance and community-health check |
+| [CHAOSS metrics](https://chaoss.community/metrics/) | Established community-health metrics |
+| [OpenSSF Scorecard](https://scorecard.dev/) | Repository security practices |
+| [OSV](https://osv.dev/) | Open-source vulnerability database |
+| [Reproducible Builds](https://reproducible-builds.org/) | Build verification and reproducible-build guidance |
 
 ## Ubuntu
 
@@ -33,7 +43,7 @@ The Linux desktop has excellent documentation. It is also spread across a dozen 
 | [Ubuntu Desktop documentation](https://documentation.ubuntu.com/desktop/en/latest/) | Desktop behavior, accessibility, and snap/deb policy |
 | [Ubuntu 26.04 release notes](https://documentation.ubuntu.com/release-notes/26.04/) | The baseline for this guide |
 | [Ubuntu Pro Client](https://documentation.ubuntu.com/pro-client/en/latest/) | `pro`, ESM, Livepatch, FIPS, CIS |
-| [Snap documentation](https://canonical-snap.readthedocs-hosted.com/) | snapd, confinement, interfaces, updates |
+| [Snap documentation](https://snapcraft.io/docs/) | snapd, confinement, interfaces, updates |
 | [Snapcraft](https://documentation.ubuntu.com/snapcraft/stable/) | Building snaps |
 | [Rockcraft](https://documentation.ubuntu.com/rockcraft/stable/) | Ubuntu-based OCI images |
 | [Ubuntu packaging guide](https://packaging.ubuntu.com/html/) | deb packaging |
@@ -52,6 +62,9 @@ The Linux desktop has excellent documentation. It is also spread across a dozen 
 | [fwupd / LVFS](https://fwupd.org/) | Firmware updates |
 | [PackageKit](https://www.freedesktop.org/software/PackageKit/) | Package management |
 | [snapd REST API](https://snapcraft.io/docs/snapd-api) | Snap automation |
+| [Ubuntu Desktop snap/deb packages](https://ubuntu.com/desktop/docs/en/26.04/explanation/snap-and-deb-packages) | App Center package formats |
+| [Permissions prompting](https://discourse.ubuntu.com/t/permissions-prompting-a-deep-dive/81785) | Security Center and Snap prompting |
+| [Ubuntu Insights](https://github.com/ubuntu/ubuntu-insights) | Opt-in system telemetry |
 
 ## GNOME and GTK
 
@@ -68,8 +81,8 @@ The Linux desktop has excellent documentation. It is also spread across a dozen 
 | [GNOME developer documentation](https://developer.gnome.org/documentation/) | Tutorials, guides, and API docs |
 | [GTK Inspector](https://docs.gtk.org/gtk4/running.html) | Interactive debugging |
 | [Sysprof](https://apps.gnome.org/Sysprof/) | System-wide profiling |
-| [Accerciser](https://wiki.gnome.org/Apps/Accerciser) | Accessibility tree inspector |
-| [Orca](https://wiki.gnome.org/Projects/Orca) | Screen reader |
+| [Accerciser](https://gitlab.gnome.org/GNOME/accerciser) | Accessibility tree inspector |
+| [Orca](https://gitlab.gnome.org/GNOME/orca) | Screen reader |
 | [Glycin](https://gitlab.gnome.org/GNOME/glycin) | Sandboxed image decoding for untrusted images |
 
 ## KDE and Qt
@@ -103,11 +116,16 @@ The Linux desktop has excellent documentation. It is also spread across a dozen 
 | Resource | Why it matters |
 | --- | --- |
 | [Flatpak documentation](https://docs.flatpak.org/) | Sandbox, manifests, runtimes, portals |
+| [Flatpak runtimes](https://docs.flatpak.org/en/latest/available-runtimes.html) | Runtime branches and support windows |
 | [Flatpak Builder](https://docs.flatpak.org/en/latest/flatpak-builder.html) | Manifest format and build workflow |
 | [Flathub documentation](https://docs.flathub.org/) | Submission, maintenance, verification |
 | [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements) | What gets accepted |
+| [Flathub metainfo guidelines](https://docs.flathub.org/docs/for-app-authors/metainfo-guidelines) | Metadata, screenshots, branding, translations |
+| [Flathub quality guidelines](https://docs.flathub.org/docs/for-app-authors/metainfo-guidelines/quality-guidelines) | Store-listing quality targets |
+| [Flathub linter](https://docs.flathub.org/docs/for-app-authors/linter) | Manifest and metainfo validation |
 | [Flathub submission](https://docs.flathub.org/docs/for-app-authors/submission) | The PR process |
 | [AppStream documentation](https://www.freedesktop.org/software/appstream/docs/) | Metadata, validation, screenshots |
+| [AppStream validator issue tags](https://github.com/ximion/appstream/blob/main/src/as-validator-issue-tag.h) | Exact `appstreamcli` issue names |
 | [Debian Policy](https://www.debian.org/doc/debian-policy/) | The deb package contract |
 | [Debian packaging tutorial](https://www.debian.org/doc/manuals/debmake-doc/) | Practical deb building |
 | [Ubuntu packaging](https://packaging.ubuntu.com/html/) | Ubuntu-specific packaging |
@@ -124,11 +142,14 @@ The Linux desktop has excellent documentation. It is also spread across a dozen 
 | [Valgrind](https://valgrind.org/) | Memory errors and callgrind |
 | [perf](https://perf.wiki.kernel.org/) | Linux perf events |
 | [dogtail](https://gitlab.com/dogtail/dogtail) | AT-SPI UI automation |
-| [Accerciser](https://wiki.gnome.org/Apps/Accerciser) | Accessibility inspection |
+| [Accerciser](https://gitlab.gnome.org/GNOME/accerciser) | Accessibility inspection |
 | [GammaRay](https://github.com/KDAB/GammaRay) | Qt/QML inspection |
 | [GTK Inspector](https://docs.gtk.org/gtk4/running.html) | GTK layout, CSS, and accessibility |
 | [Workbench](https://apps.gnome.org/Workbench/) | GTK prototyping |
 | [Blueprint](https://gnome.pages.gitlab.gnome.org/blueprint-compiler/) | GTK UI language |
+| [Meson i18n](https://mesonbuild.com/i18n-module.html) | gettext/POTFILES integration |
+| [CMake documentation](https://cmake.org/documentation/) | Build configuration and GNUInstallDirs |
+| [GStreamer documentation](https://gstreamer.freedesktop.org/documentation/) | Media pipelines and VA-API |
 
 ## Design assets
 
@@ -176,5 +197,16 @@ Content negotiation (`Accept: text/markdown`) depends on host or CDN support and
 - Re-test links and commands at least once per release cycle.
 - If a tool is unmaintained, say so and point to the replacement.
 - When in doubt, read the specification. It is shorter than the argument.
+
+### Content review checklist
+
+1. Check the Ubuntu release notes and release cycle; note any support-date discrepancy.
+2. Check GNOME/GTK/libadwaita, Qt/KDE, Snapcraft, Flatpak, and Flathub release notes for the versions you target.
+3. Update `src/data/baseline.json` and `reference/baseline.mdx` together.
+4. Re-check the pages that cite the changed versions or channels.
+5. Run `npm run check:baseline`, `npm run build`, `npm run check:agent-docs`, and `npm run test:docs-mcp`.
+6. Re-run the external link check and the internal link/anchor check.
+7. Review the diff for unsourced claims, vendor promotion, and Apple/macOS/Windows comparisons.
+8. Record the review date and the sources you checked.
 
 Back to [The Native Standard](/start/native-standard/) or [Checklists](/reference/checklists/).

@@ -18,9 +18,9 @@ This page is about the unglamorous engineering that decides whether users trust 
 | Portal missing | File dialog unavailable | Fall back to a clear explanation, not a dead button |
 | Corrupt config | App fails to start | Back up, reset to defaults, tell the user |
 | Corrupt database | Data unreadable | Restore backup, run integrity check, preserve the file |
-| Compositor restart | Window disappears/reappears | Reconnect, restore size/state, do not lose work |
+| Compositor restart | Window disappears/reappears | A Wayland compositor restart normally kills the client connection; persist state continuously and restore on the next launch |
 | Suspend/resume | Timers fire late | Recompute state, reconnect, refresh |
-| Out of memory | App killed | Reduce caches, stream data, fail gracefully |
+| Out of memory | App killed | The kernel sends `SIGKILL`; use `GMemoryMonitor` warnings to drop caches and bound memory before exhaustion |
 | Dependency missing | Import/startup error | Ship the runtime; fail with a clear message |
 
 ## Error handling
@@ -125,6 +125,10 @@ For a GUI app launched from the desktop, the journal may show the app's stderr u
 
 Do not write your own log rotation unless you have a specific need. If you do write a log file, put it in `XDG_STATE_HOME`, rotate it, and bound its size.
 
+## systemd user units
+
+A GUI background service belongs in a user unit, not a hand-rolled daemon. Start from `graphical-session.target`, use `PartOf=graphical-session.target`, set `StateDirectory=`, and add basic hardening (`NoNewPrivileges=true`, `PrivateTmp=true`, `ProtectSystem=strict`). Test `systemctl --user daemon-reload`, `enable --now`, and `journalctl --user -u`.
+
 ## Crash reporting
 
 ### Local crash dumps
@@ -150,11 +154,11 @@ Remote reporting must be **opt-in** and privacy-preserving.
 - Provide a way to inspect the payload before sending.
 - Honor the user's choice permanently.
 
-Sentry, Backtrace, and self-hosted endpoints are all viable. The important part is consent and redaction.
+Choose a crash backend by its data-retention policy, self-hosting option, SDK license, and redaction controls. The important part is consent and redaction, not the vendor name.
 
 ## Data integrity
 
-- Write files atomically: temp file in the same directory, `fsync`, rename.
+- Write files atomically: temp file in the same directory, `fsync`, rename, then `fsync` the parent directory. The directory sync is what makes the rename durable after a power loss.
 - Use SQLite transactions for multi-step writes.
 - Enable WAL mode for concurrent reads; handle `SQLITE_BUSY`.
 - Version the schema and migrate forward in a transaction.
@@ -225,7 +229,7 @@ A diagnostic bundle should be a single file the user can review before sending. 
 - ☐ Autosave and session restore exist for editable content.
 - ☐ There is a safe mode or settings reset.
 - ☐ `--version`, `--help`, and `--debug` work.
-- ☐ The app handles suspend/resume and compositor restart.
+- ☐ The app persists state across suspend/resume and compositor restart, and handles OOM warnings without assuming it can catch `SIGKILL`.
 - ☐ Background work is cancellable and cleaned up.
 - ☐ Support has a diagnostic bundle path.
 

@@ -20,7 +20,7 @@ The companion app in `examples/notes/` is a complete GTK 4 + libadwaita referenc
 │   │   ├── design/            # Principles, visual language, layout, interaction, a11y, i18n
 │   │   ├── engineering/       # Architecture, GTK, Qt, Rust, performance, testing, reliability
 │   │   ├── ship/              # AppStream, Flathub, release checklist, quality bar
-│   │   └── reference/         # Baseline, checklists, glossary, resources
+│   │   └── reference/         # Baseline, quality signals, checklists, glossary, resources
 │   ├── components/            # PageTitle override and other Starlight overrides
 │   ├── data/baseline.json     # Validated versions, imported by the baseline page
 │   ├── styles/custom.css      # Design tokens and site styling
@@ -94,6 +94,7 @@ description: One sentence for search results and social previews.
 - Every command should be runnable. Mark placeholders like `io.github.yourname.Notes` clearly.
 - Use tables for comparisons and checklists for release gates.
 - Keep the tone opinionated but fair: GTK and Qt are both first-class.
+- Do not use Apple/macOS/Windows as the reference point or promote proprietary/non-standard vendors. Name an alternative only as a sourced example when it is open source, actively maintained, widely accepted, and compared on quality signals.
 - Mention the tested baseline: Ubuntu 26.04 LTS, GNOME 50, GTK 4.22, libadwaita 1.9, Qt 6.10, KDE Frameworks 6.24.
 - When a behavior is desktop-specific, say so and give the portable baseline.
 
@@ -184,8 +185,8 @@ The palette is intentionally cool and low-glare for long reading sessions, with 
 
 ## Status
 
-- 32 content pages plus the landing page.
-- 34 HTML pages including the 404.
+- 33 content pages plus the landing page.
+- 35 HTML pages including the 404.
 - All internal links checked; external links checked against primary sources at the time of writing.
 - Reference app syntax-checked, built with Meson, validated with `desktop-file-validate` and `appstreamcli`, and launched successfully in a headless GNOME 50 Wayland session.
 

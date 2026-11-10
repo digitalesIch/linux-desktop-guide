@@ -3,7 +3,7 @@ title: Design Principles
 description: How to design Linux desktop apps that feel calm, fast, and native across GNOME, KDE, and the wider ecosystem — without sanding off your product's character.
 ---
 
-Linux design is plural. GNOME, KDE Plasma, elementary, and COSMIC each have a coherent design language and a published HIG. There is no single authority that can settle every question, so the app has to make a choice: **pick a primary desktop, follow its conventions deeply, and adapt gracefully elsewhere.**
+Linux design is plural. GNOME, KDE Plasma, and elementary publish human-interface guidelines; COSMIC publishes its own design guidance. Each has a coherent language, but they do not agree on every pattern. There is no single authority that can settle every question, so the app has to make a choice: **pick a primary desktop, follow its conventions deeply, and adapt gracefully elsewhere.**
 
 That is not a limitation. It is what lets a Linux app feel like it belongs in more than one place without feeling imported from another platform.
 
@@ -136,7 +136,7 @@ The fastest way to make a Linux app feel foreign is to import another platform's
 
 1. **Write the user's task in one sentence.** "Capture a thought before it disappears." Not "note management".
 2. **Sketch the smallest flow.** One window, one primary action, one escape hatch.
-3. **Choose the platform pattern.** Sidebar, split view, stack, tabs, or dialog. Use the HIG, not a Dribbble shot.
+3. **Choose the platform pattern.** Sidebar, split view, stack, tabs, or dialog. Use the HIG, not a generic design-gallery mockup.
 4. **Prototype in the real toolkit.** GTK Builder/Blueprint or Qt Quick. A prototype that cannot resize is not a prototype.
 5. **Test at three sizes.** Narrow (360 px), medium (720 px), wide (1280 px). Test at 200% scale.
 6. **Test with the keyboard only.** Then with Orca. Then with reduced motion and high contrast.
@@ -148,7 +148,7 @@ The fastest way to make a Linux app feel foreign is to import another platform's
 | Anti-pattern | Why it hurts |
 | --- | --- |
 | Hamburger menu for primary navigation | Hides the app's structure; poor discoverability |
-| Custom titlebar with fake traffic lights | Breaks tiling, gestures, and platform expectations |
+| Custom titlebar with fake window controls | Breaks tiling, gestures, and platform expectations |
 | Modal dialog for every action | Interrupts flow; stacks up; hard to undo |
 | Tiny icon-only buttons without tooltips | Inaccessible and ambiguous |
 | Animation on every state change | Feels slow; ignores reduced-motion settings |

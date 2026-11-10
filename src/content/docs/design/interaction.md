@@ -131,9 +131,13 @@ Search is a first-class interaction, not a filter box bolted onto a list.
 self.search_entry.connect("search-changed", self.on_search_changed)
 
 def on_search_changed(self, entry):
-    query = entry.get_text().strip()
-    self.filter.set_filter_func(lambda row: query.lower() in row.title.lower())
+    query = entry.get_text().strip().lower()
+    self.filter_model.set_filter(
+        Gtk.CustomFilter.new(lambda item: query in item.title.lower())
+    )
 ```
+
+`Gtk.FilterListModel` has a `filter` property, not a `set_filter_func()` method; `Gtk.CustomFilter` wraps the match function.
 
 If the app has searchable content that should appear in the desktop overview, add a GNOME Shell search provider. Do not make the shell wait on a slow network call.
 

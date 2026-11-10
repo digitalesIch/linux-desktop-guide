@@ -14,7 +14,7 @@ Terms are grouped by area. Links point to the canonical specification or documen
 | **D-Bus** | The standard inter-process communication bus on Linux desktops. Used for activation, notifications, settings, hardware services, and portals. |
 | **PipeWire** | The modern Linux multimedia server for audio, video, and screen sharing. |
 | **Portal** | An XDG Desktop Portal: a D-Bus interface that lets a sandboxed app ask the desktop to perform a privileged operation (open a file, capture the screen, send a notification). |
-| **Wayland** | The display protocol where the compositor owns the screen and clients render their own buffers. Default on Ubuntu 26.04. |
+| **Wayland** | The display protocol where the compositor owns the screen and clients render their own buffers. The Ubuntu Desktop session on 26.04 is Wayland-only; XWayland runs X11 apps. |
 | **X11** | The legacy display protocol. Still used via XWayland for compatibility, but not the native target on Ubuntu 26.04. |
 | **XWayland** | A compatibility layer that runs X11 apps inside a Wayland session. |
 | **XDG Base Directory** | The specification for `XDG_CONFIG_HOME`, `XDG_DATA_HOME`, `XDG_STATE_HOME`, `XDG_CACHE_HOME`, and `XDG_RUNTIME_DIR`. |
@@ -49,15 +49,15 @@ Terms are grouped by area. Links point to the canonical specification or documen
 | **Bubblewrap** | The sandboxing tool used by Flatpak to create namespaces and restrict access. |
 | **deb** | The Debian/Ubuntu binary package format, installed with `dpkg`/`apt`. |
 | **Desktop Entry** | The `.desktop` file that tells the desktop how to launch an app and where it appears. |
-| **Flathub** | The largest Flatpak app store and build service. |
-| **Flatpak** | A cross-distribution packaging and sandboxing system built on runtimes, OSTree, and portals. |
+| **Flathub** | A major vendor-neutral Flatpak app store and build service. |
+| **Flatpak** | A cross-distribution packaging and sandboxing system built on runtimes, OSTree, and portals. It is not part of a stock Ubuntu installation; users install it deliberately. |
 | **hicolor** | The fallback icon theme hierarchy where apps install their icons. |
 | **MetaInfo** | The AppStream XML file, usually `<app-id>.metainfo.xml`, that describes an app to software centers. |
 | **OSTree** | The content-addressed filesystem used by Flatpak for runtimes and delta updates. |
 | **PPA** | Personal Package Archive on Launchpad for Ubuntu packages. |
 | **Runtime** | A shared Flatpak base (GNOME, KDE, Freedesktop) containing the toolkit and common libraries. |
 | **Sandbox** | An isolated execution environment that restricts filesystem, network, device, and D-Bus access. |
-| **Snap** | Canonical's packaging and confinement system, used by the Ubuntu App Center. |
+| **Snap** | Canonical's packaging and confinement system, recommended by the Ubuntu App Center for third-party apps. The App Center also manages debs. |
 | **Snapcraft** | The build tool and recipe format for Snap packages. |
 | **snapd** | The background daemon that installs, confines, refreshes, and manages snaps. |
 | **Rockcraft** | Canonical's tool for building minimal Ubuntu-based OCI images (rocks). |

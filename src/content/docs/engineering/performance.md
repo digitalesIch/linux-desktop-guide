@@ -5,7 +5,7 @@ description: Startup budgets, main-loop discipline, rendering, memory, battery, 
 
 Performance is not a benchmark score. It is the feeling that the app responds before you finish the thought. It is also measurable, budgetable, and regressable — which means it belongs in engineering, not in a late optimization sprint.
 
-Ubuntu 26.04 ships **Sysprof** as a default system utility. Use it. A profile of the real app on the oldest hardware you support is worth more than a hundred guesses.
+Ubuntu 26.04 ships **Sysprof** as a default system utility. Use it. A profile of the real app on the oldest hardware you support is more useful than guesswork.
 
 ## Budgets
 
@@ -15,7 +15,7 @@ Set budgets before optimizing. A focused desktop app should be able to defend th
 | --- | --- | --- |
 | Cold start to first window | < 1 s (focused app), < 2 s (complex app) | Sysprof, startup marks |
 | Time to interactive | < 500 ms after first frame | Manual + profile |
-| Input latency | < 50 ms | Manual, `xinput`/`wev`, frame timings |
+| Input latency | < 50 ms | `libinput debug-events`, `wev`, Sysprof timestamps |
 | Frame time during scroll | < 16.7 ms (60 fps) | Sysprof, GTK Inspector |
 | Idle CPU | < 1% | `top`, `powertop`, Sysprof |
 | Resident memory | < 200 MB (document app), < 500 MB (complex) | `/usr/bin/time -v`, heaptrack |
@@ -62,7 +62,18 @@ Use it for allocation counts, peak memory, and leaks. A slow app is often an all
 GTK_DEBUG=interactive ./build/notes
 ```
 
-Inspect the widget tree, CSS, layout, render nodes, and accessibility. The "Visual" tab shows overdraw and clip regions. The "Objects" tab shows signals and properties.
+Inspect the widget tree, CSS, layout, render nodes, and accessibility. Use the **Recorder** tab for render nodes and clip regions; the **Objects** tab shows properties, actions, CSS nodes, and accessibility.
+
+### Startup tracing
+
+For startup work, capture a trace instead of guessing:
+
+```bash title="Terminal"
+sysprof-cli -- ./build/notes
+GDK_DEBUG=frame-timings ./build/notes
+```
+
+`perf` may require `perf_event_paranoid` to be lowered for your user; do that deliberately on a development machine, not on a shared production host.
 
 ### Other tools
 
@@ -139,6 +150,7 @@ GTK 4 renders through GSK, usually on the GPU. Most rendering problems are cause
 - Use `Gtk.Picture` with `can_shrink` and appropriately sized textures for images.
 - Avoid decoding a 6000×4000 image just to show a 64×64 thumbnail.
 - Test with `GSK_RENDERER=gl`, `ngl`, `vulkan`, and `cairo` if you support multiple renderers; do not force one in production without a reason.
+- Use `Gtk.GraphicsOffload` for fullscreen video or other surfaces that should bypass GSK composition, and test `GDK_DEBUG=gl-disable` to catch fallback behavior.
 
 If scrolling stutters, check:
 
@@ -156,6 +168,7 @@ If scrolling stutters, check:
 - Bound caches: thumbnails, decoded images, search results, undo history.
 - Release large buffers when a view closes.
 - Use `GdkTexture` and `Gtk.Picture` instead of keeping `GdkPixbuf` copies.
+- Use `GMemoryMonitor` low-memory warnings to drop caches and bound memory. The kernel OOM killer sends `SIGKILL`; the app cannot catch it or "fail gracefully" after the kill.
 - Decode untrusted images with Glycin, which also limits resource use.
 
 ## Battery and background work
@@ -164,8 +177,10 @@ If scrolling stutters, check:
 - Use the longest acceptable timer interval; coalesce updates.
 - Stop animations and timers when the window is not visible.
 - Release idle inhibitors when work finishes.
+- Use `Gtk.Application.inhibit` or the Inhibit portal, and test with power-profiles-daemon in balanced, power-saver, and performance modes.
 - Do not hold a GPU context or a wake lock for a hidden window.
 - Test suspend/resume: the app should reconnect, refresh, and not spin.
+- A Wayland compositor restart normally terminates client connections. Persist state continuously and restore it on the next launch; do not promise a live reconnect unless your toolkit and compositor explicitly support it.
 
 `powertop` and Sysprof can show wakeups and CPU residency. A "0% CPU" app that wakes 100 times per second is still draining the battery.
 

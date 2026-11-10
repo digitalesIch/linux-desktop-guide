@@ -113,18 +113,22 @@ Copy these into an issue template, a `RELEASE.md`, or a pull request checklist.
 
 - ☐ Target an LTS release and state its support window.
 - ☐ Pin the toolchain version used by CI and packaging.
-- ☐ Choose deb, snap, Flatpak, or OCI deliberately.
+- ☐ Choose deb, snap, Flatpak, or OCI deliberately; state which path Ubuntu supports and which alternatives require extra setup.
 - ☐ Use portals or toolkit APIs for files, printing, notifications, secrets, and screen capture.
-- ☐ Use D-Bus APIs instead of shelling out to `nmcli`, `udisksctl`, `snap`, or `fwupdmgr`.
+- ☐ Use D-Bus APIs or the snapd REST API instead of shelling out to `nmcli`, `udisksctl`, `snap`, or `fwupdmgr`.
 - ☐ Never require `sudo`; use a named Polkit action for privileged work.
 - ☐ Ship and test an AppArmor profile for any system service.
 - ☐ Do not flash firmware directly; use fwupd/LVFS.
 - ☐ Do not require Ubuntu Pro; detect optional services and degrade gracefully.
-- ☐ Test with Orca and the Ubuntu accessibility stack.
+- ☐ Test with Orca, Accerciser, and the Ubuntu accessibility stack, including permission-denied paths.
 - ☐ Test the snap and deb install/upgrade paths on a clean Ubuntu installation.
+- ☐ If you ship a Snap, use `core26` and stage Python explicitly for Python apps.
+- ☐ If you ship Flatpak, document that Ubuntu does not install Flatpak or Flathub by default.
 - ☐ Validate the desktop file, AppStream metadata, and package with Ubuntu tooling.
 
 ## Release day
+
+- ☐ The channel choice passes the [quality signals](/reference/quality-signals/) check, with the date and sources recorded.
 
 - ☐ Install the published artifact on a clean VM.
 - ☐ Create, open, save, and delete data.

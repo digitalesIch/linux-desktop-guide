@@ -15,7 +15,7 @@ GTK and Qt are both excellent. Rust is a strong default for new apps, but not a 
 | You are building for KDE Plasma first, or need C++/QML depth | **Qt 6 + Kirigami** |
 | You want memory safety, performance, and a growing GNOME ecosystem | **Rust + gtk-rs + libadwaita-rs** or **Relm4** |
 | You have a small utility and a Python team | **Python + PyGObject + libadwaita** |
-| You need a cross-platform desktop app and already have a web team | **Tauri** (preferred) or **Electron** (with eyes open) |
+| You need a cross-platform app and already have a web team | A maintained web or custom-render runtime; apply the quality signals and do the native integration work |
 | You are building a game or a custom-rendered canvas | **SDL3**, **Godot**, or **Qt Quick** |
 | You need a single binary for many distros with minimal runtime | **Rust + Iced/Slint**, or **Qt** with static deployment |
 
@@ -35,7 +35,7 @@ It is the stack used by GNOME's own apps, it has the deepest accessibility and p
 
 - The most direct path to a GNOME-native look and feel.
 - Excellent accessibility (AT-SPI), input method, and Wayland integration.
-- Modern rendering through GSK; GTK 4.22 adds native SVG rendering with `GtkSvg`.
+- Modern rendering through GSK; GTK 4.22 includes native SVG rendering with `GtkSvg`.
 - libadwaita 1.9 adds `Adw.Sidebar`, `Adw.ViewSwitcherSidebar`, and automatic reduced-motion support.
 - Strong language options: C, Rust, Python, Vala, JavaScript (GJS).
 - Blueprint makes UI declarative and reviewable.
@@ -47,11 +47,11 @@ It is the stack used by GNOME's own apps, it has the deepest accessibility and p
 - GTK's major-version transitions are infrequent but significant. Budget for them.
 - Custom design systems require restraint; fighting Adwaita usually looks worse than adopting it.
 
-**Choose it when:** GNOME/Ubuntu is your primary audience, you want the shortest path to native behavior, or you are building an app for the GNOME ecosystem.
+**Choose it when:** GNOME/Ubuntu is your primary audience, you want a direct path to native behavior, or you are building an app for the GNOME ecosystem.
 
 ### Qt 6 + Kirigami
 
-**What it is:** Qt is a mature C++/QML application framework. Kirigami is KDE's adaptive UI framework built on Qt Quick. KDE Plasma 6.6 and Qt 6.10 ship in Ubuntu 26.04's KDE edition.
+**What it is:** Qt is a mature C++/QML application framework. Kirigami is KDE's adaptive UI framework built on Qt Quick. Kubuntu 26.04 ships Plasma 6.6, Qt 6.10, and KDE Frameworks 6.24.
 
 **Strengths**
 
@@ -104,16 +104,21 @@ Rust is no longer experimental on the Linux desktop. GNOME apps such as Loupe an
 
 **C** remains the lingua franca of GTK and the Linux desktop. It is stable, portable, and well documented. It is also manual: memory management, error handling, and string handling are on you. Use C for libraries and small, long-lived tools; prefer Rust for new application code unless your team is already fluent.
 
-### Electron, Tauri, and web tech
+### Web and custom-render runtimes
 
-Web technology is legitimate when the product is genuinely document- or web-shaped, or when the team's velocity depends on it. It is a poor default for a small native utility.
+Web technology is legitimate when the product is genuinely document- or web-shaped, or when the team's velocity depends on it. It is a poor default for a small native utility, and it does not remove the need to integrate with the desktop.
 
-| Option | What you get | What you pay |
-| --- | --- | --- |
-| **Electron** | Chromium + Node.js, predictable rendering | 100–300 MB installs, high memory, slow cold start, duplicated accessibility stack |
-| **Tauri** | System webview + Rust backend | Much smaller binaries, but rendering and behavior vary by distro webview |
-| **Flutter** | Custom renderer, consistent pixels | Not native widgets; accessibility and IME integration require care; large runtime |
-| **Wails** | Go + system webview | Similar trade-offs to Tauri, smaller ecosystem |
+If you choose a web or custom-render runtime, evaluate it with the same [quality signals](/reference/quality-signals/) as any other dependency:
+
+- **Open source and license:** can you inspect, patch, and redistribute it?
+- **Maintenance:** active releases, security process, and a clear support window.
+- **Accessibility:** does it expose AT-SPI semantics, keyboard navigation, and input-method support, or will you rebuild them?
+- **Sandboxing:** does it work inside Flatpak/Snap and use portals for files, notifications, and secrets?
+- **Packaging:** can you build a reproducible artifact and validate its metadata?
+- **Desktop integration:** does it support Wayland, fractional scaling, dark mode, and the host's file dialogs?
+- **Runtime weight:** startup time, memory, battery, and install size are product costs, not just engineering metrics.
+
+A named runtime is an example, not an endorsement. If a project fails the quality signals, do not recommend it just because it is popular.
 
 If you choose this path, do the native work anyway: a proper `.desktop` file, AppStream metadata, portal-based file dialogs, keyboard shortcuts, dark-mode support, accessibility labels, and a tray-free primary workflow. A web app that respects the desktop is better than a native app that does not.
 
@@ -134,7 +139,7 @@ Do not let a language preference force you into a toolkit that fights the deskto
 Ubuntu publishes supported setup and version-availability guides for Python, Go, Rust, GCC, Clang, .NET, Java, and Zig. Use them as the source of truth when you need to know what an LTS release ships, or when you need a supported install path:
 
 - [Ubuntu for Developers](https://documentation.ubuntu.com/ubuntu-for-developers/) — overview and tutorials.
-- [Toolchains](https://documentation.ubuntu.com/ubuntu-for-developers/toolchains/) — per-language setup and first-program guides.
+- [Toolchains](https://ubuntu.com/developers/docs/toolchains/) — per-language setup and first-program guides.
 - [Toolchain availability](https://documentation.ubuntu.com/ubuntu-for-developers/reference/availability/) — what each Ubuntu release provides.
 - [IDEs](https://documentation.ubuntu.com/ubuntu-for-developers/reference/ides/) — supported editors and install commands.
 
@@ -147,14 +152,14 @@ For GTK apps, use the archive toolchain when you link against system libraries. 
 3. **Is the team already fluent in a stack?** A well-maintained Qt app beats a poorly maintained GTK app. Maintenance is a feature.
 4. **How will it ship?** Flatpak is the default when you want one upstream build across distributions. If you need a deb in the Ubuntu archive, plan for Debian packaging from day one.
 5. **What is the accessibility story?** Native widgets give you AT-SPI semantics for free. Custom-drawn UI does not. Budget accordingly.
-6. **What is the five-year plan?** Check the toolkit's release cadence, major-version policy, and the health of its bindings.
+6. **What is the five-year plan?** Check the toolkit's release cadence, major-version policy, and the health of its bindings using the [quality signals](/reference/quality-signals/).
 
 ## Versions to target in 2026
 
 The validated version set lives in [Baseline](/reference/baseline/). It records the current Ubuntu LTS, GNOME, GTK, libadwaita, Qt, KDE Frameworks, Flatpak runtimes, and the review date. Use it as the reference for examples and screenshots; define a separate minimum-version policy when you support an older release.
 
 :::caution[Do not target the newest API by default]
-A Flatpak app can bundle a newer runtime, but a deb must work with the libraries in the archive. If you ship both, target the oldest library version you support and guard newer APIs at runtime.
+A Flatpak app can bundle a newer runtime, but a deb must work with the libraries in the archive. If you ship both, target the oldest library version you support and use compile-time version checks (`GTK_CHECK_VERSION`, `QT_VERSION_CHECK`) or feature flags for newer APIs.
 :::
 
 Next: [Build Your First App](/start/first-app/) — a complete, minimal GTK 4 app with packaging.

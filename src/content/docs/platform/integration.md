@@ -33,7 +33,7 @@ On Ubuntu, these interfaces are provided by specific system services: NetworkMan
 
 ## Single instance and activation
 
-A desktop app should be a single instance with multiple windows — not five independent processes. `Gtk.Application` and `QApplication` solve this via D-Bus: the first process owns the application bus name, later launches activate it.
+A desktop app should be a single instance with multiple windows — not five independent processes. `Gtk.Application` handles this through D-Bus: the first process owns the application bus name, later launches activate it. `QApplication` does not register a bus name by itself; use `KDBusService(KDBusService::Unique)` for KDE/Qt, or `QLockFile`/a custom D-Bus name for non-KDE Qt.
 
 ```python title="Single-instance application with file opening"
 class NotesApplication(Adw.Application):
@@ -59,10 +59,12 @@ Set `DBusActivatable=true` in the desktop entry and ship a D-Bus service file if
 ```ini title="io.github.yourname.Notes.service"
 [D-BUS Service]
 Name=io.github.yourname.Notes
-Exec=/usr/bin/notes
+Exec=/usr/bin/notes --gapplication-service
 ```
 
 `Gtk.Application` implements `org.freedesktop.Application` for you. Do not invent a second activation protocol.
+
+On Wayland, activation is also subject to focus-stealing prevention. `Gtk.Application` and Qt handle the activation token for you. If you use a custom toolkit, implement `xdg_activation_v1` and pass the `XDG_ACTIVATION_TOKEN` from the launching process; `Gio.AppInfo` and `Gtk.FileLauncher` already do this. Do not use `wmctrl`, `xdotool`, or X11 activation hacks.
 
 ## Notifications
 
@@ -174,11 +176,16 @@ A GUI app should not keep a process alive after the last window closes unless it
 ```ini title="~/.config/systemd/user/notes-sync.service"
 [Unit]
 Description=Notes sync
-After=network-online.target
+After=graphical-session.target
+PartOf=graphical-session.target
 
 [Service]
 ExecStart=/usr/bin/notes --sync
 Restart=on-failure
+StateDirectory=notes
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
 
 [Install]
 WantedBy=default.target
@@ -189,7 +196,25 @@ systemctl --user enable --now notes-sync.service
 journalctl --user -u notes-sync.service -f
 ```
 
-Do not daemonize manually, fork into the background, or write PID files. systemd already does that job.
+Do not daemonize manually, fork into the background, or write PID files. systemd already does that job. If the service needs the session environment, call `systemctl --user import-environment` from the session startup; do not assume a user unit inherits it.
+
+## MIME types and URL handlers
+
+A desktop entry declares what the app can open and how it is launched:
+
+- Add the types to `MimeType=` and use `%U` (URLs) or `%F` (files) in `Exec`.
+- For custom URL schemes, add `x-scheme-handler/<scheme>` to `MimeType=` and handle the URI in `Gio.Application`'s `open` signal.
+- Run `update-desktop-database` after installing the desktop file so the MIME cache sees it.
+- Set the default with `xdg-mime default io.github.yourname.Notes.desktop text/markdown` and verify with `xdg-mime query default`.
+- For "Show in folder", use `org.freedesktop.FileManager1.ShowItems`/`ShowItemProperties` instead of shelling out to a file manager.
+
+Use `Gio.AppInfo` for "open with" behavior; it respects the user's default applications and the sandbox.
+
+## Media, printing, and power
+
+- **Media:** use GStreamer 1.28 with PipeWire. `gstreamer-vaapi` is gone; use the VA-API `va` plugins for hardware decode/encode. Qt Multimedia uses PipeWire on Linux.
+- **Printing:** use `Gtk.PrintDialog`/`Gtk.PrintOperation` or the Print portal; test against CUPS/IPP, including a printer that is offline.
+- **Power:** use `Gtk.Application.inhibit` or the Inhibit portal for long work, and listen for logind's `PrepareForSleep` before suspend. Release inhibitors as soon as the work finishes.
 
 ## Hardware and system services
 
@@ -201,8 +226,8 @@ Use D-Bus APIs instead of parsing `/proc`, `/sys`, or shelling out to command-li
 | BlueZ | `org.bluez` | Bluetooth devices and adapters |
 | NetworkManager | `org.freedesktop.NetworkManager` | Connectivity, Wi-Fi, VPN state |
 | UDisks2 | `org.freedesktop.UDisks2` | Disks, partitions, mounts |
-| PipeWire | `org.pipewire` | Audio/video streams |
-| CUPS | `org.cups.cupsd` | Printing |
+| PipeWire | PipeWire API / GStreamer | Audio/video streams; there is no general `org.pipewire` D-Bus API |
+| CUPS | IPP / libcups | Printing |
 | GeoClue | `org.freedesktop.GeoClue2` | Location (with permission) |
 
 In a sandbox, many of these are proxied by portals or unavailable by design. Check for the service, handle its absence, and explain the limitation to the user instead of crashing.
@@ -230,6 +255,7 @@ Desktop-integrated preferences belong in GSettings, with a schema and an `Adw.Pr
 - ☐ Media apps implement MPRIS.
 - ☐ Background work uses systemd user units or the Background portal.
 - ☐ Hardware state comes from D-Bus services, not `/proc` parsing.
+- ☐ File and URL handlers declare `MimeType=`/`%U`, update the desktop database, and use the FileManager1 interface for "Show in folder".
 - ☐ Settings are in GSettings with a schema and a reset path.
 
 Next: [Flatpak & Portals](/platform/flatpak-portals/) — the sandbox model and the mediation layer that makes integration safe.
