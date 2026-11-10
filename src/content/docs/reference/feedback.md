@@ -11,7 +11,7 @@ This page is also the feedback contract for agents. The site is static and runs 
 
 [Open a documentation issue](https://github.com/digitalesIch/linux-desktop-guide/issues/new?template=docs-feedback.yml)
 
-The repository is **private during development**. If you do not have access, GitHub will ask you to sign in; the public feedback channel opens when the repository becomes public. The link itself does not change when that happens.
+The repository is **public**. You need a GitHub account to open an issue; if you are signed out, GitHub will ask you to sign in first.
 
 ## What to report
 

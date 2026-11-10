@@ -1,6 +1,6 @@
 # Public release checklist
 
-The repository is private during development. Do not change visibility until these items are resolved. GitHub Pages on the Free plan requires a public repository; GitHub Pro, Team, or Enterprise Cloud can publish Pages from a private repository.
+The repository is public. This checklist records the work required for a future visibility change or a new distribution channel. GitHub Pages on the Free plan requires a public repository; GitHub Pro, Team, or Enterprise Cloud can publish Pages from a private repository.
 
 ## 1. Licensing
 
@@ -12,10 +12,10 @@ The repository is private during development. Do not change visibility until the
 ## 2. Internal material and history
 
 - ☑ Decide whether `research/target-selection.md` is published. The current policy calls it internal and not published.
-- ☐ If it stays internal, remove it from the public tree **and from the Git history** before making the repository public. A normal delete is not enough; use `git filter-repo` or create a fresh public repository from a clean snapshot.
-- ☐ Review `AGENTS.md`, `openspec/`, and `research/` for internal notes, unpublished evidence, and personal paths.
-- ☐ Scan the full history for secrets, tokens, private URLs, and personal data.
-- ☐ Confirm that no `.env`, credentials, or local worktree paths are present in the history.
+- ☑ If it stays internal, remove it from the public tree **and from the Git history** before making the repository public. A normal delete is not enough; use `git filter-repo` or create a fresh public repository from a clean snapshot.
+- ☑ Review `AGENTS.md`, `openspec/`, and `research/` for internal notes, unpublished evidence, and personal paths.
+- ☑ Scan the full history for secrets, tokens, private URLs, and personal data.
+- ☑ Confirm that no `.env`, credentials, or local worktree paths are present in the history.
 
 ## 3. Site delivery
 
@@ -36,7 +36,7 @@ The repository is private during development. Do not change visibility until the
 
 ## 5. Feedback
 
-- ☐ Remove the private-repository note from `src/content/docs/reference/feedback.md`.
+- ☑ Remove the private-repository note from `src/content/docs/reference/feedback.md`.
 - ☐ Verify the issue form and the `documentation` / `agent-report` labels are public.
 - ☐ Verify the issue link works without authentication.
 - ☐ Confirm that reports do not ask for secrets or personal data.

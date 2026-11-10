@@ -26,7 +26,7 @@ gh issue create --repo digitalesIch/linux-desktop-guide \
   --body-file /tmp/docs-feedback.md
 ```
 
-The issue form asks for page, section, quote, expected, actual, version, target, reporter type, and source. The repository is private during development; do not assume an external reader can open an issue.
+The issue form asks for page, section, quote, expected, actual, version, target, reporter type, and source. The repository is public; readers need a GitHub account to open an issue.
 
 ## Documentation
 

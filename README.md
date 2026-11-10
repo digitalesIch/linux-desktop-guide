@@ -9,7 +9,7 @@ The project is both:
 
 The companion app in `examples/notes/` is a complete GTK 4 + libadwaita reference implementation with Meson and Flatpak packaging.
 
-Repository: [digitalesIch/linux-desktop-guide](https://github.com/digitalesIch/linux-desktop-guide). It is private during development.
+Repository: [digitalesIch/linux-desktop-guide](https://github.com/digitalesIch/linux-desktop-guide).
 
 ## Platform targets
 
@@ -265,7 +265,7 @@ The palette is intentionally cool and low-glare for long reading sessions, with 
 - The build has no server-side runtime; any static host works.
 - Search is client-side and requires the `dist/pagefind/` directory to be deployed with the rest of the site.
 - If you deploy under a subpath, set Astro's `base` and update internal links accordingly.
-- The repository is private during development. Before changing visibility, complete [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md): licensing, removal of internal research from the Git history, Pages setup, Worker deployment, and feedback checks.
+- The public release checklist is in [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md): licensing, history cleanup, Pages setup, Worker deployment, and feedback checks.
 
 ## License
 
