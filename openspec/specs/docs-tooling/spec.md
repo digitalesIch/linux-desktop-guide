@@ -1,7 +1,7 @@
 # docs-tooling Specification
 
 ## Purpose
-TBD - created by archiving change harden-docs-tooling. Update Purpose after archive.
+Provide repeatable local checks for documentation correctness, generated agent output, MCP behavior, and internal links, with network-dependent external checks kept opt-in.
 
 ## Requirements
 
