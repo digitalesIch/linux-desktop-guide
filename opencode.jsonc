@@ -5,10 +5,12 @@
   },
   "mcp": {
     "servers": {
+      // Local, read-only documentation for agents.
       "docs": {
         "type": "local",
         "command": ["node", "tools/docs-mcp/server.mjs"],
-        "cwd": "."
+        "cwd": ".",
+        "codemode": true
       }
     }
   }
