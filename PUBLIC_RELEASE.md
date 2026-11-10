@@ -4,14 +4,14 @@ The repository is private during development. Do not change visibility until the
 
 ## 1. Licensing
 
-- ☐ Choose a license for the code and a license for the prose. They do not have to be the same.
-- ☐ Add the license files and the matching `license` field in `package.json`.
-- ☐ Confirm that bundled fonts, icons, screenshots, and example assets are compatible with the chosen licenses.
-- ☐ Update `README.md` with the license statement.
+- ☑ Choose a license for the code and a license for the prose. They do not have to be the same.
+- ☑ Add the license files and the matching `license` field in `package.json`.
+- ☑ Confirm that bundled fonts, icons, screenshots, and example assets are compatible with the chosen licenses.
+- ☑ Update `README.md` with the license statement.
 
 ## 2. Internal material and history
 
-- ☐ Decide whether `research/target-selection.md` is published. The current policy calls it internal and not published.
+- ☑ Decide whether `research/target-selection.md` is published. The current policy calls it internal and not published.
 - ☐ If it stays internal, remove it from the public tree **and from the Git history** before making the repository public. A normal delete is not enough; use `git filter-repo` or create a fresh public repository from a clean snapshot.
 - ☐ Review `AGENTS.md`, `openspec/`, and `research/` for internal notes, unpublished evidence, and personal paths.
 - ☐ Scan the full history for secrets, tokens, private URLs, and personal data.

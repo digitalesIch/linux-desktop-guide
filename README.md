@@ -267,6 +267,14 @@ The palette is intentionally cool and low-glare for long reading sessions, with 
 - If you deploy under a subpath, set Astro's `base` and update internal links accordingly.
 - The repository is private during development. Before changing visibility, complete [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md): licensing, removal of internal research from the Git history, Pages setup, Worker deployment, and feedback checks.
 
+## License
+
+- **Code** — scripts, the Cloudflare Worker, site components, and the example app are licensed under the [MIT License](LICENSE).
+- **Prose and documentation** — the guide text, diagrams, and screenshots are licensed under [CC BY-SA 4.0](LICENSE-docs).
+- **Third-party assets** — fonts, icons, and bundled dependencies keep their own licenses; see the package metadata and upstream projects.
+
+The two licenses are deliberate: MIT keeps the code easy to reuse, and CC BY-SA keeps derived documentation open under the same terms.
+
 ## Status
 
 - 42 Markdown source files and 43 built HTML pages, including the 404.
