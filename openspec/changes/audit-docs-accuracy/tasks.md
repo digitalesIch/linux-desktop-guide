@@ -12,7 +12,7 @@
 - [x] 1.8 Fix `engineering/performance.md` to use Wayland-compatible input-latency tools instead of `xinput`.
 - [x] 1.9 Fix the CI workflow in `engineering/testing.md`: do not mix `setup-python` with apt PyGObject; install `flatpak-builder-lint` or use the Flatpak builder container.
 - [x] 1.10 Fix the packaging-channel table in `platform/flatpak-portals.md`: Snap uses a shared base snap, not one base per app; clarify that screenshots are expected for a good Flathub listing while metainfo is required.
-- [ ] 1.11 Compile-check or validate the Blueprint, QML/C++, Rust, and Python examples where feasible; mark examples as illustrative when they cannot be compiled in CI.
+- [x] 1.11 Compile-check or validate the Blueprint, QML/C++, Rust, and Python examples where feasible; mark examples as illustrative when they cannot be compiled in CI.
 - [x] 1.12 Replace the legacy `canonical-snap.readthedocs-hosted.com` links with `https://snapcraft.io/docs/` and the current Snapcraft documentation; re-run the external link check.
 - [x] 1.13 Correct the portal semantics in `platform/flatpak-portals.md`: Secret portal returns a per-app master secret, `Usb` is the correct portal name, and Settings exposes color-scheme/accent/contrast/reduced-motion but not fonts.
 - [x] 1.14 Correct Flatpak examples: `fallback-x11` only applies when Wayland is unavailable, use `GDK_DEBUG=portals` for GTK4, and show the `apt install flatpak flatpak-builder` plus `flatpak remote-add` setup that Ubuntu 26.04 needs.
@@ -71,7 +71,7 @@
 - [x] 3.28 Add the directory `fsync` after `rename()` to the atomic-write guidance.
 - [x] 3.29 Expand Qt coverage: Qt 6.10 high contrast, animated vector graphics, `SearchField`, `FlexboxLayout`, `QRangeModel`, `Synchronizer`, `TreeModel`, `SortFilterProxyModel`, QML performance, KDE integration, and Wayland/scaling/IME.
 - [x] 3.30 Expand GTK coverage: `GtkSvg`/Glycin trust boundary, libadwaita 1.9 navigation, accessibility/input/scaling, rendering (`GraphicsOffload`, GSK renderers), and Meson/Flatpak wiring.
-- [ ] 3.31 Expand performance/testing/architecture/reliability: startup tracing, headless Wayland recipe, sanitizers/fuzzers, reproducible builds, systemd hardening, crash reporting, structured journald, and SQLite recovery.
+- [x] 3.31 Expand performance/testing/architecture/reliability: startup tracing, headless Wayland recipe, sanitizers/fuzzers, reproducible builds, systemd hardening, crash reporting, structured journald, and SQLite recovery.
 
 ## 4. Editorial corrections
 

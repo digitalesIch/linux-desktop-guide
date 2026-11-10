@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 }
 ```
 
-For a KDE app, initialize `KAboutData`, `KLocalizedString`, and the translation domain before loading QML. Use `KAboutData::setApplicationData()` so the about dialog and bug reports have the right metadata.
+The QML and C++ snippets are illustrative; the exact imports, backend model, and CMake wiring depend on your project. For a KDE app, initialize `KAboutData`, `KLocalizedString`, and the translation domain before loading QML. Use `KAboutData::setApplicationData()` so the about dialog and bug reports have the right metadata.
 
 ## Kirigami patterns
 

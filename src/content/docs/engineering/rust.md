@@ -82,6 +82,8 @@ fn build_ui(app: &adw::Application) {
 }
 ```
 
+The Rust snippets are illustrative; add the crate features and generated resources that match your project.
+
 `Cargo.toml`:
 
 ```toml title="Cargo.toml"

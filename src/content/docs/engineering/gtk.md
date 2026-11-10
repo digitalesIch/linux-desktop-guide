@@ -88,7 +88,7 @@ template $NotesWindow: Adw.ApplicationWindow {
         icon-name: "open-menu-symbolic";
         menu-model: main_menu;
       }
-    };
+    }
 
     content: Adw.OverlaySplitView split {
       sidebar: Gtk.ScrolledWindow {
@@ -97,13 +97,9 @@ template $NotesWindow: Adw.ApplicationWindow {
         };
       };
 
-      content: Gtk.Stack content_stack {
-        Gtk.ScrolledWindow {
-          child: Gtk.Label {
-            label: _("Select a note");
-            styles ["dim-label"];
-          };
-        }
+      content: Gtk.Label content_label {
+        label: _("Select a note");
+        styles ["dim-label"]
       };
     };
   };
@@ -115,6 +111,8 @@ Compile it:
 ```bash title="Terminal"
 blueprint-compiler compile src/window.blp --output src/window.ui
 ```
+
+The Blueprint snippet above is compile-checked with `blueprint-compiler` 0.19. The Python snippets are illustrative; adapt imports and application wiring to your project.
 
 Bundle the `.ui` file into a GResource so it is available at runtime:
 
@@ -140,7 +138,7 @@ class NotesWindow(Adw.ApplicationWindow):
     __gtype_name__ = "NotesWindow"
 
     note_list = Gtk.Template.Child()
-    content_stack = Gtk.Template.Child()
+    content_label = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
