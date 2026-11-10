@@ -155,8 +155,8 @@ Release notes are user-facing. Write them for the person deciding whether to upd
 
 ```xml
 <branding>
-  <color type="primary" scheme_preference="light">#f97316</color>
-  <color type="primary" scheme_preference="dark">#fb923c</color>
+  <color type="primary" scheme_preference="light">#3f7d20</color>
+  <color type="primary" scheme_preference="dark">#c6ff3d</color>
 </branding>
 ```
 

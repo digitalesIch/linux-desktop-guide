@@ -327,10 +327,10 @@ Install an SVG icon as `data/io.github.yourname.Notes.svg`. It must be a square,
 
 ```xml title="data/io.github.yourname.Notes.svg"
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <rect width="128" height="128" rx="28" fill="#f97316"/>
+  <rect width="128" height="128" rx="28" fill="#c6ff3d"/>
   <rect x="26" y="30" width="76" height="68" rx="10" fill="#160b04"/>
-  <path d="M26 46h76" stroke="#f97316" stroke-width="4"/>
-  <path d="M42 62h44M42 76h30" stroke="#fdba74" stroke-width="5" stroke-linecap="round"/>
+  <path d="M26 46h76" stroke="#c6ff3d" stroke-width="4"/>
+  <path d="M42 62h44M42 76h30" stroke="#5eead4" stroke-width="5" stroke-linecap="round"/>
 </svg>
 ```
 

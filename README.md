@@ -61,7 +61,7 @@ The site uses:
 
 - Starlight's Pagefind search (built at `npm run build` time);
 - system-aware light/dark themes;
-- a custom warm-paper / graphite palette with an Ubuntu-adjacent orange accent;
+- a custom ink / lime / cyan palette with a dark hero stage;
 - local fonts via `@fontsource` (no external font requests).
 
 ## Add or edit a page
@@ -126,13 +126,13 @@ Content negotiation (`Accept: text/markdown`) is intentionally left to a future 
 
 The site's tokens live at the top of `src/styles/custom.css`:
 
-- accent: `#f97316` (dark) / `#c2410c` (light);
-- backgrounds: graphite `#0a0c0f` / warm paper `#fbf8f2`;
+- accent: `#c6ff3d` (dark) / `#3f7d20` (light);
+- backgrounds: ink `#060b09` / cool ivory `#f6f9f2`;
 - display font: Space Grotesk;
 - body font: Inter;
 - code font: JetBrains Mono.
 
-The palette is intentionally warm and low-glare for long reading sessions, with orange reserved for actions, links, and focus.
+The palette is intentionally cool and low-glare for long reading sessions, with lime reserved for actions, links, and focus.
 
 ## Deployment notes
 

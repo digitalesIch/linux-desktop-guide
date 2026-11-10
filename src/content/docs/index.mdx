@@ -4,7 +4,7 @@ description: A practical field guide to building fast, accessible, deeply integr
 template: splash
 hero:
   title: Build Linux apps that feel inevitable.
-  tagline: A field guide to fast, accessible, deeply integrated desktop software — for Ubuntu 26.04 and every Linux desktop that follows the same contracts.
+  tagline: A field guide to fast, accessible, native apps for Ubuntu 26.04 and every Linux desktop.
   image:
     html: '<img class="ldg-hero-art" src="/hero-window.svg" alt="A native Linux notes app with a sidebar, note cards, and integration badges for Wayland, Portals, and Flatpak." />'
   actions:
@@ -16,6 +16,8 @@ hero:
       variant: minimal
 ---
 
+import LandingFX from '../../components/LandingFX.astro';
+
 <div class="ldg-baseline" aria-label="Platform baseline">
   <span class="ldg-baseline-label">Baseline</span>
   <span>Ubuntu 26.04 LTS</span>
@@ -25,14 +27,25 @@ hero:
   <span>Flatpak</span>
 </div>
 
+<div class="ldg-ticker" aria-hidden="true">
+  <div class="ldg-ticker-track">
+    <div class="ldg-ticker-set">
+      <span>WAYLAND</span><span>XDG</span><span>D-BUS</span><span>APPSTREAM</span><span>PORTALS</span><span>FLATPAK</span><span>GTK 4.22</span><span>QT 6.10</span>
+    </div>
+    <div class="ldg-ticker-set" aria-hidden="true">
+      <span>WAYLAND</span><span>XDG</span><span>D-BUS</span><span>APPSTREAM</span><span>PORTALS</span><span>FLATPAK</span><span>GTK 4.22</span><span>QT 6.10</span>
+    </div>
+  </div>
+</div>
+
 <div class="ldg-section">
   <p class="ldg-eyebrow">The Linux difference</p>
   <h2 class="ldg-title">No single vendor. One set of contracts.</h2>
   <p class="ldg-lede">Linux gives you a small number of open standards, several excellent toolkits, and users who expect to stay in control. The constraints are real: no single vendor, no single store, no single design authority. The result is software that can be faster, more focused, and more deeply integrated than a one-size-fits-all platform allows.</p>
 
   <div class="ldg-grid-3">
-    <div class="ldg-card">
-      <span class="ldg-card-icon ldg-icon-orange" aria-hidden="true">
+    <div class="ldg-card ldg-card--feature">
+      <span class="ldg-card-icon ldg-icon-lime" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 3 21 8l-9 5-9-5 9-5Z"/>
           <path d="m3 12 9 5 9-5"/>
@@ -41,9 +54,13 @@ hero:
       </span>
       <h3>Standards are the API</h3>
       <p>Wayland, XDG, D-Bus, AppStream and Portals are the stable surface. Learn them once; your app works across GNOME, KDE and every distribution.</p>
+      <div class="ldg-chip-cluster" aria-hidden="true">
+        <span>Wayland</span><span>XDG</span><span>D-Bus</span><span>Portals</span><span>AppStream</span><span>Flatpak</span>
+      </div>
+      <span class="ldg-feature-mark" aria-hidden="true">&lt;/&gt;</span>
     </div>
-    <div class="ldg-card">
-      <span class="ldg-card-icon ldg-icon-green" aria-hidden="true">
+    <div class="ldg-card ldg-card--cyan">
+      <span class="ldg-card-icon ldg-icon-cyan" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="8" r="3"/>
           <path d="M5.5 20c.8-3.4 3.2-5 6.5-5s5.7 1.6 6.5 5"/>
@@ -52,8 +69,8 @@ hero:
       <h3>The desktop is the user's</h3>
       <p>Respect themes, fonts, scaling, shortcuts and privacy settings. Native software adapts to the host instead of importing another platform's habits.</p>
     </div>
-    <div class="ldg-card">
-      <span class="ldg-card-icon ldg-icon-blue" aria-hidden="true">
+    <div class="ldg-card ldg-card--lime">
+      <span class="ldg-card-icon ldg-icon-lime" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/>
           <path d="m4 7.5 8 4.5 8-4.5M12 12v9"/>
@@ -101,7 +118,6 @@ hero:
 </div>
 
 <div class="ldg-section">
-  <p class="ldg-eyebrow">The path</p>
   <h2 class="ldg-title">From first window to Flathub.</h2>
 
   <div class="ldg-path">
@@ -129,8 +145,7 @@ hero:
 <div class="ldg-section ldg-bar-section">
   <div class="ldg-bar">
     <div>
-      <p class="ldg-eyebrow">The bar</p>
-      <h2 class="ldg-title ldg-title-sm">Budgets, not absolutes.</h2>
+          <h2 class="ldg-title ldg-title-sm">Budgets, not absolutes.</h2>
       <p class="ldg-lede ldg-lede-sm">Measure on the oldest hardware you support. These are the numbers a focused desktop app should be able to defend.</p>
     </div>
     <div class="ldg-metrics">
@@ -143,7 +158,6 @@ hero:
 </div>
 
 <div class="ldg-section">
-  <p class="ldg-eyebrow">Pick your entry point</p>
   <h2 class="ldg-title">Start where you are.</h2>
 
   <div class="ldg-grid-2">
@@ -170,9 +184,11 @@ hero:
   </div>
 </div>
 
-<div class="ldg-section ldg-quote-section">
+<div class="ldg-section ldg-quote-section ldg-quote-panel">
   <blockquote class="ldg-quote">
     <p>The best Linux app is the one that makes the desktop feel more like itself.</p>
   </blockquote>
   <p class="ldg-footnote">Linux Desktop Guide · Version 1.0 · November 2026</p>
 </div>
+
+<LandingFX />

@@ -3,6 +3,8 @@ const { head, id } = Astro.locals.starlightRoute;
 const markdownHref = id === '404' || id === 'index' ? undefined : `/${id}.md`;
 ---
 
+<script is:inline>document.documentElement.classList.add('js');</script>
+
 {head.map(({ tag: Tag, attrs, content }) => (
 	<Tag {...attrs} set:html={content} />
 ))}
