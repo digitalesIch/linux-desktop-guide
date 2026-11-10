@@ -25,6 +25,34 @@ The Linux desktop has excellent documentation. It is also spread across a dozen 
 | [systemd](https://systemd.io/) | User services, timers, journald, coredump |
 | [systemd user session](https://wiki.archlinux.org/title/systemd/User) | Running background services per user |
 
+## Ubuntu
+
+| Resource | Why it matters |
+| --- | --- |
+| [Ubuntu for Developers](https://documentation.ubuntu.com/ubuntu-for-developers/) | Toolchains, IDEs, packaging, and support |
+| [Ubuntu Desktop documentation](https://documentation.ubuntu.com/desktop/en/latest/) | Desktop behavior, accessibility, and snap/deb policy |
+| [Ubuntu 26.04 release notes](https://documentation.ubuntu.com/release-notes/26.04/) | The baseline for this guide |
+| [Ubuntu Pro Client](https://documentation.ubuntu.com/pro-client/en/latest/) | `pro`, ESM, Livepatch, FIPS, CIS |
+| [Snap documentation](https://canonical-snap.readthedocs-hosted.com/) | snapd, confinement, interfaces, updates |
+| [Snapcraft](https://documentation.ubuntu.com/snapcraft/stable/) | Building snaps |
+| [Rockcraft](https://documentation.ubuntu.com/rockcraft/stable/) | Ubuntu-based OCI images |
+| [Ubuntu packaging guide](https://packaging.ubuntu.com/html/) | deb packaging |
+| [New package guide](https://documentation.ubuntu.com/project/contributors/new-package/create-a-new-package/) | Ubuntu archive process |
+| [Build packages in a PPA](https://documentation.ubuntu.com/project/contributors/bug-fix/build-packages-in-a-ppa/) | PPA upload and signing |
+| [Ubuntu accessibility stack](https://documentation.ubuntu.com/desktop/en/latest/explanation/accessibility-stack/) | AT-SPI, GTK, Orca, BRLTTY |
+| [AppArmor](https://apparmor.net/) | Confinement profiles and auditing |
+| [Polkit](https://www.freedesktop.org/software/polkit/docs/latest/) | Privileged actions |
+| [NetworkManager](https://networkmanager.dev/docs/developers/) | Connectivity and network state |
+| [PipeWire](https://docs.pipewire.org/) | Audio/video graph |
+| [WirePlumber](https://pipewire.pages.freedesktop.org/wireplumber/) | PipeWire session/policy manager |
+| [UPower](https://upower.freedesktop.org/docs/) | Battery and power state |
+| [BlueZ D-Bus API](https://git.kernel.org/pub/scm/bluetooth/bluez.git/tree/doc) | Bluetooth |
+| [OpenPrinting CUPS](https://openprinting.github.io/cups/) | Printing |
+| [UDisks2 API](https://storaged.org/udisks/docs/) | Disks and mounts |
+| [fwupd / LVFS](https://fwupd.org/) | Firmware updates |
+| [PackageKit](https://www.freedesktop.org/software/PackageKit/) | Package management |
+| [snapd REST API](https://snapcraft.io/docs/snapd-api) | Snap automation |
+
 ## GNOME and GTK
 
 | Resource | Why it matters |

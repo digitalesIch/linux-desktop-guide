@@ -27,6 +27,10 @@ On Linux, most of that integration happens over **D-Bus** and **XDG Desktop Port
 
 Use the highest-level API the toolkit offers. It will choose the right transport, handle async, and keep the app working inside a sandbox.
 
+:::note[Ubuntu defaults]
+On Ubuntu, these interfaces are provided by specific system services: NetworkManager, PipeWire/WirePlumber, UPower, BlueZ, CUPS, UDisks2, and Polkit. The [Ubuntu Platform](/platform/ubuntu/#system-services) page maps each service to its supported API and tells you when an app should use a portal instead of talking to the service directly.
+:::
+
 ## Single instance and activation
 
 A desktop app should be a single instance with multiple windows — not five independent processes. `Gtk.Application` and `QApplication` solve this via D-Bus: the first process owns the application bus name, later launches activate it.

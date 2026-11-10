@@ -59,6 +59,8 @@ Terms are grouped by area. Links point to the canonical specification or documen
 | **Sandbox** | An isolated execution environment that restricts filesystem, network, device, and D-Bus access. |
 | **Snap** | Canonical's packaging and confinement system, used by the Ubuntu App Center. |
 | **Snapcraft** | The build tool and recipe format for Snap packages. |
+| **snapd** | The background daemon that installs, confines, refreshes, and manages snaps. |
+| **Rockcraft** | Canonical's tool for building minimal Ubuntu-based OCI images (rocks). |
 | **Verification** | Flathub's process for proving that a publisher controls the app's domain or repository. |
 
 ## Design and accessibility
@@ -77,10 +79,16 @@ Terms are grouped by area. Links point to the canonical specification or documen
 
 | Term | Meaning |
 | --- | --- |
+| **AppArmor** | Ubuntu's default Linux Security Module; confines programs with per-application profiles. |
 | **CVE** | Common Vulnerabilities and Exposures: a public identifier for a security flaw. |
 | **Glycin** | A sandboxed image-loading library for untrusted images, used by GNOME apps. |
+| **ESM** | Expanded Security Maintenance: Ubuntu Pro updates for packages beyond the standard support window. |
+| **fwupd** | The D-Bus service and daemon for firmware updates via the Linux Vendor Firmware Service (LVFS). |
 | **Least privilege** | The principle that an app should request only the access it needs for a feature. |
+| **Livepatch** | Ubuntu Pro kernel patching that avoids reboots for supported livepatch fixes. |
+| **Polkit** | The D-Bus authority for privileged desktop actions; apps define named actions instead of using sudo. |
 | **Seccomp** | Linux syscall filtering, used by sandboxes to reduce the kernel attack surface. |
+| **Ubuntu Pro** | Canonical's subscription for ESM, Livepatch, FIPS, CIS, and extended support; optional for apps. |
 | **Secret Service** | The D-Bus API for the user's keyring; libsecret is the common client library. |
 
 ## Performance
@@ -98,7 +106,9 @@ Terms are grouped by area. Links point to the canonical specification or documen
 | --- | --- |
 | **MPRIS** | The D-Bus interface for media players, used by desktop media controls and `playerctl`. |
 | **StatusNotifierItem** | The D-Bus-based system tray protocol used by some desktops. Support varies; do not rely on it. |
+| **PackageKit** | The D-Bus abstraction for package management used by software centers. |
 | **UPower** | The D-Bus service for battery and power information. |
+| **WirePlumber** | The modular session and policy manager for PipeWire. |
 | **BlueZ** | The Linux Bluetooth stack and its D-Bus API. |
 | **NetworkManager** | The Linux network management service and D-Bus API. |
 | **UDisks2** | The D-Bus API for disks, partitions, and mounts. |

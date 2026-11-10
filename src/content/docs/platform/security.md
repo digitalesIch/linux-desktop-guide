@@ -50,6 +50,46 @@ If a feature cannot work in a sandbox, the answer is usually one of:
 
 Do not silently disable the sandbox.
 
+## Ubuntu security services
+
+Ubuntu layers four services on top of the sandbox model. They are covered in more detail in [Ubuntu Platform](/platform/ubuntu/#security-and-ubuntu-pro).
+
+| Service | Use it for | Do not |
+| --- | --- | --- |
+| **AppArmor** | Confining system services and sandboxed apps | Disable a profile to make a feature work |
+| **Polkit** | Named privileged actions with desktop authentication | Run `sudo` or `pkexec` from a GUI app |
+| **fwupd / LVFS** | Firmware updates and device status | Write firmware directly |
+| **Ubuntu Pro** | ESM, Livepatch, FIPS, CIS for users who subscribe | Require Pro for core app functionality |
+
+### AppArmor
+
+AppArmor is the default mandatory-access-control layer on Ubuntu. It mediates filesystem access, capabilities, network sockets, D-Bus, and IPC for confined programs. If you ship a system service, include an AppArmor profile and test it:
+
+```bash
+aa-status
+sudo journalctl -fx -k --grep=apparmor
+```
+
+Desktop apps should rely on the Flatpak or Snap sandbox rather than asking users to install a custom profile.
+
+### Polkit
+
+Polkit is the correct way to request a privileged operation from a desktop session. Define a named action with a clear message, then let the desktop's authentication agent prompt the user. Do not shell out to `sudo`, and do not run `pkexec` from a GUI process; both bypass the desktop's policy and break in sandboxes.
+
+### fwupd and Ubuntu Pro
+
+fwupd handles firmware updates through the Linux Vendor Firmware Service (LVFS). Integrate with it or link to the firmware updater; never flash firmware yourself.
+
+Ubuntu Pro adds ESM, Livepatch, FIPS, and CIS hardening. It is optional:
+
+```bash
+pro status
+sudo pro enable esm-apps
+sudo pro enable livepatch
+```
+
+Detect whether a Pro service is enabled before exposing it in the UI, and keep the app fully usable when it is absent.
+
 ## Secrets
 
 Never store credentials in plaintext. Use the Secret Service (libsecret on GNOME, KWallet on KDE with a compatible backend), the Secret portal in a sandbox, or the platform's keyring API.
@@ -183,6 +223,10 @@ When a report arrives: reproduce, contain, patch, release, notify. Do not argue 
 - ☐ No shell interpolation of untrusted data.
 - ☐ Crash reports and telemetry are opt-in and redacted.
 - ☐ Updates come from a signed channel; no self-updater in a sandbox.
+- ☐ AppArmor profiles are shipped for system services and tested with `aa-status`.
+- ☐ Privileged operations use a named Polkit action, not `sudo` or `pkexec`.
+- ☐ Firmware updates go through fwupd/LVFS; the app never flashes firmware directly.
+- ☐ Ubuntu Pro is optional; the app works without ESM, Livepatch, FIPS, or CIS.
 - ☐ `SECURITY.md` exists and is current.
 - ☐ Dependencies are pinned and monitored.
 

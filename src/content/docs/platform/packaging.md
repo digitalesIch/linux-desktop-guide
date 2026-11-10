@@ -24,6 +24,10 @@ A pragmatic release matrix for a new app:
 3. **Snap** — only if the Ubuntu App Center is a real audience and you can maintain the confinement.
 4. **AppImage** — optional, for portable testing; not a substitute for a repository.
 
+:::note[Ubuntu's own guidance]
+Ubuntu supports two first-class package formats: **deb** and **snap**. The Ubuntu App Center recommends snaps for third-party apps because they are sandboxed and updated independently of the release; a deb has full access to the user's resources. Flatpak remains the cross-distribution upstream path in this guide. See [Ubuntu Platform](/platform/ubuntu/#packaging-paths) for the full decision table and primary sources.
+:::
+
 ## Flatpak
 
 Flatpak is covered in depth in [Flatpak & Portals](/platform/flatpak-portals/). The packaging-specific workflow is:
@@ -54,7 +58,9 @@ The sandbox cannot replace its own deployment. Ship updates through Flathub/Flat
 
 ## deb packages
 
-A Debian package is a directory tree plus metadata. The minimum source package layout is:
+A Debian package is a directory tree plus metadata. The [Ubuntu packaging guide](https://packaging.ubuntu.com/html/) and the [new-package guide](https://documentation.ubuntu.com/project/contributors/new-package/create-a-new-package/) cover the archive process; the example below is the minimal local layout.
+
+The minimum source package layout is:
 
 ```text
 notes/
@@ -139,7 +145,7 @@ debuild -S -sa
 dput ppa:yourname/notes ../notes_0.1.0-1_source.changes
 ```
 
-A PPA is a good stepping stone. It is not a substitute for the Ubuntu archive, and users still need to add it manually.
+A PPA is a good stepping stone. It is not a substitute for the Ubuntu archive, and users still need to add it manually. Follow [Build packages in a PPA](https://documentation.ubuntu.com/project/contributors/bug-fix/build-packages-in-a-ppa/) for the upload and signing flow.
 
 ### What goes in the package
 
@@ -212,6 +218,12 @@ snap run notes
 - The Snap Store review checks metadata, confinement, and policy. Expect iteration.
 
 Snap's automatic refresh is a feature, not a bug. Do not add a self-updater; test the app across a refresh, including with unsaved work.
+
+For the full build and review flow, use the [Snapcraft documentation](https://documentation.ubuntu.com/snapcraft/stable/) and the [Craft a snap](https://documentation.ubuntu.com/snapcraft/stable/tutorials/craft-a-snap/) tutorial. Declare the smallest set of [interfaces](https://canonical-snap.readthedocs-hosted.com/reference/interfaces/) you can; use XDG portals inside the snap where possible, as described in the [Snap portal guidance](https://canonical-snap.readthedocs-hosted.com/explanation/snap-development/xdg-desktop-portals/). For automation, use the [snapd REST API](https://snapcraft.io/docs/snapd-api) rather than shelling out to `snap`.
+
+## OCI images with Rockcraft
+
+If the deliverable is a service or cloud workload rather than a desktop app, build it as an OCI image with [Rockcraft](https://documentation.ubuntu.com/rockcraft/stable/). Rocks are minimal, Ubuntu-based images with a supported build path. Do not use them as a desktop packaging format.
 
 ## AppImage
 

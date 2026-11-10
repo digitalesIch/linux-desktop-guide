@@ -33,6 +33,7 @@ export default defineConfig({
 				{
 					label: 'Platform',
 					items: [
+						{ label: 'Ubuntu Platform', slug: 'platform/ubuntu' },
 						{ label: 'Wayland & Display', slug: 'platform/wayland' },
 						{ label: 'The XDG Contract', slug: 'platform/xdg' },
 						{ label: 'System Integration', slug: 'platform/integration' },

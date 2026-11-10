@@ -19,6 +19,8 @@ It is also a legal requirement. The **European Accessibility Act** applies to ma
 
 If you use native widgets, you get most of this for free. If you draw your own controls, you must implement the semantics yourself — and that is usually a bad trade.
 
+On Ubuntu, the stack is documented in the [Ubuntu Desktop accessibility guide](https://documentation.ubuntu.com/desktop/en/latest/explanation/accessibility-stack/). GTK 4 apps expose semantics through `Gtk.Accessible`; GTK 3 uses ATK. Orca is the default screen reader, with BRLTTY for Braille and Speech Dispatcher/eSpeak for speech. Flutter has known AT-SPI compatibility limitations, so test it with Orca and budget for custom accessibility work. The [AT-SPI D-Bus interfaces](https://documentation.ubuntu.com/desktop/en/latest/reference/accessibility/dbus/) are the reference for custom assistive tooling.
+
 ## The baseline: WCAG 2.2 AA
 
 The four principles are **perceivable, operable, understandable, and robust**. For desktop apps, the practical checklist is:

@@ -7,6 +7,8 @@ Rust is a first-class language for Linux desktop apps. GNOME's Loupe and Resourc
 
 The trade-offs are real: longer compile times, a smaller pool of UI contributors, and a toolkit object model that does not map cleanly to Rust's ownership rules. None of them are blockers if you choose the right layer.
 
+Ubuntu documents both the archive Rust toolchain and the `rustup` path, along with the versions available in each release. Use the [Ubuntu Rust guide](https://documentation.ubuntu.com/ubuntu-for-developers/toolchains/rust/) when you need an install path, and the [version reference](https://documentation.ubuntu.com/ubuntu-for-developers/reference/availability/rust/) before you promise support for an older LTS.
+
 ## The options
 
 | Stack | Model | Best for | Notes |

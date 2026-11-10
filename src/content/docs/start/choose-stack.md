@@ -129,6 +129,17 @@ A useful rule:
 
 Do not let a language preference force you into a toolkit that fights the desktop, and do not let a toolkit force you into a language your team cannot staff.
 
+## Ubuntu toolchains
+
+Ubuntu publishes supported setup and version-availability guides for Python, Go, Rust, GCC, Clang, .NET, Java, and Zig. Use them as the source of truth when you need to know what an LTS release ships, or when you need a supported install path:
+
+- [Ubuntu for Developers](https://documentation.ubuntu.com/ubuntu-for-developers/) — overview and tutorials.
+- [Toolchains](https://documentation.ubuntu.com/ubuntu-for-developers/toolchains/) — per-language setup and first-program guides.
+- [Toolchain availability](https://documentation.ubuntu.com/ubuntu-for-developers/reference/availability/) — what each Ubuntu release provides.
+- [IDEs](https://documentation.ubuntu.com/ubuntu-for-developers/reference/ides/) — supported editors and install commands.
+
+For GTK apps, use the archive toolchain when you link against system libraries. For compilers or language runtimes that must be newer than the archive, use a project-local toolchain or a snap and pin the version in CI. Do not mix an archive library with a newer runtime ABI without testing the combination.
+
 ## A decision walkthrough
 
 1. **Which desktop is primary?** GNOME/Ubuntu → GTK/libadwaita. KDE → Qt/Kirigami. Both equally → Qt with a platform-integration pass, or accept that one desktop will be secondary.
