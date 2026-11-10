@@ -98,7 +98,7 @@
 - [x] 6.3 Run `npm run check:agent-docs`.
 - [x] 6.4 Run `npm run test:docs-mcp` and verify search still returns the updated pages.
 - [x] 6.5 Re-run the internal link/anchor checker.
-- [ ] 6.6 Validate the updated AppStream, desktop-entry, Snap, and Flatpak examples with the available tools.
+- [x] 6.6 Validate the updated AppStream, desktop-entry, Snap, and Flatpak examples with the available tools. Flatpak built with GNOME SDK 50; Snap manifest parsed and core26/command/Python checked; Snapcraft build skipped because snapcraft/sudo is unavailable.
 - [x] 6.7 Review the diff for factual claims and editorial-rule violations; run `git diff --check`.
 - [x] 6.8 Commit on `workspace` with an English message and merge to `main`.
 
