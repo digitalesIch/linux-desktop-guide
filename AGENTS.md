@@ -29,7 +29,7 @@ The public guide is published for agents as well as humans. After `npm run build
 - `/llms-full.txt` — the complete guide in one file.
 - Append `.md` to a page route for a clean Markdown version, for example `/start/why-linux.md`.
 
-Run `npm run check:docs` before releasing. It performs baseline validation, a full build, agent-doc validation, MCP tests, and internal link/anchor checking. The default gate is offline. External link checks are opt-in with `npm run check:links:external`; unreachable hosts are warnings unless `check:links:external:strict` is used.
+Run `npm run check:docs` before releasing. It performs baseline validation, tutorial/example consistency checking, a full build, agent-doc validation, MCP tests, and internal link/anchor checking. The default gate is offline. External link checks are opt-in with `npm run check:links:external`; unreachable hosts are warnings unless `check:links:external:strict` is used.
 
 Run `npm run check:quality` for the browser-based gate. It serves `dist/`, runs Lighthouse on representative pages, requires accessibility, best practices, and SEO at 100, and keeps performance at or above 90. It needs a local Chrome and is intentionally separate from the offline `check:docs` gate. Add `-- --no-build` to reuse an existing build.
 

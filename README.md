@@ -76,10 +76,11 @@ npm run check:docs
 It runs, in order:
 
 1. baseline validation;
-2. a full Astro build (including agent docs and Pagefind);
-3. agent-doc validation;
-4. the MCP server tests;
-5. internal link and anchor checking against `dist/`.
+2. tutorial/example consistency checking;
+3. a full Astro build (including agent docs and Pagefind);
+4. agent-doc validation;
+5. the MCP server tests;
+6. internal link and anchor checking against `dist/`.
 
 The default gate is offline and repeatable. External URLs are checked separately:
 
@@ -89,7 +90,7 @@ npm run check:links:external
 
 Unreachable hosts are warnings, because a local network or a site blocking automated requests is not proof of a broken link. Use `npm run check:links:external:strict` when the network is reliable and warnings should fail the check.
 
-`npm run check:links` runs only the fast internal check.
+`npm run check:links` runs only the fast internal check. `npm run check:examples` compares the file blocks in the first-app tutorial with `examples/notes`; it fails on drift and prints a line diff.
 
 Browser-based quality checks are separate because they need a local Chrome installation:
 

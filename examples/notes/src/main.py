@@ -36,6 +36,7 @@ class NotesWindow(Adw.ApplicationWindow):
         self.notes = self.load_notes()
         self.rows = {}
 
+        # Window actions -------------------------------------------------
         new_action = Gio.SimpleAction.new("new-note", None)
         new_action.connect("activate", self.on_new_note)
         self.add_action(new_action)
@@ -44,10 +45,12 @@ class NotesWindow(Adw.ApplicationWindow):
         about_action.connect("activate", self.on_about)
         self.add_action(about_action)
 
+        # Header bar -----------------------------------------------------
         header = Adw.HeaderBar()
 
         new_button = Gtk.Button(icon_name="list-add-symbolic")
         new_button.set_tooltip_text("New note (Ctrl+N)")
+        new_button.update_property([Gtk.AccessibleProperty.LABEL], ["New note"])
         new_button.set_action_name("win.new-note")
         new_button.add_css_class("suggested-action")
         header.pack_start(new_button)
@@ -56,8 +59,10 @@ class NotesWindow(Adw.ApplicationWindow):
         menu.append("About Notes", "win.about")
         menu_button = Gtk.MenuButton(icon_name="open-menu-symbolic", menu_model=menu)
         menu_button.set_tooltip_text("Main menu")
+        menu_button.update_property([Gtk.AccessibleProperty.LABEL], ["Main menu"])
         header.pack_end(menu_button)
 
+        # Sidebar --------------------------------------------------------
         self.listbox = Gtk.ListBox()
         self.listbox.set_selection_mode(Gtk.SelectionMode.SINGLE)
         self.listbox.add_css_class("navigation-sidebar")
@@ -68,6 +73,7 @@ class NotesWindow(Adw.ApplicationWindow):
         sidebar_scroller.set_child(self.listbox)
         sidebar_scroller.set_vexpand(True)
 
+        # Content --------------------------------------------------------
         self.title_label = Gtk.Label(xalign=0)
         self.title_label.add_css_class("title-2")
 
@@ -99,6 +105,7 @@ class NotesWindow(Adw.ApplicationWindow):
         self.stack.add_named(content_scroller, "editor")
         self.stack.set_visible_child_name("empty")
 
+        # Adaptive split view -------------------------------------------
         split = Adw.OverlaySplitView()
         split.set_sidebar(sidebar_scroller)
         split.set_content(self.stack)
@@ -106,6 +113,13 @@ class NotesWindow(Adw.ApplicationWindow):
         split.set_max_sidebar_width(320)
         split.set_show_sidebar(True)
 
+        breakpoint = Adw.Breakpoint.new(
+            Adw.BreakpointCondition.parse("max-width: 600sp")
+        )
+        breakpoint.add_setter(split, "collapsed", True)
+        self.add_breakpoint(breakpoint)
+
+        # Layout ---------------------------------------------------------
         toolbar = Adw.ToolbarView()
         toolbar.add_top_bar(header)
         toolbar.set_content(split)
@@ -114,6 +128,7 @@ class NotesWindow(Adw.ApplicationWindow):
         self.refresh()
         self.connect("close-request", self.on_close_request)
 
+    # Data ---------------------------------------------------------------
     def load_notes(self):
         try:
             data = json.loads(self.data_file.read_text(encoding="utf-8"))
@@ -138,22 +153,14 @@ class NotesWindow(Adw.ApplicationWindow):
     def save_notes(self):
         self.data_file.parent.mkdir(parents=True, exist_ok=True)
         temp = self.data_file.with_suffix(".tmp")
-        temp.write_text(
-            json.dumps(self.notes, indent=2, ensure_ascii=False), encoding="utf-8"
-        )
+        temp.write_text(json.dumps(self.notes, indent=2, ensure_ascii=False), encoding="utf-8")
         temp.replace(self.data_file)
 
     def refresh(self):
-        child = self.listbox.get_first_child()
-        while child is not None:
-            self.listbox.remove(child)
-            child = self.listbox.get_first_child()
-
+        self.listbox.remove_all()
         self.rows.clear()
         for index, note in enumerate(self.notes):
-            row = Adw.ActionRow(
-                title=note["title"], subtitle=note["body"].splitlines()[0]
-            )
+            row = Adw.ActionRow(title=note["title"], subtitle=note["body"].splitlines()[0])
             row.set_subtitle_lines(1)
             row.set_activatable(True)
             self.listbox.append(row)
@@ -163,6 +170,7 @@ class NotesWindow(Adw.ApplicationWindow):
         if first is not None:
             self.listbox.select_row(first)
 
+    # Signal handlers ---------------------------------------------------
     def on_row_selected(self, _listbox, row):
         if row is None or row not in self.rows:
             return
@@ -184,6 +192,9 @@ class NotesWindow(Adw.ApplicationWindow):
             version="0.1.0",
             developers=["Your Name <you@example.com>"],
             copyright="© 2026 Your Name",
+            license_type=Gtk.License.GPL_3_0,
+            website="https://example.org/notes",
+            issue_url="https://example.org/notes/issues",
         )
         about.present(self)
 

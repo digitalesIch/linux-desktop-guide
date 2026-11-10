@@ -46,7 +46,7 @@ The last row is the philosophical difference. On Linux, the user can replace the
 
 ## The four contracts
 
-Everything in this guide hangs off four contracts. They are also the four sections of the platform part of this book.
+Everything in this guide hangs off four contracts. They are also the four sections of the platform part of this book. If a term is unfamiliar, the [Glossary](/reference/glossary/) defines the platform and toolkit vocabulary used throughout.
 
 ### 1. Display: render through the compositor
 

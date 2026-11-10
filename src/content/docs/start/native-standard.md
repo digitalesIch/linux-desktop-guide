@@ -207,4 +207,4 @@ If you can defend that sentence in a code review, you are building native softwa
 - [AppStream](https://www.freedesktop.org/software/appstream/docs/)
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
 
-Next: [Design Principles](/design/principles/) — how the standard becomes an interface.
+Next: [Ubuntu Platform](/platform/ubuntu/) — the release, toolchains, and packaging paths the standard runs on.

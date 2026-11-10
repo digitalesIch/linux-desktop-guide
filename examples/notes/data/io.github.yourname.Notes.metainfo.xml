@@ -13,6 +13,14 @@
 
   <launchable type="desktop-id">io.github.yourname.Notes.desktop</launchable>
   <url type="homepage">https://example.org/notes</url>
+  <categories>
+    <category>Office</category>
+  </categories>
+  <keywords>
+    <keyword>notes</keyword>
+    <keyword>writing</keyword>
+    <keyword>markdown</keyword>
+  </keywords>
   <developer id="org.example">
     <name>Your Name</name>
   </developer>

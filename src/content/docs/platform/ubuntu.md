@@ -208,3 +208,6 @@ Sources: [Ubuntu Desktop accessibility stack](https://documentation.ubuntu.com/d
 - [Flatpak & Portals](/platform/flatpak-portals/)
 - [Packaging & Distribution](/platform/packaging/)
 - [Security & Privacy](/platform/security/)
+- [Glossary](/reference/glossary/) — definitions for the platform and toolkit terms used here.
+
+Next: [Wayland & Display](/platform/wayland/) — how the compositor, input, and scaling model change what the app can do.

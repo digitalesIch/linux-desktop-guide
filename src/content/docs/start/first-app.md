@@ -53,13 +53,14 @@ Create `src/main.py`:
 
 import json
 import pathlib
+import sys
 
 import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Adw, Gio, GLib, GObject, Gtk
+from gi.repository import Adw, Gio, GLib, Gtk
 
 
 APP_ID = "io.github.yourname.Notes"
@@ -82,7 +83,7 @@ class NotesWindow(Adw.ApplicationWindow):
         self.set_title("Notes")
         self.set_default_size(980, 680)
 
-        self.data_file = pathlib.Path(GLib.get_user_data_dir()) / APP_ID / "notes.json"
+        self.data_file = pathlib.Path(GLib.get_user_data_dir()) / "notes" / "notes.json"
         self.notes = self.load_notes()
         self.rows = {}
 
@@ -128,7 +129,7 @@ class NotesWindow(Adw.ApplicationWindow):
         self.title_label.add_css_class("title-2")
 
         self.body_label = Gtk.Label(xalign=0, wrap=True, selectable=True)
-        self.body_label.add_css_class("document")
+        self.body_label.add_css_class("body")
 
         content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
         content_box.set_margin_top(30)
@@ -255,6 +256,8 @@ class NotesWindow(Adw.ApplicationWindow):
 
 if __name__ == "__main__":
     app = NotesApplication()
+    if "--quit-after-startup" in sys.argv:
+        GLib.timeout_add(800, app.quit)
     app.run(None)
 ```
 
@@ -265,6 +268,8 @@ python3 src/main.py
 ```
 
 You should get a window with a sidebar, two notes, an adaptive split view, and a working `Ctrl+N` shortcut. Close and reopen it: the notes persist in `~/.local/share/notes/notes.json`.
+
+The `--quit-after-startup` flag is a smoke-test hook: it opens the window, waits for the first frame, then exits. It is not a user-facing feature.
 
 ## 4. Add the desktop entry
 
@@ -279,11 +284,10 @@ Exec=notes
 Icon=io.github.yourname.Notes
 Terminal=false
 Type=Application
-Categories=Office;Utility;
+Categories=Office;
 Keywords=notes;writing;markdown;
 StartupNotify=true
-StartupWMClass=notes
-DBusActivatable=true
+StartupWMClass=io.github.yourname.Notes
 ```
 
 Validate it:
@@ -292,7 +296,7 @@ Validate it:
 desktop-file-validate data/io.github.yourname.Notes.desktop
 ```
 
-`DBusActivatable=true` needs a matching D-Bus service file when the app is installed outside Flatpak; see [System Integration](/platform/integration/#single-instance-and-activation). Flatpak exports the application ID for you.
+D-Bus activation and single-instance behavior are covered in [System Integration](/platform/integration/#single-instance-and-activation).
 
 ## 5. Add AppStream metadata
 
@@ -316,7 +320,6 @@ Create `data/io.github.yourname.Notes.metainfo.xml`:
   <url type="homepage">https://example.org/notes</url>
   <categories>
     <category>Office</category>
-    <category>Utility</category>
   </categories>
   <keywords>
     <keyword>notes</keyword>
@@ -359,7 +362,7 @@ Install an SVG icon as `data/io.github.yourname.Notes.svg`. It must be a square,
 
 Create `meson.build`:
 
-```python title="meson.build"
+```meson title="meson.build"
 project('notes', version: '0.1.0', meson_version: '>=1.3.0')
 
 bindir = get_option('bindir')
