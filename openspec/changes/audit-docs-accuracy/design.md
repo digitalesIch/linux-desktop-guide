@@ -93,10 +93,50 @@ This change adds a review checklist and source links, not a crawler or a paid se
 | `engineering/testing.md` | `setup-python` plus apt `python3-gi` | The setup-python interpreter cannot see apt-installed PyGObject; use the system Python with `python3-pytest`, or a container that installs both | GitHub Actions and PyGObject packaging |
 | `ship/flathub.md` | Flathub manifest with `type: dir` | Flathub submissions must not include source code; use a `git` source with a tag/commit, or an `archive` source with a checksum | Flathub requirements, "Required files" and "No network access" |
 | `reference/baseline.mdx` | "the future documentation MCP server" | The MCP server exists and reads the same baseline data | `tools/docs-mcp` |
+| `platform/ubuntu.md`, `platform/packaging.md`, `reference/resources.md` | `canonical-snap.readthedocs-hosted.com` links | The legacy Snap docs now redirect to a Read the Docs login; use `https://snapcraft.io/docs/` and the current Snapcraft documentation | HTTP link check, 2026-11-10 |
+| `platform/flatpak-portals.md` | Secret portal "stores secrets in the keyring" | `org.freedesktop.portal.Secret` returns a per-app master secret for app-local encrypted storage; libsecret uses it transparently. Direct keyring access is `org.freedesktop.secrets` and is broader | xdg-desktop-portal Secret docs |
+| `platform/flatpak-portals.md` | `org.freedesktop.portal.USB` | The portal is `org.freedesktop.portal.Usb`; D-Bus names are case-sensitive | xdg-desktop-portal Usb docs |
+| `platform/flatpak-portals.md` | Settings portal exposes fonts | The Settings portal exposes `color-scheme`, `accent-color`, `contrast`, and `reduced-motion`; fonts come from GSettings/toolkit APIs | xdg-desktop-portal Settings docs |
+| `platform/ubuntu.md` | "Flatpak runtimes ... built around Ubuntu LTS" | Flatpak runtimes follow Freedesktop/GNOME/KDE schedules, not Ubuntu LTS; document their own support windows | Flatpak runtime docs |
+| `platform/xdg.md` | License at `$prefix/share/licenses/$app-id` | Debian/Ubuntu use `/usr/share/doc/<package>/copyright`; `/usr/share/licenses` is a Fedora convention | Debian Policy §12.5 |
+| `platform/packaging.md` | Snap `command: bin/notes` with `--prefix=/usr` | The command must point to the installed path, for example `usr/bin/notes`, or use `command: notes` | Snapcraft `snapcraft.yaml` reference |
+| `platform/flatpak-portals.md` | `--socket=fallback-x11` provides X11 via XWayland | `fallback-x11` only exposes X11 when Wayland is unavailable; use `--socket=x11` if the app must run under XWayland on a Wayland session | Flatpak sandbox permissions |
+| `platform/flatpak-portals.md` | `GTK_USE_PORTAL=1` for GTK4 testing | GTK4 uses `GDK_DEBUG=portals`; `GTK_USE_PORTAL` is a GTK3-era compatibility switch | GTK4 running/debugging docs |
+| `platform/flatpak-portals.md` | Flatpak commands assume an installed Flatpak/Flathub setup | Ubuntu 26.04 does not ship Flatpak by default; show `apt install flatpak flatpak-builder` and `flatpak remote-add` | Ubuntu Desktop/Flatpak docs |
+| `platform/integration.md` | D-Bus service file `Exec=/usr/bin/notes` | A `GApplication` D-Bus activation service needs `Exec=/usr/bin/notes --gapplication-service` | GApplication docs |
+| `platform/xdg.md` | Shipped autostart file with `Hidden=true` | `Hidden=true` is a user override; shipping it disables autostart for everyone | XDG Autostart spec |
+| `platform/wayland.md` | `wl-info` | Use `wayland-info` from `wayland-utils`; `wl-info` is not a standard Ubuntu binary | Ubuntu Wayland tooling |
+| `platform/packaging.md` | CI sketch promises Snap but has no Snap job; `build-dep` needs `deb-src` | Add a Snap job, enable `deb-src` or use `mk-build-deps`, and install `lintian` | GitHub Actions/Ubuntu packaging |
+| `platform/packaging.md` | "strict is the only acceptable default" | Too absolute; classic confinement is legitimate for tools that need broad host access and pass review | Snapcraft confinement docs |
+| `platform/ubuntu.md`, `src/data/baseline.json` | Ubuntu 26.04 support ends May 2031/2036/2041 | The 26.04 release notes say April 2031; the release-cycle table says May. Choose one as the primary source and footnote the discrepancy | Canonical release notes and release cycle |
 | `platform/ubuntu.md`, `design/accessibility.md` | Flutter AT-SPI claim | Remove the named competitor claim; keep the general advice to test custom-rendered UI with Orca | Editorial rule |
 | `start/choose-stack.md`, `engineering/rust.md` | Electron/Tauri/Flutter/Wails comparison | Replace with criteria for web-shaped products, without named competitor comparisons | Editorial rule |
 | `platform/xdg.md`, `start/why-linux.md` | `~/Library/Application Support` reference | Remove the macOS comparison; describe XDG directly | Editorial rule |
 | `platform/wayland.md`, `design/principles.md` | "fake traffic lights" | Replace with "fake window controls"; the term is a macOS reference | Editorial rule |
+
+## Second-pass findings
+
+- **Tutorial adaptivity:** `Adw.OverlaySplitView` does not collapse by itself. The first-app example needs an `Adw.Breakpoint` that sets `collapsed` at a narrow width; `design/layout.md` must stop calling the split views "adaptive by design."
+- **Window-size persistence:** binding `default-width`/`default-height` only sets the initial size. Save the actual `width`/`height` on close (or observe `notify::width`) and restore with `set_default_size`.
+- **Meson/gettext layout:** `i18n.gettext()` must live in the directory that contains `POTFILES.in` and `LINGUAS` (usually `po/meson.build` with `subdir('po')` from the root), not at the root while the files sit in `po/`.
+- **Flathub screenshots:** Flathub's quality guidelines favor a window capture around 1000×700 (2000×1400 for HiDPI), not "1600×900 or larger." They also require the native window shadow/decoration and language-tagged screenshots; the guide's "avoid drop shadows" advice directly conflicts with the store it recommends.
+- **Branding colors:** the light-scheme brand color is darker than the dark-scheme color. Flathub expects the dark variant to be the darker/muted counterpart and to contrast with the icon; swap or validate the pair.
+- **AppStream validator output:** the "common validation errors" table uses approximate names (`icon-missing`, `id-mismatch`) instead of the actual `appstreamcli` issue tags. Use real validator output and add `appstreamcli compose`/Flathub lint for desktop-file consistency.
+- **Accessible labels:** the first-app icon-only buttons have tooltips but no accessible names, contradicting the accessibility page. Add `Gtk.AccessibleProperty.LABEL` for both buttons.
+- **Category consistency:** the desktop file uses `Categories=Office;` while the AppStream page uses `Office;Utility;`. Pick one and keep them in sync.
+- **snapd is not D-Bus:** the checklist and Ubuntu page say "use D-Bus instead of `snap`"; snapd exposes a REST API on `/run/snapd.socket`. Say "use D-Bus or the snapd REST API" and keep the command-line warning.
+- **Reduced motion:** libadwaita widgets honor the setting, but GTK 4.22 core widgets and custom animations need verification; do not claim every GTK widget handles it automatically.
+- **`<launchable>` mapping:** `<launchable type="desktop-id">` points at the installed desktop-file ID, not at `Exec`. Fix the AppStream/desktop consistency table.
+- **Flathub Builder setup:** add the Flathub remote before installing `org.flatpak.Builder`, and use `--user` consistently to match the Flathub docs.
+- **GtkSvg timing:** the GTK 4.22 docs mark `GtkSvg` as available in 4.22, while `GtkSvgWidget` is 4.24-only. Verify the exact introduction version before making a stronger historical claim; describe what Ubuntu 26.04 actually ships.
+- **Dimension count:** the native standard has ten rules, but the Quality Bar has seven dimensions; fix the cross-reference.
+- **First-app data path:** use an app-ID-scoped directory under `GLib.get_user_data_dir()` so the app does not collide with another app called "notes" outside Flatpak.
+- **Long-form text:** `.body` is for UI descriptions; use `.document` for note content.
+- **About dialog completeness:** include the license, website, and issue URL that the metadata checklist promises.
+- **Filter API:** `Gtk.FilterListModel` has no `set_filter_func`; show `Gtk.CustomFilter` or set the filter on the model correctly.
+- **Localization setup:** add `po/POTFILES.in`, `po/meson.build`, Python `gettext.bindtextdomain`/`textdomain`, Qt `qt_add_translations`/`QTranslator`, input methods (IBus/Fcitx5), bidi isolates, and a realistic RTL locale test.
+- **Release checklist wording:** "string freeze is over" should say the freeze is in effect until release; add Snap (`core26`, Snapcraft 9, Python staging, `snapcraft lint`, refresh/rollback), App Center listing, crash reporting, SBOM/provenance, and reproducible-build checks.
+- **Unsourced absolutes:** qualify "without asking a gatekeeper" (stores still review), "a decade-old laptop," "100–300 MB installs," "largest vendor-neutral app store," and "most apps fail on three or four rules."
 
 ## Risks / Trade-offs
 
