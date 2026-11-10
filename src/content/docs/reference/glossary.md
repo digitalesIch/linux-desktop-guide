@@ -3,7 +3,7 @@ title: Glossary
 description: The Linux desktop terms used in this guide — Wayland, XDG, portals, GTK, libadwaita, Flatpak, AppStream, and more — defined in plain language.
 ---
 
-Terms are grouped by area. Links point to the canonical specification or documentation where one exists.
+Terms are grouped by area. Links point to the canonical specification or documentation where one exists. For how the guide uses and formats these terms, see the [Style Guide](/reference/style-guide/).
 
 ## Platform
 
@@ -115,6 +115,7 @@ Terms are grouped by area. Links point to the canonical specification or documen
 
 ## See also
 
+- [Style Guide](/reference/style-guide/)
 - [The XDG Contract](/platform/xdg/)
 - [Flatpak & Portals](/platform/flatpak-portals/)
 - [GTK & libadwaita](/engineering/gtk/)

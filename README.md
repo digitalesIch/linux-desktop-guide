@@ -30,8 +30,8 @@ Start at `src/content/docs/targets/index.md`; the method and evidence are in `ta
 │   │   ├── platform/          # Ubuntu, Wayland, XDG, integration, Flatpak, packaging, security
 │   │   ├── design/            # Principles, visual language, layout, interaction, a11y, i18n
 │   │   ├── engineering/       # Architecture, GTK, Qt, Rust, performance, testing, reliability
-│   │   ├── ship/              # AppStream, Flathub, release checklist, quality bar
-│   │   └── reference/         # Baseline, quality signals, checklists, glossary, resources
+│   │   ├── ship/              # AppStream, user documentation, Flathub, release checklist, quality bar
+│   │   └── reference/         # Baseline, quality signals, checklists, style guide, glossary, resources
 │   ├── components/            # PageTitle override and other Starlight overrides
 │   ├── data/baseline.json     # Ubuntu/GNOME reference baseline
 │   ├── data/targets.json      # Curated target matrix and evidence scores
@@ -152,6 +152,7 @@ description: One sentence for search results and social previews.
 
 ## Content conventions
 
+- Follow `src/content/docs/reference/style-guide.md` for voice, terminology, links, code, screenshots, accessibility, localization, and agent-facing Markdown.
 - English prose; keep technical terms in English.
 - Prefer primary sources (freedesktop specs, GNOME/KDE/Qt docs, Flathub docs).
 - Every command should be runnable. Mark placeholders like `io.github.yourname.Notes` clearly.

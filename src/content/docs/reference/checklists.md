@@ -51,6 +51,23 @@ Copy these into an issue template, a `RELEASE.md`, or a pull request checklist.
 - ☐ Media has captions/transcripts.
 - ☐ Accessibility statement and contact exist.
 
+## Documentation
+
+Full gate: [User Documentation](/ship/documentation/).
+
+- ☐ Every core task has a task-based page.
+- ☐ Install and first run are covered.
+- ☐ Prerequisites, steps, result, and recovery are present.
+- ☐ Commands and UI labels were run on the reference target.
+- ☐ Error messages say what happened, why, and what to do next.
+- ☐ Release notes describe user-visible changes and migration steps.
+- ☐ Documentation is HTML, keyboard accessible, and passes WCAG 2.2 AA.
+- ☐ Screenshots are current and have alt text.
+- ☐ Links and anchors pass; no page describes a removed feature.
+- ☐ The page passes the [style guide](/reference/style-guide/) checklist.
+- ☐ Review date, version, and reviewer are recorded.
+- ☐ Documentation ships in the same release as the app.
+
 ## Performance
 
 - ☐ Cold start is within budget on the oldest supported hardware.

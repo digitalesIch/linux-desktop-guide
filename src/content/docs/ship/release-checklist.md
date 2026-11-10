@@ -55,6 +55,18 @@ Use it as a living document. Delete items that do not apply; add the ones your u
 - ☐ Dependencies are pinned and scanned for known CVEs.
 - ☐ `SECURITY.md` has a working contact.
 
+### Documentation
+
+See [User Documentation](/ship/documentation/) for the full gate.
+
+- ☐ Install, first run, and every core task have a task-based page.
+- ☐ Changed steps and screenshots were tested on the reference target.
+- ☐ Release notes list user-visible changes, migration steps, and known issues.
+- ☐ Error messages and empty states match the new behavior.
+- ☐ Documentation is HTML, keyboard accessible, and passes WCAG 2.2 AA.
+- ☐ Internal links and anchors pass; no page describes a removed feature.
+- ☐ The review date, version, and reviewer are recorded in the release change.
+
 ## 3. UX matrix
 
 Test the app in each of these states, not just your development setup.

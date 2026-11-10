@@ -147,6 +147,7 @@ Release notes are user-facing. Write them for the person deciding whether to upd
 - Mention breaking changes and migration steps.
 - Do not paste the git log.
 - Keep the version consistent with the package and the app's `--version`.
+- Treat this as a summary. The task pages and troubleshooting live in the [user documentation](/ship/documentation/), not in the metainfo file.
 
 ## Icons and branding
 

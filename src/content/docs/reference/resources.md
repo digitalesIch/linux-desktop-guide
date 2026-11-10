@@ -35,6 +35,21 @@ The Linux desktop has excellent documentation. It is also spread across a dozen 
 | [OSV](https://osv.dev/) | Open-source vulnerability database |
 | [Reproducible Builds](https://reproducible-builds.org/) | Build verification and reproducible-build guidance |
 
+## Documentation quality
+
+The guide's practical workflow is in [User Documentation](/ship/documentation/). These are the primary sources behind it. The guide's own house rules are in the [Style Guide](/reference/style-guide/).
+
+| Resource | Why it matters |
+| --- | --- |
+| [ISO/IEC/IEEE 26514:2022](https://www.iso.org/standard/77451.html) | Design and development of information for users; the software-documentation backbone |
+| [ISO 24495-1:2023](https://www.iso.org/standard/78907.html) | Plain-language principles: relevant, findable, understandable, usable |
+| [ISO/IEC/IEEE 26513:2017](https://www.iso.org/standard/67417.html) | Reviewing and testing information for users |
+| [IEC/IEEE 82079-1:2019](https://webstore.iec.ch/en/publication/29075) | Horizontal principles for product information, when a contract or regulated market requires them |
+| [ISO 9241-11:2018](https://www.iso.org/standard/63500.html) | Usability vocabulary for task-based evaluation |
+| [WCAG 2.2](https://www.w3.org/TR/WCAG22/) | Accessible HTML documentation and in-app help |
+| [EN 301 549 V4.1.1](https://www.etsi.org/deliver/etsi_en/301500_301599/301549/04.01.01_60/en_301549v040101p.pdf) | EU accessibility requirements, including documentation and support services |
+| [Diátaxis](https://diataxis.fr/) | Structure model for tutorials, how-to guides, reference, and explanation |
+
 ## Ubuntu
 
 | Resource | Why it matters |

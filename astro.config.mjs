@@ -82,6 +82,7 @@ export default defineConfig({
 					label: 'Ship',
 					items: [
 						{ label: 'AppStream & Metadata', slug: 'ship/appstream' },
+						{ label: 'User Documentation', slug: 'ship/documentation' },
 						{ label: 'Flathub', slug: 'ship/flathub' },
 						{ label: 'Release Checklist', slug: 'ship/release-checklist' },
 						{ label: 'The Quality Bar', slug: 'ship/quality-bar' },
@@ -93,6 +94,7 @@ export default defineConfig({
 						{ label: 'Baseline', slug: 'reference/baseline' },
 						{ label: 'Quality Signals', slug: 'reference/quality-signals' },
 						{ label: 'Checklists', slug: 'reference/checklists' },
+						{ label: 'Style Guide', slug: 'reference/style-guide' },
 						{ label: 'Glossary', slug: 'reference/glossary' },
 						{ label: 'Resources', slug: 'reference/resources' },
 					],

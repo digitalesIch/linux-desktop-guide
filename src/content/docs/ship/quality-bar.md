@@ -90,8 +90,10 @@ Score each dimension from 0 to 3.
 | --- | --- |
 | 0 | One person, no tests, no docs, no license |
 | 1 | Some tests; README; a release process |
-| 2 | Clear architecture; CI; docs; issue templates; translation workflow; bus factor > 1 |
-| 3 | Healthy contributors; regular releases; roadmap; responsive security process; upstream contributions |
+| 2 | Clear architecture; CI; task-based docs; issue templates; translation workflow; bus factor > 1 |
+| 3 | Healthy contributors; regular releases; roadmap; docs tested with users and accessible; responsive security process; upstream contributions |
+
+User documentation is evidence for this dimension: task pages, tested steps, current screenshots, and an accessible HTML format. See [User Documentation](/ship/documentation/).
 
 ## How to score
 

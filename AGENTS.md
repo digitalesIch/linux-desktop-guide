@@ -12,6 +12,12 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 This is a target-based field guide, not a distro-agnostic tutorial. The supported matrix is in `src/data/targets.json`; the selection method and evidence are in `src/content/docs/targets/selection.md`. Do not add a distribution/toolkit combination without evidence and without updating the matrix. Each reference target has one default stack and HIG; alternatives are secondary and must be documented as trade-offs. The full evidence report is in `research/target-selection.md`; it is internal and not published.
 
+## House style
+
+Before editing or adding content, read `src/content/docs/reference/style-guide.md`. It is the canonical guide for voice, page shape, terminology, code, links, screenshots, accessibility, localization, and agent-facing Markdown. Platform terms stay in `src/content/docs/reference/glossary.md`; do not create a second glossary. Run `npm run check:docs` after content changes.
+
+When you find a documentation defect, report it instead of silently rewriting the page: include the page slug, section, quote, expected and actual result, version, target, and the source that contradicts the page. Agents are readers and reviewers, not publishers. The docs MCP server is read-only and must stay that way.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build

@@ -180,6 +180,7 @@ Automated accessibility checks catch missing labels. They do not catch a confusi
 - ☐ WCAG 2.2 AA is the target for public-facing apps.
 - ☐ Keyboard and screen-reader tests are part of release QA.
 - ☐ The accessibility statement names known limitations and a contact.
+- ☐ Product documentation lists accessibility features and is available in an accessible format; see [User Documentation](/ship/documentation/).
 - ☐ Third-party components are checked for accessibility.
 - ☐ The team has access to Orca, Accerciser, and a high-contrast environment.
 - ☐ Accessibility bugs are prioritized like other user-facing bugs.
