@@ -91,6 +91,16 @@ Unreachable hosts are warnings, because a local network or a site blocking autom
 
 `npm run check:links` runs only the fast internal check.
 
+Browser-based quality checks are separate because they need a local Chrome installation:
+
+```bash
+npm run check:quality
+```
+
+It builds the site, serves `dist/` on a loopback-only port, and runs Lighthouse against the landing page, a start page, a framework guide, the accessibility page, and the packaging page. Accessibility, best practices, and SEO must score 100. Performance must stay at or above 90; the observed local range is 98–100.
+
+Use `npm run check:quality -- --no-build` to audit an existing `dist/` without rebuilding, for example after `npm run check:docs`.
+
 ## Add or edit a page
 
 1. Create `src/content/docs/<section>/<slug>.md`.
