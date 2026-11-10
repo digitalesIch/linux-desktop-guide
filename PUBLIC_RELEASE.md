@@ -11,9 +11,8 @@ The repository is public. This checklist records the work required for a future 
 
 ## 2. Internal material and history
 
-- ☑ Decide whether `research/target-selection.md` is published. The current policy calls it internal and not published.
-- ☑ If it stays internal, remove it from the public tree **and from the Git history** before making the repository public. A normal delete is not enough; use `git filter-repo` or create a fresh public repository from a clean snapshot.
-- ☑ Review `AGENTS.md`, `openspec/`, and `research/` for internal notes, unpublished evidence, and personal paths.
+- ☑ The internal target research was moved out of this repository and removed from the public Git history. The private copy and the old history bundle are kept outside the repository.
+- ☑ Review `AGENTS.md` and `openspec/` for internal notes, unpublished evidence, and personal paths.
 - ☑ Scan the full history for secrets, tokens, private URLs, and personal data.
 - ☑ Confirm that no `.env`, credentials, or local worktree paths are present in the history.
 
