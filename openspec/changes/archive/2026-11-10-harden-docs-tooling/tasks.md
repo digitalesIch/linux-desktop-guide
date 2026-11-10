@@ -23,7 +23,7 @@
 - [x] 4.1 Run `npm run check:docs`.
 - [x] 4.2 Run `npm run check:links:external` and review the reported URLs/warnings; run the strict variant where the network is reliable.
 - [x] 4.3 Run `npm run test:docs-mcp`.
-- [ ] 4.4 Review the diff, run `git diff --check`, commit on `workspace`, and merge to `main`.
+- [x] 4.4 Review the diff, run `git diff --check`, commit on `workspace`, and merge to `main`.
 
 ## Workflow follow-up
 
