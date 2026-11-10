@@ -2,6 +2,8 @@
 
 The repository is public. This checklist records the work required for a future visibility change or a new distribution channel. GitHub Pages on the Free plan requires a public repository; GitHub Pro, Team, or Enterprise Cloud can publish Pages from a private repository.
 
+Scope: the guide ships a static site and a local stdio MCP server. No remote MCP endpoint is operated.
+
 ## 1. Licensing
 
 - ☑ Choose a license for the code and a license for the prose. They do not have to be the same.
@@ -25,25 +27,14 @@ The repository is public. This checklist records the work required for a future 
 - ☐ Verify `/llms.txt`, `/llms-full.txt`, per-page `.md` routes, the PWA manifest, the service worker, and internal links on the deployed host.
 - ☐ Run `npm run check:docs` and `npm run check:quality` against the release commit.
 
-## 4. Remote MCP
-
-- ☐ Deploy the Worker with `npm run worker:deploy`.
-- ☐ Add the custom domain, for example `mcp.linux-desktop.guide`, and the DNS record.
-- ☐ Add a Cloudflare rate-limiting rule for the Worker hostname.
-- ☐ Verify `/health`, MCP `initialize`, `tools/list`, `search_docs`, and `get_page` against the deployed endpoint.
-- ☐ Add the endpoint to `README.md`, `AGENTS.md`, and the agent-facing docs page.
-- ☐ Keep the local stdio server as the offline path.
-
-## 5. Feedback
+## 4. Feedback
 
 - ☑ Remove the private-repository note from `src/content/docs/reference/feedback.md`.
 - ☐ Verify the issue form and the `documentation` / `agent-report` labels are public.
 - ☐ Verify the issue link works without authentication.
 - ☐ Confirm that reports do not ask for secrets or personal data.
 
-## 6. After launch
+## 5. After launch
 
 - ☐ Watch the first issues and search misses; triage them through the feedback loop.
-- ☐ Re-check the Worker corpus and redeploy after guide changes.
-- ☐ Review the rate limit and Worker logs after the first traffic.
 - ☐ Schedule the next documentation review and link check.

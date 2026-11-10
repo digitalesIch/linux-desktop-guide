@@ -69,16 +69,7 @@ The project registers a local, read-only MCP server named `docs` in `opencode.js
 
 The server runs over stdio with `npm run mcp:docs`. It indexes `src/content/docs/**/*.md`, rejects path traversal, writes nothing, and makes no network requests. Run `npm run test:docs-mcp` after changing the server or its index.
 
-A separate Cloudflare Worker serves the same five tools over Streamable HTTP at `/mcp` for agents that cannot run a local process. It is not part of GitHub Pages and does not replace the local server. The corpus is generated from the same Markdown:
-
-```
-npm run worker:corpus
-npm run worker:test
-npm run worker:check
-npm run worker:dev
-```
-
-Deploy with `npm run worker:deploy` after `wrangler login`. Read `workers/docs-mcp/README.md` before changing the endpoint, CORS, or rate limits. The Worker is read-only: no writes, no issue creation, no remote fetches.
+Only the local stdio server is offered. Do not add a remote MCP endpoint, a hosted worker, or a Cloudflare deployment without a new decision and an OpenSpec change. Agents that cannot run a local process use `llms.txt` or the per-page Markdown.
 
 ## Editorial policy
 

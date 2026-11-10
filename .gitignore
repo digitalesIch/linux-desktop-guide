@@ -17,10 +17,5 @@ pnpm-debug.log*
 .env
 .env.production
 
-# Cloudflare Worker output
-.wrangler/
-workers/docs-mcp/src/generated/
-workers/docs-mcp/dist/
-
 # macOS-specific files
 .DS_Store

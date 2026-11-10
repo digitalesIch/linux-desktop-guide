@@ -39,9 +39,8 @@ Start at `src/content/docs/targets/index.md`; the method and evidence are in `ta
 │   ├── data/targets.json      # Curated target matrix and evidence scores
 │   ├── styles/custom.css      # Design tokens and site styling
 │   └── assets/                # Logo and hero artwork
-├── scripts/                   # Baseline, corpus, and maintenance checks
+├── scripts/                   # Baseline and maintenance checks
 ├── tools/docs-mcp/            # Read-only stdio MCP server for agents
-├── workers/docs-mcp/          # Read-only remote MCP on Cloudflare Workers
 ├── public/                    # Favicon, hero SVG, PWA manifest, service worker, icons, offline page
 ├── examples/notes/            # Runnable GTK 4 reference app
 ├── astro.config.mjs           # Site title, sidebar, Starlight options
@@ -233,19 +232,7 @@ Run the server tests with:
 npm run test:docs-mcp
 ```
 
-### Remote MCP on Cloudflare Workers
-
-The site itself stays on GitHub Pages. A separate Worker serves the same five read-only tools over Streamable HTTP at `/mcp`, for agents that cannot run a local process.
-
-```bash
-npm run worker:corpus   # generate the corpus from src/content/docs
-npm run worker:test     # test the Worker's tool layer
-npm run worker:check    # generate, test, and bundle with wrangler --dry-run
-npm run worker:dev      # local Worker on http://localhost:8787
-npm run worker:deploy   # deploy with wrangler
-```
-
-The corpus is generated, not committed. The Worker does not fetch the Pages site at runtime, does not write data, and does not call another service. See `workers/docs-mcp/README.md` for the endpoint, deployment, custom domain, and rate-limit guidance.
+The guide deliberately operates only this local stdio server. There is no remote MCP endpoint, no hosted worker, and no Cloudflare deployment. Agents that cannot run a local process use `llms.txt` or the per-page Markdown instead.
 
 ## Design tokens
 
@@ -265,11 +252,11 @@ The palette is intentionally cool and low-glare for long reading sessions, with 
 - The build has no server-side runtime; any static host works.
 - Search is client-side and requires the `dist/pagefind/` directory to be deployed with the rest of the site.
 - If you deploy under a subpath, set Astro's `base` and update internal links accordingly.
-- The public release checklist is in [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md): licensing, history cleanup, Pages setup, Worker deployment, and feedback checks.
+- The public release checklist is in [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md): licensing, history cleanup, Pages setup, and feedback checks.
 
 ## License
 
-- **Code** — scripts, the Cloudflare Worker, site components, and the example app are licensed under the [MIT License](LICENSE).
+- **Code** — scripts, site components, and the example app are licensed under the [MIT License](LICENSE).
 - **Prose and documentation** — the guide text, diagrams, and screenshots are licensed under [CC BY-SA 4.0](LICENSE-docs).
 - **Third-party assets** — fonts, icons, and bundled dependencies keep their own licenses; see the package metadata and upstream projects.
 
@@ -281,4 +268,4 @@ The two licenses are deliberate: MIT keeps the code easy to reuse, and CC BY-SA 
 - All internal links checked; external links checked against primary sources at the time of writing.
 - Reference app syntax-checked, built with Meson, validated with `desktop-file-validate` and `appstreamcli`, and launched successfully in a headless GNOME 50 Wayland session.
 
-Add a `LICENSE` file before publishing. The prose and the example code may need different licenses; decide deliberately.
+Licenses are in `LICENSE` (code) and `LICENSE-docs` (prose).
