@@ -26,6 +26,7 @@ The companion app in `examples/notes/` is a complete GTK 4 + libadwaita referenc
 │   ├── styles/custom.css      # Design tokens and site styling
 │   └── assets/                # Logo and hero artwork
 ├── scripts/                   # Baseline and maintenance checks
+├── tools/docs-mcp/            # Read-only stdio MCP server for agents
 ├── public/                    # Favicon and the hero SVG
 ├── examples/notes/            # Runnable GTK 4 reference app
 ├── astro.config.mjs           # Site title, sidebar, Starlight options
@@ -121,6 +122,46 @@ npm run check:agent-docs
 ```
 
 Content negotiation (`Accept: text/markdown`) is intentionally left to a future host/CDN rule.
+
+## Documentation MCP server
+
+Agents can read the guide through a local MCP server instead of loading `llms-full.txt`:
+
+```bash
+npm run mcp:docs
+```
+
+The server speaks MCP over stdio and exposes five read-only tools:
+
+- `search_docs` — ranked search over titles, descriptions, headings, and body text, with section filters and excerpts;
+- `get_page` — one page's Markdown, metadata, headings, and URL by slug;
+- `list_pages` — the table of contents grouped by section;
+- `get_related` — related pages based on internal links, section, and text similarity;
+- `get_baseline` — the validated platform data from `src/data/baseline.json`.
+
+It indexes `src/content/docs/**/*.md`, rejects path traversal and unknown slugs, writes nothing, and makes no network requests. The index refreshes automatically when source files change.
+
+`opencode.jsonc` registers it as the local `docs` server:
+
+```jsonc
+{
+  "mcp": {
+    "servers": {
+      "docs": {
+        "type": "local",
+        "command": ["node", "tools/docs-mcp/server.mjs"],
+        "cwd": "."
+      }
+    }
+  }
+}
+```
+
+Run the server tests with:
+
+```bash
+npm run test:docs-mcp
+```
 
 ## Design tokens
 

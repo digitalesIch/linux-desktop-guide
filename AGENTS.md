@@ -30,3 +30,13 @@ The public guide is published for agents as well as humans. After `npm run build
 - Append `.md` to a page route for a clean Markdown version, for example `/start/why-linux.md`.
 
 Use `npm run check:baseline` and `npm run check:agent-docs` before releasing. Do not edit `dist/`; it is generated.
+
+## Documentation MCP server
+
+The project registers a local, read-only MCP server named `docs` in `opencode.jsonc`. Use it to search and read this guide efficiently:
+
+1. Call `search_docs` first.
+2. Pass a returned slug to `get_page`.
+3. Use `list_pages` to browse, `get_related` after a page, and `get_baseline` for validated versions.
+
+The server runs over stdio with `npm run mcp:docs`. It indexes `src/content/docs/**/*.md`, rejects path traversal, writes nothing, and makes no network requests. Run `npm run test:docs-mcp` after changing the server or its index.

@@ -12,15 +12,21 @@
 		"astro": "astro",
 		"check:baseline": "node scripts/check-baseline.mjs",
 		"postbuild": "node scripts/generate-agent-docs.mjs",
-		"check:agent-docs": "node scripts/check-agent-docs.mjs"
+		"check:agent-docs": "node scripts/check-agent-docs.mjs",
+		"mcp:docs": "node tools/docs-mcp/server.mjs",
+		"test:docs-mcp": "node --test tools/docs-mcp/test/pages.test.mjs tools/docs-mcp/test/search.test.mjs tools/docs-mcp/test/related.test.mjs tools/docs-mcp/test/baseline.test.mjs tools/docs-mcp/test/server.test.mjs"
 	},
 	"dependencies": {
 		"@astrojs/starlight": "^0.42.10",
 		"@fontsource-variable/inter": "^5.3.0",
 		"@fontsource-variable/jetbrains-mono": "^5.3.0",
 		"@fontsource-variable/space-grotesk": "^5.3.0",
+		"@modelcontextprotocol/sdk": "^1.32.2",
 		"astro": "^7.3.6",
-		"sharp": "^0.35.3"
+		"minisearch": "^7.2.0",
+		"sharp": "^0.35.3",
+		"yaml": "^2.9.1",
+		"zod": "^4.6.7"
 	},
 	"devDependencies": {
 		"linkedom": "^0.18.15",
