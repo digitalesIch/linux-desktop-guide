@@ -138,6 +138,20 @@ This change adds a review checklist and source links, not a crawler or a paid se
 - **Release checklist wording:** "string freeze is over" should say the freeze is in effect until release; add Snap (`core26`, Snapcraft 9, Python staging, `snapcraft lint`, refresh/rollback), App Center listing, crash reporting, SBOM/provenance, and reproducible-build checks.
 - **Unsourced absolutes:** qualify "without asking a gatekeeper" (stores still review), "a decade-old laptop," "100–300 MB installs," "largest vendor-neutral app store," and "most apps fail on three or four rules."
 
+## Toolkit findings
+
+- **Qt CMake is build-breaking:** the KNotifications component/target is `Notifications`/`KF6::Notifications`, not `Notification`/`KF6::Notification`. The example also uses `CMAKE_INSTALL_BINDIR` without `include(GNUInstallDirs)`, and links too few KF6 components for the features the page recommends.
+- **Qt single-instance:** `QApplication` does not register a D-Bus name. Use `KDBusService(KDBusService::Unique)` for KDE/Qt, or `QLockFile`/a custom D-Bus name for non-KDE Qt.
+- **GTK Inspector:** there is no "Visual" tab. Use **Recorder** for render nodes/clip regions and **Objects** for properties, actions, CSS nodes, and accessibility.
+- **OOM and compositor restart:** Linux OOM kills with `SIGKILL`, which the app cannot catch; use `GMemoryMonitor` warnings to drop caches. A Wayland compositor restart normally kills client connections; persist state continuously and restore on the next launch rather than promising reconnect.
+- **Actions and shortcuts:** actions do not automatically appear in a shortcuts dialog. Provide an `Adw.ShortcutsDialog` or the `shortcuts_dialog` resource that `Adw.Application` loads.
+- **Runtime API guards:** C/C++ APIs are compile-time, not runtime. Use `GTK_CHECK_VERSION`, `QT_VERSION_CHECK`, and Rust feature flags; target GTK 4.22/Qt 6.10 on Ubuntu 26.04 and only guard if older distros are genuinely supported.
+- **GTK snippet gaps:** `Gtk.SignalListItemFactory` needs `setup`/`bind` handlers; the async snippet is missing `GLib`; the CSS snippet is missing `Gdk`; the `Adw.SwitchRow` is inert; the Blueprint menu references an undefined action.
+- **Rust feature mismatch:** `gtk4` with `v4_10` and `libadwaita` with `v1_5` exclude `GtkSvg` and `AdwSidebar`/`AdwViewSwitcherSidebar`. Use `gnome_50`/`v4_22` and `v1_9`, and add the Rust SDK extension + Cargo environment to the Flatpak module.
+- **Rust/CMake details:** the Flatpak cache key uses `github.sha`, so it never hits; use `hashFiles(...)`. `Arc<Mutex<>>` needs a type parameter. Atomic writes need a directory `fsync` after `rename()` for durability.
+- **Thin sections:** GTK needs the `GtkSvg`/Glycin trust boundary, libadwaita navigation, accessibility/input/scaling, rendering, and Meson/Flatpak depth. Qt needs 6.10 high-contrast/vector/model/QML-performance/KDE/Wayland coverage. Rust needs a version/feature matrix, Iced/Slint/libcosmic practice, cancellation, and supply-chain guidance. Performance/testing/architecture/reliability need startup tracing, headless Wayland, sanitizers, systemd hardening, and crash-reporting depth.
+- **Editorial absolutes:** the Tauri row is a named competitor comparison; “mature, fast,” “first-class,” “stable,” “shortest path,” and “worth more than a hundred guesses” are unsourced; “Sentry, Backtrace, and self-hosted endpoints are all viable” is a vendor endorsement. Replace with criteria or measurements.
+
 ## Risks / Trade-offs
 
 - **Large diff across many pages** → Split the work into the four task groups: blockers, Ubuntu 26.04 coverage, toolkit depth, editorial/sources.

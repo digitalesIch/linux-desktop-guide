@@ -58,6 +58,16 @@
 - [ ] 3.19 Fix the "ten dimensions" cross-reference to the Quality Bar's seven dimensions.
 - [ ] 3.20 Replace "use D-Bus instead of `snap`" with "use D-Bus or the snapd REST API" in the checklists and Ubuntu page.
 - [ ] 3.21 Fix the release checklist: string-freeze wording, Snap/core26/Snapcraft 9/Python staging, App Center listing, crash reporting, SBOM/provenance, and reproducible-build checks.
+- [ ] 3.22 Fix the Qt CMake example: `Notifications`/`KF6::Notifications`, `include(GNUInstallDirs)`, and the KF6 components/targets actually used by the page.
+- [ ] 3.23 Replace the `QApplication` single-instance claim with `KDBusService(KDBusService::Unique)` for KDE/Qt or `QLockFile`/a custom D-Bus name for non-KDE Qt.
+- [ ] 3.24 Fix GTK Inspector tabs, OOM handling (`SIGKILL`/`GMemoryMonitor`), compositor-restart expectations, and the shortcuts-dialog mechanism.
+- [ ] 3.25 Fix GTK snippets: `Gtk.SignalListItemFactory` setup/bind, missing `GLib`/`Gdk` imports, the inert `Adw.SwitchRow`, and the undefined Blueprint action.
+- [ ] 3.26 Replace "guard newer APIs at runtime" in C/C++ with `GTK_CHECK_VERSION`, `QT_VERSION_CHECK`, and Rust feature flags; only guard when older distros are supported.
+- [ ] 3.27 Fix Rust examples: `gnome_50`/`v4_22` and `v1_9` features, the Flatpak Rust SDK extension/Cargo environment, the CI cache key, and `Arc<Mutex<T>>`.
+- [ ] 3.28 Add the directory `fsync` after `rename()` to the atomic-write guidance.
+- [ ] 3.29 Expand Qt coverage: Qt 6.10 high contrast, animated vector graphics, `SearchField`, `FlexboxLayout`, `QRangeModel`, `Synchronizer`, `TreeModel`, `SortFilterProxyModel`, QML performance, KDE integration, and Wayland/scaling/IME.
+- [ ] 3.30 Expand GTK coverage: `GtkSvg`/Glycin trust boundary, libadwaita 1.9 navigation, accessibility/input/scaling, rendering (`GraphicsOffload`, GSK renderers), and Meson/Flatpak wiring.
+- [ ] 3.31 Expand performance/testing/architecture/reliability: startup tracing, headless Wayland recipe, sanitizers/fuzzers, reproducible builds, systemd hardening, crash reporting, structured journald, and SQLite recovery.
 
 ## 4. Editorial corrections
 
@@ -67,10 +77,11 @@
 - [ ] 4.4 Search all docs for Apple/macOS/Windows, "traffic lights", and named competitor comparisons; rewrite or remove every hit that violates the editorial rule.
 - [ ] 4.5 Replace unsourced absolute claims with sourced statements or explicit recommendations, including "without asking a gatekeeper," "a decade-old laptop," "100–300 MB installs," "largest vendor-neutral app store," and "most apps fail on three or four rules."
 - [ ] 4.6 Update the glossary entries for Wayland, Snap, and App Center to match the current platform, without adding competitor comparisons; qualify COSMIC's design documentation rather than calling it a published HIG.
+- [ ] 4.7 Replace unsourced vendor endorsements and absolutes in the engineering pages (“mature, fast,” “first-class,” “stable,” “shortest path,” “worth more than a hundred guesses,” “Sentry/Backtrace are viable”) with criteria or measurements.
 
 ## 5. Sources and baseline
 
-- [ ] 5.1 Update `reference/resources.md` with: Ubuntu 26.04 release notes and release cycle, GNOME 50/GTK 4.22/libadwaita 1.9 release notes and NEWS, Qt 6.10 release/high-contrast notes, KDE Frameworks 6.24 and Plasma 6.6, current Snapcraft/Snap docs (`snapcraft.io/docs`), Snapcraft `core26` and Python migration, Flathub requirements/metainfo/linter/quality guidelines, AppStream validator docs, WCAG 2.2/EN 301 549/EAA, AT-SPI, Meson i18n, CMake, GStreamer, Security Center/permission prompting, App Center, Ubuntu Insights, Mutter Devkit, `xdg-activation`, XDG User Dirs, systemd user units, Flatpak runtimes/permissions, xdg-desktop-portal Secret/Usb/Settings docs, Debian Policy, GApplication D-Bus activation, GTK4 running/debugging and window docs, OverlaySplitView/Breakpoint docs, reproducible-builds/OSV/OpenSSF.
+- [ ] 5.1 Update `reference/resources.md` with: Ubuntu 26.04 release notes and release cycle, GNOME 50/GTK 4.22/libadwaita 1.9 release notes and NEWS, Qt 6.10 release/high-contrast notes, KDE Frameworks 6.24 and Plasma 6.6, KNotifications/KDBusService docs, current Snapcraft/Snap docs (`snapcraft.io/docs`), Snapcraft `core26` and Python migration, Flathub requirements/metainfo/linter/quality guidelines, AppStream validator docs, WCAG 2.2/EN 301 549/EAA, AT-SPI, Meson i18n, CMake/GNUInstallDirs, GStreamer, Security Center/permission prompting, App Center, Ubuntu Insights, Mutter Devkit, `xdg-activation`, XDG User Dirs, systemd user units, Flatpak runtimes/permissions, Flathub Rust SDK extension, xdg-desktop-portal Secret/Usb/Settings docs, Debian Policy, GApplication D-Bus activation, GTK4 running/debugging and window docs, GMemoryMonitor, OverlaySplitView/Breakpoint docs, reproducible-builds/OSV/OpenSSF.
 - [ ] 5.2 Add inline source links to every version, support, and platform claim that can change.
 - [ ] 5.3 Add a short "content review" checklist covering sources, baseline fields, affected pages, and validation commands.
 - [ ] 5.4 Update `README.md` and `AGENTS.md` if the review process or commands change.
