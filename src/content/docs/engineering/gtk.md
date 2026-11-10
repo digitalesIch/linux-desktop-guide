@@ -1,6 +1,6 @@
 ---
 title: GTK & libadwaita
-description: "A practical deep dive into GTK 4.22 and libadwaita 1.9: application structure, Blueprint UI, adaptive widgets, actions, models, settings, async work, custom widgets, and debugging."
+description: "A practical deep dive into GTK 4.22 and libadwaita 1.9: project structure, Blueprint UI, adaptive widgets, actions, models, settings, async work, testing, accessibility, and debugging."
 ---
 
 GTK 4 is the toolkit behind GNOME and the default native stack on Ubuntu 26.04 LTS. libadwaita adds the GNOME design system: headerbars, adaptive split views, view switchers, preferences pages, dialogs, toasts, and the Adwaita style.
@@ -10,6 +10,24 @@ The combination is opinionated, and that is the point. If you are building for G
 :::note[Versions in Ubuntu 26.04]
 GTK 4.22, libadwaita 1.9, GNOME 50. GTK 4 is the stable line; GTK 3 is maintenance-only. Target GTK 4.22 on Ubuntu 26.04. Use `GTK_CHECK_VERSION` in C or the binding's feature flags when you also support older releases; API availability is a compile-time property, not a runtime guard.
 :::
+
+## Project skeleton
+
+The [first-app tutorial](/start/first-app/) builds the complete GTK 4 + libadwaita project, and `examples/notes` in the guide repository is the runnable version. The structure is deliberately small:
+
+```text
+notes/
+├── data/
+│   ├── io.github.yourname.Notes.desktop
+│   ├── io.github.yourname.Notes.metainfo.xml
+│   └── io.github.yourname.Notes.svg
+├── src/
+│   └── main.py
+├── io.github.yourname.Notes.yml
+└── meson.build
+```
+
+Keep the application object, window, and data layer separate before the file grows. A useful split for a larger app is `src/main.py` (application and actions), `src/window.py` (widgets and bindings), and `src/model.py` (data and pure functions). The Blueprint section below adds `src/window.blp` and a GResource when you want declarative UI.
 
 ## The application skeleton
 
@@ -337,6 +355,59 @@ picture = Gtk.Picture.new_for_paintable(svg)
 ```
 
 `Gtk.Svg` is not a sandbox for arbitrary user files. Decode untrusted SVG or image data with [Glycin](https://gitlab.gnome.org/GNOME/glycin), which runs the parser in a sandboxed process. `Gtk.SvgWidget` is a 4.24-only convenience widget; Ubuntu 26.04's GTK 4.22 does not provide it.
+
+## Testing
+
+Test the model without a display, then test the window with a display. A pure function is the cheapest test and catches the logic that tends to break during refactors.
+
+```python title="src/model.py"
+def normalize_title(value: str) -> str:
+    return value.strip()
+```
+
+```python title="tests/test_model.py"
+from model import normalize_title
+
+def test_title_is_trimmed():
+    assert normalize_title("  Buy milk  ") == "Buy milk"
+
+def test_title_can_be_empty():
+    assert normalize_title("   ") == ""
+```
+
+Run the model tests from the project root so `src` is importable:
+
+```bash title="Terminal"
+python3 -m pip install --user pytest
+PYTHONPATH=src python3 -m pytest
+```
+
+For the UI layer, validate the files before launching the app and test the keyboard flow with a real accessibility stack:
+
+```bash title="Terminal"
+gtk4-builder-tool validate src/window.ui
+blueprint-compiler compile src/window.blp --output /tmp/window.ui
+desktop-file-validate data/io.github.yourname.Notes.desktop
+appstreamcli validate --no-net data/io.github.yourname.Notes.metainfo.xml
+```
+
+A widget test needs a display. On a headless runner, start a throwaway compositor (for example `weston --headless`) or use the distribution's GNOME test harness; do not switch to X11 just to run tests. For end-to-end checks, drive the app through AT-SPI with [Dogtail](https://gitlab.com/dogtail/dogtail) or a similar client. The [Testing](/engineering/testing/) chapter covers the full matrix.
+
+## Accessibility
+
+GTK exposes roles, names, and states for native widgets. The failures happen in custom widgets, icon-only buttons, and dialogs that move focus unexpectedly.
+
+```python title="Accessible icon button"
+button = Gtk.Button(icon_name="list-add-symbolic")
+button.update_property([Gtk.AccessibleProperty.LABEL], ["New note"])
+button.update_property([Gtk.AccessibleProperty.DESCRIPTION], ["Create a new note"])
+```
+
+- Use `Gtk.AccessibleRole` and `Gtk.AccessibleProperty` for custom widgets; do not rely on a tooltip as the accessible name.
+- Keep a logical focus order and restore focus when a dialog closes.
+- Register actions with `Gtk.Application`; they are keyboard-accessible and appear in `Adw.ShortcutsDialog`.
+- Test with Orca and [Accerciser](https://gitlab.gnome.org/GNOME/accerciser), at 200% text scaling and in high-contrast mode.
+- Do not encode meaning in color alone; pair it with text, an icon, or a state.
 
 ## Debugging
 

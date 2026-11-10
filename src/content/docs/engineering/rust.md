@@ -1,6 +1,6 @@
 ---
 title: Rust on the Desktop
-description: Rust desktop options compared — gtk-rs, Relm4, Iced, Slint, libcosmic — with async patterns, memory ownership, Flatpak packaging, testing, and profiling.
+description: Rust desktop options compared — gtk-rs, Relm4, Iced, Slint, libcosmic — with a complete gtk-rs project, actions, async patterns, testing, accessibility, and Flatpak packaging.
 ---
 
 Rust is a strong choice for Linux desktop apps. GNOME's Loupe and Resources are written in Rust, COSMIC is built on Rust, and the gtk-rs bindings are mature enough for production. You get memory safety, fearless concurrency, and a packaging story that fits Flatpak well.
@@ -34,16 +34,61 @@ For a GNOME/Ubuntu app, use **gtk-rs + libadwaita-rs**, or **Relm4** if you want
 
 Feature flags are compile-time. If you enable `v4_22`/`v1_9`, the binary will not run against an older GTK/libadwaita; use runtime checks only if you build separate compatibility paths.
 
+## Project skeleton
+
+```text
+notes/
+├── Cargo.toml
+├── src/
+│   ├── main.rs
+│   └── note.rs
+├── data/
+│   ├── io.github.yourname.Notes.desktop
+│   ├── io.github.yourname.Notes.metainfo.xml
+│   └── io.github.yourname.Notes.svg
+└── io.github.yourname.Notes.yml
+```
+
+Keep the domain logic in its own module so it can be tested without a display. `main.rs` owns the application and window; `note.rs` owns the data rules.
+
 ## A minimal gtk-rs app
 
+```toml title="Cargo.toml"
+[package]
+name = "notes"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+gtk = { package = "gtk4", version = "0.11", features = ["v4_22"] }
+libadwaita = { version = "0.9", features = ["v1_9"] }
+```
+
+```rust title="src/note.rs"
+pub fn normalize_title(value: &str) -> String {
+    value.trim().to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn trims_surrounding_whitespace() {
+        assert_eq!(normalize_title("  Buy milk  "), "Buy milk");
+    }
+}
+```
+
 ```rust title="src/main.rs"
+mod note;
+
 use adw::prelude::*;
 use gtk::{gio, glib};
 
 fn main() -> glib::ExitCode {
     let app = adw::Application::builder()
         .application_id("io.github.yourname.Notes")
-        .flags(gio::ApplicationFlags::DEFAULT_FLAGS)
         .build();
 
     app.connect_activate(build_ui);
@@ -60,44 +105,78 @@ fn build_ui(app: &adw::Application) {
 
     let header = adw::HeaderBar::new();
 
-    let new_button = gtk::Button::builder()
+    let add_button = gtk::Button::builder()
         .icon_name("list-add-symbolic")
         .tooltip_text("New note")
+        .action_name("win.new-note")
         .build();
-    new_button.add_css_class("suggested-action");
-    header.pack_start(&new_button);
+    add_button.add_css_class("suggested-action");
+    header.pack_start(&add_button);
+
+    let list = gtk::ListBox::new();
+    list.set_selection_mode(gtk::SelectionMode::Single);
+    list.add_css_class("boxed-list");
+
+    let scroller = gtk::ScrolledWindow::builder()
+        .hscrollbar_policy(gtk::PolicyType::Never)
+        .vexpand(true)
+        .child(&list)
+        .build();
 
     let toolbar = adw::ToolbarView::new();
     toolbar.add_top_bar(&header);
-
-    let label = gtk::Label::builder()
-        .label("Select a note")
-        .vexpand(true)
-        .build();
-    label.add_css_class("dim-label");
-    toolbar.set_content(Some(&label));
-
+    toolbar.set_content(Some(&scroller));
     window.set_content(Some(&toolbar));
+
+    let new_note = gio::SimpleAction::new("new-note", None);
+    new_note.connect_activate(glib::clone!(
+        #[weak]
+        list,
+        move |_, _| {
+            let row = adw::ActionRow::builder()
+                .title(note::normalize_title("Untitled note"))
+                .build();
+            list.append(&row);
+        }
+    ));
+    window.add_action(&new_note);
+    app.set_accels_for_action("win.new-note", &["<Control>n"]);
+
     window.present();
 }
 ```
 
-The Rust snippets are illustrative; add the crate features and generated resources that match your project.
+This app keeps notes in memory. The [first-app tutorial](/start/first-app/) shows the XDG persistence, atomic-write, and Flatpak parts; replace the in-memory list with `gio::File` or SQLite when you add storage. The Rust example is illustrative: build it against the crate versions in the table above and the GTK/libadwaita development packages for your distribution.
 
-`Cargo.toml`:
+## Testing
 
-```toml title="Cargo.toml"
-[package]
-name = "notes"
-version = "0.1.0"
-edition = "2024"
+`cargo test` runs the `note` module's unit test without a display. Add more tests around the pure data layer before reaching for a UI test:
 
-[dependencies]
-gtk = { package = "gtk4", version = "0.11", features = ["v4_22"] }
-libadwaita = { version = "0.9", features = ["v1_9"] }
+```bash title="Terminal"
+cargo test
+cargo clippy --all-targets -- -D warnings
+cargo fmt --check
 ```
 
-Version numbers move; use the latest compatible releases and the feature flags for the minimum GTK/libadwaita version you support. Do not enable a feature you cannot run on your target distro.
+For the UI, drive the app through AT-SPI with [Dogtail](https://gitlab.com/dogtail/dogtail), or use the GTK test harness under a throwaway compositor. Run session-bus tests inside `dbus-run-session`; keep `weston --headless` or the distribution's headless GNOME session in CI. `cargo llvm-cov` adds coverage, and the [Testing](/engineering/testing/) chapter covers the full matrix.
+
+## Accessibility
+
+gtk-rs exposes GTK's accessibility semantics for native widgets. Set labels on icon-only controls and custom widgets:
+
+```rust title="Accessible icon button"
+use gtk::prelude::*;
+
+let button = gtk::Button::builder()
+    .icon_name("list-add-symbolic")
+    .build();
+button.update_property(&[
+    gtk::accessible::Property::Label("New note"),
+    gtk::accessible::Property::Description("Create a new note"),
+]);
+```
+
+Test with Orca and Accerciser, at 200% text scaling and in high-contrast mode. Do not treat a tooltip as the accessible name; use `gtk::accessible::Property::Label` and, for custom widgets, an explicit `AccessibleRole`.
 
 ## Ownership and the GTK object model
 
@@ -243,18 +322,13 @@ modules:
 
 Use the `org.gnome.Platform` runtime for gtk-rs/libadwaita apps. The runtime includes GTK and libadwaita; your binary links against them.
 
-## Testing and profiling
+## Profiling and release checks
 
-- `cargo test` for units and integration tests.
-- `insta` for snapshot tests of serialized output.
-- `proptest` for parsers and state machines.
-- `trybuild` for compile-fail tests of macros.
-- UI tests via `dogtail` or AT-SPI, driven from outside the process.
-- `cargo llvm-cov` for coverage.
-- `perf`, `heaptrack`, and `cargo flamegraph` for profiling.
-- `cargo clippy -- -D warnings` and `cargo fmt --check` in CI.
+- `perf`, `heaptrack`, and `cargo flamegraph` for CPU, allocation, and startup profiles.
+- `cargo llvm-cov` for coverage; `insta`, `proptest`, and `trybuild` for snapshot, property, and compile-fail tests.
 - `cargo audit`/`cargo deny` for advisories and license policy; generate an SBOM for releases.
 - Pin the Rust toolchain (`rust-toolchain.toml`) and the Flatpak SDK extension version.
+- Measure cold start with `hyperfine`; keep the first window under your budget before optimizing details.
 
 ## Common pitfalls
 
