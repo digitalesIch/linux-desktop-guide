@@ -23,7 +23,12 @@
 		"check:examples": "node scripts/check-examples.mjs",
 		"check:targets": "node scripts/check-targets.mjs",
 		"check:pwa": "node scripts/check-pwa.mjs",
-		"generate:pwa-icons": "node scripts/generate-pwa-icons.mjs"
+		"generate:pwa-icons": "node scripts/generate-pwa-icons.mjs",
+		"worker:corpus": "node scripts/generate-mcp-corpus.mjs",
+		"worker:test": "node --test workers/docs-mcp/test/core.test.mjs",
+		"worker:check": "npm run worker:corpus && npm run worker:test && wrangler deploy --dry-run --config workers/docs-mcp/wrangler.toml --outdir .wrangler/tmp",
+		"worker:dev": "npm run worker:corpus && wrangler dev --config workers/docs-mcp/wrangler.toml",
+		"worker:deploy": "npm run worker:corpus && wrangler deploy --config workers/docs-mcp/wrangler.toml"
 	},
 	"dependencies": {
 		"@astrojs/starlight": "^0.42.10",
@@ -42,6 +47,7 @@
 		"lighthouse": "^13.6.0",
 		"linkedom": "^0.18.15",
 		"turndown": "^7.2.5",
-		"turndown-plugin-gfm": "^1.0.2"
+		"turndown-plugin-gfm": "^1.0.2",
+		"wrangler": "^4.160.0"
 	}
 }

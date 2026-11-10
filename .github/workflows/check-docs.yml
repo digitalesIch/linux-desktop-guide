@@ -31,3 +31,6 @@ jobs:
 
       - name: Run the offline documentation gate
         run: npm run check:docs
+
+      - name: Validate the Cloudflare Worker
+        run: npm run worker:check

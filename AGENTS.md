@@ -69,6 +69,17 @@ The project registers a local, read-only MCP server named `docs` in `opencode.js
 
 The server runs over stdio with `npm run mcp:docs`. It indexes `src/content/docs/**/*.md`, rejects path traversal, writes nothing, and makes no network requests. Run `npm run test:docs-mcp` after changing the server or its index.
 
+A separate Cloudflare Worker serves the same five tools over Streamable HTTP at `/mcp` for agents that cannot run a local process. It is not part of GitHub Pages and does not replace the local server. The corpus is generated from the same Markdown:
+
+```
+npm run worker:corpus
+npm run worker:test
+npm run worker:check
+npm run worker:dev
+```
+
+Deploy with `npm run worker:deploy` after `wrangler login`. Read `workers/docs-mcp/README.md` before changing the endpoint, CORS, or rate limits. The Worker is read-only: no writes, no issue creation, no remote fetches.
+
 ## Editorial policy
 
 Do not use Apple/macOS/Windows as the reference point or promote proprietary or non-standard vendors. The guide borrows the clarity and opinionation of vendor platform documentation, but it explains Linux directly; another OS is not the baseline. Name a third-party alternative only as a sourced example when it is open source, actively maintained, widely accepted, and compared on the quality signals in `reference/quality-signals.md`. Packaging channels are compared on sandboxing, updates, metadata, review, support, and maintenance burden, not on vendor preference.

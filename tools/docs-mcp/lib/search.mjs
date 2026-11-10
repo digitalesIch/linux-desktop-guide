@@ -1,5 +1,5 @@
 import MiniSearch from 'minisearch';
-import { SECTION_LABELS, SECTION_ORDER } from './config.mjs';
+import { SECTION_LABELS, SECTION_ORDER } from './sections.mjs';
 import { DocsError } from './errors.mjs';
 import { makeExcerpt, matchingHeadings, normalizeSearchText, queryTerms } from './text.mjs';
 

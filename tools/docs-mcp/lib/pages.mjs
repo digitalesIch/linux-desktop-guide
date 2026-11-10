@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative, sep } from 'node:path';
-import { EXCLUDED_SLUGS, SECTION_LABELS, SECTION_ORDER } from './config.mjs';
+import { EXCLUDED_SLUGS, SECTION_LABELS, SECTION_ORDER } from './sections.mjs';
 import { DocsError } from './errors.mjs';
 import {
 	countWords,
