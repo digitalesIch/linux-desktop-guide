@@ -1,0 +1,108 @@
+name: Documentation feedback
+description: Report a wrong, missing, or unclear page in the Linux Desktop Guide.
+title: "[Docs] "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the guide. Please report one defect per issue.
+
+        Do not include secrets, tokens, personal data, or private file contents. For a security vulnerability, use a private security advisory instead of this form.
+
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: The URL or slug of the page.
+      placeholder: /ship/documentation/
+    validations:
+      required: true
+
+  - type: input
+    id: section
+    attributes:
+      label: Section
+      description: The heading the problem appears under.
+      placeholder: Write the task, not the feature
+    validations:
+      required: false
+
+  - type: textarea
+    id: quote
+    attributes:
+      label: Quote or code block
+      description: The exact sentence, command, or block that is wrong.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+      description: What the page should say or do.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual
+      description: What the page says, or what happened when you followed it.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Guide version or commit
+      description: The release, date, or commit you were reading.
+      placeholder: 2026-11-10 or b49885f
+    validations:
+      required: true
+
+  - type: dropdown
+    id: target
+    attributes:
+      label: Target
+      description: The platform where you observed the problem.
+      options:
+        - Ubuntu 26.04 LTS + GNOME
+        - Fedora 45 KDE
+        - Fedora 45 Workstation + GNOME
+        - Arch Linux
+        - Debian 13
+        - Not target-specific
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reporter
+    attributes:
+      label: Reporter
+      description: Human or automated agent.
+      options:
+        - Human
+        - Agent
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: The specification, upstream documentation, or test that supports the correction.
+      placeholder: https://docs.flatpak.org/en/latest/available-runtimes.html
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have removed secrets, tokens, and personal data from this report.
+          required: true
+        - label: This is a documentation defect, not an app support request or feature request.
+          required: true

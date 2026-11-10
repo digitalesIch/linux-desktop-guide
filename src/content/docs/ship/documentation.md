@@ -229,6 +229,8 @@ Agents are readers and reviewers, not publishers.
 - Keep the docs MCP server read-only. Do not add write tools just to collect feedback.
 - Review agent-generated patches like any other patch, including the [style guide](/reference/style-guide/) checklist.
 
+Report a defect through [Feedback](/reference/feedback/) or the [structured issue form](https://github.com/digitalesIch/linux-desktop-guide/issues/new?template=docs-feedback.yml). The repository is private during development, so external readers cannot open issues yet.
+
 ## Documentation gate
 
 Use this as the release gate. The condensed version is in [Checklists](/reference/checklists/).

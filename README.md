@@ -9,6 +9,8 @@ The project is both:
 
 The companion app in `examples/notes/` is a complete GTK 4 + libadwaita reference implementation with Meson and Flatpak packaging.
 
+Repository: [digitalesIch/linux-desktop-guide](https://github.com/digitalesIch/linux-desktop-guide). It is private during development.
+
 ## Platform targets
 
 The guide is not a distro-agnostic tutorial. It supports a small, evidence-based target matrix:
@@ -69,6 +71,8 @@ npm run preview
 ```
 
 The static output is in `dist/`. Deploy it to any static host (GitHub Pages, GitLab Pages, Netlify, Cloudflare Pages, an object store, or a plain web server).
+
+GitHub Pages on a private repository requires a plan that supports private Pages (GitHub Pro, Team, or Enterprise Cloud). On the Free plan, make the repository public before enabling Pages; the deployed site can still be public while the repository is private only on a paid plan.
 
 The site uses:
 
@@ -249,8 +253,7 @@ The palette is intentionally cool and low-glare for long reading sessions, with 
 
 ## Status
 
-- 33 content pages plus the landing page.
-- 35 HTML pages including the 404.
+- 42 Markdown source files and 43 built HTML pages, including the 404.
 - All internal links checked; external links checked against primary sources at the time of writing.
 - Reference app syntax-checked, built with Meson, validated with `desktop-file-validate` and `appstreamcli`, and launched successfully in a headless GNOME 50 Wayland session.
 

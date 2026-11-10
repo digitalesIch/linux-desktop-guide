@@ -23,9 +23,14 @@ const markdownHref = id === '404' || id === 'index' ? undefined : `/${id}.md`;
 				<span>{sectionLabel}</span>
 			</p>
 		)}
-		{markdownHref && (
-			<a class="page-markdown" href={markdownHref}>Markdown</a>
-		)}
+		<div class="page-links">
+			{id !== 'reference/feedback' && (
+				<a class="page-markdown" href="/reference/feedback/">Feedback</a>
+			)}
+			{markdownHref && (
+				<a class="page-markdown" href={markdownHref}>Markdown</a>
+			)}
+		</div>
 	</div>
 	<h1 id="_top">{entry.data.title}</h1>
 	{description && <p class="page-lede">{description}</p>}
@@ -42,6 +47,13 @@ const markdownHref = id === '404' || id === 'index' ? undefined : `/${id}.md`;
 		justify-content: space-between;
 		gap: 1rem;
 		margin-bottom: 0.95rem;
+	}
+
+	.page-links {
+		display: flex;
+		align-items: center;
+		gap: 0.9rem;
+		margin-left: auto;
 	}
 
 	.page-eyebrow {
