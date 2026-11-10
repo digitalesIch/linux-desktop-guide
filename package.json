@@ -14,7 +14,11 @@
 		"postbuild": "node scripts/generate-agent-docs.mjs",
 		"check:agent-docs": "node scripts/check-agent-docs.mjs",
 		"mcp:docs": "node tools/docs-mcp/server.mjs",
-		"test:docs-mcp": "node --test tools/docs-mcp/test/pages.test.mjs tools/docs-mcp/test/search.test.mjs tools/docs-mcp/test/related.test.mjs tools/docs-mcp/test/baseline.test.mjs tools/docs-mcp/test/server.test.mjs"
+		"test:docs-mcp": "node --test tools/docs-mcp/test/pages.test.mjs tools/docs-mcp/test/search.test.mjs tools/docs-mcp/test/related.test.mjs tools/docs-mcp/test/baseline.test.mjs tools/docs-mcp/test/text.test.mjs tools/docs-mcp/test/server.test.mjs",
+		"check:links": "node scripts/check-links.mjs",
+		"check:links:external": "node scripts/check-links.mjs --external",
+		"check:docs": "node scripts/check-docs.mjs",
+		"check:links:external:strict": "node scripts/check-links.mjs --external --strict"
 	},
 	"dependencies": {
 		"@astrojs/starlight": "^0.42.10",

@@ -5,12 +5,15 @@
   },
   "mcp": {
     "servers": {
-      // Local, read-only documentation for agents.
+      // Local, read-only docs MCP; see README and AGENTS.
       "docs": {
         "type": "local",
         "command": ["node", "tools/docs-mcp/server.mjs"],
         "cwd": ".",
-        "codemode": true
+        "codemode": true,
+        "timeout": {
+          "startup": 30000
+        }
       }
     }
   }

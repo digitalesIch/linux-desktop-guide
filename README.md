@@ -65,6 +65,32 @@ The site uses:
 - a custom ink / lime / cyan palette with a dark hero stage;
 - local fonts via `@fontsource` (no external font requests).
 
+## Documentation checks
+
+Run the deterministic local gate before releasing:
+
+```bash
+npm run check:docs
+```
+
+It runs, in order:
+
+1. baseline validation;
+2. a full Astro build (including agent docs and Pagefind);
+3. agent-doc validation;
+4. the MCP server tests;
+5. internal link and anchor checking against `dist/`.
+
+The default gate is offline and repeatable. External URLs are checked separately:
+
+```bash
+npm run check:links:external
+```
+
+Unreachable hosts are warnings, because a local network or a site blocking automated requests is not proof of a broken link. Use `npm run check:links:external:strict` when the network is reliable and warnings should fail the check.
+
+`npm run check:links` runs only the fast internal check.
+
 ## Add or edit a page
 
 1. Create `src/content/docs/<section>/<slug>.md`.

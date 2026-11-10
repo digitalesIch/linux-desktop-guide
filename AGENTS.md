@@ -29,7 +29,7 @@ The public guide is published for agents as well as humans. After `npm run build
 - `/llms-full.txt` — the complete guide in one file.
 - Append `.md` to a page route for a clean Markdown version, for example `/start/why-linux.md`.
 
-Use `npm run check:baseline` and `npm run check:agent-docs` before releasing. Do not edit `dist/`; it is generated.
+Run `npm run check:docs` before releasing. It performs baseline validation, a full build, agent-doc validation, MCP tests, and internal link/anchor checking. The default gate is offline. External link checks are opt-in with `npm run check:links:external`; unreachable hosts are warnings unless `check:links:external:strict` is used. Do not edit `dist/`; it is generated.
 
 ## Documentation MCP server
 
