@@ -1,6 +1,6 @@
 ---
 title: Reliability & Logging
-description: How Linux desktop apps fail — disk full, network down, permission denied, portal unavailable — and how to log, recover, report crashes, and support users without leaking their data.
+description: "Designing for failure: logging, crash reports, recovery, and data integrity across the Linux desktop."
 ---
 
 Every app fails. The disk fills up, the network disappears, the keyring is locked, the compositor restarts, a portal is missing, and a file is corrupted. Reliability is not the absence of failure; it is the ability to fail visibly, recover gracefully, and explain what happened.

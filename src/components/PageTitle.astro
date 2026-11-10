@@ -1,0 +1,83 @@
+---
+const { entry, id } = Astro.locals.starlightRoute;
+const description = entry.data.description;
+const section = id.split('/')[0];
+
+const sections: Record<string, string> = {
+	start: 'Start Here',
+	platform: 'Platform',
+	design: 'Design',
+	engineering: 'Engineering',
+	ship: 'Ship',
+	reference: 'Reference',
+};
+
+const sectionLabel = sections[section];
+---
+
+<div class="page-header">
+	{sectionLabel && (
+		<p class="page-eyebrow">
+			<span>{sectionLabel}</span>
+		</p>
+	)}
+	<h1 id="_top">{entry.data.title}</h1>
+	{description && <p class="page-lede">{description}</p>}
+</div>
+
+<style>
+	.page-header {
+		margin-block: 0.25rem 1.25rem;
+	}
+
+	.page-eyebrow {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		margin: 0 0 0.95rem;
+		font-family: var(--sl-font-mono);
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--sl-color-accent);
+	}
+
+	.page-eyebrow::before {
+		content: '';
+		width: 1.4rem;
+		height: 1px;
+		background: currentColor;
+		opacity: 0.75;
+	}
+
+	h1 {
+		margin: 0;
+		font-family: var(--ldg-font-display);
+		font-size: clamp(2.15rem, 4.4vw, 3.35rem);
+		font-weight: 600;
+		line-height: 1.02;
+		letter-spacing: -0.045em;
+		color: var(--sl-color-white);
+		text-wrap: balance;
+	}
+
+	.page-lede {
+		max-width: 66ch;
+		margin: 1.05rem 0 0;
+		font-size: 1.03rem;
+		line-height: 1.65;
+		color: var(--sl-color-gray-2);
+		text-wrap: pretty;
+	}
+
+	@media (max-width: 40rem) {
+		.page-header {
+			margin-bottom: 0.75rem;
+		}
+
+		.page-lede {
+			font-size: 0.97rem;
+		}
+	}
+</style>

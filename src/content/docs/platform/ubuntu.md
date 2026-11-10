@@ -1,6 +1,6 @@
 ---
 title: Ubuntu Platform
-description: "The Ubuntu-specific layer of the guide: release support, toolchains, packaging paths, system services, accessibility, AppArmor, Polkit, fwupd, and Ubuntu Pro."
+description: "Release support, toolchains, packaging paths, system services, security, and Ubuntu Pro for desktop developers."
 ---
 
 Ubuntu is the reference platform for this guide, but it is not a single SDK. It is an LTS release with a supported toolchain set, two first-class package formats, a set of privileged system services, and a security-maintenance model that extends beyond the standard support window.

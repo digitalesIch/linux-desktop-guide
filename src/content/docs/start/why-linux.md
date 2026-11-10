@@ -1,6 +1,6 @@
 ---
 title: Why Linux Is Different
-description: Linux is not a single platform with a single vendor. It is a set of contracts between apps, desktops, and users. Understanding those contracts is the first step to building software that feels native.
+description: "A model for building software across GNOME, KDE Plasma, and every Linux desktop that shares the same contracts."
 ---
 
 Linux is not a product with a vendor at the top. It is an ecosystem held together by open standards, several strong desktop communities, and users who expect to remain in control.

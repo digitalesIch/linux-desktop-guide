@@ -16,6 +16,15 @@ hero:
       variant: minimal
 ---
 
+<div class="ldg-baseline" aria-label="Platform baseline">
+  <span class="ldg-baseline-label">Baseline</span>
+  <span>Ubuntu 26.04 LTS</span>
+  <span>GNOME 50</span>
+  <span>GTK 4.22</span>
+  <span>Wayland</span>
+  <span>Flatpak</span>
+</div>
+
 <div class="ldg-section">
   <p class="ldg-eyebrow">The Linux difference</p>
   <h2 class="ldg-title">No single vendor. One set of contracts.</h2>
@@ -23,17 +32,33 @@ hero:
 
   <div class="ldg-grid-3">
     <div class="ldg-card">
-      <span class="ldg-card-icon ldg-icon-orange">◎</span>
+      <span class="ldg-card-icon ldg-icon-orange" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3 21 8l-9 5-9-5 9-5Z"/>
+          <path d="m3 12 9 5 9-5"/>
+          <path d="m3 16 9 5 9-5"/>
+        </svg>
+      </span>
       <h3>Standards are the API</h3>
       <p>Wayland, XDG, D-Bus, AppStream and Portals are the stable surface. Learn them once; your app works across GNOME, KDE and every distribution.</p>
     </div>
     <div class="ldg-card">
-      <span class="ldg-card-icon ldg-icon-green">◈</span>
+      <span class="ldg-card-icon ldg-icon-green" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="3"/>
+          <path d="M5.5 20c.8-3.4 3.2-5 6.5-5s5.7 1.6 6.5 5"/>
+        </svg>
+      </span>
       <h3>The desktop is the user's</h3>
       <p>Respect themes, fonts, scaling, shortcuts and privacy settings. Native software adapts to the host instead of importing another platform's habits.</p>
     </div>
     <div class="ldg-card">
-      <span class="ldg-card-icon ldg-icon-blue">⬡</span>
+      <span class="ldg-card-icon ldg-icon-blue" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/>
+          <path d="m4 7.5 8 4.5 8-4.5M12 12v9"/>
+        </svg>
+      </span>
       <h3>Distribution is the product</h3>
       <p>Flatpak, deb, Snap and AppImage are not afterthoughts. Reproducible builds, signed updates and honest metadata are how trust is earned.</p>
     </div>

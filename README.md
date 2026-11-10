@@ -16,11 +16,12 @@ The companion app in `examples/notes/` is a complete GTK 4 + libadwaita referenc
 ├── src/
 │   ├── content/docs/          # Markdown/MDX source of truth
 │   │   ├── start/             # Why Linux, stack choice, tutorial, standard
-│   │   ├── platform/          # Wayland, XDG, integration, Flatpak, packaging, security
+│   │   ├── platform/          # Ubuntu, Wayland, XDG, integration, Flatpak, packaging, security
 │   │   ├── design/            # Principles, visual language, layout, interaction, a11y, i18n
 │   │   ├── engineering/       # Architecture, GTK, Qt, Rust, performance, testing, reliability
 │   │   ├── ship/              # AppStream, Flathub, release checklist, quality bar
 │   │   └── reference/         # Checklists, glossary, resources
+│   ├── components/            # PageTitle override and other Starlight overrides
 │   ├── styles/custom.css      # Design tokens and site styling
 │   └── assets/                # Logo and hero artwork
 ├── public/                    # Favicon and the hero SVG
