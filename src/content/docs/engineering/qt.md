@@ -253,6 +253,8 @@ Kirigami.ApplicationWindow {
 }
 ```
 
+The model is the state; the QML action calls an invokable method. QML never mutates the C++ list directly, so the same model can be tested without a window and reused by another view.
+
 ### The build
 
 The QML module URI and the `loadFromModule("Notes", "Main")` call must agree. The file is `Main.qml`, not `main.qml`.

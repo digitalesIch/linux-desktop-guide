@@ -148,6 +148,10 @@ fn build_ui(app: &adw::Application) {
 
 This app keeps notes in memory. The [first-app tutorial](/start/first-app/) shows the XDG persistence, atomic-write, and Flatpak parts; replace the in-memory list with `gio::File` or SQLite when you add storage. The Rust example is illustrative: build it against the crate versions in the table above and the GTK/libadwaita development packages for your distribution.
 
+## State and actions
+
+The window owns the `gio::SimpleAction`; the button activates it, and the action appends to the list. That is the smallest useful boundary: the widget tree does not own the data, and a test can exercise the data rule without a window. For a larger app, move the state into a struct and pass messages instead of mutating widgets from several callbacks. Relm4's component model below is one way to structure that.
+
 ## Testing
 
 `cargo test` runs the `note` module's unit test without a display. Add more tests around the pure data layer before reaching for a UI test:
