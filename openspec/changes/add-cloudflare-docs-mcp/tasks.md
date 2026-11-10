@@ -27,4 +27,4 @@
 - [x] 4.3 Start `wrangler dev` locally and verify `/health`, MCP `initialize`, `tools/list`, and a `tools/call` for `search_docs` and `get_page`.
 - [x] 4.4 Compare `search_docs` and `get_page` output with the local server for at least three queries and three pages; verify the shapes and ordering match.
 - [x] 4.5 Run `npm run check:quality -- --no-build`; verify the site still meets the Lighthouse thresholds.
-- [ ] 4.6 Commit and push; verify the CI workflow passes and the Worker dry-run step succeeds.
+- [x] 4.6 Commit and push; verify the CI workflow passes and the Worker dry-run step succeeds.
