@@ -12,7 +12,7 @@ The project SHALL provide one local command that runs the deterministic document
 #### Scenario: Run the default gate
 
 - **WHEN** a maintainer runs `npm run check:docs`
-- **THEN** the command verifies the baseline, checks tutorial/example consistency, validates the target matrix, builds the site, validates generated agent docs, runs the MCP tests, and checks internal links and anchors
+- **THEN** the command verifies the baseline, checks tutorial/example consistency, validates the target matrix, builds the site, validates the PWA output and generated agent docs, runs the MCP tests, and checks internal links and anchors
 
 #### Scenario: A check fails
 

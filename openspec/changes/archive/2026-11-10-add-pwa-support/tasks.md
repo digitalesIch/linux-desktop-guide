@@ -23,4 +23,4 @@
 - [x] 4.1 Run `npm run check:docs`.
 - [x] 4.2 Run `npm run check:quality`.
 - [x] 4.3 Verify the manifest, icons, service worker, and offline page in `dist/`.
-- [ ] 4.4 Commit, merge to `main`, and archive the change.
+- [x] 4.4 Commit, merge to `main`, and archive the change.
