@@ -208,13 +208,4 @@ Rules:
 - ☐ Sound is optional and off by default.
 - ☐ Notifications are actionable and rate-limited.
 
-## Key takeaways
-
-- Keyboard access is the baseline, not a bonus.
-- Bind shortcuts to actions so menus, help, and accessibility stay in sync.
-- Feedback must be immediate; progress must be cancellable.
-- Undo is better than confirmation for reversible actions.
-- Errors are a UX surface: be specific, human, and actionable.
-- Motion and sound are seasoning, not the meal.
-
 Next: [Accessibility](/design/accessibility/) — the legal, ethical, and technical baseline for software that works for everyone.

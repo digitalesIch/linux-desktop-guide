@@ -72,7 +72,7 @@ This is the standard this guide uses. It is toolkit-neutral: GTK, Qt, Rust, and 
 
 **Avoid**
 
-- Copying macOS or Windows chrome.
+- Copying another platform's chrome.
 - Forcing a dark theme when the user chose light.
 - Custom titlebars that break tiling, gestures, or accessibility.
 
@@ -196,9 +196,4 @@ If you can defend that sentence in a code review, you are building native softwa
 - Use it to push back on shortcuts that will cost more later.
 - Use the [Quality Bar](/ship/quality-bar/) to score an app across all ten dimensions.
 
-## Key takeaways
-
-- Native is behavior, not decoration.
-- The ten rules are toolkit-neutral and testable.
-- Most quality failures are architectural, not visual.
-- The cheapest time to fix them is before the first release.
+Next: [Design Principles](/design/principles/) — how the standard becomes an interface.

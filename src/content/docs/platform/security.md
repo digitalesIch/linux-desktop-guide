@@ -230,13 +230,4 @@ When a report arrives: reproduce, contain, patch, release, notify. Do not argue 
 - ☐ `SECURITY.md` exists and is current.
 - ☐ Dependencies are pinned and monitored.
 
-## Key takeaways
-
-- Least privilege is the default; every permission needs a justification.
-- The sandbox is a feature. Do not disable it to make packaging easier.
-- Secrets belong in the keyring, never in files or logs.
-- Treat files and network input as hostile.
-- Privacy is a design decision: opt in, minimize, redact, and delete for real.
-- A security contact and a patch cadence are part of shipping.
-
 Next: [Design Principles](/design/principles/) — how to make the app feel calm, fast, and native across Linux desktops.

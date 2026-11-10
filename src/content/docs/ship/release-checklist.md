@@ -165,28 +165,16 @@ Also test:
 - ☐ Update the roadmap and changelog.
 - ☐ Thank translators and contributors.
 
-## The one-hour audit
+## Release audit
 
-If you only have an hour before release, do this:
+Run the canonical [one-hour audit](/ship/quality-bar/#the-one-hour-audit). It covers the clean install, first launch, file opening, dark mode, 200% scaling, keyboard navigation, error handling, store listing, and upgrade.
 
-1. Install the published artifact on a clean VM.
-2. Launch it, create data, close it, reopen it.
-3. Open a file through the file manager.
-4. Switch to dark mode and 200% scaling.
-5. Tab through the main flow with no mouse.
-6. Trigger an error (read-only file, offline network) and read the message.
-7. Check the software-center listing.
-8. Verify the upgrade from the previous version.
+For a release, add these checks:
 
-If those eight pass, the release is probably shippable. If any fails, fix it before you announce.
+- Install the exact artifact that was published, not a local build.
+- Verify the upgrade from the previous version, including its data.
+- Confirm the release notes and store listing show the new version.
 
-## Key takeaways
-
-- A release is tested as an artifact, on a clean system, as a user.
-- Accessibility, performance, and permission behavior are release gates.
-- The UX matrix catches more real bugs than the unit suite.
-- Metadata and screenshots are part of the release, not marketing afterthoughts.
-- Always have a rollback and a data-migration story.
-- The first 24 hours after release are part of the release.
+If any check fails, fix it before you announce.
 
 Next: [The Quality Bar](/ship/quality-bar/) — a scorecard for the whole product.

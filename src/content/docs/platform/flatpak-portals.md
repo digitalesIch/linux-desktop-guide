@@ -166,7 +166,7 @@ Do not ship a manifest that relies on user overrides. If a feature only works af
 | Best for | Upstream apps, Flathub | Ubuntu App Center, server tools | Distro packages, system components |
 | Review burden | Flathub review + lint | Store review | Archive review |
 
-For a new upstream desktop app, **Flatpak/Flathub is the default**. Add a deb when you want to be in the Ubuntu archive or need tight system integration. Add a Snap when the Ubuntu App Center is a priority.
+For a new upstream desktop app that needs one build across distributions, **Flatpak/Flathub is the default**. Add a deb when you want to be in the Ubuntu archive or need tight system integration. Add a Snap when the Ubuntu App Center is a priority.
 
 ## Common mistakes
 
@@ -195,13 +195,5 @@ Flathub is curated. Before you submit:
 - Screenshots, release notes, and a valid AppStream file are required.
 
 The full process is covered in [Flathub](/ship/flathub/).
-
-## Key takeaways
-
-- Flatpak's value is the combination of a shared runtime, a sandbox, and portals.
-- A good manifest starts with almost no permissions.
-- Portals are not a workaround; they are the supported integration path.
-- Test the sandboxed build, not just the host build.
-- Flatpak, Snap, and deb solve different problems; choose deliberately.
 
 Next: [Packaging & Distribution](/platform/packaging/) — how the formats differ, and how to ship each one without losing your sanity.

@@ -3,9 +3,9 @@ title: Why Linux Is Different
 description: Linux is not a single platform with a single vendor. It is a set of contracts between apps, desktops, and users. Understanding those contracts is the first step to building software that feels native.
 ---
 
-If you come from macOS, the first instinct is to look for the Linux equivalent of AppKit, SwiftUI, the Human Interface Guidelines, and the App Store. You will find something in each category — but not one of each. Linux is not a product with a vendor at the top. It is an ecosystem held together by open standards, several strong desktop communities, and users who expect to remain in control.
+Linux is not a product with a vendor at the top. It is an ecosystem held together by open standards, several strong desktop communities, and users who expect to remain in control.
 
-That changes the job. You are not targeting one platform. You are targeting a **contract**: a small set of protocols, file formats, and behavioral expectations that let your app work across GNOME, KDE Plasma, and every distribution that ships them.
+That changes the job. You are not targeting one framework. You are targeting a **contract**: a small set of protocols, file formats, and behavioral expectations that let your app work across GNOME, KDE Plasma, and every distribution that ships them.
 
 Once you accept that, the apparent fragmentation becomes an advantage. You can choose the toolkit that fits your product. You can ship directly to users. You can integrate as deeply as the platform allows — without asking a gatekeeper for permission.
 
@@ -27,20 +27,20 @@ The important line is not between "Linux" and "your app". It is between **stable
 If a feature only works on one desktop, one display server, or one packaging format, it is not your baseline. It is an enhancement. Make the baseline excellent first.
 :::
 
-## What macOS gives you, and what Linux gives you instead
+## Where each concern lives
 
-The comparison is useful as long as it is not treated as a checklist to copy.
+A Linux desktop is assembled from a small number of stable layers. Knowing where each concern lives is more useful than memorizing a single framework.
 
-| Concern | macOS | Linux desktop |
-| --- | --- | --- |
-| UI toolkit | AppKit / SwiftUI | GTK 4 + libadwaita, Qt 6 + Kirigami, Rust toolkits |
-| Design authority | Apple Human Interface Guidelines | GNOME HIG, KDE HIG, elementary HIG, distribution guidance |
-| Windowing | One compositor (WindowServer) | Wayland compositors (Mutter, KWin, wlroots-based) |
-| Integration | Frameworks and system services | D-Bus, XDG Desktop Portals, freedesktop specifications |
-| Distribution | Mac App Store, notarized direct download | Flathub, deb, Snap, AppImage, distro repositories |
-| Sandbox | App Sandbox + entitlements | Flatpak/Snap sandboxes + portals |
-| Updates | Sparkle, App Store, system updates | Flatpak/OSTree, Snap, package manager, app-specific updaters |
-| User control | Guided by the OS vendor | Explicit, visible, and often scriptable |
+| Concern | Where it lives |
+| --- | --- |
+| UI toolkit | GTK 4 + libadwaita, Qt 6 + Kirigami, or another maintained toolkit |
+| Design authority | GNOME HIG, KDE HIG, elementary HIG, and distribution guidance |
+| Windowing | Wayland compositors such as Mutter, KWin, and wlroots-based compositors |
+| Integration | D-Bus, XDG Desktop Portals, and freedesktop specifications |
+| Distribution | Flathub, deb, Snap, AppImage, and distribution repositories |
+| Sandbox | Flatpak or Snap confinement plus portals |
+| Updates | Flatpak/OSTree, Snap, the package manager, or a documented app updater |
+| User control | Explicit, visible, and often scriptable |
 
 The last row is the philosophical difference. On Linux, the user can replace the desktop, the theme, the file manager, the compositor, and the package source. Your app is a guest in an environment it does not own. The best Linux apps behave like good guests: they adapt, they ask before taking, and they leave things as they found them.
 
@@ -104,22 +104,14 @@ These are the most common ways a ported or hastily built app stops feeling nativ
 
 ## The Linux advantage
 
-It is worth saying plainly: the Linux model is not a worse version of macOS. It is a different bet.
+The Linux model is a bet on shared ownership.
 
 - **You can ship without a gatekeeper.** Flathub, a PPA, a `.deb`, or a tarball are all legitimate paths.
-- **You can integrate deeper.** D-Bus, portals, and the XDG specs expose capabilities that closed platforms often keep private.
+- **You can integrate deeper.** D-Bus, portals, and the XDG specifications expose capabilities the desktop already provides.
 - **You can support older hardware.** A well-written GTK or Qt app can run on a decade-old laptop and still feel responsive.
 - **You can be inspected.** Users and distributors can read the source, verify the build, and patch the package.
-- **You can choose your stack.** The ecosystem rewards maintenance and good citizenship, not a single vendor's roadmap.
+- **You can choose your stack.** The ecosystem rewards maintenance and good citizenship.
 
 The cost is that you must take standards seriously. The reward is software that belongs on the desktop rather than merely running on it.
 
-## Key takeaways
-
-- Linux is a contract ecosystem, not a single vendor platform.
-- Build on Wayland, XDG, D-Bus, portals, and AppStream — not on one desktop's private behavior.
-- "Native" is measured in behavior: predictable, responsive, integrated, accessible, honest.
-- The four contracts are display, desktop, data, and distribution.
-- Fragmentation is a design constraint. Treat it as the brief, not as an excuse.
-
-Next: [Choose Your Stack](/start/choose-stack/) — an honest comparison of the toolkits and languages you can build on.
+Next: [Choose Your Stack](/start/choose-stack/) — a practical comparison of the toolkits and languages you can build on.

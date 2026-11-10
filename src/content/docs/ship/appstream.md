@@ -221,12 +221,4 @@ flatpak-builder-lint manifest io.github.yourname.Notes.yml
 - ☐ The metainfo passes validation.
 - ☐ The icon is installed and legible at 16 px.
 
-## Key takeaways
-
-- AppStream metadata is how software centers see the app; treat it as product copy.
-- One application ID across every file is non-negotiable.
-- Screenshots and release notes drive trust and install conversion.
-- Validate metadata in CI; do not wait for store review.
-- The desktop file and metainfo must tell the same story.
-
 Next: [Flathub](/ship/flathub/) — the submission and maintenance process.

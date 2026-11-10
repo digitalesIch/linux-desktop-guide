@@ -5,7 +5,7 @@ description: "Building native KDE apps with Qt 6.10 and Kirigami: QML vs Widgets
 
 Qt is the other great Linux desktop stack. It is mature, fast, cross-platform, and backed by a deep tooling ecosystem. **Kirigami** is KDE's adaptive UI framework built on Qt Quick; it gives you the navigation, sheets, cards, and responsive layout that make an app feel at home on Plasma.
 
-If your primary audience is KDE, Qt + Kirigami is the shortest path to native. If you need one codebase across Linux, Windows, macOS, Android, and embedded, Qt is often the pragmatic choice — provided you still do the platform integration work.
+If your primary audience is KDE, Qt + Kirigami is the shortest path to native. If you need one codebase across desktop, mobile, and embedded targets, Qt is often the pragmatic choice — provided you still do the platform integration work.
 
 :::note[Versions in Ubuntu 26.04]
 Qt 6.10.2, KDE Frameworks 6.24, KDE Plasma 6.6. Qt 6.8 LTS is a conservative target if you need broader distribution support. Target Qt 6.8+ APIs and guard newer ones at runtime.
@@ -249,14 +249,5 @@ The KDE runtime includes Kirigami and the KDE Frameworks, so you do not need to 
 | No high-DPI support | Qt 6 handles it; test and avoid manual scaling |
 | File access outside the sandbox | Use KIO/portals and XDG paths |
 | No accessible names on custom items | Set `Accessible.name` and role |
-
-## Key takeaways
-
-- Qt + Kirigami is the native KDE stack; Qt Widgets is still excellent for dense tools.
-- Use `Kirigami.PageRow`, `Kirigami.Units`, and `Kirigami.Theme` instead of inventing adaptive layout.
-- KConfig, KNotification, KIO, and KWallet are the integration primitives.
-- Set the desktop file name and application metadata; the desktop needs them.
-- Test accessibility explicitly; QML does not infer everything.
-- Ship with the KDE runtime on Flatpak and keep static permissions minimal.
 
 Next: [Rust on the Desktop](/engineering/rust/) — memory safety without giving up native GTK.

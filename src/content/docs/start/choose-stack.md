@@ -1,13 +1,13 @@
 ---
 title: Choose Your Stack
-description: GTK 4 + libadwaita, Qt 6 + Kirigami, Rust, Python, or web tech? An honest comparison of Linux desktop stacks, what they are good at, and where they stop feeling native.
+description: GTK 4 + libadwaita, Qt 6 + Kirigami, Rust, Python, or web tech? A practical comparison of Linux desktop stacks, what they are good at, and where they stop feeling native.
 ---
 
 There is no single "Linux SDK". There are several mature stacks, each with a different center of gravity. The right choice is the one your team can maintain for five years, on the desktop your users actually run.
 
-This page is opinionated, but not sectarian. GTK and Qt are both excellent. Rust is a strong default for new apps, but not a religion. Web technology can be the right answer when the product is genuinely web-shaped — and the wrong answer when it is used to avoid learning the platform.
+GTK and Qt are both excellent. Rust is a strong default for new apps, but not a requirement. Web technology can be the right answer when the product is genuinely web-shaped — and the wrong answer when it is used to avoid learning the platform.
 
-## The short version
+## At a glance
 
 | If this is true… | Start with… |
 | --- | --- |
@@ -58,7 +58,7 @@ It is the stack used by GNOME's own apps, it has the deepest accessibility and p
 - Excellent performance and a very mature tooling chain (Qt Creator, QML profiler, GammaRay).
 - QML is productive for highly animated, touch-friendly, adaptive interfaces.
 - Kirigami gives you KDE-native navigation, cards, sheets, and responsive page stacks.
-- Strong cross-platform story (Windows, macOS, Android, embedded).
+- Strong cross-platform story across desktop, mobile, and embedded targets.
 - C++ and Python bindings; Qt Widgets remains a solid choice for dense desktop UIs.
 
 **Trade-offs**
@@ -145,7 +145,7 @@ For GTK apps, use the archive toolchain when you link against system libraries. 
 1. **Which desktop is primary?** GNOME/Ubuntu → GTK/libadwaita. KDE → Qt/Kirigami. Both equally → Qt with a platform-integration pass, or accept that one desktop will be secondary.
 2. **Does the app need a custom renderer?** Games, CAD, video editors, and canvas-first tools may prefer SDL3, Qt Quick, or a custom GPU stack. Form-and-list apps should use native widgets.
 3. **Is the team already fluent in a stack?** A well-maintained Qt app beats a poorly maintained GTK app. Maintenance is a feature.
-4. **How will it ship?** Flatpak is the default for upstream apps. If you need a deb in the Ubuntu archive, plan for Debian packaging from day one.
+4. **How will it ship?** Flatpak is the default when you want one upstream build across distributions. If you need a deb in the Ubuntu archive, plan for Debian packaging from day one.
 5. **What is the accessibility story?** Native widgets give you AT-SPI semantics for free. Custom-drawn UI does not. Budget accordingly.
 6. **What is the five-year plan?** Check the toolkit's release cadence, major-version policy, and the health of its bindings.
 
@@ -164,14 +164,5 @@ For GTK apps, use the archive toolchain when you link against system libraries. 
 :::caution[Do not target the newest API by default]
 A Flatpak app can bundle a newer runtime, but a deb must work with the libraries in the archive. If you ship both, target the oldest library version you support and guard newer APIs at runtime.
 :::
-
-## Key takeaways
-
-- Pick the toolkit for platform fit; pick the language for team and safety.
-- GTK 4 + libadwaita is the shortest path to native GNOME/Ubuntu.
-- Qt 6 + Kirigami is the shortest path to native KDE, with strong cross-platform reach.
-- Rust is a first-class choice for new GTK apps, not a compromise.
-- Web tech is viable when the product is web-shaped; it does not remove the need for native integration.
-- The five-year maintenance plan matters more than the demo.
 
 Next: [Build Your First App](/start/first-app/) — a complete, minimal GTK 4 app with packaging.

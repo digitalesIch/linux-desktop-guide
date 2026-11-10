@@ -320,14 +320,4 @@ Use the Inspector to check CSS, layout, accessibility, and render nodes. It is t
 | Custom titlebar breaks tiling | Use `Adw.HeaderBar` and toolkit window controls |
 | Rebuilding rows on scroll | Use `Gtk.ListView` + a factory |
 
-## Key takeaways
-
-- Use `Adw.Application` + `Adw.ApplicationWindow`; let the framework own the lifecycle.
-- Blueprint keeps UI declarative and reviewable; compile it into a GResource.
-- Use the libadwaita widget vocabulary before composing your own.
-- Bind commands to actions, not raw key handlers.
-- Use models and `Gtk.ListView` for collections.
-- Keep the main loop free; return results to it explicitly.
-- Debug with the GTK Inspector and `GTK_DEBUG`, not guesswork.
-
 Next: [Qt & Kirigami](/engineering/qt/) — the KDE-native stack with the same architectural discipline.

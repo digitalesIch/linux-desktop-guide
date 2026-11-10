@@ -185,13 +185,4 @@ Verified apps show a badge and can use the verified developer portal. Verificati
 - ☐ The PR targets `new-pr` and follows the template.
 - ☐ A maintainer is committed to updates.
 
-## Key takeaways
-
-- Flathub is curated; the submission is a product launch.
-- The application ID is permanent and must be consistent everywhere.
-- Minimal permissions and portals are mandatory, not optional.
-- Build from source, offline, with the current runtime.
-- Lint locally before opening the PR.
-- Maintenance is part of acceptance: runtime updates, metadata, and security response.
-
 Next: [Release Checklist](/ship/release-checklist/) — the final pass before users install.

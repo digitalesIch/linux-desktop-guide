@@ -240,12 +240,4 @@ When moving from `~/.myapp` to XDG paths, look for the old directory once, copy 
 - ☐ Recent files and trash use the desktop APIs.
 - ☐ A reset removes config and state but not user data without confirmation.
 
-## Key takeaways
-
-- XDG directories are the Linux equivalent of a per-app support directory, split by purpose.
-- Use GLib/Qt APIs, not hardcoded paths.
-- GSettings for desktop-integrated preferences; a versioned file or SQLite for app data.
-- Desktop entries, icons, MIME types, and AppStream metadata are part of the product.
-- Sandboxes remap these paths; portals are how you reach the host.
-
 Next: [System Integration](/platform/integration/) — D-Bus, notifications, secrets, search, and the services that make an app feel part of the desktop.

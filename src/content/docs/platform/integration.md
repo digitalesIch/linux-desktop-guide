@@ -232,12 +232,4 @@ Desktop-integrated preferences belong in GSettings, with a schema and an `Adw.Pr
 - ☐ Hardware state comes from D-Bus services, not `/proc` parsing.
 - ☐ Settings are in GSettings with a schema and a reset path.
 
-## Key takeaways
-
-- Integration is a set of standard interfaces, not a pile of features.
-- `Gtk.Application` already gives you single-instance behavior and activation; use it.
-- Notifications, file dialogs, and secrets have platform APIs. Use them.
-- Search and MPRIS are optional, but if you expose them, make them fast and correct.
-- Background work belongs in systemd, not in a forked process.
-
 Next: [Flatpak & Portals](/platform/flatpak-portals/) — the sandbox model and the mediation layer that makes integration safe.

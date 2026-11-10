@@ -5,7 +5,7 @@ description: How to design Linux desktop apps that feel calm, fast, and native a
 
 Linux design is plural. GNOME, KDE Plasma, elementary, and COSMIC each have a coherent design language and a published HIG. There is no single authority that can settle every question, so the app has to make a choice: **pick a primary desktop, follow its conventions deeply, and adapt gracefully elsewhere.**
 
-That is not a limitation. It is what lets a Linux app feel like it belongs in more than one place without looking like a copy of macOS.
+That is not a limitation. It is what lets a Linux app feel like it belongs in more than one place without feeling imported from another platform.
 
 ## The principles
 
@@ -143,7 +143,7 @@ The fastest way to make a Linux app feel foreign is to import another platform's
 7. **Remove one thing.** The first design is usually too busy.
 8. **Ship, observe, iterate.** Watch where users hesitate; fix the flow, not the color.
 
-## Anti-patterns
+## What to avoid
 
 | Anti-pattern | Why it hurts |
 | --- | --- |
@@ -157,13 +157,5 @@ The fastest way to make a Linux app feel foreign is to import another platform's
 | "Are you sure?" for reversible actions | Trains users to click through dialogs |
 | Hover-only controls | Unusable with keyboard and touch |
 | Custom file picker | Breaks sandboxing, bookmarks, and recent files |
-
-## Key takeaways
-
-- Pick a primary desktop and follow its HIG deeply.
-- Native is a set of behaviors: clarity, calm, keyboard access, consistency, feedback, forgiveness.
-- Custom chrome is expensive; custom content is where brand belongs.
-- Test at multiple sizes, scales, input methods, and accessibility settings.
-- Performance and accessibility are design properties, not engineering cleanup.
 
 Next: [Visual Language](/design/visual-language/) — typography, color, spacing, icons, and motion that adapt to the host.

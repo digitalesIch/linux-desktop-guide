@@ -241,13 +241,4 @@ Use the `org.gnome.Platform` runtime for gtk-rs/libadwaita apps. The runtime inc
 | Assuming `Send` for UI state | Keep UI state local; use messages across threads |
 | Ignoring accessibility | gtk-rs exposes GTK semantics; set labels and roles |
 
-## Key takeaways
-
-- gtk-rs + libadwaita-rs is the native Rust path for GNOME/Ubuntu.
-- Relm4 adds structure without hiding GTK.
-- The GTK object graph is reference-counted and main-thread-bound; respect that.
-- Bridge async runtimes explicitly; never block the main loop.
-- Vendor dependencies for Flatpak and pin the runtime.
-- Rust buys safety, not free UI design; accessibility and HIG work remain.
-
 Next: [Performance](/engineering/performance/) — how to measure and defend the numbers users feel.

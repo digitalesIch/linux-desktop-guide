@@ -327,13 +327,4 @@ Never replace your own binary from inside the app. It breaks package ownership, 
 - ☐ The license and copyright are installed.
 - ☐ The uninstall path removes app data only with consent.
 
-## Key takeaways
-
-- Packaging is part of the product, not a release-day chore.
-- Flatpak/Flathub is the default for upstream desktop apps.
-- deb is for Ubuntu/Debian integration; Snap is for the Ubuntu App Center.
-- AppImage is a portable artifact, not a distribution strategy.
-- Build every channel from one tag, in a clean environment, with the same metadata.
-- Never self-update inside a package-managed app.
-
 Next: [Security & Privacy](/platform/security/) — the threat model behind the sandbox, secrets, and permissions.

@@ -217,7 +217,7 @@ class NotesService:
 
 The UI calls `NotesService`; tests use an in-memory `NoteRepository`. The database is an implementation detail.
 
-## Anti-patterns
+## Architectural anti-patterns
 
 | Anti-pattern | Cost |
 | --- | --- |
@@ -229,14 +229,5 @@ The UI calls `NotesService`; tests use an in-memory `NoteRepository`. The databa
 | Premature abstraction | Layers with no purpose, more code to maintain |
 | Custom IPC when D-Bus exists | Reinvented discovery, auth, and lifecycle |
 | Silent exception handling | Data loss with no diagnosis |
-
-## Key takeaways
-
-- Keep the main loop free; move I/O and heavy work off it.
-- One source of truth; widgets render state, they do not own it.
-- Separate domain, application, infrastructure, and UI with clear seams.
-- Make long work cancellable and stale results harmless.
-- Use the platform's storage, IPC, and single-instance primitives.
-- Testability is an architectural property, not a testing afterthought.
 
 Next: [GTK & libadwaita](/engineering/gtk/) — the deep dive into the Ubuntu-native toolkit.

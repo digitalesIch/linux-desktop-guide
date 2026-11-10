@@ -208,13 +208,4 @@ Implement `--quit-after-startup` in the app: show the window, wait for the first
 | Slow first paint | Show the shell before loading data |
 | Large package | Strip binaries, share runtime, remove unused assets |
 
-## Key takeaways
-
-- Performance is a budget, measured on real hardware, not a vibe.
-- The main loop is the first place to look; blocking it defeats every other optimization.
-- Rendering cost is usually the widget tree and images, not the GPU.
-- Memory leaks are often reference cycles; use weak references.
-- Battery is a performance metric; polling is the enemy.
-- Profile, fix one thing, measure again, and add a regression check.
-
 Next: [Testing](/engineering/testing/) — how to prove the app works before users do.

@@ -231,12 +231,4 @@ Do not machine-translate the UI and ship it unreviewed. Flathub explicitly rejec
 - ☐ The app runs in an RTL locale.
 - ☐ Translators are credited.
 
-## Key takeaways
-
-- Internationalize while writing the first screen, not after the release.
-- Use gettext or Qt's translation system; do not invent a format.
-- Plurals, dates, numbers, and RTL are not edge cases.
-- Metadata translation is part of the product.
-- Machine translation without review is worse than no translation.
-
 Next: [Architecture](/engineering/architecture/) — how to structure the code so the UI stays fast and the app stays maintainable.

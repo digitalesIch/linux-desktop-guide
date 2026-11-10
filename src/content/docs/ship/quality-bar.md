@@ -184,13 +184,4 @@ For a new app that wants to reach "native":
 - Set up crash reporting (opt-in) and a support path.
 - Schedule the first patch release.
 
-## Key takeaways
-
-- Quality is multi-dimensional; a strong score in one area does not compensate for a zero in another.
-- Score the shipped artifact, with evidence.
-- Native is a binary baseline; the scorecard measures excellence beyond it.
-- The lowest dimension is the next investment.
-- A one-hour audit finds more than a week of opinions.
-- A 90-day plan turns "we should improve quality" into a release.
-
 Next: [Checklists](/reference/checklists/) — the condensed, copy-paste version for daily use.

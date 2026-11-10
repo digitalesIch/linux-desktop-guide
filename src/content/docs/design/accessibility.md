@@ -177,12 +177,4 @@ Automated accessibility checks catch missing labels. They do not catch a confusi
 - ☐ The team has access to Orca and a high-contrast environment.
 - ☐ Accessibility bugs are prioritized like other user-facing bugs.
 
-## Key takeaways
-
-- Native widgets give you accessibility semantics; custom drawing does not.
-- Keyboard access, focus visibility, contrast, scaling, and reduced motion are the baseline.
-- Test with Orca, not just an automated checker.
-- Accessibility is a legal requirement for many products, and a quality requirement for all of them.
-- The best accessibility work happens in design, before the first widget is drawn.
-
 Next: [Localization](/design/localization/) — making the app work in every language, locale, and writing direction.

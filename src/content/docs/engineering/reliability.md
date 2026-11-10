@@ -229,13 +229,4 @@ A diagnostic bundle should be a single file the user can review before sending. 
 - ☐ Background work is cancellable and cleaned up.
 - ☐ Support has a diagnostic bundle path.
 
-## Key takeaways
-
-- Reliability is designed: every failure needs a path, a message, and a recovery.
-- Logs are for diagnosis; keep them structured, bounded, and secret-free.
-- Crash reporting requires consent and redaction.
-- Atomic writes, transactions, and migrations prevent the worst data loss.
-- Autosave, session restore, and safe mode turn a disaster into an inconvenience.
-- A diagnostic command is a feature, not an afterthought.
-
 Next: [AppStream & Metadata](/ship/appstream/) — how the software center sees your app.

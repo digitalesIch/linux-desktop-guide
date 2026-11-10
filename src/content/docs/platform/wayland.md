@@ -186,12 +186,4 @@ For GNOME-specific behavior, Mutter Devkit in GNOME 50 can simulate HiDPI, fract
 | App steals focus | X11 activation hack | Use `Gtk.Application` activation |
 | Clipboard empty after copy | Asynchronous read not awaited | Use async clipboard APIs and handle failure |
 
-## Key takeaways
-
-- Wayland is the default on Ubuntu 26.04; XWayland is compatibility, not a target.
-- The compositor owns placement, input, capture, and scaling. Work with it, not around it.
-- Portals are the supported path for screen capture, global shortcuts, and file access.
-- Fractional scaling and input methods are baseline requirements, not edge cases.
-- Most "Wayland bugs" are X11 assumptions that were never true on other desktops either.
-
 Next: [The XDG Contract](/platform/xdg/) — where apps put their data, and why it matters.

@@ -193,12 +193,4 @@ Avoid:
 - ☐ Empty states explain the next step.
 - ☐ Screenshots show the real app in both color schemes.
 
-## Key takeaways
-
-- Use the host's type scale, spacing, icons, and semantic colors.
-- Brand belongs in the icon, content, and empty states — not in window chrome.
-- Contrast and reduced motion are not optional.
-- Custom CSS should be small, semantic, and easy to delete.
-- A calm visual language is a feature, not a lack of personality.
-
 Next: [Layout & Navigation](/design/layout/) — choosing the right adaptive structure for your app.

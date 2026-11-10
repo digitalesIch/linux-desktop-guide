@@ -189,12 +189,4 @@ If you are building for KDE:
 - ☐ Primary actions are visible; secondary actions are in a menu with shortcuts.
 - ☐ The layout works at 200% text and display scaling.
 
-## Key takeaways
-
-- Choose navigation from the content model, not from a screenshot.
-- Use the platform's adaptive widgets; breakpoints are for the remaining details.
-- Desktop apps must work narrow, wide, and at 200% scaling.
-- Empty and error states are part of the layout, not an afterthought.
-- Settings and dialogs follow the host's patterns; they are not custom pages.
-
 Next: [Interaction & Feedback](/design/interaction/) — keyboard, focus, undo, search, and the small behaviors that make an app feel alive.

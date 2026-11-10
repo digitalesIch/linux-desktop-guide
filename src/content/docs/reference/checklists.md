@@ -3,7 +3,7 @@ title: Checklists
 description: Condensed, copy-paste checklists for new Linux desktop projects, releases, accessibility, performance, security, metadata, and Flatpak.
 ---
 
-The short version of this guide. Copy these into an issue template, a `RELEASE.md`, or a pull request checklist.
+Copy these into an issue template, a `RELEASE.md`, or a pull request checklist.
 
 ## New project
 
@@ -153,12 +153,4 @@ If you have ten minutes:
 8. Check the app in the software center.
 9. Uninstall; did it leave junk behind?
 10. Read the release notes; would you install it?
-
-## Key takeaways
-
-- Checklists are only useful if they are enforced; put them in CI or the PR template.
-- The ten-minute audit catches the failures users notice first.
-- Metadata and permissions are as important as code.
-- Release day is part of the product; plan it.
-
 Back to [The Quality Bar](/ship/quality-bar/) or [Resources](/reference/resources/).

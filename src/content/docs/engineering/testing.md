@@ -306,13 +306,4 @@ Before a release, require:
 - ☐ Performance budgets are checked.
 - ☐ No known critical security issue is open.
 
-## Key takeaways
-
-- Test the domain without a display; test the packaged artifact before release.
-- UI tests are for critical flows, not every widget.
-- Isolate XDG, D-Bus, network, and time.
-- Accessibility is a test surface, not a manual afterthought.
-- Flaky tests hide real races; fix them.
-- The release artifact is the thing that must work.
-
 Next: [Reliability & Logging](/engineering/reliability/) — what happens when the disk is full, the network is down, and the compositor restarts.

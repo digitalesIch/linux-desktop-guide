@@ -431,13 +431,4 @@ This tutorial is intentionally minimal. A real app needs:
 
 The full example is available in the `examples/notes` directory of this guide's repository. Copy it, rename the app ID, and start replacing the placeholder logic.
 
-## Key takeaways
-
-- A native app is a complete package: code, metadata, icon, storage, and sandbox permissions.
-- `Adw.ApplicationWindow` + `Adw.ToolbarView` + `Adw.OverlaySplitView` gives you an adaptive GNOME layout with very little code.
-- Store data in `GLib.get_user_data_dir()`, not next to the binary.
-- `Gtk.FileDialog` and other portal-aware APIs keep the app working inside a sandbox.
-- A minimal Flatpak manifest needs almost no permissions. Add capabilities only when a feature requires them.
-- Validate the desktop file and metainfo before you ship; software centers will reject or hide invalid metadata.
-
 Next: [The Native Standard](/start/native-standard/) — the ten rules that separate a working app from one that belongs.
