@@ -19,7 +19,7 @@
 - [x] 3.1 Run `npm run check:quality` and confirm all five pages pass.
 - [x] 3.2 Run `npm run check:quality -- --no-build` and confirm reuse works.
 - [x] 3.3 Run `npm run check:docs` and confirm the offline gate is unaffected.
-- [ ] 3.4 Run `git diff --check`, commit on `workspace`, and merge to `main`.
+- [x] 3.4 Run `git diff --check`, commit on `workspace`, and merge to `main`.
 
 ## Workflow follow-up
 
