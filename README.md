@@ -44,7 +44,7 @@ Start at `src/content/docs/targets/index.md`; the method and evidence are in `ta
 ├── scripts/                   # Baseline and maintenance checks
 ├── tools/docs-mcp/            # Read-only stdio MCP server for agents
 ├── public/                    # Favicon, hero SVG, PWA manifest, service worker, icons, offline page
-├── examples/notes/            # Runnable GTK 4 reference app
+├── examples/notes/            # Runnable GTK 4 teaching example
 ├── astro.config.mjs           # Site title, sidebar, Starlight options
 └── package.json
 ```
@@ -182,7 +182,7 @@ description: One sentence for search results and social previews.
 - Mention the tested target and its baseline: Ubuntu 26.04 LTS + GNOME (GTK 4.22, libadwaita 1.9) or Fedora 45 KDE + Qt (Qt 6.11, KDE Frameworks 6.30+). The full matrix is in `/targets/`.
 - When a behavior is desktop-specific, say so and give the portable baseline.
 
-## Reference app
+## Teaching example
 
 ```bash
 cd examples/notes
@@ -284,6 +284,6 @@ The two licenses are deliberate: MIT keeps the code easy to reuse, and CC BY-SA 
 
 - 42 Markdown source files and 43 built HTML pages, including the 404.
 - All internal links checked; external links checked against primary sources at the time of writing.
-- Reference app syntax-checked, built with Meson, validated with `desktop-file-validate` and `appstreamcli`, and launched successfully in a headless GNOME 50 Wayland session.
+- Teaching example syntax-checked, built with Meson, validated with `desktop-file-validate` and `appstreamcli`, and launched successfully in a headless GNOME 50 Wayland session. It is not a complete production app; its README lists the missing product work.
 
 Licenses are in `LICENSE` (code) and `LICENSE-docs` (prose).

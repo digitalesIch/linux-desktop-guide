@@ -67,7 +67,7 @@ For a full KDE desktop inside a regular Fedora installation:
 sudo dnf5 install -y @kde-desktop-environment
 ```
 
-For upstream KDE development, use `kdesrc-build` and the [KDE developer documentation](https://develop.kde.org/). For the app in this guide, the [Qt & Kirigami](/engineering/qt/) chapter has the complete CMake, C++ model, QML view, and test target.
+For upstream KDE development, use `kdesrc-build` and the [KDE developer documentation](https://develop.kde.org/). For the app in this guide, the [Qt & Kirigami](/engineering/qt/) chapter has the CMake, C++ model, QML view, and test target; it is an illustrative example until the Fedora 45 checks below are recorded.
 
 Install the Flatpak runtime and SDK:
 
@@ -109,12 +109,12 @@ Use [Toolbx](https://containertoolbx.org/) for the development environment; the 
 
 ## Golden path
 
-1. [Qt & Kirigami](/engineering/qt/) — the complete C++/QML project, `QAbstractListModel`, `KDBusService`, KConfig, KNotification, KIO, CMake, tests, and accessibility.
+1. [Qt & Kirigami](/engineering/qt/) — the C++/QML project, `QAbstractListModel`, `KDBusService`, KConfig, KNotification, KIO, CMake, tests, and accessibility.
 2. [KDE Human Interface Guidelines](https://develop.kde.org/hig/) — the design language for a KDE-first app.
 3. [AppStream & Metadata](/ship/appstream/) and [Flathub](/ship/flathub/) — the distribution path.
 4. [Release Checklist](/ship/release-checklist/) — the final pass before users install.
 
-The first-app tutorial is GTK/Python. For this target, the Qt chapter is the complete starting project; do not follow the GTK tutorial and then try to make it look like a KDE app.
+The first-app tutorial is GTK/Python. For this target, the Qt chapter is the starting project; it is illustrative until the Fedora 45 checks below are recorded. Do not follow the GTK tutorial and then try to make it look like a KDE app.
 
 ## Validation checklist
 
@@ -172,4 +172,4 @@ Before you call the app ready on this target:
 - [Flathub setup for Fedora](https://flathub.org/en/setup/Fedora)
 - [Fedora countme totals](https://data-analysis.fedoraproject.org/csv-reports/countme/totals.csv)
 
-Next: [Qt & Kirigami](/engineering/qt/) — build the complete C++/QML project for this target.
+Next: [Qt & Kirigami](/engineering/qt/) — build the C++/QML project for this target.

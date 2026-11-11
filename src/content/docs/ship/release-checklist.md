@@ -7,6 +7,8 @@ A release is not "the tests pass and the tag is pushed". It is the moment the ap
 
 Use it as a living document. Delete items that do not apply; add the ones your users keep hitting.
 
+This checklist implements the mandatory [release criteria](/ship/quality-bar/#release-criteria). A failure in data preservation, accessible core tasks, justified permissions, or a supported installation and update path blocks release; the quality score does not override it.
+
 ## 1. Freeze and version
 
 - ☐ The version number is final and follows semantic versioning.
@@ -102,7 +104,7 @@ Also test:
 - ☐ AppStream metainfo validates (`appstreamcli validate --no-net`).
 - ☐ Desktop entry validates (`desktop-file-validate`).
 - ☐ Icon is installed in hicolor, legible at 16 px and 256 px.
-- ☐ Screenshots are current, light and dark, 1600×900 or larger.
+- ☐ Screenshots are current, light and dark, and follow the store's dimensions (for Flathub, capture at 1000×700 logical pixels; export 2000×1400 for HiDPI).
 - ☐ Release notes are in the metainfo and on the website.
 - ☐ The app name, summary, and description match the product.
 - ☐ License and copyright are installed.

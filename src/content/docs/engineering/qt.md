@@ -1,6 +1,6 @@
 ---
 title: Qt & Kirigami
-description: "Building native KDE apps with Qt 6.10+ and Kirigami: a complete C++/QML project, QAbstractListModel, CMake, KConfig, KNotification, KIO, testing, accessibility, and Flatpak."
+description: "Building native KDE apps with Qt 6.10+ and Kirigami: an illustrative C++/QML project, QAbstractListModel, CMake, KConfig, KNotification, KIO, testing, accessibility, and Flatpak."
 ---
 
 Qt is the other major Linux desktop stack. It is mature, widely used, cross-platform, and backed by a deep tooling ecosystem. **Kirigami** is KDE's adaptive UI framework built on Qt Quick; it gives you the navigation, sheets, cards, and responsive layout that make an app feel at home on Plasma.

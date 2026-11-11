@@ -59,11 +59,11 @@ Legacy `.appdata.xml` files are still accepted, but new apps should use `.metain
   <screenshots>
     <screenshot type="default">
       <caption>Write notes with a calm, keyboard-first interface</caption>
-      <image type="source" width="1600" height="900">https://example.org/notes/screenshot-light.png</image>
+      <image type="source" width="2000" height="1400">https://example.org/notes/screenshot-light.png</image>
     </screenshot>
     <screenshot>
       <caption>The same notes in dark mode</caption>
-      <image type="source" width="1600" height="900">https://example.org/notes/screenshot-dark.png</image>
+      <image type="source" width="2000" height="1400">https://example.org/notes/screenshot-dark.png</image>
     </screenshot>
   </screenshots>
 

@@ -8,7 +8,7 @@ This tutorial builds **Notes**, a small but real GTK 4 + libadwaita application.
 The code is Python to keep the example readable. The structure maps directly to C, Rust, or Vala; the toolkit behaves the same.
 
 :::note[Choosing KDE?]
-This tutorial builds the GNOME target with GTK 4 + libadwaita. If you chose [Fedora 45 KDE + Qt](/targets/fedora-kde/), start with the [Qt & Kirigami](/engineering/qt/) chapter instead; it contains the complete C++/QML project for that target.
+This tutorial builds the GNOME target with GTK 4 + libadwaita. If you chose [Fedora 45 KDE + Qt](/targets/fedora-kde/), start with the [Qt & Kirigami](/engineering/qt/) chapter instead; it contains the C++/QML project and build path for that target.
 :::
 
 :::note[What you need]

@@ -153,8 +153,8 @@ Do not let a language preference force you into a toolkit that fights the deskto
 
 The two reference targets have their own setup paths. Ubuntu publishes supported setup and version-availability guides for Python, Go, Rust, GCC, Clang, .NET, Java, and Zig. Use them as the source of truth when you need to know what the LTS ships, or when you need a supported install path:
 
-- [Ubuntu + GNOME target](/targets/ubuntu-gnome/) — the complete environment and golden path.
-- [Fedora + KDE target](/targets/fedora-kde/) — the complete environment and golden path.
+- [Ubuntu + GNOME target](/targets/ubuntu-gnome/) — the target environment and golden path.
+- [Fedora + KDE target](/targets/fedora-kde/) — the target environment and golden path.
 - [Ubuntu for Developers](https://ubuntu.com/developers/docs/) — overview and tutorials.
 - [Toolchains](https://ubuntu.com/developers/docs/toolchains/) — per-language setup and first-program guides.
 - [Toolchain availability](https://ubuntu.com/developers/docs/reference/availability/) — what each Ubuntu release provides.
