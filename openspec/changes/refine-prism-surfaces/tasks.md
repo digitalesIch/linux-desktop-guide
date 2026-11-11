@@ -42,5 +42,5 @@
 - [x] 6.3 Add a left gutter to step columns after the first and verify text clears the divider line while mobile stacking still works
 - [x] 6.4 Add the pointer-local glow to the agent panel and verify it tracks the pointer without covering text
 - [x] 6.5 Remove the fabricated quote section and its unused styles, including the stale 404 section class
-- [ ] 6.6 Bump the service-worker cache version so updated layout styles and removed sections replace cached copies, and verify `dist/sw.js`
-- [ ] 6.7 Run `npm run check:docs`, `npm run check:pwa`, and `npm run check:quality -- --no-build`, then verify the deployed page after the Pages workflow completes
+- [x] 6.6 Bump the service-worker cache version so updated layout styles and removed sections replace cached copies, and verify `dist/sw.js`
+- [x] 6.7 Run `npm run check:docs`, `npm run check:pwa`, and `npm run check:quality -- --no-build`, then verify the deployed page after the Pages workflow completes
