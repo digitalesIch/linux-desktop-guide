@@ -42,6 +42,24 @@ The date is the evidence review date. Runtime validation on Fedora 45 is still p
 - **KDE accessibility is improving, not finished.** QAccessible and Orca work, but test the main flows rather than assuming parity with GNOME.
 - **X11 is not the target.** Plasma 6.8 retires X11 sessions. Use Wayland and let XWayland handle legacy apps.
 
+## Design contract: KDE Plasma
+
+The [KDE HIG](https://develop.kde.org/hig/) is the exhaustive reference. This contract is the decision layer for a KDE-first app; use it with the [Qt & Kirigami](/engineering/qt/) chapter. Checked against the HIG on 2026-11-11.
+
+| Decision | Contract |
+| --- | --- |
+| **Default vs power** | **Simple by default, powerful when needed.** Make the first run and the primary task obvious; do not require configuration before the app is useful. Settings should support valid workflows, not merely toggle features. |
+| **Navigation** | For linear flows, use `Kirigami.PageStack` with back/forward actions. For five or fewer destinations, use `Kirigami.NavigationTabBar`; for more, use `Kirigami.GlobalDrawer`. On wide windows a sidebar or `Kirigami.PageRow` can show the structure; on narrow windows it becomes a drawer or the first page. Keep the launch view as the first destination. |
+| **Toolbar and menus** | Keep the main toolbar above the content on desktop and use page actions for contextual work. A hamburger menu holds a curated set of about 15 or fewer global actions; use a real menubar when there are more. Keep Quit and Minimize out of the hamburger menu. |
+| **Spacing and icons** | Use `Kirigami.Units.smallSpacing`, `mediumSpacing`, `largeSpacing`, and `gridUnit`; use `IconSizes` for icon sizes. Use Breeze icons and `Kirigami.Theme` colors; do not hardcode pixels or colors. |
+| **Settings** | Build configuration pages with `Kirigami.FormLayout`. Apply settings immediately, use progressive disclosure instead of an “Advanced” page, and do not use customization to avoid a design decision. |
+| **Status and errors** | Use `showPassiveNotification` for low-importance feedback, `Kirigami.InlineMessage` for persistent problems, and system notifications only for background events. Every error says what happened and what the user can do; avoid success-message noise. |
+| **Destructive actions** | Offer undo for reversible removal. Use a passive notification when losing the undo option is not catastrophic; use an inline message for destructive changes that need attention. Move files to the trash instead of deleting them immediately. |
+| **Keyboard and gesture** | Use `KStandardShortcut` for standard actions, keep every action visible in the UI or a menu, and make shortcuts assignable. Do not use the Meta key for app shortcuts; implement only two-finger gestures. |
+| **On other desktops** | Prioritize Plasma fidelity. A Qt/Kirigami app can run on GNOME through portals and Qt's platform theme, but it remains a KDE-first app; do not sacrifice Plasma integration to imitate another desktop. |
+
+This is a decision summary, not a replacement for the HIG. For a pattern not listed here, use the HIG's layout, navigation, status, icon, and accessibility pages rather than inventing a convention.
+
 ## Development environment
 
 Use the Fedora 45 KDE edition, or a Fedora 45 container for build and test. The container is not the desktop target; it is the reproducible build environment. Install `toolbox` first if your Fedora edition does not include it.

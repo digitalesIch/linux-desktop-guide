@@ -117,6 +117,8 @@ An app that ignores these settings is not native, no matter how it looks.
 
 **Pick one as your primary.** Follow its navigation, spacing, and dialog conventions. On other desktops, use the toolkit's platform integration, avoid hardcoded assets, and accept that the app will feel like a guest — because it is one.
 
+The reference targets carry a concise decision layer in their profiles: [GNOME design contract](/targets/ubuntu-gnome/#design-contract-gnome) and [KDE Plasma design contract](/targets/fedora-kde/#design-contract-kde-plasma). The canonical HIGs remain the exhaustive reference; these contracts translate them into the choices an app has to make. They are summaries, not copies of the upstream guidelines.
+
 ## Where brand belongs
 
 Brand expression is not banned. It just has a small, high-leverage surface area:

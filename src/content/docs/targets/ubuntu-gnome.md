@@ -39,6 +39,24 @@ The target is deliberately conservative. Ubuntu 26.04 is an LTS, not the fastest
 - **Ubuntu Pro is optional.** The baseline records the Pro window because it affects support planning; your app must not require Pro.
 - **Snap and deb are secondary, not forbidden.** If you ship them, validate the desktop entry, AppStream metadata, and permissions on the same target.
 
+## Design contract: GNOME
+
+The [GNOME HIG](https://developer.gnome.org/hig/) is the exhaustive reference. This contract is the decision layer for an Ubuntu/GNOME app; use it with the [GTK & libadwaita](/engineering/gtk/) chapter. Checked against the HIG on 2026-11-11.
+
+| Decision | Contract |
+| --- | --- |
+| **Navigation** | Prefer one window. Use `Adw.ViewStack` with `Adw.ViewSwitcher` for a few equivalent views, and a sidebar when there are too many. Keep hierarchies to one level of depth; avoid stacking windows for core content. |
+| **Window chrome** | Use `Adw.ApplicationWindow` and `Adw.HeaderBar`; let the compositor draw the window controls. Do not draw a custom titlebar or custom window buttons. |
+| **Dialogs** | Use `Adw.AlertDialog` for alerts and confirmations, and `Adw.Dialog` for actions. Parent them to the window, focus the first control, place Cancel before the affirmative button, and bind `Esc` to cancel. Prefer undo over confirmation for reversible destruction. |
+| **Feedback** | Use `Adw.Toast` for non-critical confirmation and undo, `Adw.Banner` for persistent problems, and `Adw.StatusPage` for empty states. Use notifications only for events that happen while the app is in the background. |
+| **Spacing and type** | Use libadwaita/GTK spacing, style classes, and the system font; do not hardcode colors, pixel spacing, or a private theme. Respect the system accent, light/dark preference, and text scale. |
+| **Icons** | Use symbolic icons for controls and a full-color app icon; install icons in hicolor and follow the icon naming specification. |
+| **Keyboard and focus** | Bind shortcuts to `Gio.Action` accelerators, support the standard shortcuts, show focus clearly, and keep a logical tab order. Dialogs trap focus and restore it to the trigger when closed. |
+| **Scale and settings** | Test 100–200% scaling, light/dark/high contrast, reduced motion, and large text. Layouts adapt; they do not assume a fixed window size. |
+| **On KDE** | A libadwaita app remains a GNOME app on Plasma. Use the KDE portal backend and file dialogs, but do not claim that it follows the Plasma HIG; state the primary desktop and the fallback in the app's support notes. |
+
+This is a decision summary, not a replacement for the HIG. For a pattern not listed here, use the HIG's navigation, container, feedback, and reference sections rather than inventing a convention.
+
 ## Development environment
 
 Use the Ubuntu 26.04 OCI image or a 26.04 cloud image. The container is for building and testing; the desktop target is Ubuntu 26.04 with GNOME 50. Do not substitute a newer Ubuntu release and call it the LTS target.
