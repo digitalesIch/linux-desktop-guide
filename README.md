@@ -254,13 +254,16 @@ The guide deliberately operates only this local stdio server. There is no remote
 
 The site's tokens live at the top of `src/styles/custom.css`:
 
-- accent: `#c6ff3d` (dark) / `#3f7d20` (light);
-- backgrounds: ink `#060b09` / cool ivory `#f6f9f2`;
+- paper: `#faf9f6` (light) / `#0b0d12` (Prism Ink dark);
+- surfaces: `#ffffff` (light) / `#141821` (dark);
+- ink: `#111318` (light) / `#f3f5f7` (dark);
+- functional accent: deep violet `#6d28d9` (light) / lavender `#c4b5fd` (dark);
+- spectrum: rose, amber, lime, cyan, and violet, used only for foil edges, the hero glow, page-title rules, links and hover states;
 - display font: Space Grotesk;
 - body font: Inter;
 - code font: JetBrains Mono.
 
-The palette is intentionally cool and low-glare for long reading sessions, with lime reserved for actions, links, and focus.
+The palette is deliberately paper-like and airy, with the spectrum reserved for refraction rather than full surfaces. Both themes share the same spectrum; the dark theme uses a brighter foil blend.
 
 ## Deployment notes
 

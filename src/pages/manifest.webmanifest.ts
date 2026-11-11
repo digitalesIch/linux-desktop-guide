@@ -25,8 +25,8 @@ export const GET: APIRoute = () => {
 		display: 'standalone',
 		display_override: ['standalone', 'minimal-ui'],
 		orientation: 'any',
-		background_color: '#f4f0e7',
-		theme_color: '#06100b',
+		background_color: '#faf9f6',
+		theme_color: '#faf9f6',
 		categories: ['books', 'education', 'developer'],
 		prefer_related_applications: false,
 		icons: [

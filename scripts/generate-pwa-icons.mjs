@@ -18,7 +18,7 @@ async function render(size, name, padding = 0) {
 			width: size,
 			height: size,
 			channels: 4,
-			background: '#06100b',
+			background: '#0b0d12',
 		},
 	})
 		.composite([{ input: mark, gravity: 'center' }])
