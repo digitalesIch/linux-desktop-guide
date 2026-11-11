@@ -28,4 +28,4 @@
 - [x] 5.1 Run `npm run check:docs`; verify the pages build and all internal links and anchors pass.
 - [x] 5.2 Run `npm run check:quality -- --no-build`; verify the Lighthouse budgets still pass.
 - [x] 5.3 Review the rendered target index, Fedora KDE page, Qt chapter, and baseline page at desktop and narrow widths.
-- [ ] 5.4 Commit and push; verify the Pages deployment succeeds and the live pages show the corrected text.
+- [x] 5.4 Commit and push; verify the Pages deployment succeeds and the live pages show the corrected text.
