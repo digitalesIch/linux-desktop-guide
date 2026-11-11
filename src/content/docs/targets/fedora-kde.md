@@ -90,7 +90,7 @@ For a full KDE desktop inside a regular Fedora installation:
 sudo dnf5 install -y @kde-desktop-environment
 ```
 
-For upstream KDE development, use `kdesrc-build` and the [KDE developer documentation](https://develop.kde.org/). For the app in this guide, the [Qt & Kirigami](/engineering/qt/) chapter has the CMake, C++ model, QML view, and test target; it is an illustrative example until the Fedora 45 checks below are recorded.
+For upstream KDE development, use `kdesrc-build` and the [KDE developer documentation](https://develop.kde.org/). For the app in this guide, the [Qt & Kirigami](/engineering/qt/) chapter has the persistent C++ model, XDG storage, QML view, CMake, metadata, and test targets. It is source-reviewed in this revision; the Fedora 45 build and runtime checks below are still pending.
 
 Install the Flatpak runtime and SDK:
 
@@ -132,12 +132,12 @@ Use [Toolbx](https://containertoolbx.org/) for the development environment; the 
 
 ## Golden path
 
-1. [Qt & Kirigami](/engineering/qt/) — the C++/QML project, `QAbstractListModel`, `KDBusService`, KConfig, KNotification, KIO, CMake, tests, and accessibility.
+1. [Qt & Kirigami](/engineering/qt/) — the persistent C++/QML project, XDG storage, `QAbstractListModel`, app identity, `KDBusService`, KConfig, KNotification, KIO, CMake, tests, and accessibility.
 2. [KDE Human Interface Guidelines](https://develop.kde.org/hig/) — the design language for a KDE-first app.
 3. [AppStream & Metadata](/ship/appstream/) and [Flathub](/ship/flathub/) — the distribution path.
 4. [Release Checklist](/ship/release-checklist/) — the final pass before users install.
 
-The first-app tutorial is GTK/Python. For this target, the Qt chapter is the starting project; it is illustrative until the Fedora 45 checks below are recorded. Do not follow the GTK tutorial and then try to make it look like a KDE app.
+The first-app tutorial is GTK/Python. For this target, the Qt chapter is the starting project; run the Fedora 45 checks below before treating it as validated. Do not follow the GTK tutorial and then try to make it look like a KDE app.
 
 ## Validation checklist
 
@@ -150,6 +150,17 @@ Run these on the exact Fedora 45 release before you call the target validated:
 - The Flatpak builds and runs with the manifest; install it on Fedora Kinoite as well.
 - Orca and Accerciser cover the main flows; the window works at 200% scaling and high contrast.
 - The RPM and Flatpak installs both launch, show the correct desktop entry, and pass AppStream validation.
+
+The current status is recorded, not implied:
+
+| Check | Status |
+| --- | --- |
+| Source review of the Qt chapter | 2026-11-11 |
+| Clean Toolbx build | Pending |
+| `ctest`, `qmllint`, `qmlcachegen` | Pending |
+| `mock` RPM build | Pending |
+| Flatpak install on Fedora Kinoite | Pending |
+| Orca/Accerciser and scaling checks | Pending |
 
 ## Quality gates
 
@@ -195,4 +206,4 @@ Before you call the app ready on this target:
 - [Flathub setup for Fedora](https://flathub.org/en/setup/Fedora)
 - [Fedora countme totals](https://data-analysis.fedoraproject.org/csv-reports/countme/totals.csv)
 
-Next: [Qt & Kirigami](/engineering/qt/) — build the C++/QML project for this target.
+Next: [Qt & Kirigami](/engineering/qt/) — build the persistent C++/QML project for this target.

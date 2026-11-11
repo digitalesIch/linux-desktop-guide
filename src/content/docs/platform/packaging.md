@@ -222,9 +222,14 @@ URL:            https://example.org/notes
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  cmake
 BuildRequires:  ninja-build
+BuildRequires:  extra-cmake-modules
 BuildRequires:  qt6-qtbase-devel
 BuildRequires:  qt6-qtdeclarative-devel
 BuildRequires:  kf6-kirigami-devel
+BuildRequires:  kf6-ki18n-devel
+BuildRequires:  kf6-kconfig-devel
+BuildRequires:  kf6-kcoreaddons-devel
+BuildRequires:  kf6-kdbusaddons-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  appstream
 Requires:       hicolor-icon-theme
@@ -257,6 +262,8 @@ appstreamcli validate --no-net %{buildroot}%{_datadir}/metainfo/io.github.yourna
 * Wed Nov 11 2026 Your Name <you@example.org> - 0.1.0-1
 - Initial package
 ```
+
+The `%license LICENSE` line requires a license file in the source tree; add one that matches the metainfo's `project_license`. Every `find_package` component in the Qt example needs a matching `BuildRequires`; check the list when you add KIO, KCrash, or Notifications.
 
 The commands separate a local build from a clean build:
 
