@@ -44,9 +44,9 @@
 	--ldg-foil-blend: normal;
 	--ldg-glow-blend: normal;
 
-	--ldg-paper: #faf9f6;
+	--ldg-paper: #ffffff;
 	--ldg-surface: #ffffff;
-	--ldg-surface-2: #f3f0e9;
+	--ldg-surface-2: #f5f5f6;
 	--ldg-ink: #111318;
 	--ldg-ink-2: #4b5058;
 	--ldg-ink-3: #6f747c;
@@ -54,10 +54,7 @@
 	--ldg-line-strong: rgba(17, 19, 24, 0.16);
 	--ldg-shadow: 0 1px 2px rgba(17, 19, 24, 0.04), 0 24px 60px -36px rgba(17, 19, 24, 0.18);
 	--ldg-shadow-lift: 0 2px 4px rgba(17, 19, 24, 0.05), 0 30px 70px -34px rgba(17, 19, 24, 0.24);
-	--ldg-page-glow:
-		radial-gradient(ellipse 50% 34% at 8% -4%, rgba(255, 92, 138, 0.09), transparent 72%),
-		radial-gradient(ellipse 42% 30% at 92% -2%, rgba(56, 217, 255, 0.08), transparent 72%),
-		radial-gradient(ellipse 50% 30% at 52% 104%, rgba(184, 242, 61, 0.05), transparent 74%);
+	--ldg-page-glow: none;
 }
 
 :root[data-theme='light'] {
@@ -69,14 +66,14 @@
 	--sl-color-gray-2: #4b5058;
 	--sl-color-gray-3: #6f747c;
 	--sl-color-gray-4: #a1a6ad;
-	--sl-color-gray-5: #d8d3c9;
-	--sl-color-gray-6: #eeeae2;
-	--sl-color-gray-7: #f7f4ee;
-	--sl-color-black: #faf9f6;
-	--sl-color-bg: #faf9f6;
-	--sl-color-bg-nav: #faf9f6;
-	--sl-color-bg-sidebar: #faf9f6;
-	--sl-color-bg-inline-code: #f3f0e9;
+	--sl-color-gray-5: #d4d4d8;
+	--sl-color-gray-6: #ececef;
+	--sl-color-gray-7: #f7f7f8;
+	--sl-color-black: #ffffff;
+	--sl-color-bg: #ffffff;
+	--sl-color-bg-nav: #ffffff;
+	--sl-color-bg-sidebar: #ffffff;
+	--sl-color-bg-inline-code: #f4f4f5;
 	--sl-color-bg-badge: #f3e8ff;
 	--sl-color-border-badge: #d8b4fe;
 	--sl-color-text-badge: #5b21b6;
@@ -198,29 +195,6 @@ body {
 	box-shadow: 0 0 0 4px color-mix(in srgb, var(--sl-color-accent) 14%, transparent);
 }
 
-.ldg-cursor-glow.is-active {
-	opacity: 0.45;
-}
-
-.ldg-cursor-glow {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 540px;
-	height: 540px;
-	border-radius: 50%;
-	pointer-events: none;
-	z-index: 1;
-	opacity: 0;
-	background:
-		radial-gradient(circle at 38% 40%, rgba(255, 92, 138, 0.16), transparent 44%),
-		radial-gradient(circle at 62% 48%, rgba(56, 217, 255, 0.12), transparent 48%),
-		radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent 70%);
-	filter: blur(18px);
-	mix-blend-mode: var(--ldg-glow-blend);
-	transition: opacity 300ms ease;
-}
-
 .js .ldg-reveal {
 	opacity: 0;
 	transform: translateY(20px);
@@ -259,6 +233,12 @@ body {
 	font-family: var(--ldg-font-display);
 	font-weight: 600;
 	letter-spacing: -0.025em;
+	color: var(--sl-color-text);
+}
+
+.site-title:hover {
+	color: var(--sl-color-text);
+	opacity: 0.78;
 }
 
 /* The header is compact; the shortcut remains available via aria-keyshortcuts. */
@@ -612,8 +592,6 @@ site-search button[data-open-modal] > kbd {
 	width: 100%;
 	max-width: 38rem;
 	margin-inline: auto;
-	transition: transform 180ms ease-out;
-	will-change: transform;
 	filter: drop-shadow(0 30px 55px rgba(17, 19, 24, 0.16));
 }
 
@@ -948,10 +926,11 @@ site-search button[data-open-modal] > kbd {
 	position: absolute;
 	inset: 0;
 	z-index: 0;
-	background:
-		radial-gradient(260px circle at 12% 0%, rgba(255, 92, 138, 0.12), transparent 58%),
-		radial-gradient(260px circle at 88% 100%, rgba(56, 217, 255, 0.1), transparent 58%),
-		radial-gradient(300px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(139, 92, 246, 0.1), transparent 62%);
+	background: radial-gradient(
+		280px circle at var(--card-x, 50%) var(--card-y, 50%),
+		color-mix(in srgb, var(--ldg-violet) 10%, transparent),
+		transparent 64%
+	);
 	mix-blend-mode: var(--ldg-foil-blend);
 	opacity: 0;
 	transition: opacity 220ms var(--ldg-ease);
@@ -1021,18 +1000,17 @@ site-search button[data-open-modal] > kbd {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	background:
-		radial-gradient(circle at 100% 0%, rgba(255, 92, 138, 0.16), transparent 46%),
-		radial-gradient(circle at 0% 100%, rgba(56, 217, 255, 0.14), transparent 48%),
-		linear-gradient(180deg, var(--ldg-surface), color-mix(in srgb, var(--ldg-violet) 5%, var(--ldg-surface)));
+	background: var(--ldg-surface);
 	border-color: var(--ldg-line-strong);
 	color: var(--ldg-ink);
 }
 
 .ldg-card--feature::before {
-	background:
-		radial-gradient(360px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(255, 92, 138, 0.12), transparent 60%),
-		radial-gradient(320px circle at 85% 100%, rgba(56, 217, 255, 0.1), transparent 62%);
+	background: radial-gradient(
+		360px circle at var(--card-x, 50%) var(--card-y, 50%),
+		color-mix(in srgb, var(--ldg-rose) 13%, transparent),
+		transparent 62%
+	);
 	mix-blend-mode: var(--ldg-foil-blend);
 }
 
@@ -1061,15 +1039,11 @@ site-search button[data-open-modal] > kbd {
 }
 
 .ldg-card--cyan {
-	background:
-		radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--ldg-cyan) 9%, transparent), transparent 58%),
-		var(--ldg-surface);
+	background: var(--ldg-surface);
 }
 
 .ldg-card--lime {
-	background:
-		radial-gradient(circle at 0% 100%, color-mix(in srgb, var(--ldg-lime) 8%, transparent), transparent 58%),
-		var(--ldg-surface);
+	background: var(--ldg-surface);
 }
 
 .ldg-feature-mark {
@@ -1192,6 +1166,26 @@ site-search button[data-open-modal] > kbd {
 	color: inherit;
 }
 
+.ldg-contract::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	background: radial-gradient(240px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(56, 217, 255, 0.1), transparent 58%);
+	opacity: 0;
+	transition: opacity 220ms var(--ldg-ease);
+	pointer-events: none;
+}
+
+.ldg-contract:hover::after {
+	opacity: 1;
+}
+
+.ldg-contract > * {
+	position: relative;
+	z-index: 1;
+}
+
 .ldg-num {
 	font-family: var(--sl-font-mono);
 	font-size: 0.72rem;
@@ -1304,9 +1298,7 @@ site-search button[data-open-modal] > kbd {
 	padding-block: clamp(2.5rem, 5vw, 3.5rem);
 	border-top: 1px solid var(--ldg-line);
 	border-bottom: 1px solid var(--ldg-line);
-	background:
-		radial-gradient(ellipse 60% 100% at 0% 50%, color-mix(in srgb, var(--ldg-violet) 6%, transparent), transparent 70%),
-		radial-gradient(ellipse 50% 100% at 100% 50%, color-mix(in srgb, var(--ldg-cyan) 4%, transparent), transparent 70%);
+	background: var(--ldg-surface);
 }
 
 .ldg-bar {
@@ -1377,6 +1369,26 @@ site-search button[data-open-modal] > kbd {
 		box-shadow 180ms var(--ldg-ease);
 }
 
+.ldg-linkcard::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	background: radial-gradient(240px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(139, 92, 246, 0.12), transparent 60%);
+	opacity: 0;
+	transition: opacity 220ms var(--ldg-ease);
+	pointer-events: none;
+}
+
+.ldg-linkcard:hover::before {
+	opacity: 1;
+}
+
+.ldg-linkcard > * {
+	position: relative;
+	z-index: 1;
+}
+
 .ldg-linkcard:hover {
 	border-color: var(--ldg-line-strong);
 	box-shadow: var(--ldg-shadow-lift);
@@ -1423,23 +1435,8 @@ site-search button[data-open-modal] > kbd {
 	padding: clamp(2rem, 5vw, 4rem);
 	border: 1px solid var(--ldg-line-strong);
 	border-radius: 28px;
-	background:
-		radial-gradient(circle at 85% 15%, rgba(255, 92, 138, 0.1), transparent 38%),
-		radial-gradient(circle at 10% 90%, rgba(56, 217, 255, 0.1), transparent 42%),
-		var(--ldg-surface);
+	background: var(--ldg-surface);
 	color: var(--ldg-ink);
-}
-
-.ldg-quote-panel::before {
-	content: '';
-	position: absolute;
-	inset: -30%;
-	background:
-		radial-gradient(circle at 70% 30%, rgba(255, 92, 138, 0.1), transparent 35%),
-		radial-gradient(circle at 30% 80%, rgba(56, 217, 255, 0.08), transparent 38%);
-	filter: blur(50px);
-	opacity: 0.8;
-	pointer-events: none;
 }
 
 .ldg-quote-panel > * {
@@ -1735,12 +1732,15 @@ footer.sl-flex {
 		display: none;
 	}
 
-	.ldg-cursor-glow {
-		display: none;
-	}
-
 	.js .ldg-reveal {
 		opacity: 1;
+		transform: none;
+	}
+
+	.ldg-card:hover,
+	.ldg-linkcard:hover,
+	.ldg-contract:hover,
+	.hero .actions .sl-link-button:hover {
 		transform: none;
 	}
 }

@@ -254,7 +254,7 @@ The guide deliberately operates only this local stdio server. There is no remote
 
 The site's tokens live at the top of `src/styles/custom.css`:
 
-- paper: `#faf9f6` (light) / `#0b0d12` (Prism Ink dark);
+- paper: `#ffffff` (light) / `#0b0d12` (Prism Ink dark);
 - surfaces: `#ffffff` (light) / `#141821` (dark);
 - ink: `#111318` (light) / `#f3f5f7` (dark);
 - functional accent: deep violet `#6d28d9` (light) / lavender `#c4b5fd` (dark);

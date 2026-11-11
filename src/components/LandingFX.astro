@@ -1,15 +1,11 @@
 ---
 ---
 
-<div class="ldg-cursor-glow" aria-hidden="true"></div>
-
 <script>
 	(() => {
 		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const finePointer = window.matchMedia('(pointer: fine)').matches;
 		const hero = document.querySelector('.hero');
-		const art = document.querySelector('.hero .hero-html');
-		const glow = document.querySelector('.ldg-cursor-glow');
 		const ticker = document.querySelector('.ldg-ticker-track');
 
 		if (!hero) return;
@@ -50,12 +46,6 @@
 			frame = 0;
 			hero.style.setProperty('--mx', `${targetX * 100}%`);
 			hero.style.setProperty('--my', `${targetY * 100}%`);
-
-			if (art) {
-				const rotateY = (targetX - 0.5) * 4.5;
-				const rotateX = (0.5 - targetY) * 3.5;
-				art.style.transform = `perspective(900px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-3px)`;
-			}
 		};
 
 		hero.addEventListener('pointermove', (event) => {
@@ -77,17 +67,6 @@
 				card.style.setProperty('--card-x', `${((event.clientX - rect.left) / rect.width) * 100}%`);
 				card.style.setProperty('--card-y', `${((event.clientY - rect.top) / rect.height) * 100}%`);
 			});
-		}
-
-		if (glow) {
-			window.addEventListener(
-				'pointermove',
-				(event) => {
-					glow.classList.add('is-active');
-					glow.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate(-50%, -50%)`;
-				},
-				{ passive: true }
-			);
 		}
 
 		if (ticker) {
