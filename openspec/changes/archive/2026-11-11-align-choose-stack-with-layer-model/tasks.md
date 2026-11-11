@@ -18,8 +18,8 @@
 - [x] 3.1 Run `npm run check:docs`; verify links, anchors, target consistency, and agent-doc validation.
 - [x] 3.2 Run `npm run check:quality -- --no-build` and review the page at desktop and narrow widths.
 - [x] 3.3 Run `openspec validate align-choose-stack-with-layer-model --strict`; verify only the page and change artifacts are touched.
-- [ ] 3.4 Commit and push; verify the Pages deployment and the live page.
-- [ ] 3.5 Archive the change.
+- [x] 3.4 Commit and push; verify the Pages deployment and the live page.
+- [x] 3.5 Archive the change.
 
 ## Workflow follow-up
 
