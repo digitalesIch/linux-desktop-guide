@@ -24,7 +24,11 @@
 		"check:examples": "node scripts/check-examples.mjs",
 		"check:targets": "node scripts/check-targets.mjs",
 		"check:pwa": "node scripts/check-pwa.mjs",
-		"generate:pwa-icons": "node scripts/generate-pwa-icons.mjs"
+		"generate:pwa-icons": "node scripts/generate-pwa-icons.mjs",
+		"check:deployed": "node scripts/check-deployed.mjs",
+		"check:root-build": "BASE_PATH=/ SITE_URL=https://example.com npm run build && node scripts/check-root-build.mjs",
+		"check:freshness": "node scripts/check-freshness.mjs",
+		"test:freshness": "node --test scripts/freshness.test.mjs"
 	},
 	"dependencies": {
 		"@astrojs/markdown-remark": "^7.3.7",
@@ -45,5 +49,8 @@
 		"linkedom": "^0.18.15",
 		"turndown": "^7.2.5",
 		"turndown-plugin-gfm": "^1.0.2"
+	},
+	"engines": {
+		"node": ">=24"
 	}
 }

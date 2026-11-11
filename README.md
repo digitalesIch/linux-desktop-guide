@@ -108,11 +108,12 @@ It runs, in order:
 1. baseline validation;
 2. tutorial/example consistency checking;
 3. target-matrix validation;
-4. a full Astro build (including agent docs and Pagefind);
-5. PWA validation;
-6. agent-doc validation;
-7. the MCP server tests;
-8. internal link and anchor checking against `dist/`.
+4. freshness fixture tests;
+5. a full Astro build (including agent docs and Pagefind);
+6. PWA validation;
+7. agent-doc validation;
+8. the MCP server tests;
+9. internal link and anchor checking against `dist/`.
 
 The default gate is offline and repeatable. External URLs are checked separately:
 
@@ -120,9 +121,22 @@ The default gate is offline and repeatable. External URLs are checked separately
 npm run check:links:external
 ```
 
-Unreachable hosts are warnings, because a local network or a site blocking automated requests is not proof of a broken link. Use `npm run check:links:external:strict` when the network is reliable and warnings should fail the check.
+Network and DNS failures are warnings, because a local network or a site blocking automated requests is not proof of a broken link. Strict mode fails on real HTTP 4xx/5xx responses. Known blocked hosts are listed in `scripts/external-allowlist.mjs` with a reason.
 
 `npm run check:links` runs only the fast internal check. `npm run check:examples` compares the file blocks in the first-app tutorial with `examples/notes`; it fails on drift and prints a line diff. `npm run check:targets` validates the curated target matrix: dates, scores, sources, roles, and coverage gates. `npm run check:pwa` validates the manifest, icons, service worker, offline page, and install meta tags.
+
+Freshness checks compare the recorded baseline and target values with public upstream sources:
+
+```bash
+npm run check:freshness          # human-readable report
+npm run test:freshness           # offline fixture tests
+```
+
+The scheduled `Freshness` workflow runs the check weekly and opens or updates an issue labeled `docs:freshness` when a source changes. It never edits content. A root-domain build can be validated with:
+
+```bash
+npm run check:root-build
+```
 
 Browser-based quality checks are separate because they need a local Chrome installation:
 
@@ -255,7 +269,8 @@ The palette is intentionally cool and low-glare for long reading sessions, with 
 - The build has no server-side runtime; any static host works.
 - Search is client-side and requires the `dist/pagefind/` directory to be deployed with the rest of the site.
 - Internal links, the manifest, the service worker, and the agent Markdown all follow the configured base path. Run `npm run check:docs` after changing it.
-- The public release checklist is in [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md): licensing, history cleanup, Pages setup, and feedback checks.
+- The public release checklist is in [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md): licensing, history cleanup, Pages setup, freshness, and feedback checks.
+- Verify the deployed site after a deployment: `npm run check:deployed -- https://digitalesich.github.io/linux-desktop-guide/`. The Pages workflow runs the same check in its `verify` job.
 
 ## License
 

@@ -1,0 +1,63 @@
+name: Freshness report
+description: Report an upstream source change that affects the guide's baseline or target matrix.
+title: "[Freshness] "
+labels: ["docs:freshness"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form when a release, support window, toolkit version, or package version on a source page no longer matches the guide. The scheduled freshness workflow opens this kind of issue automatically; this form is for a manual report.
+
+  - type: input
+    id: source
+    attributes:
+      label: Source URL
+      description: The primary source that changed.
+      placeholder: https://ubuntu.com/about/release-cycle
+    validations:
+      required: true
+
+  - type: input
+    id: field
+    attributes:
+      label: Field or claim
+      description: The baseline or target field, or the sentence on the page.
+      placeholder: baseline.desktop.gtk
+    validations:
+      required: true
+
+  - type: input
+    id: old_value
+    attributes:
+      label: Old value
+      description: What the guide currently says.
+      placeholder: GTK 4.22
+    validations:
+      required: true
+
+  - type: input
+    id: new_value
+    attributes:
+      label: New value
+      description: What the source says now.
+      placeholder: GTK 4.24
+    validations:
+      required: true
+
+  - type: input
+    id: pages
+    attributes:
+      label: Affected pages
+      description: Page slugs or URLs that need review.
+      placeholder: /reference/baseline/, /targets/ubuntu-gnome/
+    validations:
+      required: true
+
+  - type: input
+    id: checked_on
+    attributes:
+      label: Checked on
+      description: The date you checked the source (YYYY-MM-DD).
+      placeholder: "2026-11-11"
+    validations:
+      required: true

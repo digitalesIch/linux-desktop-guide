@@ -1,0 +1,110 @@
+{
+  "checked_on": "2026-11-11",
+  "sources": [
+    {
+      "id": "ubuntu-release-cycle",
+      "url": "https://ubuntu.com/about/release-cycle",
+      "mode": "machine",
+      "fields": ["baseline.ubuntu.release"],
+      "expect": ["26.04"]
+    },
+    {
+      "id": "ubuntu-26.04-release-notes",
+      "url": "https://documentation.ubuntu.com/release-notes/26.04/",
+      "mode": "machine",
+      "fields": ["baseline.ubuntu.release"],
+      "expect": ["26.04"]
+    },
+    {
+      "id": "gnome-50",
+      "url": "https://release.gnome.org/50/",
+      "mode": "machine",
+      "fields": ["baseline.desktop.gnome"],
+      "expect": ["GNOME 50"]
+    },
+    {
+      "id": "gnome-51",
+      "url": "https://release.gnome.org/51/",
+      "mode": "machine",
+      "fields": ["targets.fedora-gnome.desktop"],
+      "expect": ["GNOME 51"]
+    },
+    {
+      "id": "fedora-45",
+      "url": "https://fedoramagazine.org/announcing-fedora-linux-45/",
+      "mode": "machine",
+      "fields": ["targets.fedora-kde.distro", "targets.fedora-gnome.distro"],
+      "expect": ["Fedora Linux 45"]
+    },
+    {
+      "id": "plasma-6.8",
+      "url": "https://kde.org/announcements/plasma/6/6.8.0/",
+      "mode": "machine",
+      "fields": ["baseline.qt.plasma"],
+      "expect": ["Plasma 6.8"]
+    },
+    {
+      "id": "kde-frameworks-6.31",
+      "url": "https://kde.org/announcements/frameworks/6/6.31.0/",
+      "mode": "machine",
+      "fields": ["baseline.qt.kde_frameworks"],
+      "expect": ["6.31"]
+    },
+    {
+      "id": "debian-releases",
+      "url": "https://www.debian.org/releases/",
+      "mode": "machine",
+      "fields": ["targets.debian-stable.distro"],
+      "expect": ["trixie"]
+    },
+    {
+      "id": "arch-gtk4",
+      "url": "https://archlinux.org/packages/search/json/?name=gtk4",
+      "mode": "machine",
+      "fields": ["targets.arch-rolling.toolkit"],
+      "expect": ["4.24"]
+    },
+    {
+      "id": "arch-qt6",
+      "url": "https://archlinux.org/packages/search/json/?name=qt6-base",
+      "mode": "machine",
+      "fields": ["targets.arch-rolling.toolkit"],
+      "expect": ["6.12"]
+    },
+    {
+      "id": "gtk-docs",
+      "url": "https://docs.gtk.org/gtk4/",
+      "mode": "human",
+      "fields": ["baseline.desktop.gtk", "targets.fedora-gnome.toolkit"],
+      "reason": "The documentation landing page does not expose a stable version string; compare with the release notes."
+    },
+    {
+      "id": "qt-docs",
+      "url": "https://doc.qt.io/qt-6/",
+      "mode": "human",
+      "fields": ["baseline.qt.version"],
+      "reason": "The Qt documentation blocks automated requests and does not expose a stable version string."
+    },
+    {
+      "id": "ubuntu-packages",
+      "url": "https://packages.ubuntu.com/search?keywords=libgtk-4-1&searchon=names&suite=all&section=all",
+      "mode": "human",
+      "fields": ["baseline.desktop.gtk"],
+      "reason": "The package search result needs a human to pick the suite and read the version."
+    },
+    {
+      "id": "debian-packages",
+      "url": "https://packages.debian.org/search?keywords=libgtk-4-1&searchon=names&suite=trixie&section=all",
+      "mode": "human",
+      "fields": ["targets.debian-stable.toolkit"],
+      "reason": "The package search result needs a human to read the version."
+    },
+    {
+      "id": "flathub-setup",
+      "url": "https://flathub.org/en/setup/Ubuntu",
+      "mode": "human",
+      "fields": ["targets.ubuntu-gnome.packaging"],
+      "reason": "Setup instructions are prose and change independently of the package versions."
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, extname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BASE_PATH } from '../site.config.mjs';
+import { allowlistReason } from './external-allowlist.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const dist = join(root, 'dist');
@@ -193,7 +194,15 @@ async function checkExternalUrl(url, attempts = 2) {
 
 async function checkExternal() {
 	const urls = extractExternalUrls();
-	const entries = [...urls.entries()].filter(([url]) => !isPlaceholder(url));
+	const allowlisted = [];
+	const entries = [...urls.entries()].filter(([url]) => {
+		const reason = allowlistReason(url);
+		if (reason) {
+			allowlisted.push({ url, reason });
+			return false;
+		}
+		return !isPlaceholder(url);
+	});
 	const failures = [];
 	const warnings = [];
 	let checked = 0;
@@ -212,8 +221,13 @@ async function checkExternal() {
 
 	await Promise.all(Array.from({ length: Math.min(12, entries.length || 1) }, () => worker()));
 
+	if (allowlisted.length > 0) {
+		console.log(`External links: ${allowlisted.length} allowlisted URL(s):`);
+		for (const entry of allowlisted) console.log(`- ${entry.url} (${entry.reason})`);
+	}
+
 	if (warnings.length > 0) {
-		console.warn(`External links: ${warnings.length} unreachable URL(s) ignored as warnings (use --strict to fail):`);
+		console.warn(`External links: ${warnings.length} unreachable URL(s) ignored as warnings:`);
 		for (const warning of warnings) {
 			console.warn(`- ${warning.url} (${warning.error})`);
 		}
@@ -227,8 +241,9 @@ async function checkExternal() {
 		}
 		return false;
 	}
-	if (strict && warnings.length > 0) return false;
-	console.log(`External links OK: ${checked} URL(s) checked${warnings.length ? ` (${warnings.length} unreachable warning(s))` : ''}.`);
+	// Strict mode fails only on real HTTP failures. Network/DNS warnings describe the
+	// CI egress path, not the target site, so they do not fail the check.
+	console.log(`External links OK${strict ? ' (strict)' : ''}: ${checked} URL(s) checked${warnings.length ? ` (${warnings.length} unreachable warning(s))` : ''}.`);
 	return true;
 }
 
