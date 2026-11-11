@@ -1,15 +1,26 @@
 ---
 title: Packaging & Distribution
-description: Flatpak, deb, RPM, Snap, and AppImage compared — with the files, commands, and release practices needed to ship a Linux desktop app that users can install and update with confidence.
+description: "How to package a Linux desktop app: Flatpak, deb, RPM, Snap, and AppImage compared — with the files, commands, and release practices for installation and updates."
 ---
 
-On Linux, packaging is not a final step. It is part of the architecture. The same source tree may need to produce a Flatpak for Flathub, a deb for the Ubuntu archive, an RPM for Fedora, a Snap for the App Center, and a tarball for the people who build from source.
+On Linux, packaging is not a final step. It is part of the architecture. A platform-native build and a cross-target build solve different problems, and the same source tree should not be forced into every channel.
 
 You do not have to ship every format. You do have to choose deliberately, because each one changes how the app is built, sandboxed, updated, and supported.
 
+## Two packaging decisions
+
+Packaging answers two different questions:
+
+| Decision | Question | Examples |
+| --- | --- | --- |
+| **Platform-native** | What does this target's platform support and expect? | Ubuntu: Snap, deb. Fedora: Flatpak, RPM. Debian: deb, Flatpak. Arch: Flatpak, pacman. |
+| **Cross-target** | What single artifact can carry the app across the reference targets? | Flatpak/Flathub. |
+
+Choose the scope before the channel. A platform-native default is not a universal default; a cross-target channel is not the Ubuntu native default.
+
 ## Choose the channel
 
-Ubuntu documents two supported package formats: **deb** and **Snap**. Flatpak is not installed by default and is not Canonical's supported path, but it is a mature, open-source, cross-distribution channel. The right choice depends on your audience and your maintenance capacity, not on a single universal ranking.
+Ubuntu documents two supported package formats: **deb** and **Snap**. Flatpak is not installed by default and is not Canonical's supported path, but it is a mature, open-source, cross-distribution channel. Start with the scope: one target or several.
 
 ### Ubuntu-supported paths
 
@@ -32,11 +43,12 @@ Ubuntu's [App Center recommends snaps](https://ubuntu.com/desktop/docs/en/26.04/
 
 A pragmatic release matrix:
 
-1. **Start with the native path that fits your audience.** A deb in a PPA or the archive for apt integration; a Snap for the App Center and confined auto-updates; an RPM for Fedora archive integration.
-2. **Add Flatpak on Flathub** when you need one upstream build across distributions or a vendor-neutral store. Document the extra setup: Ubuntu does not ship Flatpak or Flathub by default.
-3. **Add AppImage** only for portable demos or users who cannot install packages.
-4. **Keep a source tarball** for packagers and developers.
-5. **Do not ship every channel by default.** Every channel is a maintenance, testing, and support commitment.
+1. **If you support one target, start with its native path.** A deb in a PPA or the archive for apt integration; a Snap for the App Center and confined auto-updates; an RPM for Fedora archive integration; Flatpak/Flathub on Fedora.
+2. **If you support both reference targets, use Flatpak/Flathub as the common upstream build.** It gives you one artifact and one store across Ubuntu and Fedora. Document the extra setup: Ubuntu does not ship Flatpak or Flathub by default.
+3. **Add Snap or RPM only when the audience or a required integration justifies the work.** Do not add a native channel just to mirror the cross-target build.
+4. **Add AppImage** only for portable demos or users who cannot install packages.
+5. **Keep a source tarball** for packagers and developers.
+6. **Do not ship every channel by default.** Every channel is a maintenance, testing, and support commitment.
 
 :::note[Ubuntu's own guidance]
 Ubuntu supports **deb** and **Snap** as first-class package formats. The App Center recommends snaps for third-party apps and supports debs from the Ubuntu archive; third-party debs are possible but discouraged. Flatpak is not part of a stock Ubuntu installation and is not Canonical's supported path, but it remains a legitimate open-source cross-distribution channel for upstream apps. See [Ubuntu Platform](/platform/ubuntu/#packaging-paths) for the full decision table and primary sources.
@@ -48,7 +60,7 @@ Whichever channel you choose, check that the runtime, toolkit, and store are act
 
 ## Flatpak
 
-Flatpak is covered in depth in [Flatpak & Portals](/platform/flatpak-portals/). Ubuntu does not install Flatpak or Flathub by default; if you choose this channel, set it up explicitly:
+Flatpak is covered in depth in [Flatpak & Portals](/platform/flatpak-portals/). It is the cross-target default when one app supports both reference targets. It is not the Ubuntu native default: Snap and deb are the target-native paths there, and Ubuntu does not install Flatpak or Flathub by default. If you choose this channel, set it up explicitly:
 
 ```bash title="Terminal"
 sudo apt install flatpak flatpak-builder
@@ -196,7 +208,7 @@ Do not install into `/opt` unless the app is genuinely self-contained and you un
 
 ## RPM packages
 
-RPM is the native package format on Fedora, RHEL, and openSUSE. On the Fedora KDE target it is the **secondary** channel: Flatpak/Flathub is primary because it carries the current Qt/KDE runtime, while RPM is for apps that need archive integration, a system service, or a Fedora-only audience. Pick one primary channel and state it; do not present both as equal defaults.
+RPM is the native package format on Fedora, RHEL, and openSUSE. On the Fedora KDE target it is the **archive-native secondary** channel: Flatpak/Flathub is the target default because it carries the current Qt/KDE runtime, while RPM is for apps that need archive integration, a system service, or a Fedora-only audience. State the support scope; do not present both as equal defaults.
 
 The [Fedora Packaging Guidelines](https://docs.fedoraproject.org/en-US/packaging-guidelines/) are the contract. A spec file describes the source, build, install, files, and changelog; it is not a shell script. The skeleton below is illustrative — replace the URL and app ID, and build it in `mock` before claiming Fedora support:
 
@@ -457,6 +469,7 @@ Never replace your own binary from inside the app. It breaks package ownership, 
 - ☐ The RPM builds in `mock` on Fedora 45 and passes `rpmlint`.
 - ☐ The Snap uses `core26`, installs and launches on a clean VM with `strict` confinement, and passes `snapcraft lint`.
 - ☐ The app launches with no home directory access (Flatpak) and degrades gracefully.
+- ☐ The release states whether it is platform-native or cross-target, and does not present a cross-target channel as the target-native default.
 - ☐ The channel choice passes the [quality signals](/reference/quality-signals/) check; Flatpak setup is documented separately from stock Ubuntu.
 - ☐ The upgrade path from the previous version is tested.
 - ☐ Release notes and screenshots are current.

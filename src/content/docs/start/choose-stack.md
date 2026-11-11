@@ -18,7 +18,7 @@ The guide does not pretend there is one stack for every Linux desktop. It pairs 
 | [Debian 13](/targets/#compatibility-target) | The target stack, usually through Flatpak | GNOME or KDE HIG | Use the target's HIG |
 | [Arch Linux](/targets/#validation-targets) | Either stack, for validation | The chosen desktop's HIG | Validation only, no support promise |
 
-If you have not chosen a target, start with [Platform Targets](/targets/). If your product is genuinely cross-distro, pick one primary target, ship Flatpak, and test on the validation targets. Do not build a different UI for every distribution.
+If you have not chosen a target, start with [Platform Targets](/targets/). If your product is genuinely cross-distro, pick one primary target, ship Flatpak as the common upstream channel, and test on the validation targets. See [One App Across Linux Targets](/start/one-app-across-targets/). Do not build a different UI for every distribution.
 
 ## At a glance
 
@@ -167,7 +167,7 @@ For GTK apps, use the archive toolchain when you link against system libraries. 
 1. **Which desktop is primary?** GNOME/Ubuntu → GTK/libadwaita. KDE → Qt/Kirigami. Both equally → Qt with a platform-integration pass, or accept that one desktop will be secondary.
 2. **Does the app need a custom renderer?** Games, CAD, video editors, and canvas-first tools may prefer SDL3, Qt Quick, or a custom GPU stack. Form-and-list apps should use native widgets.
 3. **Is the team already fluent in a stack?** A well-maintained Qt app beats a poorly maintained GTK app. Maintenance is a feature.
-4. **How will it ship?** Flatpak is the default when you want one upstream build across distributions. If you need a deb in the Ubuntu archive, plan for Debian packaging from day one.
+4. **How will it ship?** If you support one target, start with its native channel: Snap or deb on Ubuntu, Flatpak or RPM on Fedora. If you support both reference targets, Flatpak is the common upstream build; add native channels only when they earn their maintenance cost. See [One App Across Linux Targets](/start/one-app-across-targets/).
 5. **What is the accessibility story?** Native widgets give you AT-SPI semantics for free. Custom-drawn UI does not. Budget accordingly.
 6. **What is the five-year plan?** Check the toolkit's release cadence, major-version policy, and the health of its bindings using the [quality signals](/reference/quality-signals/).
 

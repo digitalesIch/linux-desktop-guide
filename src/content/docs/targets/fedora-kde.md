@@ -5,6 +5,10 @@ description: "The guide's upstream-current KDE reference target: Fedora 45 KDE P
 
 This is the guide's **upstream-current KDE reference target**. It is the right default when you want a Qt 6 + Kirigami app that follows the KDE HIG, uses Plasma's integration points, and ships through Flatpak without asking users to change distribution.
 
+:::note[Platform guide]
+This page covers the target-native decisions for Fedora + KDE Plasma: distribution, desktop, stack, HIG, packaging, integration, and validation. Shared rules live in the Linux-wide chapters and are linked, not repeated. If you ship one app across targets, start with [One App Across Linux Targets](/start/one-app-across-targets/).
+:::
+
 The target is deliberately current, not LTS. Fedora moves quickly, so the target assumes an annual upgrade cadence. The KDE 6.6 LTS series is supported longer by upstream, but this target follows the Fedora KDE edition and the current Plasma release.
 
 ## Target profile
@@ -18,8 +22,8 @@ The target is deliberately current, not LTS. Fedora moves quickly, so the target
 | Display | Wayland. Plasma 6.8 retires X11 sessions; check the session options on the exact Fedora package. |
 | HIG | [KDE Human Interface Guidelines](https://develop.kde.org/hig/) |
 | Accessibility | QAccessible and Orca |
-| Primary packaging | Flatpak / Flathub (preconfigured on Fedora) |
-| Secondary packaging | rpm |
+| Target-native packaging | Flatpak / Flathub (preconfigured on Fedora); rpm for archive integration |
+| Cross-target packaging | Same Flatpak build |
 | Flatpak runtime | `org.kde.Platform//6.10`, `org.kde.Sdk//6.10` (the project baseline; verify the current Flathub branch) |
 | Support | Approximately 13 months |
 | Last checked | 2026-11-10 |
@@ -39,6 +43,7 @@ The date is the evidence review date. Runtime validation on Fedora 45 is still p
 - **The support window is short.** Fedora releases are supported for about 13 months. Plan an annual upgrade and test the app on the next Fedora release before it lands.
 - **The exact Plasma version can lag the upstream announcement.** Fedora 45 may package Plasma 6.7.x even though Plasma 6.8 is current upstream. Check `plasmashell --version` and the Fedora package before you promise a version in your own docs.
 - **The Flatpak runtime can lag the distribution.** `org.kde.Platform//6.10` is the project baseline; the distro may have newer Qt. Pin the runtime in the manifest and test against it.
+- **RPM is the archive-native secondary.** Use it when you need Fedora archive integration or a system service; Flatpak remains the target default.
 - **KDE accessibility is improving, not finished.** QAccessible and Orca work, but test the main flows rather than assuming parity with GNOME.
 - **X11 is not the target.** Plasma 6.8 retires X11 sessions. Use Wayland and let XWayland handle legacy apps.
 

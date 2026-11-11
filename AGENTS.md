@@ -12,6 +12,8 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 This is a target-based field guide, not a distro-agnostic tutorial. The supported matrix is in `src/data/targets.json`; the selection method and evidence are in `src/content/docs/targets/selection.md`. Do not add a distribution/toolkit combination without evidence and without updating the matrix. Each reference target has one default stack and HIG; alternatives are secondary and must be documented as trade-offs. The full evidence report is maintained outside this repository; it is internal and not published.
 
+Keep target-native decisions in the platform guides (`src/content/docs/targets/*.md`) and shared decisions in the Linux-wide chapters. Do not duplicate a shared rule in a platform guide; link it. When packaging is discussed, distinguish the target-native default from the cross-target channel: Flatpak is the cross-target default, not the Ubuntu native default.
+
 ## Guide goals
 
 Before adding a chapter or integration, claiming a development path is complete, or assessing release readiness, read the purpose and complete-path criteria in `src/content/docs/start/native-standard.md` and the release criteria in `src/content/docs/ship/quality-bar.md`. Page coverage, API lists, and packaging-channel counts are not evidence that a path works. Label illustrative, source-reviewed, build-tested, and runtime-tested material honestly; optional integrations are not requirements. Keep the developer-only, Linux-first scope; do not add business or market guidance, app showcases, or targets outside the selected matrix.

@@ -19,6 +19,8 @@ The guide supports a small matrix on purpose. A developer who picks a target get
 
 Scores are an editorial synthesis of the evidence, not a measurement. The role and the coverage gates decide the final matrix; see [How Targets Are Chosen](/targets/selection/).
 
+The matrix chooses the environment. The platform guides for the two reference targets describe what is native there: stack, HIG, packaging, integration, and validation. Shared standards live in the Linux-wide chapters. If you ship one app across targets, use [One App Across Linux Targets](/start/one-app-across-targets/).
+
 ## The reference targets
 
 ### Ubuntu 26.04 LTS + GNOME
@@ -49,12 +51,14 @@ The trade-off is support duration: Fedora releases are supported for roughly 13 
 
 ## The default stack
 
-| Target | Default toolkit | HIG | Primary packaging | Do not |
+| Target | Default toolkit | HIG | Platform default | Do not |
 | --- | --- | --- | --- | --- |
-| Ubuntu + GNOME | GTK 4 + libadwaita | GNOME HIG | Flatpak/Flathub; deb and Snap secondary | Start a Qt app for a GNOME-first product unless cross-platform is a hard requirement |
+| Ubuntu + GNOME | GTK 4 + libadwaita | GNOME HIG | Snap (`core26`) and deb; Flatpak is the cross-target channel | Start a Qt app for a GNOME-first product unless cross-platform is a hard requirement |
 | Fedora + KDE | Qt 6 + Kirigami | KDE HIG | Flatpak/Flathub; rpm secondary | Start a GTK app for a KDE-first product unless cross-platform is a hard requirement |
-| Debian | The target stack, usually through Flatpak | GNOME or KDE HIG | Flatpak/Flathub; deb | Assume Debian's GTK/Qt versions are the app runtime |
-| Arch | Either stack, for validation | The chosen desktop's HIG | Flatpak/Flathub; pacman | Promise Arch as a supported baseline |
+| Debian | The target stack, usually through Flatpak | GNOME or KDE HIG | deb; Flatpak for newer stacks | Assume Debian's GTK/Qt versions are the app runtime |
+| Arch | Either stack, for validation | The chosen desktop's HIG | Flatpak; pacman for development | Promise Arch as a supported baseline |
+
+“Platform default” is the channel native to that target. For an app that supports both reference targets, Flatpak/Flathub is the cross-target default; Snap and RPM are optional native additions. See [One App Across Linux Targets](/start/one-app-across-targets/).
 
 The point is not that one toolkit is universally better. The point is that a GNOME-first app should feel like a GNOME app, and a KDE-first app should feel like a KDE app. A cross-platform product can use one toolkit and accept that it will be a guest on the other desktop; that is a deliberate trade-off, not a default.
 
@@ -76,7 +80,7 @@ These are real candidates with real strengths. They are not in the matrix becaus
 
 1. **Pick one target first.** Choose the target whose users and design language match your product. Do not start with a toolkit and then look for a desktop.
 2. **Use the target's HIG.** GTK apps should follow the GNOME HIG; Qt apps should follow the KDE HIG. A cross-desktop app can share code, but it still needs to respect the host.
-3. **Ship Flatpak as the common channel.** It gives Debian, Arch, and Fedora users a current runtime without forcing them to upgrade their distribution.
+3. **Choose the packaging scope before the channel.** If you support one target, start with its native path: Snap or deb on Ubuntu, Flatpak or RPM on Fedora. If you support both reference targets, ship Flatpak as the common upstream channel; add native channels only when they earn their maintenance cost.
 4. **Test on the validation targets.** Fedora GNOME catches upstream GNOME drift; Arch catches upstream GTK/Qt drift. Neither is a support promise.
 5. **Do not promise every distribution.** State the supported targets and the compatibility target. A clear support matrix is more trustworthy than a vague "works on Linux".
 

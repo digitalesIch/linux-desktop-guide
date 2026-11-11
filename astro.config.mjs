@@ -45,6 +45,7 @@ export default defineConfig({
 					items: [
 						{ label: 'Why Linux Is Different', slug: 'start/why-linux' },
 						{ label: 'Choose Target & Stack', slug: 'start/choose-stack' },
+						{ label: 'One App Across Targets', slug: 'start/one-app-across-targets' },
 						{ label: 'Build Your First App', slug: 'start/first-app' },
 						{ label: 'The Native Standard', slug: 'start/native-standard' },
 					],

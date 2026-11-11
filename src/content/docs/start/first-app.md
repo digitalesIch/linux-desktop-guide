@@ -11,6 +11,10 @@ The code is Python to keep the example readable. The structure maps directly to 
 This tutorial builds the GNOME target with GTK 4 + libadwaita. If you chose [Fedora 45 KDE + Qt](/targets/fedora-kde/), start with the [Qt & Kirigami](/engineering/qt/) chapter instead; it contains the C++/QML project and build path for that target.
 :::
 
+:::note[Why Flatpak in this tutorial?]
+This tutorial uses Flatpak because it is the guide's cross-target channel: the same manifest style works on the Fedora KDE target and other distributions. On Ubuntu, Snap is the native third-party path and deb is the archive path. Flatpak is not preinstalled on Ubuntu and is not Canonical-supported. If you ship Ubuntu only, evaluate Snap first. See [One App Across Linux Targets](/start/one-app-across-targets/).
+:::
+
 :::note[What you need]
 [Ubuntu 26.04 LTS](/reference/baseline/) (or a recent Fedora/Arch with GTK 4.22 and libadwaita 1.9), `python3-gi`, `gir1.2-gtk-4.0`, `gir1.2-adw-1`, `meson`, `flatpak`, and `flatpak-builder`.
 :::

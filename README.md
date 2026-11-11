@@ -23,6 +23,10 @@ The guide is not a distro-agnostic tutorial. It supports a small, evidence-based
 
 Start at `src/content/docs/targets/index.md`; the method and evidence are in `targets/selection.md`; the machine-readable matrix is `src/data/targets.json`. `npm run check:targets` enforces dates, sources, scores, roles, and coverage.
 
+## Platform guides and Linux-wide guidance
+
+The target profiles are platform guides: they describe what is native on Ubuntu + GNOME and Fedora + KDE. Shared standards, architecture, design, engineering, and release guidance live in the Linux-wide chapters and are linked, not repeated. If you ship one app across targets, start with `src/content/docs/start/one-app-across-targets.md`.
+
 ## Structure
 
 ```text
@@ -30,7 +34,7 @@ Start at `src/content/docs/targets/index.md`; the method and evidence are in `ta
 ├── src/
 │   ├── content/docs/          # Markdown/MDX source of truth
 │   │   ├── targets/           # Curated platform targets and selection method
-│   │   ├── start/             # Why Linux, stack choice, tutorial, standard
+│   │   ├── start/             # Why Linux, stack choice, tutorial, standard, cross-target recipe
 │   │   ├── platform/          # Ubuntu, Wayland, XDG, integration, Flatpak, packaging, security
 │   │   ├── design/            # Principles, visual language, layout, interaction, a11y, i18n
 │   │   ├── engineering/       # Architecture, GTK, Qt, Rust, performance, testing, reliability

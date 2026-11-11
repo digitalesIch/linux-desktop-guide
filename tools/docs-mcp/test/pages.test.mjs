@@ -33,6 +33,7 @@ test('excludes the 404 page and keeps sidebar order', () => {
 	assert.deepEqual(startPages, [
 		'start/why-linux',
 		'start/choose-stack',
+		'start/one-app-across-targets',
 		'start/first-app',
 		'start/native-standard',
 	]);

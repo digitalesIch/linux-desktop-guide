@@ -1,9 +1,13 @@
 ---
 title: Ubuntu 26.04 LTS + GNOME
-description: "The guide's stable GNOME reference target: Ubuntu 26.04 LTS, GNOME 50, GTK 4.22, libadwaita 1.9, Wayland, Flatpak, and the quality gates that keep the app native."
+description: "The guide's stable GNOME reference target: Ubuntu 26.04 LTS, GNOME 50, GTK 4.22, libadwaita 1.9, Wayland, native Snap/deb packaging, cross-target Flatpak, and the quality gates that keep the app native."
 ---
 
 This is the guide's **stable GNOME reference target**. It is the right default when you want a GTK 4 + libadwaita app that feels at home on Ubuntu, follows the GNOME HIG, and remains supportable for years.
+
+:::note[Platform guide]
+This page covers the target-native decisions for Ubuntu + GNOME: distribution, desktop, stack, HIG, packaging, integration, and validation. Shared rules live in the Linux-wide chapters and are linked, not repeated. If you ship one app across targets, start with [One App Across Linux Targets](/start/one-app-across-targets/).
+:::
 
 The target is deliberately conservative. Ubuntu 26.04 is an LTS, not the fastest-moving GNOME distribution. If you need the newest GTK or libadwaita before the next LTS, build on the Fedora validation target and ship the app through a Flatpak runtime with the newer stack.
 
@@ -18,8 +22,8 @@ The target is deliberately conservative. Ubuntu 26.04 is an LTS, not the fastest
 | Display | Wayland. GNOME on Xorg was removed in Ubuntu 25.10; XWayland remains for legacy X11 apps. |
 | HIG | [GNOME Human Interface Guidelines](https://developer.gnome.org/hig/) |
 | Accessibility | AT-SPI and Orca |
-| Primary packaging | Flatpak / Flathub |
-| Secondary packaging | deb, Snap (`core26`) |
+| Target-native packaging | Snap (`core26`) for third-party apps; deb for archive and system integration |
+| Cross-target packaging | Flatpak / Flathub (not preinstalled; not Canonical-supported) |
 | Flatpak runtime | `org.gnome.Platform//50`, `org.gnome.Sdk//50` |
 | Support | 5 years standard; 10 with Ubuntu Pro; 15 with the Legacy add-on |
 | Last validated | 2026-11-10 (Ubuntu 26.04.1) |
@@ -34,10 +38,10 @@ The target is deliberately conservative. Ubuntu 26.04 is an LTS, not the fastest
 
 ## Trade-offs
 
-- **Flatpak is not preinstalled.** The guide recommends Flatpak/Flathub as the primary channel, but Ubuntu ships Snap and deb first. Install Flatpak explicitly and document the channel in your release notes.
+- **Snap and deb are the native paths.** Ubuntu supports Snap and deb first-class. Use Snap when you want the App Center's confined, auto-updating path; use deb when you need archive or system integration. Validate the desktop entry, AppStream metadata, and permissions on the same target.
+- **Flatpak is the cross-target channel.** Flatpak is not preinstalled and Canonical does not support it as an Ubuntu package format. It is still the right common channel when one app must also run on Fedora and other targets; document the setup separately and do not imply that it is part of a stock Ubuntu installation.
 - **GTK 4.22 is not the newest GTK.** Upstream moves faster. Test against the Fedora validation target when you use a newer API, and pin the Flatpak runtime that carries it.
 - **Ubuntu Pro is optional.** The baseline records the Pro window because it affects support planning; your app must not require Pro.
-- **Snap and deb are secondary, not forbidden.** If you ship them, validate the desktop entry, AppStream metadata, and permissions on the same target.
 
 ## Design contract: GNOME
 
