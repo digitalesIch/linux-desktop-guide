@@ -19,6 +19,19 @@ It is not a certification. It is a shared vocabulary for asking: **how native is
 | **Distribution & metadata** | Can users find, install, and update it with confidence? |
 | **Maintainability & community** | Can it be sustained for the next five years? |
 
+## Release criteria
+
+Before the score, check the gates that no amount of polish can replace:
+
+| Criterion | Evidence | Blocks release when |
+| --- | --- | --- |
+| **Data preservation** | Save/crash tests, atomic-write review, migration and recovery runbook | A known path loses user data, or an update cannot preserve it |
+| **Accessible core tasks** | Keyboard-only pass, Orca/Accerciser review, 200% zoom, reduced motion, high contrast | A core task is unreachable or unusable with assistive technology |
+| **Justified permissions** | Permission review and a denial test | The app requests broad host access it cannot justify, or fails without a useful denial path |
+| **Supported installation and updates** | Clean install, launch, update, uninstall, and metadata validation on the declared channel | The declared channel cannot install, update, or remove the app while preserving user data |
+
+A missing check is **unresolved**, not passed. A failure on any criterion blocks a release-ready assessment regardless of the aggregate score.
+
 ## The scorecard
 
 Score each dimension from 0 to 3.
@@ -82,7 +95,9 @@ Score each dimension from 0 to 3.
 | 0 | No metadata; manual copy of files; no updates |
 | 1 | Desktop file, icon, basic package; manual updates |
 | 2 | Valid AppStream, screenshots, Flathub/deb/Snap, signed updates, clean uninstall |
-| 3 | Multiple channels maintained from one tag; reproducible builds; verification; excellent store listing |
+| 3 | The declared channel or channels maintained from one tag; reproducible builds; verification; excellent store listing |
+
+A single well-maintained channel can reach level 3 when it is the declared support scope. Additional formats are optional and add maintenance cost; they are not a substitute for a working update path.
 
 ### 7. Maintainability & community
 
@@ -110,7 +125,7 @@ A simple rule:
 - **14–18:** native; polish and distribution.
 - **19–21:** exemplary; maintain and share.
 
-No dimension should be 0 at a public release.
+The bands summarize the seven dimensions; they do not override the release criteria. No dimension should be 0, and no release criterion may fail, at a public release.
 
 ## The definition of native
 
@@ -128,7 +143,7 @@ Use this as a quick binary check:
 - ☐ It ships a reproducible, sandboxed build with minimal permissions.
 - ☐ It has a maintainer and an update path.
 
-If all eleven are true, the app is native by this guide's definition. The scorecard tells you how *good* it is beyond that.
+If all eleven are true, the app is native by this guide's definition. That is a platform-fit label, not a release-readiness label; the release criteria above still apply. The scorecard tells you how *good* it is beyond that.
 
 ## The one-hour audit
 

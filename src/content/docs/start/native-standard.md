@@ -7,6 +7,25 @@ Platforms do not feel native because of a color palette. They feel native becaus
 
 This is the standard this guide uses. It is toolkit-neutral: GTK, Qt, Rust, and even a web runtime can meet it. In practice, teams usually have three or four weak rules rather than all ten. Fixing those is often the difference between "a Linux build" and "a Linux app".
 
+## Purpose of the guide
+
+This guide gives developers a curated, evidence-backed path to high-quality apps for a defined set of Linux desktop targets. It explains how the parts work together, from the first useful task to an installable, safely updatable release. Apps should be straightforward to use, accessible, responsive, protective of user data, and maintainable over time.
+
+That is the standard the guide works toward, not a claim that every current path has already passed it. The [target matrix](/targets/) defines the supported environments, and the [Quality Bar](/ship/quality-bar/) defines the evidence required before an app is called release-ready.
+
+## How this guide defines a complete path
+
+A complete path is a connected sequence, not a collection of snippets:
+
+**project setup → a useful core task → persistence and recovery → desktop integration → packaging → installation → updates.**
+
+- **Outcome first.** Each chapter answers the developer decision or user task it serves. Optional integrations are included only when the app's purpose needs them.
+- **Examples must fit together.** File names, app IDs, build dependencies, manifests, and source versions must agree across the path. An illustrative fragment is labeled as illustrative; it is not evidence that the path works.
+- **Verification is specific.** The guide distinguishes source-reviewed facts, successful builds, and runtime-tested behavior. A website build or link check is not app validation.
+- **The host is not the runtime.** Distribution packages, the build SDK, and the Flatpak runtime can carry different toolkit versions. State each version where it matters.
+- **The primary HIG wins.** A GNOME app follows the GNOME HIG on GNOME and degrades gracefully elsewhere; a KDE app follows the KDE HIG on Plasma. Shared standards do not make the desktops identical.
+- **One supported channel can be enough.** A well-maintained Flatpak is a complete distribution answer for an app that declares it; additional formats are optional, not a quality score.
+
 ## 1. Respect the compositor
 
 **Why.** Wayland is the security and performance boundary on Ubuntu 26.04. The compositor owns input, screen capture, window placement, and scaling. Apps that reach around it break under tiling, fractional scaling, screen sharing, and input methods.
@@ -185,7 +204,7 @@ This is the standard this guide uses. It is toolkit-neutral: GTK, Qt, Rust, and 
 
 ## The standard in one sentence
 
-> A native Linux app renders through the compositor, integrates through standards, stores data in XDG locations, asks for the least privilege, starts fast, stays responsive, works from the keyboard, and ships reproducibly.
+> A native Linux app renders through the compositor, integrates through standards, stores data in XDG locations, preserves that data through failure and updates, asks for the least privilege, starts fast, stays responsive, works from the keyboard, and ships reproducibly.
 
 If you can defend that sentence in a code review, you are building native software.
 

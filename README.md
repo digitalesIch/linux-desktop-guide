@@ -1,13 +1,13 @@
 # Linux Desktop Guide
 
-A field guide to building fast, accessible, deeply integrated native apps for the Linux desktops that matter. It defines a small, evidence-based set of platform targets, a default stack for each, and a shared quality bar.
+A field guide to building fast, accessible, deeply integrated native apps for the Linux desktops that matter. It defines a small, evidence-based set of platform targets, a default stack for each, and a shared quality bar. The [Native Standard](/start/native-standard/#purpose-of-the-guide) states the guide's purpose and what counts as a complete development path; the [Quality Bar](/ship/quality-bar/#release-criteria) defines the criteria an app must meet before it is release-ready.
 
 The project is both:
 
 - **a documentation website** built with [Astro Starlight](https://starlight.astro.build/);
 - **a Markdown source collection** in `src/content/docs/`, so the content can be reused in MkDocs, Obsidian, GitHub, or any other renderer.
 
-The companion app in `examples/notes/` is a complete GTK 4 + libadwaita reference implementation with Meson and Flatpak packaging.
+The companion app in `examples/notes/` is a minimal GTK 4 + libadwaita teaching example with Meson and Flatpak packaging; its README lists the production work it deliberately leaves out.
 
 Repository: [digitalesIch/linux-desktop-guide](https://github.com/digitalesIch/linux-desktop-guide).
 
