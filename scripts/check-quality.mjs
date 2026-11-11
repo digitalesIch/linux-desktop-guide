@@ -150,9 +150,9 @@ async function main() {
 	let chrome;
 
 	try {
-		chrome = await launch({
-			chromeFlags: ['--headless=new', '--disable-gpu', '--disable-dev-shm-usage'],
-		});
+		const chromeFlags = ['--headless=new', '--disable-gpu', '--disable-dev-shm-usage'];
+		if (process.env.CI) chromeFlags.push('--no-sandbox', '--disable-setuid-sandbox');
+		chrome = await launch({ chromeFlags });
 
 		console.log(`\nLighthouse ${(await import('lighthouse/package.json', { with: { type: 'json' } })).default.version}`);
 		console.log(`Serving ${dist} at ${origin}\n`);
