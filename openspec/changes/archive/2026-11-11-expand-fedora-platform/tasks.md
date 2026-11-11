@@ -28,4 +28,4 @@
 - [x] 4.2 Run `npm run check:quality -- --no-build`; verify the Lighthouse budgets.
 - [x] 4.3 Run `npm run check:links:external`; triage new Fedora/KDE sources and record any unreachable host.
 - [x] 4.4 Review the rendered RPM, SELinux, and Fedora integration sections at desktop and narrow widths.
-- [ ] 4.5 Commit and push; verify the Pages deployment and the live pages.
+- [x] 4.5 Commit and push; verify the Pages deployment and the live pages.
