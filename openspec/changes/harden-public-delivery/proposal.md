@@ -10,7 +10,7 @@ The content and build are in good shape, but the public delivery is still mostly
 - the freshness pipeline is still a promise on the baseline page, not a scheduled check;
 - external link failures and known blocked hosts are not distinguished in strict mode;
 - the deployed site has no repeatable live verification;
-- the 109-source target evidence page is only on the `workspace` branch and cannot be edited or published from `main` yet;
+- the full target evidence page is only on the `workspace` branch and cannot be edited or published from `main` yet;
 - the target matrix has no CI that actually builds on Fedora, Debian, or Arch.
 
 This change records the structural work so the session that owns the build and deployment can pick it up without rediscovering the current state or damaging the base-path deployment.
