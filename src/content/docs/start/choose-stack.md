@@ -1,13 +1,17 @@
 ---
 title: Choose Your Target and Stack
-description: Choose a platform target first, then the default stack for that target. A practical comparison of GTK 4 + libadwaita, Qt 6 + Kirigami, Rust, Python, and web tech.
+description: Choose a platform target first, then the default stack for that target. A practical comparison of GTK 4 + libadwaita, Qt 6 + Kirigami, Rust, Python, and web tech, with target-native and cross-target packaging kept separate.
 ---
 
 There is no single "Linux SDK". There are several mature stacks, each with a different center of gravity. The right choice is the one your team can maintain for five years, on the desktop your users actually run.
 
-GTK and Qt are both excellent. Rust is a strong default for new apps, but not a requirement. Web technology can be the right answer when the product is genuinely web-shaped — and the wrong answer when it is used to avoid learning the platform.
+GTK and Qt are both excellent. Rust is a strong language choice for new GTK apps, but it is not a separate platform default; the target still decides the toolkit and HIG. Web technology can be the right answer when the product is genuinely web-shaped — and the wrong answer when it is used to avoid learning the platform.
 
 The guide does not pretend there is one stack for every Linux desktop. It pairs each **reference target** with a default stack, a HIG, and a packaging path. Choose the target first; the stack follows.
+
+:::note[Decision guide, not a platform guide]
+This page compares toolkits, languages, and HIG choices. Target-native setup, packaging, and validation live in the Platform Guides. If you ship one app across targets, use [One App Across Linux Targets](/start/one-app-across-targets/).
+:::
 
 ## Choose a target first
 
@@ -15,7 +19,7 @@ The guide does not pretend there is one stack for every Linux desktop. It pairs 
 | --- | --- | --- | --- |
 | [Ubuntu 26.04 LTS + GNOME](/targets/ubuntu-gnome/) | GTK 4 + libadwaita | GNOME HIG | [GTK & libadwaita](/engineering/gtk/) |
 | [Fedora 45 KDE + Qt](/targets/fedora-kde/) | Qt 6 + Kirigami + KDE Frameworks | KDE HIG | [Qt & Kirigami](/engineering/qt/) |
-| [Debian 13](/targets/#compatibility-target) | The target stack, usually through Flatpak | GNOME or KDE HIG | Use the target's HIG |
+| [Debian 13](/targets/#compatibility-target) | The target stack; deb is native, Flatpak for newer stacks | GNOME or KDE HIG | Use the target's HIG |
 | [Arch Linux](/targets/#validation-targets) | Either stack, for validation | The chosen desktop's HIG | Validation only, no support promise |
 
 If you have not chosen a target, start with [Platform Targets](/targets/). If your product is genuinely cross-distro, pick one primary target, ship Flatpak as the common upstream channel, and test on the validation targets. See [One App Across Linux Targets](/start/one-app-across-targets/). Do not build a different UI for every distribution.
@@ -30,13 +34,13 @@ If you have not chosen a target, start with [Platform Targets](/targets/). If yo
 | You have a small utility and a Python team | **Python + PyGObject + libadwaita** |
 | You need a cross-platform app and already have a web team | A maintained web or custom-render runtime; apply the quality signals and do the native integration work |
 | You are building a game or a custom-rendered canvas | **SDL3**, **Godot**, or **Qt Quick** |
-| You need a single binary for many distros with minimal runtime | **Rust + Iced/Slint**, or **Qt** with static deployment |
+| You need a single binary for many distros with minimal runtime — a special case, not a reference default | **Rust + Iced/Slint**, or **Qt** with static deployment; verify licensing, accessibility, and desktop integration |
 
 The guide has one default **per target**, not one universal default:
 
-> **GNOME target:** **[GTK 4.22 + libadwaita 1.9](/reference/baseline/) + Blueprint + Meson + Flatpak**, written in C, Rust, Python, or Vala.
+> **GNOME target:** **[GTK 4.22 + libadwaita 1.9](/reference/baseline/) + Blueprint + Meson**, written in C, Rust, Python, or Vala. Target-native packaging: Snap (`core26`) or deb. Cross-target packaging: Flatpak/Flathub.
 
-> **KDE target:** **Qt 6.11 + Kirigami + KDE Frameworks 6.30+ + CMake + Flatpak**, written in C++ and QML.
+> **KDE target:** **Qt 6.11 + Kirigami + KDE Frameworks 6.30+ + CMake**, written in C++ and QML. Target-native packaging: Flatpak/Flathub; archive-native secondary: RPM. Cross-target packaging: the same Flatpak build.
 
 GTK is the direct path to GNOME-native behavior, and it is what Ubuntu 26.04 LTS ships. Qt/Kirigami is the direct path to KDE-native behavior, and it is what the Fedora KDE reference target ships. A cross-distro product can share code, but it still has to choose which HIG it follows first.
 
@@ -66,7 +70,7 @@ GTK is the direct path to GNOME-native behavior, and it is what Ubuntu 26.04 LTS
 
 ### Qt 6 + Kirigami
 
-**What it is:** Qt is a mature C++/QML application framework. Kirigami is KDE's adaptive UI framework built on Qt Quick. The guide's KDE reference target is [Fedora 45 KDE Plasma](/targets/fedora-kde/); [Kubuntu 26.04](https://kubuntu.org/news/kubuntu-26-04-release-notes/) is a valid Ubuntu-based alternative, but it is a validation option, not a reference target.
+**What it is:** Qt is a mature C++/QML application framework. Kirigami is KDE's adaptive UI framework built on Qt Quick. The guide's KDE reference target is [Fedora 45 KDE Plasma](/targets/fedora-kde/); [Kubuntu 26.04](https://kubuntu.org/news/kubuntu-26-04-release-notes/) is a valid Ubuntu-based KDE check outside the matrix, but it is not a selected target or a support promise.
 
 **Strengths**
 
@@ -164,7 +168,7 @@ For GTK apps, use the archive toolchain when you link against system libraries. 
 
 ## A decision walkthrough
 
-1. **Which desktop is primary?** GNOME/Ubuntu → GTK/libadwaita. KDE → Qt/Kirigami. Both equally → Qt with a platform-integration pass, or accept that one desktop will be secondary.
+1. **Which desktop is primary?** GNOME/Ubuntu → GTK/libadwaita. KDE → Qt/Kirigami. Both equally → choose one primary HIG and toolkit, then document the other as a guest; do not average the HIGs or assume Qt is the automatic compromise.
 2. **Does the app need a custom renderer?** Games, CAD, video editors, and canvas-first tools may prefer SDL3, Qt Quick, or a custom GPU stack. Form-and-list apps should use native widgets.
 3. **Is the team already fluent in a stack?** A well-maintained Qt app beats a poorly maintained GTK app. Maintenance is a feature.
 4. **How will it ship?** If you support one target, start with its native channel: Snap or deb on Ubuntu, Flatpak or RPM on Fedora. If you support both reference targets, Flatpak is the common upstream build; add native channels only when they earn their maintenance cost. See [One App Across Linux Targets](/start/one-app-across-targets/).
@@ -173,7 +177,7 @@ For GTK apps, use the archive toolchain when you link against system libraries. 
 
 ## Versions to target in 2026
 
-The validated version set for the GNOME target lives in [Baseline](/reference/baseline/); the full matrix lives in [Platform Targets](/targets/). The targets record the distribution, toolkit, Flatpak runtime, support window, and review date. Use them as the reference for examples and screenshots; define a separate minimum-version policy when you support an older release.
+The validated version set for the GNOME target lives in [Baseline](/reference/baseline/); the full matrix lives in [Platform Targets](/targets/). The targets record the distribution, toolkit, support window, and review date. The Flatpak runtime is a separate cross-target detail; it is not the host toolkit version. Use the targets as the reference for examples and screenshots; define a separate minimum-version policy when you support an older release.
 
 :::caution[Do not target the newest API by default]
 A Flatpak app can bundle a newer runtime, but a deb must work with the libraries in the archive. If you ship both, target the oldest library version you support and use compile-time version checks (`GTK_CHECK_VERSION`, `QT_VERSION_CHECK`) or feature flags for newer APIs.
