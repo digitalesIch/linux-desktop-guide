@@ -1,5 +1,8 @@
 ---
+import { BASE_URL } from '../../site.config.mjs';
+
 const { entry, id } = Astro.locals.starlightRoute;
+const base = BASE_URL;
 const description = entry.data.description;
 const section = id.split('/')[0];
 
@@ -13,7 +16,7 @@ const sections: Record<string, string> = {
 };
 
 const sectionLabel = sections[section];
-const markdownHref = id === '404' || id === 'index' ? undefined : `/${id}.md`;
+const markdownHref = id === '404' || id === 'index' || !id ? undefined : `${base}${id}.md`;
 ---
 
 <div class="page-header">
@@ -25,7 +28,7 @@ const markdownHref = id === '404' || id === 'index' ? undefined : `/${id}.md`;
 		)}
 		<div class="page-links">
 			{id !== 'reference/feedback' && (
-				<a class="page-markdown" href="/reference/feedback/">Feedback</a>
+				<a class="page-markdown" href={`${base}reference/feedback/`}>Feedback</a>
 			)}
 			{markdownHref && (
 				<a class="page-markdown" href={markdownHref}>Markdown</a>

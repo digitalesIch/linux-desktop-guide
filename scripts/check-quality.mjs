@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 import { launch } from 'chrome-launcher';
 import lighthouse from 'lighthouse';
+import { BASE_PATH } from '../site.config.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const dist = join(root, 'dist');
@@ -64,7 +65,10 @@ function build() {
 }
 
 function resolveRequest(requestUrl) {
-	const pathname = decodeURIComponent(new URL(requestUrl, 'http://localhost').pathname);
+	let pathname = decodeURIComponent(new URL(requestUrl, 'http://localhost').pathname);
+	if (BASE_PATH !== '/' && (pathname === BASE_PATH || pathname.startsWith(`${BASE_PATH}/`))) {
+		pathname = pathname.slice(BASE_PATH.length) || '/';
+	}
 	let target = resolve(dist, `.${pathname}`);
 	if (target !== dist && !target.startsWith(`${dist}${sep}`)) return null;
 

@@ -21,9 +21,9 @@ Scope: the guide ships a static site and a local stdio MCP server. No remote MCP
 ## 3. Site delivery
 
 - ☑ Make the repository public. The public repository is [digitalesIch/linux-desktop-guide](https://github.com/digitalesIch/linux-desktop-guide); the old private history is archived as `linux-desktop-guide-private`.
-- ☐ Enable GitHub Pages for the Astro build output.
-- ☐ Register a domain or add base-path support. `linux-desktop.guide` was not registered on 2026-11-10 (RDAP returned 404), so Pages cannot use the current `site` value until the domain exists.
-- ☐ Set `site` in `astro.config.mjs` to the real URL and verify canonical URLs.
+- ☐ Enable GitHub Pages for the Astro build output with the `Deploy to GitHub Pages` workflow.
+- ☑ No custom domain is required. The default URL is `https://digitalesich.github.io/linux-desktop-guide/`.
+- ☑ `site.config.mjs` sets the Pages URL and `/linux-desktop-guide` base path; the manifest, service worker, and internal links follow it.
 - ☐ Verify `/llms.txt`, `/llms-full.txt`, per-page `.md` routes, the PWA manifest, the service worker, and internal links on the deployed host.
 - ☐ Run `npm run check:docs` and `npm run check:quality` against the release commit.
 

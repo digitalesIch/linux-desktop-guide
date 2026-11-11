@@ -1,10 +1,16 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import { rehypeBaseLinks } from './scripts/rehype-base-links.mjs';
+import { BASE_PATH, SITE_URL } from './site.config.mjs';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://linux-desktop.guide',
+	site: SITE_URL,
+	base: BASE_PATH,
+	markdown: {
+		rehypePlugins: [[rehypeBaseLinks, { base: BASE_PATH }]],
+	},
 	integrations: [
 		starlight({
 			title: 'Linux Desktop Guide',

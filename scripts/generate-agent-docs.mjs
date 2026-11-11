@@ -6,11 +6,11 @@ import { fileURLToPath } from 'node:url';
 import { parseHTML } from 'linkedom';
 import TurndownService from 'turndown';
 import { gfm } from 'turndown-plugin-gfm';
+import { BASE_URL, SITE_URL } from '../site.config.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const dist = join(root, 'dist');
-const config = readFileSync(join(root, 'astro.config.mjs'), 'utf8');
-const site = (config.match(/site:\s*'([^']+)'/)?.[1] ?? 'https://linux-desktop.guide').replace(/\/$/, '');
+const site = `${SITE_URL}${BASE_URL === '/' ? '' : BASE_URL.replace(/\/$/, '')}`;
 
 const sectionLabels = {
 	targets: 'Targets',

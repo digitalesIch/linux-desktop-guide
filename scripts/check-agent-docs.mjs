@@ -3,10 +3,12 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { BASE_URL } from '../site.config.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const docsRoot = join(root, 'src', 'content', 'docs');
 const dist = join(root, 'dist');
+const basePrefix = BASE_URL === '/' ? '' : BASE_URL.replace(/\/$/, '');
 
 function walk(dir) {
 	const files = [];
@@ -45,7 +47,12 @@ if (existsSync(llmsPath)) {
 	}
 
 	for (const match of llms.matchAll(/\]\((https?:\/\/[^)]+\.md)\)/g)) {
-		const pathname = new URL(match[1]).pathname.replace(/^\//, '');
+		const urlPath = new URL(match[1]).pathname;
+		const pathname = (
+			basePrefix && urlPath.startsWith(`${basePrefix}/`)
+				? urlPath.slice(basePrefix.length + 1)
+				: urlPath.replace(/^\//, '')
+		);
 		if (!existsSync(join(dist, pathname))) {
 			errors.push(`llms.txt link target is missing: /${pathname}`);
 		}

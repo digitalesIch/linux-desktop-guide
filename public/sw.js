@@ -1,15 +1,17 @@
 // Linux Desktop Guide service worker.
 // Bump CACHE_VERSION when the shell or cache strategy changes.
-const CACHE_VERSION = 'ldg-v1';
+const CACHE_VERSION = 'ldg-v2';
+const SCOPE = self.registration.scope;
+const BASE = new URL(SCOPE).pathname;
 const CORE = [
-	'/',
-	'/manifest.webmanifest',
-	'/offline.html',
-	'/favicon.svg',
-	'/icons/icon-192.png',
-	'/icons/icon-512.png',
-	'/icons/icon-maskable-512.png',
-	'/icons/apple-touch-icon.png',
+	BASE,
+	`${BASE}manifest.webmanifest`,
+	`${BASE}offline.html`,
+	`${BASE}favicon.svg`,
+	`${BASE}icons/icon-192.png`,
+	`${BASE}icons/icon-512.png`,
+	`${BASE}icons/icon-maskable-512.png`,
+	`${BASE}icons/apple-touch-icon.png`,
 ];
 
 self.addEventListener('install', (event) => {
@@ -56,7 +58,7 @@ self.addEventListener('fetch', (event) => {
 
 	const url = new URL(request.url);
 	if (url.origin !== self.location.origin) return;
-	if (url.pathname === '/sw.js') return;
+	if (url.pathname === `${BASE}sw.js`) return;
 
 	if (request.mode === 'navigate') {
 		event.respondWith(
@@ -68,9 +70,9 @@ self.addEventListener('fetch', (event) => {
 				} catch {
 					const cached = await caches.match(request);
 					if (cached) return cached;
-					const root = await caches.match('/');
+					const root = await caches.match(BASE);
 					if (root) return root;
-					return (await caches.match('/offline.html')) || Response.error();
+					return (await caches.match(`${BASE}offline.html`)) || Response.error();
 				}
 			})(),
 		);
@@ -78,7 +80,7 @@ self.addEventListener('fetch', (event) => {
 	}
 
 	if (
-		url.pathname.startsWith('/_astro/') ||
+		url.pathname.startsWith(`${BASE}_astro/`) ||
 		/\.(?:css|js|svg|png|jpe?g|webp|ico|woff2?)$/i.test(url.pathname)
 	) {
 		event.respondWith(

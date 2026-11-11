@@ -45,6 +45,8 @@ if (!String(manifest.start_url ?? '').startsWith('/')) errors.push('manifest.sta
 if (!String(manifest.scope ?? '').startsWith('/')) errors.push('manifest.scope must be root-relative');
 
 const icons = Array.isArray(manifest.icons) ? manifest.icons : [];
+const scope = typeof manifest.scope === 'string' ? manifest.scope : '/';
+const base = scope.endsWith('/') ? scope : `${scope}/`;
 const requiredIcons = [
 	{ sizes: '192x192', purpose: 'any' },
 	{ sizes: '512x512', purpose: 'any' },
@@ -56,7 +58,8 @@ for (const required of requiredIcons) {
 		errors.push(`manifest.icons is missing ${required.sizes} (${required.purpose})`);
 		continue;
 	}
-	const file = join(dist, icon.src.replace(/^\//, ''));
+	const relative = icon.src.startsWith(base) ? icon.src.slice(base.length) : icon.src.replace(/^\//, '');
+	const file = join(dist, relative);
 	if (!existsSync(file)) {
 		errors.push(`manifest icon is missing: ${icon.src}`);
 		continue;
@@ -73,7 +76,7 @@ for (const required of requiredIcons) {
 	}
 }
 
-if (!/rel=["']manifest["'][^>]*href=["']\/manifest\.webmanifest["']/i.test(index) && !/href=["']\/manifest\.webmanifest["'][^>]*rel=["']manifest["']/i.test(index)) {
+if (!/rel=["']manifest["'][^>]*href=["'][^"']*manifest\.webmanifest["']/i.test(index) && !/href=["'][^"']*manifest\.webmanifest["'][^>]*rel=["']manifest["']/i.test(index)) {
 	errors.push('built index.html is missing the manifest link');
 }
 for (const [label, pattern] of [
@@ -82,7 +85,7 @@ for (const [label, pattern] of [
 	['apple-mobile-web-app-capable', /name=["']apple-mobile-web-app-capable["']/i],
 	['apple-mobile-web-app-title', /name=["']apple-mobile-web-app-title["']/i],
 	['apple-touch-icon', /rel=["']apple-touch-icon["']/i],
-	['service-worker registration', /navigator\.serviceWorker\.register\(\s*['"]\/sw\.js['"]/i],
+	['service-worker registration', /navigator\.serviceWorker\.register\(/i],
 ]) {
 	if (!pattern.test(index)) errors.push(`built index.html is missing ${label}`);
 }
@@ -92,7 +95,7 @@ for (const handler of ['install', 'activate', 'fetch']) {
 		errors.push(`sw.js is missing the ${handler} handler`);
 	}
 }
-if (!sw.includes('/offline.html')) errors.push('sw.js does not cache the offline page');
+if (!sw.includes('offline.html')) errors.push('sw.js does not cache the offline page');
 if (!/cache\.addAll|CORE/.test(sw)) errors.push('sw.js does not precache a core shell');
 
 if (!/offline/i.test(offline)) errors.push('offline.html does not look like an offline page');

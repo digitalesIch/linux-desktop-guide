@@ -3,6 +3,7 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, extname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { BASE_PATH } from '../site.config.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const dist = join(root, 'dist');
@@ -21,6 +22,14 @@ const assetExtensions = new Set([
 	'.xml',
 ]);
 const placeholderHosts = new Set(['example.org', 'example.com', 'www.example.org', 'www.example.com']);
+const basePrefix = BASE_PATH === '/' ? '' : BASE_PATH;
+
+function stripBase(pathname) {
+	if (!basePrefix) return pathname;
+	if (pathname === basePrefix) return '/';
+	if (pathname.startsWith(`${basePrefix}/`)) return pathname.slice(basePrefix.length);
+	return pathname;
+}
 
 function walk(directory, extension) {
 	const files = [];
@@ -75,9 +84,22 @@ function checkInternal() {
 			const href = decodeHtml(match[1]).trim();
 			if (!href || href.startsWith('#') || href.startsWith('//')) continue;
 			if (!href.startsWith('/')) continue;
-			if (href.startsWith('/_astro/')) continue;
 
-			const [pathname, fragment] = href.split('#');
+			const [rawPathname, fragment] = href.split('#');
+			if (
+				basePrefix &&
+				rawPathname.startsWith('/') &&
+				!rawPathname.startsWith('//') &&
+				rawPathname !== basePrefix &&
+				!rawPathname.startsWith(`${basePrefix}/`)
+			) {
+				errors.push(
+					`${relative(root, page)} -> ${href} (missing base path ${basePrefix})`,
+				);
+				continue;
+			}
+			const pathname = stripBase(rawPathname);
+			if (pathname.startsWith('/_astro/')) continue;
 			if (assetExtensions.has(extname(pathname))) continue;
 
 			checked += 1;

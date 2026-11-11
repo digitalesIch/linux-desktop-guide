@@ -248,10 +248,11 @@ The palette is intentionally cool and low-glare for long reading sessions, with 
 
 ## Deployment notes
 
-- Set `site` in `astro.config.mjs` to the real URL before deploying so sitemap and canonical URLs are correct.
+- The default build targets GitHub Pages at `https://digitalesich.github.io/linux-desktop-guide/` with `base: /linux-desktop-guide`. `site.config.mjs` holds both values.
+- To use a custom domain at the root, set `SITE_URL=https://example.com` and `BASE_PATH=/` in the build environment. No other code change is needed.
 - The build has no server-side runtime; any static host works.
 - Search is client-side and requires the `dist/pagefind/` directory to be deployed with the rest of the site.
-- If you deploy under a subpath, set Astro's `base` and update internal links accordingly.
+- Internal links, the manifest, the service worker, and the agent Markdown all follow the configured base path. Run `npm run check:docs` after changing it.
 - The public release checklist is in [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md): licensing, history cleanup, Pages setup, and feedback checks.
 
 ## License
