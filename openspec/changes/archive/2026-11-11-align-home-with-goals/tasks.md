@@ -20,7 +20,7 @@
 - [x] 4.1 Run `npm run check:docs`; verify links, anchors, target consistency, and the base path.
 - [x] 4.2 Run `npm run check:quality -- --no-build` and review the page at desktop and narrow widths; verify the hierarchy is scannable and no section implies a completed Fedora runtime validation.
 - [x] 4.3 Run `openspec validate align-home-with-goals --strict`; verify only the landing page and change artifacts are touched.
-- [ ] 4.4 Commit and push; verify the Pages deployment and the live page.
+- [x] 4.4 Commit and push; verify the Pages deployment and the live page.
 
 ## Workflow follow-up
 
