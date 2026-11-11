@@ -1,0 +1,45 @@
+{
+	"name": "linux-desktop-guide-mcp",
+	"version": "0.1.0",
+	"description": "Read-only MCP server for the published Linux Desktop Guide.",
+	"type": "module",
+	"license": "MIT",
+	"homepage": "https://digitalesich.github.io/linux-desktop-guide/",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/digitalesIch/linux-desktop-guide.git",
+		"directory": "tools/guide-mcp"
+	},
+	"bugs": {
+		"url": "https://github.com/digitalesIch/linux-desktop-guide/issues"
+	},
+	"keywords": [
+		"mcp",
+		"model-context-protocol",
+		"documentation",
+		"linux",
+		"gnome",
+		"kde",
+		"flatpak"
+	],
+	"bin": {
+		"linux-desktop-guide-mcp": "dist/server.mjs"
+	},
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
+	"engines": {
+		"node": ">=22"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"scripts": {
+		"build": "node build.mjs",
+		"test": "node --test test/*.test.mjs",
+		"prepack": "node build.mjs"
+	}
+}

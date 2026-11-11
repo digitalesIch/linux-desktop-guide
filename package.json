@@ -16,6 +16,10 @@
 		"check:agent-docs": "node scripts/check-agent-docs.mjs",
 		"mcp:docs": "node tools/docs-mcp/server.mjs",
 		"test:docs-mcp": "node --test tools/docs-mcp/test/pages.test.mjs tools/docs-mcp/test/search.test.mjs tools/docs-mcp/test/related.test.mjs tools/docs-mcp/test/baseline.test.mjs tools/docs-mcp/test/text.test.mjs tools/docs-mcp/test/server.test.mjs",
+		"build:guide-mcp": "node tools/guide-mcp/build.mjs",
+		"test:guide-mcp": "npm run build:guide-mcp && node --test tools/guide-mcp/test/*.test.mjs",
+		"check:guide-package": "node scripts/check-guide-package.mjs",
+		"check:mcp": "node scripts/check-mcp-deployed.mjs",
 		"check:links": "node scripts/check-links.mjs",
 		"check:links:external": "node scripts/check-links.mjs --external",
 		"check:docs": "node scripts/check-docs.mjs",
@@ -45,6 +49,7 @@
 	},
 	"devDependencies": {
 		"chrome-launcher": "^1.2.3",
+		"esbuild": "^0.28.2",
 		"lighthouse": "^13.6.0",
 		"linkedom": "^0.18.15",
 		"turndown": "^7.2.5",

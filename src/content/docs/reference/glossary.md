@@ -113,6 +113,15 @@ Terms are grouped by area. Links point to the canonical specification or documen
 | **NetworkManager** | The Linux network management service and D-Bus API. |
 | **UDisks2** | The D-Bus API for disks, partitions, and mounts. |
 
+## Documentation and agents
+
+| Term | Meaning |
+| --- | --- |
+| **agent docs** | The generated Markdown, `llms.txt`, and `llms-full.txt` that let an agent read the published guide without HTML. |
+| **docs MCP** | The local `docs` server that reads `src/content/docs` in a checkout and makes no network requests. |
+| **guide MCP** | The local `guide` server, published as `linux-desktop-guide-mcp`, that reads the deployed site and caches it. |
+| **MCP** | Model Context Protocol, the interface an agent uses to call the `docs` and `guide` tools. |
+
 ## See also
 
 - [Style Guide](/reference/style-guide/)

@@ -15,6 +15,8 @@ const steps = [
 	'check:pwa',
 	'check:agent-docs',
 	'test:docs-mcp',
+	'test:guide-mcp',
+	'check:guide-package',
 	'check:links',
 ];
 if (external) steps.push('check:links:external');

@@ -1,0 +1,47 @@
+# Linux Desktop Guide — Full Text
+
+> A fixture for the guide MCP tests.
+
+Canonical site: __BASE__
+
+---
+
+# Why Linux Is Different
+
+URL: __BASE__start/why-linux/
+
+> A fixture page about Linux contracts.
+
+Linux is not a product with a vendor. The [Flatpak & Portals](__BASE__platform/flatpak-portals/) page explains sandboxing.
+
+## The four contracts
+
+Linux desktops share display, packaging, integration, and quality contracts.
+
+---
+
+# Choose Target & Stack
+
+URL: __BASE__start/choose-stack/
+
+> A fixture page about targets and toolkits.
+
+Choose a target first. Then choose the default stack for that target.
+
+## Compare the stacks
+
+GTK and Qt are both supported by the guide.
+
+---
+
+# Flatpak & Portals
+
+URL: __BASE__platform/flatpak-portals/
+
+> A fixture page about Flatpak, portals, and sandboxing.
+
+Flatpak runs the app in a sandbox. [Why Linux Is Different](__BASE__start/why-linux/) explains the ecosystem.
+
+## Portals you will use
+
+File chooser, notifications, and screen capture go through portals.

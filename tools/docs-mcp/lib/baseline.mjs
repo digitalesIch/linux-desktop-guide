@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { BASELINE_PATH } from './config.mjs';
-import { DocsError } from './errors.mjs';
+import { DocsError } from '../../docs-core/errors.mjs';
 
 export function readBaseline(path = BASELINE_PATH) {
 	let source;

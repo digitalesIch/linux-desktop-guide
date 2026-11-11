@@ -74,10 +74,28 @@ if (existsSync(fullPath)) {
 
 if (existsSync(join(dist, '404.md'))) errors.push('dist/404.md should not be generated');
 
+const baselineSourcePath = join(root, 'src', 'data', 'baseline.json');
+const baselineDistPath = join(dist, 'reference', 'baseline.json');
+if (!existsSync(baselineDistPath)) {
+	errors.push('dist/reference/baseline.json is missing');
+} else {
+	try {
+		const source = JSON.parse(readFileSync(baselineSourcePath, 'utf8'));
+		const published = JSON.parse(readFileSync(baselineDistPath, 'utf8'));
+		if (JSON.stringify(source) !== JSON.stringify(published)) {
+			errors.push('dist/reference/baseline.json diverges from src/data/baseline.json');
+		}
+	} catch (error) {
+		errors.push(`dist/reference/baseline.json is invalid JSON (${error.message})`);
+	}
+}
+
 if (errors.length) {
 	console.error('Agent docs validation failed:');
 	for (const error of errors) console.error(`- ${error}`);
 	process.exit(1);
 }
 
-console.log(`Agent docs OK: ${expected.length} Markdown pages, llms.txt, and llms-full.txt.`);
+console.log(
+	`Agent docs OK: ${expected.length} Markdown pages, llms.txt, llms-full.txt, and reference/baseline.json.`,
+);

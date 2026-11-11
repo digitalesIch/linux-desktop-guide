@@ -2,7 +2,7 @@
 
 The repository is public. This checklist records the work required for a future visibility change or a new distribution channel. GitHub Pages on the Free plan requires a public repository; GitHub Pro, Team, or Enterprise Cloud can publish Pages from a private repository.
 
-Scope: the guide ships a static site and a local stdio MCP server. No remote MCP endpoint is operated.
+Scope: the guide ships a static site and local stdio MCP servers. No remote MCP endpoint is operated.
 
 ## 1. Licensing
 
@@ -30,7 +30,15 @@ Scope: the guide ships a static site and a local stdio MCP server. No remote MCP
 - ☑ Verify a root-domain build with `npm run check:root-build`; no project-path prefix remains in HTML, manifest, service worker, sitemap, or agent Markdown.
 - ☑ Node 24 is the CI baseline in all workflows.
 
-## 4. Continuous checks
+## 4. Guide MCP package
+
+- ☐ Create the npm package `linux-desktop-guide-mcp` and configure trusted publishing for `digitalesIch/linux-desktop-guide` and `.github/workflows/publish-guide-mcp.yml` on npmjs.com. No long-lived token is stored.
+- ☐ Publish `0.1.0` from a `guide-mcp-v0.1.0` tag and verify the provenance badge, `npm pack`, and `npx -y linux-desktop-guide-mcp --version`. The workflow rejects a tag that does not match `tools/guide-mcp/package.json`.
+- ☐ Verify the published contract with `npm run check:mcp -- https://digitalesich.github.io/linux-desktop-guide/` after the deployment that includes `reference/baseline.json`.
+- ☐ Keep the `docs` server as the offline authoring path. Publishing the package does not replace it.
+- ☐ Confirm the package has no runtime dependencies, no telemetry, and no write path outside its cache directory.
+
+## 5. Continuous checks
 
 - ☑ The `Quality` workflow runs Lighthouse on pushes and pull requests with one retry for a transient `n/a`.
 - ☑ The `External links` workflow runs weekly. `doc.qt.io` and `www.iso.org` are allowlisted with reasons; strict mode fails only on real HTTP 4xx/5xx responses.
@@ -40,19 +48,19 @@ Scope: the guide ships a static site and a local stdio MCP server. No remote MCP
 - ☑ All workflows use GitHub-hosted runners on the public repository, public HTTP endpoints, and no paid service or personal token. The automatic `GITHUB_TOKEN` is used only to update the freshness issue.
 - ☐ Target validation remains manual for Fedora 45, Debian 13, and Arch Linux. A container matrix is not in scope for now; the target pages must say so when the content session touches them.
 
-## 5. PWA verification
+## 6. PWA verification
 
 - ☑ On 2026-11-11 the deployed manifest was served as `application/manifest+json`, the service worker was served from `/linux-desktop-guide/sw.js`, and registration used the `/linux-desktop-guide/` scope.
 - ☐ Real-device installation on Android and iPhone/iPad Safari is still a manual check. Record the date, browser version, result, and caveats here after testing.
 
-## 6. Feedback
+## 7. Feedback
 
 - ☑ Remove the private-repository note from `src/content/docs/reference/feedback.md`.
 - ☑ Verify the issue form and the `documentation` / `agent-report` labels are public.
 - ☑ Verify the issue link resolves for signed-in users and redirects to login otherwise.
 - ☑ Confirm that reports do not ask for secrets or personal data.
 
-## 7. After launch
+## 8. After launch
 
 - ☐ Watch the first issues and search misses; triage them through the feedback loop.
 - ☐ Schedule the next documentation review and link check.

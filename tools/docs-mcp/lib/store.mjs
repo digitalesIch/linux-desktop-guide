@@ -1,7 +1,7 @@
-import { DocsError } from './errors.mjs';
+import { DocsError } from '../../docs-core/errors.mjs';
+import { DocsRelated } from '../../docs-core/related.mjs';
+import { DocsSearch } from '../../docs-core/search.mjs';
 import { listPages, loadPages, normalizeSlug, pageResult, sourceSignature } from './pages.mjs';
-import { DocsRelated } from './related.mjs';
-import { DocsSearch } from './search.mjs';
 
 export class DocsStore {
 	constructor({ docsRoot, sidebarPath }) {

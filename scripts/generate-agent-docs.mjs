@@ -193,4 +193,11 @@ for (const page of pages) {
 
 writeFileSync(join(dist, 'llms-full.txt'), fullLines.join('\n'), 'utf8');
 
-console.log(`Generated ${pages.length} Markdown pages, llms.txt, and llms-full.txt.`);
+const baselineSource = join(root, 'src', 'data', 'baseline.json');
+const baselineTarget = join(dist, 'reference', 'baseline.json');
+mkdirSync(dirname(baselineTarget), { recursive: true });
+writeFileSync(baselineTarget, readFileSync(baselineSource, 'utf8'), 'utf8');
+
+console.log(
+	`Generated ${pages.length} Markdown pages, llms.txt, llms-full.txt, and reference/baseline.json.`,
+);

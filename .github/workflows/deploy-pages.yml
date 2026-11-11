@@ -57,6 +57,7 @@ jobs:
   verify:
     needs: deploy
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Check out
         uses: actions/checkout@v7
@@ -65,6 +66,16 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the guide MCP package
+        run: npm run build:guide-mcp
 
       - name: Verify the deployed site
         run: node scripts/check-deployed.mjs "${{ needs.deploy.outputs.page_url }}"
+
+      - name: Verify the published MCP contract
+        run: node scripts/check-mcp-deployed.mjs "${{ needs.deploy.outputs.page_url }}"

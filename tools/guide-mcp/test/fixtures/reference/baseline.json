@@ -1,0 +1,19 @@
+{
+	"validated_on": "2026-11-10",
+	"review_due": "2027-05-10",
+	"ubuntu": {
+		"release": "26.04 LTS",
+		"codename": "Resolute Raccoon"
+	},
+	"desktop": {
+		"gnome": "50",
+		"gtk": "4.22",
+		"libadwaita": "1.9"
+	},
+	"qt": {
+		"version": "6.10.2"
+	},
+	"packaging": {
+		"flatpak_runtime": "org.gnome.Platform//50"
+	}
+}

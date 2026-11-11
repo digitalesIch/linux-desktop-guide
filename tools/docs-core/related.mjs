@@ -165,7 +165,7 @@ export class DocsRelated {
 				title: item.page.title,
 				description: item.page.description,
 				section: item.page.sectionLabel,
-				url: `/${item.page.slug}/`,
+				url: item.page.url ?? `/${item.page.slug}/`,
 				score: round(item.score),
 				reason,
 				sharedTopics: item.topics,
@@ -176,7 +176,7 @@ export class DocsRelated {
 			slug: page.slug,
 			title: page.title,
 			section: page.sectionLabel,
-			url: `/${page.slug}/`,
+			url: page.url ?? `/${page.slug}/`,
 			related,
 		};
 	}

@@ -1,0 +1,17 @@
+# Linux Desktop Guide
+
+> A fixture for the guide MCP tests.
+
+## Start Here
+
+- [Why Linux Is Different](__BASE__start/why-linux.md): A fixture page about Linux contracts.
+- [Choose Target & Stack](__BASE__start/choose-stack.md): A fixture page about targets and toolkits.
+
+## Platform
+
+- [Flatpak & Portals](__BASE__platform/flatpak-portals.md): A fixture page about Flatpak, portals, and sandboxing.
+
+## Optional
+
+- [Full text](__BASE__llms-full.txt): The complete guide in one Markdown file.
+- [Baseline](__BASE__reference/baseline.md): The validated version set and review date.

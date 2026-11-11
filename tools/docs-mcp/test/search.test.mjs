@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { ASTRO_CONFIG_PATH, DOCS_ROOT } from '../lib/config.mjs';
-import { DocsError } from '../lib/errors.mjs';
+import { ASTRO_CONFIG_PATH, DOCS_ROOT, PUBLIC_BASE_URL } from '../lib/config.mjs';
+import { DocsError } from '../../docs-core/errors.mjs';
 import { loadPages } from '../lib/pages.mjs';
-import { DocsSearch } from '../lib/search.mjs';
+import { DocsSearch } from '../../docs-core/search.mjs';
 
 const corpus = loadPages({ docsRoot: DOCS_ROOT, sidebarPath: ASTRO_CONFIG_PATH });
 const search = new DocsSearch(corpus.pages);
@@ -29,7 +29,7 @@ test('returns metadata and an excerpt for every hit', () => {
 		assert.ok(result.slug);
 		assert.ok(result.title);
 		assert.ok(result.section);
-		assert.match(result.url, /^\/[a-z0-9/-]+\/$/);
+		assert.ok(result.url.startsWith(PUBLIC_BASE_URL));
 		assert.ok(result.score > 0);
 		assert.ok(result.excerpt.length > 0, `missing excerpt for ${result.slug}`);
 	}

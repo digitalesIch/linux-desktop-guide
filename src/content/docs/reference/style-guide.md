@@ -105,6 +105,7 @@ Use one term for one concept. The full platform vocabulary is in the [Glossary](
 | **removed** | No longer available | "deprecated" |
 | **agent docs** | The generated Markdown, `llms.txt`, and `llms-full.txt` | "AI docs" |
 | **docs MCP** | The local, read-only `docs` server | "documentation API" |
+| **guide MCP** | The local, read-only server for the published guide, distributed as `linux-desktop-guide-mcp` | "remote docs API" |
 | **review trigger** | An event that requires a documentation review | "review event" |
 
 Capitalization and spelling that people get wrong:

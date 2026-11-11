@@ -5,7 +5,7 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { z } from 'zod';
 import { readBaseline } from './lib/baseline.mjs';
 import { ASTRO_CONFIG_PATH, DOCS_ROOT, SECTION_ORDER, SERVER_NAME, SERVER_VERSION } from './lib/config.mjs';
-import { DocsError } from './lib/errors.mjs';
+import { DocsError } from '../docs-core/errors.mjs';
 import { DocsStore } from './lib/store.mjs';
 
 const READ_ONLY = Object.freeze({

@@ -102,6 +102,7 @@ export default defineConfig({
 						{ label: 'Quality Signals', slug: 'reference/quality-signals' },
 						{ label: 'Checklists', slug: 'reference/checklists' },
 						{ label: 'Style Guide', slug: 'reference/style-guide' },
+						{ label: 'Agent Access', slug: 'reference/agent-access' },
 						{ label: 'Feedback', slug: 'reference/feedback' },
 						{ label: 'Glossary', slug: 'reference/glossary' },
 						{ label: 'Resources', slug: 'reference/resources' },

@@ -46,7 +46,9 @@ The target profiles are platform guides: they describe what is native on Ubuntu 
 │   ├── styles/custom.css      # Design tokens and site styling
 │   └── assets/                # Logo and hero artwork
 ├── scripts/                   # Baseline and maintenance checks
-├── tools/docs-mcp/            # Read-only stdio MCP server for agents
+├── tools/docs-core/          # Shared page, search, and related-page logic
+├── tools/docs-mcp/           # Local stdio MCP server for the working tree
+├── tools/guide-mcp/          # npm package that serves the published guide
 ├── public/                    # Favicon, hero SVG, PWA manifest, service worker, icons, offline page
 ├── examples/notes/            # Runnable GTK 4 teaching example
 ├── astro.config.mjs           # Site title, sidebar, Starlight options
@@ -116,8 +118,10 @@ It runs, in order:
 5. a full Astro build (including agent docs and Pagefind);
 6. PWA validation;
 7. agent-doc validation;
-8. the MCP server tests;
-9. internal link and anchor checking against `dist/`.
+8. the `docs` MCP server tests;
+9. the `guide` MCP server and bundle tests;
+10. the npm package content check;
+11. internal link and anchor checking against `dist/`.
 
 The default gate is offline and repeatable. External URLs are checked separately:
 
@@ -212,15 +216,19 @@ npm run check:agent-docs
 
 Content negotiation (`Accept: text/markdown`) is intentionally left to a future host/CDN rule.
 
-## Documentation MCP server
+## Documentation MCP servers
 
-Agents can read the guide through a local MCP server instead of loading `llms-full.txt`:
+The guide has two local stdio MCP servers. Both are read-only and expose the same five tools, so an agent can switch between them.
+
+### The working tree: `docs`
+
+`docs` reads `src/content/docs/**/*.md` and answers from the working tree, including unpublished edits. It makes no network requests and refreshes its index when a source file changes. Start it with:
 
 ```bash
 npm run mcp:docs
 ```
 
-The server speaks MCP over stdio and exposes five read-only tools:
+It exposes:
 
 - `search_docs` — ranked search over titles, descriptions, headings, and body text, with section filters and excerpts;
 - `get_page` — one page's Markdown, metadata, headings, and URL by slug;
@@ -228,7 +236,7 @@ The server speaks MCP over stdio and exposes five read-only tools:
 - `get_related` — related pages based on internal links, section, and text similarity;
 - `get_baseline` — the validated platform data from `src/data/baseline.json`.
 
-It indexes `src/content/docs/**/*.md`, rejects path traversal and unknown slugs, writes nothing, and makes no network requests. The index refreshes automatically when source files change.
+It rejects path traversal and unknown slugs, writes nothing, and makes no network requests. Results use absolute public URLs derived from `SITE_URL` and `BASE_PATH`, so an agent can open them directly.
 
 `opencode.jsonc` registers it as the local `docs` server:
 
@@ -246,13 +254,35 @@ It indexes `src/content/docs/**/*.md`, rejects path traversal and unknown slugs,
 }
 ```
 
-Run the server tests with:
+Run its tests with:
 
 ```bash
 npm run test:docs-mcp
 ```
 
-The guide deliberately operates only this local stdio server. There is no remote MCP endpoint, no hosted worker, and no Cloudflare deployment. Agents that cannot run a local process use `llms.txt` or the per-page Markdown instead.
+### The published guide: `guide`
+
+`guide` reads the deployed site over HTTPS and is distributed as the npm package `linux-desktop-guide-mcp`. An agent without this checkout needs only a local server entry:
+
+```jsonc
+"guide": {
+  "type": "local",
+  "command": ["npx", "-y", "linux-desktop-guide-mcp"]
+}
+```
+
+It reads `llms.txt`, `llms-full.txt`, the per-page `.md` routes, and `reference/baseline.json`. Responses are cached outside the project with ETags and TTLs; when the network fails, it returns the cached copy with `stale: true`. It accepts only the configured origin and base path.
+
+The [Agent Access](/reference/agent-access/) page documents the client configurations for OpenCode, Claude Desktop, and Cursor, the environment variables, and the `llms.txt` fallback.
+
+Run its tests and the package check with:
+
+```bash
+npm run test:guide-mcp
+npm run check:guide-package
+```
+
+The guide deliberately operates only local stdio servers. There is no remote MCP endpoint, no hosted worker, and no Cloudflare deployment. The `guide` package reads the public site; it does not require a checkout. Agents that cannot run a local process use `llms.txt` or the per-page Markdown instead.
 
 ## Design tokens
 
@@ -278,6 +308,8 @@ The palette is deliberately paper-like and airy, with the spectrum reserved for 
 - Internal links, the manifest, the service worker, and the agent Markdown all follow the configured base path. Run `npm run check:docs` after changing it.
 - The public release checklist is in [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md): licensing, history cleanup, Pages setup, freshness, and feedback checks.
 - Verify the deployed site after a deployment: `npm run check:deployed -- https://digitalesich.github.io/linux-desktop-guide/`. The Pages workflow runs the same check in its `verify` job.
+- Verify the published MCP contract with `npm run check:mcp -- https://digitalesich.github.io/linux-desktop-guide/`. The Pages workflow runs it after the deployed-site check.
+- Publish the `guide` package from a `guide-mcp-v*` tag with the `Publish the guide MCP package` workflow. The one-time npm trusted-publisher setup is in [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md).
 
 ## License
 

@@ -64,7 +64,7 @@ export class DocsSearch {
 				title: page.title,
 				description: page.description,
 				section: page.sectionLabel,
-				url: `/${page.slug}/`,
+				url: page.url ?? `/${page.slug}/`,
 				score: round(match.score),
 				excerpt: makeExcerpt(page.plain, terms),
 				headings: matchingHeadings(page.headings, terms),

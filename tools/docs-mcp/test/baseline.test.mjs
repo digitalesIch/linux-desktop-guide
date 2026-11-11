@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { BASELINE_PATH } from '../lib/config.mjs';
 import { readBaseline } from '../lib/baseline.mjs';
-import { DocsError } from '../lib/errors.mjs';
+import { DocsError } from '../../docs-core/errors.mjs';
 
 test('reads the documented baseline data', () => {
 	const baseline = readBaseline();

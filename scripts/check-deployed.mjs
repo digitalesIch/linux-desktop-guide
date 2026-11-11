@@ -98,6 +98,7 @@ if (content) {
 await fetchRoute('llms.txt', 'text/plain', 'llms.txt');
 const full = await fetchRoute('llms-full.txt', 'text/plain', 'llms-full.txt');
 await fetchRoute('start/why-linux.md', 'text/markdown', 'Markdown route');
+await fetchRoute('reference/baseline.json', 'application/json', 'baseline JSON');
 
 const manifestResponse = await fetchRoute('manifest.webmanifest', 'application/manifest+json', 'manifest');
 if (manifestResponse) {

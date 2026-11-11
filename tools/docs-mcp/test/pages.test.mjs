@@ -3,8 +3,8 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
-import { ASTRO_CONFIG_PATH, DOCS_ROOT } from '../lib/config.mjs';
-import { DocsError } from '../lib/errors.mjs';
+import { ASTRO_CONFIG_PATH, DOCS_ROOT, PUBLIC_BASE_URL } from '../lib/config.mjs';
+import { DocsError } from '../../docs-core/errors.mjs';
 import { listPages, loadPages, normalizeSlug, pageResult, sourceSignature } from '../lib/pages.mjs';
 
 const corpus = loadPages({ docsRoot: DOCS_ROOT, sidebarPath: ASTRO_CONFIG_PATH });
@@ -64,8 +64,8 @@ test('rejects traversal and absolute filesystem paths', () => {
 test('page results contain readable content and metadata', () => {
 	const page = pageResult(corpus.bySlug.get('platform/xdg'));
 	assert.equal(page.slug, 'platform/xdg');
-	assert.equal(page.url, '/platform/xdg/');
-	assert.equal(page.markdownPath, '/platform/xdg.md');
+	assert.equal(page.url, `${PUBLIC_BASE_URL}platform/xdg/`);
+	assert.equal(page.markdownPath, `${PUBLIC_BASE_URL}platform/xdg.md`);
 	assert.match(page.source, /^src\/content\/docs\//);
 	assert.ok(page.content.includes('XDG'));
 	assert.ok(page.headings.length > 0);
@@ -82,7 +82,9 @@ test('lists pages by section', () => {
 	const platform = listPages(corpus.pages, 'platform');
 	assert.ok(platform.count >= 7);
 	assert.ok(platform.sections.every((section) => section.id === 'platform'));
-	assert.ok(platform.sections[0].pages.every((page) => page.url.startsWith('/platform/')));
+	assert.ok(
+		platform.sections[0].pages.every((page) => page.url.startsWith(`${PUBLIC_BASE_URL}platform/`)),
+	);
 
 	const reference = listPages(corpus.pages, 'reference');
 	assert.match(reference.note, /get_baseline/);

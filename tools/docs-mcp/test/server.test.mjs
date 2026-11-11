@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { after, before, test } from 'node:test';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
-import { PROJECT_ROOT } from '../lib/config.mjs';
+import { PROJECT_ROOT, PUBLIC_BASE_URL } from '../lib/config.mjs';
 
 let client;
 let transport;
@@ -79,7 +79,7 @@ test('get_page accepts common slug forms', async () => {
 		const result = await client.callTool({ name: 'get_page', arguments: { slug } });
 		const payload = json(result);
 		assert.equal(payload.slug, 'start/why-linux');
-		assert.equal(payload.url, '/start/why-linux/');
+		assert.equal(payload.url, `${PUBLIC_BASE_URL}start/why-linux/`);
 		assert.match(payload.content, /Linux is not a product/);
 		assert.ok(payload.headings.length > 0);
 	}

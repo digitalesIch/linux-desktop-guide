@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { ASTRO_CONFIG_PATH, DOCS_ROOT } from '../lib/config.mjs';
-import { DocsError } from '../lib/errors.mjs';
+import { DocsError } from '../../docs-core/errors.mjs';
 import { loadPages } from '../lib/pages.mjs';
-import { DocsRelated } from '../lib/related.mjs';
+import { DocsRelated } from '../../docs-core/related.mjs';
 
 const corpus = loadPages({ docsRoot: DOCS_ROOT, sidebarPath: ASTRO_CONFIG_PATH });
 const related = new DocsRelated(corpus.pages);

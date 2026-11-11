@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { ASTRO_CONFIG_PATH, DOCS_ROOT } from '../lib/config.mjs';
 import { loadPages } from '../lib/pages.mjs';
-import { markdownToPlain } from '../lib/text.mjs';
+import { markdownToPlain } from '../../docs-core/text.mjs';
 
 test('removes table separators without dropping table content', () => {
 	const plain = markdownToPlain(`

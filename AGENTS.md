@@ -22,7 +22,7 @@ Before adding a chapter or integration, claiming a development path is complete,
 
 Before editing or adding content, read `src/content/docs/reference/style-guide.md`. It is the canonical guide for voice, page shape, terminology, code, links, screenshots, accessibility, localization, and agent-facing Markdown. Platform terms stay in `src/content/docs/reference/glossary.md`; do not create a second glossary. Run `npm run check:docs` after content changes.
 
-When you find a documentation defect, report it instead of silently rewriting the page: include the page slug, section, quote, expected and actual result, version, target, and the source that contradicts the page. Agents are readers and reviewers, not publishers. The docs MCP server is read-only and must stay that way.
+When you find a documentation defect, report it instead of silently rewriting the page: include the page slug, section, quote, expected and actual result, version, target, and the source that contradicts the page. Agents are readers and reviewers, not publishers. The docs MCP and guide MCP servers are read-only and must stay that way.
 
 Report through `/reference/feedback/` or from the command line:
 
@@ -59,7 +59,7 @@ The public guide is published for agents as well as humans. After `npm run build
 - `/llms-full.txt` — the complete guide in one file.
 - Append `.md` to a page route for a clean Markdown version, for example `/start/why-linux.md`.
 
-Run `npm run check:docs` before releasing. It performs baseline validation, tutorial/example consistency checking, target-matrix validation, freshness fixture tests, a full build, PWA validation, agent-doc validation, MCP tests, and internal link/anchor checking. The default gate is offline. External link checks are opt-in with `npm run check:links:external`; strict mode fails on real HTTP 4xx/5xx responses, while network warnings and allowlisted hosts do not fail.
+Run `npm run check:docs` before releasing. It performs baseline validation, tutorial/example consistency checking, target-matrix validation, freshness fixture tests, a full build, PWA validation, agent-doc validation, the MCP server tests, the npm package check, and internal link/anchor checking. The default gate is offline. External link checks are opt-in with `npm run check:links:external`; strict mode fails on real HTTP 4xx/5xx responses, while network warnings and allowlisted hosts do not fail.
 
 Run `npm run check:quality` for the browser-based gate. It serves `dist/`, runs Lighthouse on representative pages, requires accessibility, best practices, and SEO at 100, and keeps performance at or above 90. It needs a local Chrome and is intentionally separate from the offline `check:docs` gate. Add `-- --no-build` to reuse an existing build. The `Quality` workflow runs the same gate on pushes and pull requests with one retry for a transient `n/a`.
 
@@ -67,17 +67,19 @@ Add the deployed-site check after a Pages deployment: `npm run check:deployed --
 
 Do not edit `dist/`; it is generated.
 
-## Documentation MCP server
+## Documentation MCP servers
 
-The project registers a local, read-only MCP server named `docs` in `opencode.jsonc`. Use it to search and read this guide efficiently:
+The project registers a local, read-only MCP server named `docs` in `opencode.jsonc`. Use it to search and read the working tree efficiently:
 
 1. Call `search_docs` first.
 2. Pass a returned slug to `get_page`.
 3. Use `list_pages` to browse, `get_related` after a page, and `get_baseline` for the Ubuntu/GNOME reference baseline. The full target matrix is in `src/data/targets.json`.
 
-The server runs over stdio with `npm run mcp:docs`. It indexes `src/content/docs/**/*.md`, rejects path traversal, writes nothing, and makes no network requests. Run `npm run test:docs-mcp` after changing the server or its index.
+The `docs` server runs over stdio with `npm run mcp:docs`. It indexes `src/content/docs/**/*.md`, rejects path traversal, writes nothing, and makes no network requests. Run `npm run test:docs-mcp` after changing the server or its index.
 
-Only the local stdio server is offered. Do not add a remote MCP endpoint, a hosted worker, or a Cloudflare deployment without a new decision and an OpenSpec change. Agents that cannot run a local process use `llms.txt` or the per-page Markdown.
+A second local server, `guide`, serves the published site and is distributed as the npm package `linux-desktop-guide-mcp`. It is for agents that do not have a checkout. Do not use it to inspect uncommitted edits, and do not use the `docs` server to verify what readers see. It reads only the configured origin, caches outside the project, and exposes the same five tools. Run `npm run test:guide-mcp` and `npm run check:guide-package` after changing it.
+
+Both servers are local stdio. Do not add a remote MCP endpoint, a hosted worker, or a Cloudflare deployment without a new decision and an OpenSpec change. Agents that cannot run a local process use `llms.txt` or the per-page Markdown.
 
 ## Editorial policy
 
