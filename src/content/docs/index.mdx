@@ -1,12 +1,12 @@
 ---
 title: Build Linux apps that feel inevitable
-description: A practical field guide to building fast, accessible, deeply integrated native apps for the Linux desktops that matter — with curated targets, default stacks, and a quality bar.
+description: A practical field guide from a useful core task to an installable, safely updatable Linux app — with curated targets, default stacks, design contracts, and release criteria.
 template: splash
 hero:
   title: Build Linux apps that feel inevitable.
-  tagline: A field guide to fast, accessible, native apps for the Linux desktops that matter — with a curated target and a default stack for each.
+  tagline: A curated, evidence-backed path from the first useful task to an app users can install and update safely — with a default stack and design contract for each target.
   image:
-    html: '<img class="ldg-hero-art" src="./hero-window.svg" width="980" height="620" alt="A native Linux notes app with a sidebar, note cards, and integration badges for Wayland, Portals, and Flatpak." />'
+    html: '<img class="ldg-hero-art" src="./hero-window.svg" width="980" height="620" alt="Illustration of a native Linux notes app with a sidebar, note cards, and integration badges for Wayland, Portals, and Flatpak." />'
   actions:
     - text: Choose your target
       link: /targets/
@@ -18,7 +18,7 @@ hero:
 
 import LandingFX from '../../components/LandingFX.astro';
 
-<div class="ldg-baseline" aria-label="Platform baseline">
+<div class="ldg-baseline" aria-label="Target matrix">
   <span class="ldg-baseline-label">Targets</span>
   <span>Ubuntu 26.04 LTS</span>
   <span>Fedora 45</span>
@@ -38,9 +38,9 @@ import LandingFX from '../../components/LandingFX.astro';
 </div>
 
 <div class="ldg-section">
-  <p class="ldg-eyebrow">The Linux difference</p>
-  <h2 class="ldg-title">No single vendor. One set of contracts.</h2>
-  <p class="ldg-lede">Linux gives you a small number of open standards, several excellent toolkits, and users who expect to stay in control. The constraints are real: no single vendor, no single store, no single design authority. The result is software that can be faster, more focused, and more deeply integrated than a one-size-fits-all platform allows.</p>
+  <p class="ldg-eyebrow">What makes this guide different</p>
+  <h2 class="ldg-title">A default for every layer.</h2>
+  <p class="ldg-lede">Linux gives you open standards, several mature toolkits, and users who expect to stay in control. The guide turns that freedom into a small set of decisions you can defend — not a menu of equivalent options.</p>
 
   <div class="ldg-grid-3">
     <div class="ldg-card ldg-card--feature">
@@ -52,7 +52,7 @@ import LandingFX from '../../components/LandingFX.astro';
         </svg>
       </span>
       <h3>Standards are the API</h3>
-      <p>Wayland, XDG, D-Bus, AppStream and Portals are the stable surface. Learn them once; your app works across GNOME, KDE and every distribution.</p>
+      <p>Wayland, XDG, D-Bus, AppStream, and portals are the stable surface shared across the guide's targets. Learn them once, then use them where the app actually runs.</p>
       <div class="ldg-chip-cluster" aria-hidden="true">
         <span>Wayland</span><span>XDG</span><span>D-Bus</span><span>Portals</span><span>AppStream</span><span>Flatpak</span>
       </div>
@@ -61,12 +61,13 @@ import LandingFX from '../../components/LandingFX.astro';
     <div class="ldg-card ldg-card--cyan">
       <span class="ldg-card-icon ldg-icon-cyan" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="8" r="3"/>
-          <path d="M5.5 20c.8-3.4 3.2-5 6.5-5s5.7 1.6 6.5 5"/>
+          <circle cx="12" cy="12" r="8"/>
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
         </svg>
       </span>
-      <h3>The desktop is the user's</h3>
-      <p>Respect themes, fonts, scaling, shortcuts and privacy settings. Native software adapts to the host instead of importing another platform's habits.</p>
+      <h3>One target, one default stack</h3>
+      <p>Each reference target has one toolkit, one HIG, and one design contract. Alternatives are documented as trade-offs, not presented as equally supported defaults.</p>
     </div>
     <div class="ldg-card ldg-card--lime">
       <span class="ldg-card-icon ldg-icon-lime" aria-hidden="true">
@@ -75,8 +76,8 @@ import LandingFX from '../../components/LandingFX.astro';
           <path d="m4 7.5 8 4.5 8-4.5M12 12v9"/>
         </svg>
       </span>
-      <h3>Distribution is the product</h3>
-      <p>Flatpak, deb, Snap and AppImage are not afterthoughts. Reproducible builds, signed updates and honest metadata are how trust is earned.</p>
+      <h3>Shipping is part of the design</h3>
+      <p>Flatpak is the default channel; deb, Snap, and RPM are secondary where the target needs them. Reproducible builds, honest metadata, and a working update path are how trust is earned.</p>
     </div>
   </div>
 
@@ -86,21 +87,21 @@ import LandingFX from '../../components/LandingFX.astro';
 <div class="ldg-section">
   <p class="ldg-eyebrow">The target model</p>
   <h2 class="ldg-title">Linux has no default. This guide does.</h2>
-  <p class="ldg-lede">A vendor-controlled platform can define one screen, one toolkit and one store. Linux cannot. This guide closes the gap with a small, evidence-based target set: a distribution, a desktop, a default stack, a HIG and a packaging path for each.</p>
+  <p class="ldg-lede">A vendor-controlled platform can define one screen, one toolkit, and one store. Linux cannot. This guide closes the gap with a small, evidence-based target set: a distribution, a desktop, a default stack, a design contract, a HIG, and a packaging path for each.</p>
 
   <div class="ldg-grid-3">
     <div class="ldg-card ldg-card--feature">
       <h3>Reference targets</h3>
-      <p><strong>Ubuntu 26.04 LTS + GNOME</strong> for GTK/libadwaita, and <strong>Fedora 45 KDE + Qt</strong> for Qt/Kirigami. These get the full golden path and quality gates.</p>
-      <p class="ldg-after"><a class="ldg-textlink" href="/targets/">See the target matrix <span aria-hidden="true">→</span></a></p>
+      <p><strong>Ubuntu 26.04 LTS + GNOME</strong> for GTK/libadwaita, and <strong>Fedora 45 KDE + Qt</strong> for Qt/Kirigami. Each gets a design contract, a complete development path, and the release criteria.</p>
+      <p class="ldg-after"><a class="ldg-textlink" href="/targets/ubuntu-gnome/">Ubuntu + GNOME <span aria-hidden="true">→</span></a><br /><a class="ldg-textlink" href="/targets/fedora-kde/">Fedora + KDE <span aria-hidden="true">→</span></a><br /><a class="ldg-textlink" href="/targets/">See the target matrix <span aria-hidden="true">→</span></a></p>
     </div>
     <div class="ldg-card ldg-card--cyan">
       <h3>Validation targets</h3>
-      <p>Fedora Workstation + GNOME and Arch Linux catch upstream GTK, libadwaita and Qt drift before your users do. They are test environments, not support promises.</p>
+      <p>Fedora Workstation + GNOME and Arch Linux test whether the reference apps survive newer GTK, libadwaita, and Qt. They are validation environments, not support promises.</p>
     </div>
     <div class="ldg-card ldg-card--lime">
       <h3>Compatibility target</h3>
-      <p>Debian 13 keeps the conservative, long-support path visible — with older GTK/Qt libraries and Flatpak for apps that need a newer stack.</p>
+      <p>Debian 13 keeps the conservative, long-support path visible, with older GTK/Qt libraries and Flatpak for apps that need a newer stack.</p>
     </div>
   </div>
 </div>
@@ -108,7 +109,7 @@ import LandingFX from '../../components/LandingFX.astro';
 <div class="ldg-section">
   <p class="ldg-eyebrow">The four contracts</p>
   <h2 class="ldg-title">Native is a promise, not a theme.</h2>
-  <p class="ldg-lede">Every quality you want — speed, polish, reliability, that indefinable “it belongs here” feeling — comes from honoring four contracts with the platform.</p>
+  <p class="ldg-lede">Speed, polish, reliability, and the feeling that an app belongs come from honoring four contracts with the platform.</p>
 
   <div class="ldg-grid-4">
     <a class="ldg-contract" href="/platform/wayland/">
@@ -120,44 +121,45 @@ import LandingFX from '../../components/LandingFX.astro';
     <a class="ldg-contract" href="/platform/integration/">
       <span class="ldg-num">02</span>
       <h3>Desktop</h3>
-      <p>Use the host's widgets, HIG, icons, notifications, file dialogs and settings. Integrate through D-Bus and XDG portals.</p>
+      <p>Follow the primary target's HIG, and use the host's widgets, icons, notifications, file dialogs, and settings. Integrate through D-Bus and XDG portals; behave as a guest elsewhere.</p>
       <span class="ldg-contract-link">System integration <span aria-hidden="true">→</span></span>
     </a>
     <a class="ldg-contract" href="/platform/xdg/">
       <span class="ldg-num">03</span>
       <h3>Data</h3>
-      <p>Store config, state, cache and user data where the XDG spec says. Write atomically. Never assume the app owns the home directory.</p>
+      <p>Store config, state, cache, and user data where XDG says. Write atomically, version the format, and keep the data through crashes and updates.</p>
       <span class="ldg-contract-link">The XDG contract <span aria-hidden="true">→</span></span>
     </a>
     <a class="ldg-contract" href="/platform/packaging/">
       <span class="ldg-num">04</span>
       <h3>Distribution</h3>
-      <p>Ship a reproducible build with valid AppStream metadata, minimal permissions and an update path you don't have to hand-roll.</p>
+      <p>Ship a reproducible build with valid AppStream metadata, minimal permissions, and a supported installation and update path.</p>
       <span class="ldg-contract-link">Packaging &amp; distribution <span aria-hidden="true">→</span></span>
     </a>
   </div>
 </div>
 
 <div class="ldg-section">
-  <h2 class="ldg-title">From first window to Flathub.</h2>
+  <p class="ldg-eyebrow">The development path</p>
+  <h2 class="ldg-title">From the first useful task to a maintained release.</h2>
 
   <div class="ldg-path">
     <a class="ldg-step" href="/targets/">
       <span class="ldg-step-num">01</span>
       <h3>Choose a target</h3>
-      <p>Ubuntu + GNOME or Fedora + KDE. Pick the environment whose HIG, toolkit and users match your product.</p>
+      <p>Ubuntu + GNOME or Fedora + KDE. Pick the environment whose users, design language, toolkit, and support window fit the app.</p>
       <span class="ldg-textlink">Platform targets <span aria-hidden="true">→</span></span>
     </a>
     <a class="ldg-step" href="/start/choose-stack/">
       <span class="ldg-step-num">02</span>
-      <h3>Choose a stack and build</h3>
-      <p>GTK 4 + libadwaita for GNOME, Qt 6 + Kirigami for KDE. The target decides the default; the tutorial gets you to the first window.</p>
-      <span class="ldg-textlink">Choose your stack <span aria-hidden="true">→</span></span>
+      <h3>Build the core task</h3>
+      <p>Move from an empty window to a task a user would miss. The GTK and Qt chapters cover native widgets, actions, models, and a build that runs on the target.</p>
+      <span class="ldg-textlink">Choose target and stack <span aria-hidden="true">→</span></span>
     </a>
     <a class="ldg-step" href="/ship/release-checklist/">
       <span class="ldg-step-num">03</span>
-      <h3>Ship with evidence</h3>
-      <p>Validate metadata, permissions, startup time, accessibility and upgrades before you ask anyone to install it.</p>
+      <h3>Make it durable and shippable</h3>
+      <p>Add XDG storage, atomic saves, recovery, desktop integration, packaging, installation, and updates. Verify the release criteria on the declared channel.</p>
       <span class="ldg-textlink">Release checklist <span aria-hidden="true">→</span></span>
     </a>
   </div>
@@ -166,20 +168,22 @@ import LandingFX from '../../components/LandingFX.astro';
 <div class="ldg-section ldg-bar-section">
   <div class="ldg-bar">
     <div>
-          <h2 class="ldg-title ldg-title-sm">Budgets, not absolutes.</h2>
-      <p class="ldg-lede ldg-lede-sm">Measure on the oldest hardware you support. These are the numbers a focused desktop app should be able to defend.</p>
+      <p class="ldg-eyebrow">Release criteria</p>
+      <h2 class="ldg-title ldg-title-sm">No score replaces the basics.</h2>
+      <p class="ldg-lede ldg-lede-sm">The Quality Bar scores seven dimensions. These four gates come first: a failure blocks a release-ready assessment, whatever the aggregate score says.</p>
+      <p class="ldg-after"><a class="ldg-textlink" href="/ship/quality-bar/#release-criteria">Read the release criteria <span aria-hidden="true">→</span></a></p>
     </div>
     <div class="ldg-metrics">
-      <div><strong>&lt; 1 s</strong><span>cold start</span></div>
-      <div><strong>60 fps</strong><span>under interaction</span></div>
-      <div><strong>0</strong><span>needless permissions</span></div>
-      <div><strong>100%</strong><span>keyboard reachable</span></div>
+      <div><strong>Preserved</strong><span>user data through failure and updates</span></div>
+      <div><strong>Accessible</strong><span>core tasks with keyboard and assistive tech</span></div>
+      <div><strong>Justified</strong><span>permissions, with a useful denial path</span></div>
+      <div><strong>Updatable</strong><span>install, update, and uninstall</span></div>
     </div>
   </div>
 </div>
 
 <div class="ldg-section">
-  <h2 class="ldg-title">Start where you are.</h2>
+  <h2 class="ldg-title">Pick the path that fits.</h2>
 
   <div class="ldg-grid-2">
     <a class="ldg-linkcard" href="/start/why-linux/">
@@ -190,17 +194,27 @@ import LandingFX from '../../components/LandingFX.astro';
     <a class="ldg-linkcard" href="/targets/">
       <span class="ldg-linkcard-kicker">Choosing a target?</span>
       <h3>Start with the environment, not the toolkit.</h3>
-      <p>Two reference targets, two validation targets and a compatibility path — with the evidence behind each choice.</p>
+      <p>Two reference targets, two validation targets, and one compatibility target — with the evidence behind each choice.</p>
     </a>
-    <a class="ldg-linkcard" href="/design/principles/">
+    <a class="ldg-linkcard" href="/targets/ubuntu-gnome/#design-contract-gnome">
       <span class="ldg-linkcard-kicker">Designing for GNOME?</span>
-      <h3>Make it quiet, fast and keyboard-first.</h3>
-      <p>The principles behind libadwaita, adaptive layouts and interactions that disappear into the task.</p>
+      <h3>Follow the GNOME design contract.</h3>
+      <p>Navigation, dialogs, feedback, and accessibility decisions for GTK 4 + libadwaita, with the HIG as the reference.</p>
     </a>
-    <a class="ldg-linkcard" href="/ship/flathub/">
+    <a class="ldg-linkcard" href="/targets/fedora-kde/#design-contract-kde-plasma">
+      <span class="ldg-linkcard-kicker">Designing for KDE?</span>
+      <h3>Follow the KDE Plasma design contract.</h3>
+      <p>Navigation, toolbars, settings, and status decisions for Qt 6 + Kirigami, with the HIG as the reference.</p>
+    </a>
+    <a class="ldg-linkcard" href="/ship/release-checklist/">
       <span class="ldg-linkcard-kicker">Ready to ship?</span>
-      <h3>Publish without sanding off the edges.</h3>
-      <p>Metadata, permissions, manifests and the review details that decide whether an app feels trustworthy.</p>
+      <h3>Run the release checklist.</h3>
+      <p>Validate the artifact, metadata, permissions, and update path before anyone installs it.</p>
+    </a>
+    <a class="ldg-linkcard" href="/start/native-standard/">
+      <span class="ldg-linkcard-kicker">Need the rules?</span>
+      <h3>Read the Native Standard.</h3>
+      <p>Ten toolkit-neutral rules, plus the definition of a complete development path.</p>
     </a>
   </div>
 </div>
