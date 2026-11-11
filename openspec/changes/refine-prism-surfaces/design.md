@@ -17,7 +17,8 @@ See proposal.md for motivation. The existing Starlight CSS provides theme tokens
 - Reuse local pointer handlers for cards and hero. Suppress pointer-tracking decoration under reduced motion and avoid adding tilt; remove legacy hero rotation to match the approved foil-only direction.
 - Use neutral title colors in both normal and hover states. Generate favicon and PWA icons from the simplified SVG, retaining a small spectrum separator rather than a rainbow-filled tile.
 - Bump the service-worker cache version after shell changes. Preserve base-aware routes and existing PWA behavior.
-- Reset Starlight's adjacent-sibling `margin-top` inside the ticker, grid, bar, and metric containers rather than counter-offsetting individual cards. Increase the desktop nav height so the search field clears the hairline, align step links with auto margins, and present agent access as a bordered panel with a spectrum edge and a primary CTA.
+- Keep the target chips as the single target signal: remove the decorative ticker and fabricated quote panel, and add the same pointer-local glow to the agent panel.
+- Reset Starlight's adjacent-sibling `margin-top` inside the grid, bar, and metric containers rather than counter-offsetting individual cards. Increase the desktop nav height so the search field clears the hairline, give step columns a left gutter, align step links with auto margins, and present agent access as a bordered panel with a spectrum edge and a primary CTA.
 
 ## Risks / Trade-offs
 

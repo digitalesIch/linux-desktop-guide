@@ -7,9 +7,10 @@ The light theme still reads as yellow paper, while the global cursor glow and ra
 ## What Changes
 
 - Use white light-theme backgrounds and neutral gray secondary surfaces.
-- Clip pointer-following effects to the hero and cards; remove the global overlay.
+- Clip pointer-following effects to the hero, cards, and agent panel; remove the global overlay.
 - Keep the logo predominantly monochrome with only a small spectrum detail, and render the site title in the theme's neutral text color.
-- Align the landing rhythm: more header breathing room, matched card edges, shared metric baselines, bottom-aligned step links, and a distinct agent panel.
+- Align the landing rhythm: more header breathing room, matched card edges, shared metric baselines, bottom-aligned step links with clear divider gutters, and a distinct agent panel.
+- Reduce landing noise: remove the decorative standards ticker and the fabricated quote, keep the target chips as the single target signal, and extend the local hover glow to the agent panel.
 - Align PWA assets and metadata with the white theme while retaining dark mode.
 
 ## Capabilities

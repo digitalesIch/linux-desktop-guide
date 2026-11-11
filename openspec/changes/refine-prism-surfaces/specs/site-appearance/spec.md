@@ -18,10 +18,10 @@ The site SHALL use pure white reading backgrounds in light mode with neutral gra
 - **THEN** its reading background is white without a page-wide colored wash
 
 ### Requirement: Local pointer decoration
-Pointer-following decoration SHALL be visible only inside the hero or cards, SHALL NOT obscure text or controls, and SHALL NOT track the pointer when reduced motion is requested.
+Pointer-following decoration SHALL be visible only inside the hero, cards, or agent panel, SHALL NOT obscure text or controls, and SHALL NOT track the pointer when reduced motion is requested.
 
 #### Scenario: Pointer leaves decorated surfaces
-- **WHEN** the pointer moves from a card or hero to the surrounding page
+- **WHEN** the pointer moves from a decorated surface to the surrounding page
 - **THEN** no pointer-following glow appears on the surrounding page
 
 #### Scenario: Reduced motion
@@ -44,4 +44,12 @@ The landing page SHALL keep inherited document spacing from shifting custom layo
 
 #### Scenario: Wide landing layout
 - **WHEN** a reader views the landing page on a wide desktop viewport
-- **THEN** paired cards match the feature card edges, metric headings share a row baseline, and step links align at the bottom of their columns
+- **THEN** paired cards match the feature card edges, metric headings share a row baseline, and step links align at the bottom of their columns with clear divider gutters
+
+
+### Requirement: Focused landing signals
+The landing page SHALL present the target matrix once and SHALL NOT include a decorative standards ticker or a fabricated testimonial.
+
+#### Scenario: Landing content signals
+- **WHEN** a reader views the landing page
+- **THEN** the target chips are the only target list and no standards ticker or quote panel appears

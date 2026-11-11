@@ -6,7 +6,6 @@
 		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const finePointer = window.matchMedia('(pointer: fine)').matches;
 		const hero = document.querySelector('.hero');
-		const ticker = document.querySelector('.ldg-ticker-track');
 
 		if (!hero) return;
 
@@ -61,20 +60,11 @@
 			if (!frame) frame = requestAnimationFrame(paint);
 		});
 
-		for (const card of document.querySelectorAll('.ldg-card, .ldg-contract, .ldg-linkcard')) {
+		for (const card of document.querySelectorAll('.ldg-card, .ldg-contract, .ldg-linkcard, .ldg-agent-panel')) {
 			card.addEventListener('pointermove', (event) => {
 				const rect = card.getBoundingClientRect();
 				card.style.setProperty('--card-x', `${((event.clientX - rect.left) / rect.width) * 100}%`);
 				card.style.setProperty('--card-y', `${((event.clientY - rect.top) / rect.height) * 100}%`);
-			});
-		}
-
-		if (ticker) {
-			ticker.addEventListener('pointerenter', () => {
-				ticker.style.animationPlayState = 'paused';
-			});
-			ticker.addEventListener('pointerleave', () => {
-				ticker.style.animationPlayState = 'running';
 			});
 		}
 	})();

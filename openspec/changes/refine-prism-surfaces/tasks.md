@@ -34,3 +34,13 @@
 - [x] 5.5 Push step links to the bottom of their columns with auto margins and verify all three links share the same top edge
 - [x] 5.6 Present the agent section as a bordered panel with a spectrum edge and primary CTA, and verify it in light, dark, and mobile screenshots
 - [x] 5.7 Run `npm run check:docs`, `npm run check:pwa`, and `npm run check:quality -- --no-build`, and verify the deployed page after the Pages workflow completes
+
+## 6. Landing noise and spacing follow-up
+
+- [x] 6.1 Raise the desktop nav height and padding to leave a 20 px gap between the search control and the header hairline, then verify at a 2816 px viewport
+- [x] 6.2 Remove the standards ticker markup, styles, and pause behavior, and verify the target chips remain as the only target list
+- [x] 6.3 Add a left gutter to step columns after the first and verify text clears the divider line while mobile stacking still works
+- [x] 6.4 Add the pointer-local glow to the agent panel and verify it tracks the pointer without covering text
+- [x] 6.5 Remove the fabricated quote section and its unused styles, including the stale 404 section class
+- [ ] 6.6 Bump the service-worker cache version so updated layout styles and removed sections replace cached copies, and verify `dist/sw.js`
+- [ ] 6.7 Run `npm run check:docs`, `npm run check:pwa`, and `npm run check:quality -- --no-build`, then verify the deployed page after the Pages workflow completes
