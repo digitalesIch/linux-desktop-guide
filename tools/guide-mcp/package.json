@@ -34,8 +34,7 @@
 		"node": ">=22"
 	},
 	"publishConfig": {
-		"access": "public",
-		"provenance": true
+		"access": "public"
 	},
 	"scripts": {
 		"build": "node build.mjs",

@@ -24,7 +24,7 @@ The server is distributed as `linux-desktop-guide-mcp` and needs Node.js 22 or n
 npx -y linux-desktop-guide-mcp
 ```
 
-It needs no API key, account, or repository clone. The package is built from this repository and published with provenance from a tagged workflow. If your client cannot find the package, use the `llms.txt` routes below; they expose the same content without a local process.
+It needs no API key, account, or repository clone. The package is built from this repository. If your client cannot find the package, use the `llms.txt` routes below; they expose the same content without a local process.
 
 ## Client configuration
 

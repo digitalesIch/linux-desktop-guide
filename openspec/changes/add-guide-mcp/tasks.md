@@ -61,6 +61,6 @@
 
 - [x] 8.1 Run `openspec validate add-guide-mcp --strict` and `openspec validate --all --strict`.
 - [x] 8.2 Run `npm run check:docs` offline and confirm every step passes.
-- [ ] 8.3 Run the built server against the live deployed URL and exercise all five tools.
-- [ ] 8.4 Run `npm run check:deployed -- https://digitalesich.github.io/linux-desktop-guide/` and the new MCP smoke test against the same URL.
+- [x] 8.3 Run the built server against the live deployed URL and exercise all five tools.
+- [x] 8.4 Run `npm run check:deployed -- https://digitalesich.github.io/linux-desktop-guide/` and the new MCP smoke test against the same URL.
 - [x] 8.5 Confirm the repository contains no generated cache, tarball, or `dist/` output from the package.

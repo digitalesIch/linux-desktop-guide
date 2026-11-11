@@ -309,7 +309,7 @@ The palette is deliberately paper-like and airy, with the spectrum reserved for 
 - The public release checklist is in [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md): licensing, history cleanup, Pages setup, freshness, and feedback checks.
 - Verify the deployed site after a deployment: `npm run check:deployed -- https://digitalesich.github.io/linux-desktop-guide/`. The Pages workflow runs the same check in its `verify` job.
 - Verify the published MCP contract with `npm run check:mcp -- https://digitalesich.github.io/linux-desktop-guide/`. The Pages workflow runs it after the deployed-site check.
-- Publish the `guide` package from a `guide-mcp-v*` tag with the `Publish the guide MCP package` workflow. The one-time npm trusted-publisher setup is in [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md).
+- Publish the `guide` package after the one-time first publish; later versions go from a `guide-mcp-v*` tag with the `Publish the guide MCP package` workflow. The setup and the first publish are in [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md).
 
 ## License
 

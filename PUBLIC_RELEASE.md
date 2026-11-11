@@ -32,8 +32,10 @@ Scope: the guide ships a static site and local stdio MCP servers. No remote MCP 
 
 ## 4. Guide MCP package
 
-- ☐ Create the npm package `linux-desktop-guide-mcp` and configure trusted publishing for `digitalesIch/linux-desktop-guide` and `.github/workflows/publish-guide-mcp.yml` on npmjs.com. No long-lived token is stored.
-- ☐ Publish `0.1.0` from a `guide-mcp-v0.1.0` tag and verify the provenance badge, `npm pack`, and `npx -y linux-desktop-guide-mcp --version`. The workflow rejects a tag that does not match `tools/guide-mcp/package.json`.
+- ☐ First publish, one time: run `npm login`, then `cd tools/guide-mcp && npm publish --access public`. This creates version `0.1.0` without CI provenance. Do not push the `guide-mcp-v0.1.0` tag afterwards; the workflow would try to publish an existing version.
+- ☐ Configure trusted publishing on npmjs.com for `linux-desktop-guide-mcp`, the repository `digitalesIch/linux-desktop-guide`, and the workflow file `.github/workflows/publish-guide-mcp.yml`. No long-lived token is stored.
+- ☐ For later versions: update `tools/guide-mcp/package.json`, commit, push a tag such as `guide-mcp-v0.2.0`, and let the workflow build, test, check the tag, and publish with provenance.
+- ☐ Verify `npx -y linux-desktop-guide-mcp --version`, `npm pack`, and the provenance badge on a later release.
 - ☐ Verify the published contract with `npm run check:mcp -- https://digitalesich.github.io/linux-desktop-guide/` after the deployment that includes `reference/baseline.json`.
 - ☐ Keep the `docs` server as the offline authoring path. Publishing the package does not replace it.
 - ☐ Confirm the package has no runtime dependencies, no telemetry, and no write path outside its cache directory.
