@@ -46,4 +46,4 @@
 - [x] 7.1 Run `openspec validate harden-public-delivery --strict` and `openspec validate --all --strict`.
 - [x] 7.2 Run `npm run check:docs`, `npm run check:quality`, and the deployed-site check against the release commit.
 - [ ] 7.3 Confirm the live site serves `/`, `/targets/evidence/`, `/llms.txt`, a per-page `.md` route, the manifest, the service worker, and the offline page with no base-path errors.
-- [ ] 7.4 Commit and push; verify the Pages workflow deploys successfully and the live check passes.
+- [x] 7.4 Commit and push; verify the Pages workflow deploys successfully and the live check passes.

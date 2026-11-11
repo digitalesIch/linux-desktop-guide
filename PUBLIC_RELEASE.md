@@ -36,6 +36,7 @@ Scope: the guide ships a static site and a local stdio MCP server. No remote MCP
 - ☑ The `External links` workflow runs weekly. `doc.qt.io` and `www.iso.org` are allowlisted with reasons; strict mode fails only on real HTTP 4xx/5xx responses.
 - ☑ The `Freshness` workflow runs weekly, opens or updates an issue labeled `docs:freshness`, and never edits content. The issue template is in `.github/ISSUE_TEMPLATE/freshness.yml`.
 - ☑ Freshness fixture tests cover the no-change, drift, and failed-source paths.
+- ☑ On 2026-11-11 the `Check docs`, `Deploy to GitHub Pages`, `Quality`, `External links`, and `Freshness` workflows passed; the deploy `verify` job and a manual `npm run check:deployed` run passed.
 - ☑ All workflows use GitHub-hosted runners on the public repository, public HTTP endpoints, and no paid service or personal token. The automatic `GITHUB_TOKEN` is used only to update the freshness issue.
 - ☐ Target validation remains manual for Fedora 45, Debian 13, and Arch Linux. A container matrix is not in scope for now; the target pages must say so when the content session touches them.
 
