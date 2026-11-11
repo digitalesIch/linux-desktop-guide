@@ -24,8 +24,8 @@
 - [x] 4.1 Add `docs-content` requirements for layer separation, the cross-target recipe, and explicit packaging scope; run `openspec validate separate-platform-and-cross-target --strict`.
 - [x] 4.2 Run `npm run check:docs`; verify all links, anchors, target-matrix checks, agent docs, and the base path.
 - [x] 4.3 Run `npm run check:quality -- --no-build` and review the new page and updated profiles at desktop and narrow widths.
-- [ ] 4.4 Commit and push; verify the Pages deployment and the live cross-target page.
-- [ ] 4.5 Archive the change and sync the `docs-content` specification.
+- [x] 4.4 Commit and push; verify the Pages deployment and the live cross-target page.
+- [x] 4.5 Archive the change and sync the `docs-content` specification.
 
 ## Workflow follow-up
 
