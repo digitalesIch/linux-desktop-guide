@@ -9,7 +9,7 @@
 
 ## 2. Guide package
 
-- [x] 2.1 Add `tools/guide-mcp/package.json` with the name `linux-desktop-guide-mcp`, version `0.1.0`, `bin`, `files`, `engines: >=22`, MIT license, repository metadata, and a `prepack` build.
+- [x] 2.1 Add `tools/guide-mcp/package.json` with the name `linux-desktop-guide-mcp`, version `0.1.1`, `bin`, `files`, `engines: >=22`, MIT license, repository metadata, and a `prepack` build.
 - [x] 2.2 Implement `src/config.mjs` with the default base URL, TTLs, response cap, timeout, and environment overrides (`LDG_SITE_URL`, `LDG_CACHE_DIR`, `LDG_NO_CACHE`, `LDG_CACHE_TTL_MS`).
 - [x] 2.3 Implement `src/cache.mjs`: platform cache directory, atomic JSON entries, corrupt-entry recovery, ETag and Last-Modified storage.
 - [x] 2.4 Implement `src/site.mjs`: origin and path allowlist, manual redirects, size cap, timeout, one retry, `Retry-After`, user agent, conditional requests, and stale fallback.
