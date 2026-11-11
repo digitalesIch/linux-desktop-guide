@@ -20,7 +20,7 @@
 - [x] 4.1 Run `npm run check:docs` and `npm run check:quality -- --no-build`; verify headings, links, anchors, and base-path rendering.
 - [x] 4.2 Review both contracts and the principles page at desktop and narrow widths; verify the guidance is scannable and does not imply that either HIG is fully reproduced.
 - [x] 4.3 Run `openspec validate add-target-design-contracts --strict`; verify only the planned content pages and change artifacts are touched.
-- [ ] 4.4 Commit and push; verify the Pages deployment and the live sections.
+- [x] 4.4 Commit and push; verify the Pages deployment and the live sections.
 
 ## Workflow follow-up
 
