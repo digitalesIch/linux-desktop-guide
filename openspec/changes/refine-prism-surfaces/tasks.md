@@ -51,4 +51,4 @@
 - [x] 7.1 Raise the desktop nav to 5.5rem with 1.5rem vertical padding and verify a 24 px gap below the search control at 800 px and 2816 px viewports
 - [x] 7.2 Remove the CSS drop shadow and the SVG window shadow and green backdrop glow, then verify the hero illustration in light and dark
 - [x] 7.3 Bump the service-worker cache version so the updated header spacing and hero artwork replace cached copies
-- [ ] 7.4 Run `npm run check:docs`, `npm run check:pwa`, and `npm run check:quality -- --no-build`, then verify the deployed page after the Pages workflow completes
+- [x] 7.4 Run `npm run check:docs`, `npm run check:pwa`, and `npm run check:quality -- --no-build`, then verify the deployed page after the Pages workflow completes
