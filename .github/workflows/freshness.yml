@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Check upstream sources
-        run: npm run check:freshness -- --json > "$RUNNER_TEMP/freshness.json"
+        run: node scripts/check-freshness.mjs --json > "$RUNNER_TEMP/freshness.json"
 
       - name: Open or update the freshness issue
         uses: actions/github-script@v9
