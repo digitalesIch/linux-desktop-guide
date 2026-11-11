@@ -29,6 +29,7 @@
 - [ ] 4.2 Update `AGENTS.md`, `README.md`, `astro.config.mjs`, and the Target Evidence sidebar entry; remove the public reference to the internal working copy.
 - [ ] 4.3 Run `npm run check:docs`, `npm run check:quality -- --no-build`, and the deployed-site check; verify the evidence page, source links, and anchors under the base path.
 - [ ] 4.4 Archive `integrate-target-evidence` and record the merge in `PUBLIC_RELEASE.md`; verify the public history contains no `research/` file.
+- [ ] 4.5 Rename or annotate `last_validated` in `src/data/targets.json` and `check-targets` so evidence-checked targets are not presented as runtime-validated; update the target pages to match.
 
 ## 5. Target CI decision
 

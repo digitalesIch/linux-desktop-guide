@@ -22,7 +22,7 @@ The target is deliberately conservative. Ubuntu 26.04 is an LTS, not the fastest
 | Secondary packaging | deb, Snap (`core26`) |
 | Flatpak runtime | `org.gnome.Platform//50`, `org.gnome.Sdk//50` |
 | Support | 5 years standard; 10 with Ubuntu Pro; 15 with the Legacy add-on |
-| Last validated | 2026-11-10 |
+| Last validated | 2026-11-10 (Ubuntu 26.04.1) |
 
 ## Why this target
 

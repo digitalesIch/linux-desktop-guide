@@ -22,7 +22,9 @@ The target is deliberately current, not LTS. Fedora moves quickly, so the target
 | Secondary packaging | rpm |
 | Flatpak runtime | `org.kde.Platform//6.10`, `org.kde.Sdk//6.10` (the project baseline; verify the current Flathub branch) |
 | Support | Approximately 13 months |
-| Last validated | 2026-11-10 |
+| Last checked | 2026-11-10 |
+
+The date is the evidence review date. Runtime validation on Fedora 45 is still pending; use `plasmashell --version`, the Fedora package, and the checks below on the exact release before you promise a version.
 
 ## Why this target
 

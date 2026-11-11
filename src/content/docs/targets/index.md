@@ -31,7 +31,7 @@ The trade-off is deliberate: Ubuntu is not the fastest-moving GNOME distribution
 
 ### Fedora 45 KDE Plasma + Qt
 
-The upstream-current KDE target. Fedora KDE is a flagship edition, Plasma 6 is Wayland-only, Qt 6 and KDE Frameworks are current, and Flatpak plus Flathub are configured out of the box. It is the right default when you want a KDE-native app with Kirigami and the Plasma HIG.
+The upstream-current KDE target. Fedora KDE is a flagship edition, the target uses Wayland (Plasma 6.8 removes the X11 session, so check the exact Fedora package), Qt 6 and KDE Frameworks are current, and Flatpak plus Flathub are configured out of the box. It is the right default when you want a KDE-native app with Kirigami and the Plasma HIG.
 
 The trade-off is support duration: Fedora releases are supported for roughly 13 months, so the target assumes an annual upgrade cadence. The KDE stack is also less mature than GNOME on some accessibility edges, but Plasma 6.8 and KDE Frameworks 6.30+ are a serious, actively maintained baseline.
 
@@ -39,7 +39,7 @@ The trade-off is support duration: Fedora releases are supported for roughly 13 
 
 ## Validation targets
 
-**Fedora 45 Workstation + GNOME 51.** The same GNOME stack as Ubuntu, on a current base. It tells you whether a GTK or libadwaita change breaks before the next Ubuntu LTS. It is not a second full documentation path; it is the place to run the test suite and the packaging smoke test.
+**Fedora 45 Workstation + GNOME 51.** The next GNOME stack after Ubuntu: GNOME 51 with GTK 4.24 and libadwaita 1.10, against Ubuntu's GNOME 50, GTK 4.22, and libadwaita 1.9. It tells you whether a GTK or libadwaita change breaks before the next Ubuntu LTS. It is not a second full documentation path; it is the place to run the test suite and the packaging smoke test.
 
 **Arch Linux (rolling).** The newest GTK and Qt packages, an official container image, and a large package ecosystem. It is the early-warning system for upstream breakage. It has no support promise, so never present it as your app's supported baseline.
 
@@ -84,6 +84,7 @@ These are real candidates with real strengths. They are not in the matrix becaus
 
 - Matrix checked: **10 November 2026**
 - Next review due: **10 May 2027**, or the next Ubuntu/Fedora release, whichever comes first.
+- The date is the evidence check date. Runtime validation: **Ubuntu 26.04.1 only**; Fedora, Debian, and Arch were checked through release notes, lifecycle pages, and package indexes.
 - The machine-readable matrix is `src/data/targets.json`; `npm run check:targets` validates roles, scores, sources, and coverage.
 
 ## Sources

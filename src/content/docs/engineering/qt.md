@@ -1,14 +1,14 @@
 ---
 title: Qt & Kirigami
-description: "Building native KDE apps with Qt 6.10 and Kirigami: a complete C++/QML project, QAbstractListModel, CMake, KConfig, KNotification, KIO, testing, accessibility, and Flatpak."
+description: "Building native KDE apps with Qt 6.10+ and Kirigami: a complete C++/QML project, QAbstractListModel, CMake, KConfig, KNotification, KIO, testing, accessibility, and Flatpak."
 ---
 
 Qt is the other major Linux desktop stack. It is mature, widely used, cross-platform, and backed by a deep tooling ecosystem. **Kirigami** is KDE's adaptive UI framework built on Qt Quick; it gives you the navigation, sheets, cards, and responsive layout that make an app feel at home on Plasma.
 
 If your primary audience is KDE, Qt + Kirigami is a direct path to native behavior. If you need one codebase across desktop, mobile, and embedded targets, Qt is often the pragmatic choice — provided you still do the platform integration work.
 
-:::note[Versions in Ubuntu 26.04]
-Qt 6.10.2, KDE Frameworks 6.24, KDE Plasma 6.6. Target Qt 6.10 on Ubuntu 26.04. Use `QT_VERSION_CHECK` when you also support older releases; API availability is compile-time, not a runtime guard. Qt 6.8 LTS is commercially maintained; open-source users should track their distribution's Qt or the latest stable.
+:::note[Two reference baselines]
+Ubuntu 26.04 ships Qt 6.10.2, KDE Frameworks 6.24, and Plasma 6.6. Fedora 45 KDE, the reference environment for this chapter, ships Qt 6.11, KDE Frameworks 6.30+, and Plasma 6.7 or newer. The example uses APIs available in both: treat Qt 6.10/KF 6.24 as the compatibility floor and test on Fedora for the current stack. Use `QT_VERSION_CHECK` when you also support older releases; API availability is compile-time, not a runtime guard. Qt 6.8 LTS is commercially maintained; open-source users should track their distribution's Qt or the latest stable.
 :::
 
 ## QML or Qt Widgets?
@@ -43,7 +43,7 @@ notes/
 └── io.github.yourname.Notes.yml
 ```
 
-The desktop entry, AppStream metadata, and Flatpak manifest follow the same rules as the [first-app tutorial](/start/first-app/); only the build system and UI layer change. The example below is illustrative: build it against Qt 6.10 and KDE Frameworks 6.24.
+The desktop entry, AppStream metadata, and Flatpak manifest follow the same rules as the [first-app tutorial](/start/first-app/); only the build system and UI layer change. The example below is illustrative: build it against the Qt 6.10/KDE Frameworks 6.24 floor. Fedora 45 supplies Qt 6.11/KF 6.30+ and is the reference environment.
 
 ## A minimal Kirigami app
 

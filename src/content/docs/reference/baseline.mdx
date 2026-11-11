@@ -87,7 +87,7 @@ The baseline is the **tested reference environment**. It is not a claim that old
 - Validated on: <time dateTime={baseline.validated_on}>{reviewed}</time>
 - Next review due: <time dateTime={baseline.review_due}>{reviewDue}</time>
 
-The review date is a trigger, not a guarantee. When it passes, re-check the primary sources below, update `src/data/baseline.json`, and run the verification steps. The future freshness pipeline will open an issue when the date or an upstream source changes.
+The review date is a trigger, not a guarantee. When it passes, open an issue for the review, re-check the primary sources below, update `src/data/baseline.json`, and run the verification steps. The review is manual until a scheduled freshness check is in place.
 
 ## Local validation
 
