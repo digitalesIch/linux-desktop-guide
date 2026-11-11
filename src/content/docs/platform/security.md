@@ -1,6 +1,6 @@
 ---
 title: Security & Privacy
-description: "A practical threat model for Linux desktop apps: sandboxing, least privilege, secrets, safe file handling, network security, privacy-respecting telemetry, and vulnerability disclosure."
+description: "A practical threat model for Linux desktop apps: sandboxing, AppArmor and SELinux, least privilege, secrets, safe file handling, network security, privacy-respecting telemetry, and vulnerability disclosure."
 ---
 
 Desktop apps handle the user's documents, credentials, messages, and sometimes their entire screen. A security bug is not an edge case; it is a breach of the trust that makes the app installable in the first place.
@@ -95,6 +95,49 @@ sudo pro enable livepatch
 ```
 
 Detect whether a Pro service is enabled before exposing it in the UI, and keep the app fully usable when it is absent.
+
+## Fedora security services
+
+Fedora enables SELinux by default. The `targeted` policy confines selected system services; many desktop user applications still run unconfined. That scoping detail matters: SELinux is not the app sandbox, and a denial is not a reason to disable it.
+
+### SELinux
+
+Check the mode before changing anything:
+
+```bash title="Terminal"
+getenforce
+sestatus
+```
+
+Never ship instructions to set `SELINUX=permissive` or `SELINUX=disabled`. If the app or its service is denied, read the audit log:
+
+```bash title="Terminal"
+sudo ausearch -m AVC,USER_AVC -ts recent
+sudo ausearch -c notes -m AVC -ts recent
+```
+
+`audit2allow` turns those denials into candidate rules:
+
+```bash title="Terminal"
+sudo ausearch -m AVC -ts recent | audit2allow -m notes_local
+```
+
+Treat the output as a diagnostic, not as policy. Generated rules often allow more than the app needs. For a local test, review the generated `.te`, build the module with the SELinux development Makefile, and load it with `semodule`; do not ship generated policy without a confined-domain design and review.
+
+| Scope | What confines it | What to do |
+| --- | --- | --- |
+| Desktop user app | Usually unconfined under `targeted`; Flatpak is the sandbox when packaged as a Flatpak | Use portals and a Flatpak sandbox; do not add a custom policy just to make a file dialog work |
+| System service | SELinux domain, file contexts, and D-Bus policy | Package the policy with the service; test denials before release |
+| Flatpak app | bubblewrap, seccomp, and XDG Desktop Portals | Request the smallest portal or permission; do not use SELinux as a substitute for a sandbox |
+
+File contexts belong to the package, not to a user's manual setup. These commands are for local testing; replace `notes_exec_t` with a type from your policy:
+
+```bash title="Terminal"
+sudo semanage fcontext -a -t notes_exec_t '/usr/libexec/notes'
+sudo restorecon -Rv /usr/libexec/notes
+```
+
+For a Fedora package, put the contexts and the domain in the SELinux policy package and follow the Fedora packaging rules. A `%post` script that runs `semanage` is not a substitute for a policy.
 
 ## Secrets
 
@@ -242,6 +285,9 @@ When a report arrives: reproduce, contain, patch, release, notify. Do not argue 
 ## Sources
 
 - [AppArmor](https://apparmor.net/)
+- [Fedora SELinux Wiki](https://fedoraproject.org/wiki/SELinux)
+- [Fedora SELinux troubleshooting](https://docs.fedoraproject.org/en-US/quick-docs/selinux-troubleshooting/)
+- [audit2allow(1)](https://man7.org/linux/man-pages/man1/audit2allow.1.html)
 - [Polkit](https://www.freedesktop.org/software/polkit/docs/latest/)
 - [fwupd / LVFS](https://fwupd.org/)
 - [Ubuntu Pro](https://ubuntu.com/pro)

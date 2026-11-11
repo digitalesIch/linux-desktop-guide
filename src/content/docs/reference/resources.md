@@ -81,6 +81,22 @@ The guide's practical workflow is in [User Documentation](/ship/documentation/).
 | [Permissions prompting](https://discourse.ubuntu.com/t/permissions-prompting-a-deep-dive/81785) | Security Center and Snap prompting |
 | [Ubuntu Insights](https://github.com/ubuntu/ubuntu-insights) | Opt-in system telemetry |
 
+## Fedora
+
+| Resource | Why it matters |
+| --- | --- |
+| [Fedora Packaging Guidelines](https://docs.fedoraproject.org/en-US/packaging-guidelines/) | The normative rules for Fedora RPM packages |
+| [RPM Packaging Guide](https://rpm-packaging-guide.github.io/) | Upstream RPM tutorial and spec-file reference |
+| [Fedora Developer: RPM packaging](https://developer.fedoraproject.org/deployment/rpm/about.html) | Fedora's packaging entry point |
+| [COPR user documentation](https://docs.copr.fedorainfracloud.org/user_documentation.html) | Build service for packages outside Fedora |
+| [Fedora SELinux Wiki](https://fedoraproject.org/wiki/SELinux) | SELinux modes, policy, and troubleshooting |
+| [Fedora SELinux troubleshooting](https://docs.fedoraproject.org/en-US/quick-docs/selinux-troubleshooting/) | Diagnosing AVC denials |
+| [audit2allow(1)](https://man7.org/linux/man-pages/man1/audit2allow.1.html) | Turning audit denials into candidate rules |
+| [firewalld documentation](https://firewalld.org/documentation/) | Zones, services, and ports for host services |
+| [xdg-desktop-portal-kde](https://invent.kde.org/plasma/xdg-desktop-portal-kde) | Plasma's portal backend |
+| [Fedora Kinoite](https://docs.fedoraproject.org/en-US/fedora-kinoite/) | Plasma Atomic desktop and Flatpak-first model |
+| [Toolbx](https://containertoolbx.org/) | Containerized Fedora development environment |
+
 ## GNOME and GTK
 
 | Resource | Why it matters |

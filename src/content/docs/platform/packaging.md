@@ -1,9 +1,9 @@
 ---
 title: Packaging & Distribution
-description: Flatpak, deb, Snap, and AppImage compared — with the files, commands, and release practices needed to ship a Linux desktop app that users can install and update with confidence.
+description: Flatpak, deb, RPM, Snap, and AppImage compared — with the files, commands, and release practices needed to ship a Linux desktop app that users can install and update with confidence.
 ---
 
-On Linux, packaging is not a final step. It is part of the architecture. The same source tree may need to produce a Flatpak for Flathub, a deb for the Ubuntu archive, a Snap for the App Center, and a tarball for the people who build from source.
+On Linux, packaging is not a final step. It is part of the architecture. The same source tree may need to produce a Flatpak for Flathub, a deb for the Ubuntu archive, an RPM for Fedora, a Snap for the App Center, and a tarball for the people who build from source.
 
 You do not have to ship every format. You do have to choose deliberately, because each one changes how the app is built, sandboxed, updated, and supported.
 
@@ -25,13 +25,14 @@ Ubuntu's [App Center recommends snaps](https://ubuntu.com/desktop/docs/en/26.04/
 
 | Channel | Best for | Updates | Sandbox | Effort |
 | --- | --- | --- | --- | --- |
+| **RPM** | Fedora/RHEL/openSUSE users, archive integration | dnf, dnf-automatic | No (unless hardened) | High |
 | **Flatpak / Flathub** | Upstream desktop apps, cross-distro; not shipped by Ubuntu | OSTree deltas | Yes, portals | Medium |
 | **AppImage** | Portable demos, closed beta, legacy | Manual or app-specific | No | Low |
 | **Source tarball / self-hosted repo** | Developers, packagers, special audiences | User/distro or self-hosted | Varies | Low–high |
 
 A pragmatic release matrix:
 
-1. **Start with the Ubuntu-supported path that fits your audience.** A deb in a PPA or the archive for apt integration; a Snap for the App Center and confined auto-updates.
+1. **Start with the native path that fits your audience.** A deb in a PPA or the archive for apt integration; a Snap for the App Center and confined auto-updates; an RPM for Fedora archive integration.
 2. **Add Flatpak on Flathub** when you need one upstream build across distributions or a vendor-neutral store. Document the extra setup: Ubuntu does not ship Flatpak or Flathub by default.
 3. **Add AppImage** only for portable demos or users who cannot install packages.
 4. **Keep a source tarball** for packagers and developers.
@@ -192,6 +193,74 @@ A PPA is a good stepping stone. It is not a substitute for the Ubuntu archive, a
 | License | `/usr/share/doc/notes/copyright` |
 
 Do not install into `/opt` unless the app is genuinely self-contained and you understand the trade-offs with themes, icons, and desktop integration.
+
+## RPM packages
+
+RPM is the native package format on Fedora, RHEL, and openSUSE. On the Fedora KDE target it is the **secondary** channel: Flatpak/Flathub is primary because it carries the current Qt/KDE runtime, while RPM is for apps that need archive integration, a system service, or a Fedora-only audience. Pick one primary channel and state it; do not present both as equal defaults.
+
+The [Fedora Packaging Guidelines](https://docs.fedoraproject.org/en-US/packaging-guidelines/) are the contract. A spec file describes the source, build, install, files, and changelog; it is not a shell script. The skeleton below is illustrative — replace the URL and app ID, and build it in `mock` before claiming Fedora support:
+
+```spec title="notes.spec"
+Name:           notes
+Version:        0.1.0
+Release:        1%{?dist}
+Summary:        Small note-taking app for the Linux desktop
+License:        MIT
+URL:            https://example.org/notes
+Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+BuildRequires:  cmake
+BuildRequires:  ninja-build
+BuildRequires:  qt6-qtbase-devel
+BuildRequires:  qt6-qtdeclarative-devel
+BuildRequires:  kf6-kirigami-devel
+BuildRequires:  desktop-file-utils
+BuildRequires:  appstream
+Requires:       hicolor-icon-theme
+
+%description
+Notes is a local-first note-taking application with a native KDE interface.
+
+%prep
+%autosetup
+
+%build
+%cmake -G Ninja
+%cmake_build
+
+%install
+%cmake_install
+
+%check
+desktop-file-validate %{buildroot}%{_datadir}/applications/io.github.yourname.Notes.desktop
+appstreamcli validate --no-net %{buildroot}%{_datadir}/metainfo/io.github.yourname.Notes.metainfo.xml
+
+%files
+%license LICENSE
+%{_bindir}/notes
+%{_datadir}/applications/io.github.yourname.Notes.desktop
+%{_datadir}/metainfo/io.github.yourname.Notes.metainfo.xml
+%{_datadir}/icons/hicolor/scalable/apps/io.github.yourname.Notes.svg
+
+%changelog
+* Wed Nov 11 2026 Your Name <you@example.org> - 0.1.0-1
+- Initial package
+```
+
+The commands separate a local build from a clean build:
+
+```bash title="Terminal"
+sudo dnf5 install rpmdevtools mock rpmlint fedpkg
+rpmdev-setuptree
+cp notes.spec ~/rpmbuild/SPECS/
+spectool -g -R ~/rpmbuild/SPECS/notes.spec
+rpmbuild -ba ~/rpmbuild/SPECS/notes.spec
+mock -r fedora-45-x86_64 --rebuild ~/rpmbuild/SRPMS/notes-0.1.0-1.fc45.src.rpm
+rpmlint ~/rpmbuild/SPECS/notes.spec ~/rpmbuild/RPMS/x86_64/notes-0.1.0-1.fc45.x86_64.rpm
+```
+
+`rpmbuild` proves the spec parses on your machine; `mock` builds in a clean Fedora chroot and is the check that matters. `rpmlint` catches metadata and file-layout problems. For a package destined for Fedora, use `fedpkg lint` in the dist-git checkout and follow the review process. For a package that is not in Fedora, [COPR](https://docs.copr.fedorainfracloud.org/user_documentation.html) provides a build service and repository; it is not a substitute for Fedora review.
+
+Do not install into `/opt` and do not bundle a private Qt runtime. Use the distribution's Qt/KF6 packages for an RPM, and the Flatpak runtime for a Flatpak; mixing the two produces an app that is neither reproducible nor supportable.
 
 ## Snap
 
@@ -383,6 +452,10 @@ Never replace your own binary from inside the app. It breaks package ownership, 
 
 - [Snapcraft bases](https://ubuntu.com/docs/snapcraft/stable/reference/bases/)
 - [Core24 to core26](https://ubuntu.com/docs/snapcraft/stable/how-to/change-bases/change-from-core24-to-core26/)
+- [Fedora Packaging Guidelines](https://docs.fedoraproject.org/en-US/packaging-guidelines/)
+- [RPM Packaging Guide](https://rpm-packaging-guide.github.io/)
+- [Fedora Developer: RPM packaging](https://developer.fedoraproject.org/deployment/rpm/about.html)
+- [COPR user documentation](https://docs.copr.fedorainfracloud.org/user_documentation.html)
 - [GNOME extension](https://ubuntu.com/docs/snapcraft/stable/how-to/extensions/use-the-gnome-extension/)
 - [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements)
 - [Debian Policy](https://www.debian.org/doc/debian-policy/)

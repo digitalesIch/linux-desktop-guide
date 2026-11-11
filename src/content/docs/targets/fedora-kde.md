@@ -1,6 +1,6 @@
 ---
 title: Fedora 45 KDE Plasma + Qt
-description: "The guide's upstream-current KDE reference target: Fedora 45 KDE Plasma, Qt 6, KDE Frameworks 6, Kirigami, Wayland, Flatpak, and the quality gates for a KDE-native app."
+description: "The guide's upstream-current KDE reference target: Fedora 45 KDE Plasma, Qt 6, KDE Frameworks 6, Kirigami, Wayland, Flatpak, RPM, SELinux, and the quality gates for a KDE-native app."
 ---
 
 This is the guide's **upstream-current KDE reference target**. It is the right default when you want a Qt 6 + Kirigami app that follows the KDE HIG, uses Plasma's integration points, and ships through Flatpak without asking users to change distribution.
@@ -76,6 +76,37 @@ flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/fl
 flatpak install --user flathub org.kde.Platform//6.10 org.kde.Sdk//6.10
 ```
 
+## Fedora and KDE integration
+
+### Portals and KIO
+
+Plasma's portal backend is [`xdg-desktop-portal-kde`](https://invent.kde.org/plasma/xdg-desktop-portal-kde). It implements the file, settings, screenshot, and other interfaces used by Flatpak and sandboxed apps. Use `org.freedesktop.portal.*` through the toolkit or libportal; never bundle a portal or call the backend directly.
+
+`KIO` is the native file and network abstraction for a non-sandboxed KDE app. In a Flatpak, a file dialog goes through the portal; do not assume a `KIO` worker can see the host filesystem.
+
+### KDE frameworks
+
+- **`KDBusService`** — single-instance behavior and activation. Use `KDBusService(KDBusService::Unique)`; do not add a second lock file or a private D-Bus name.
+- **`KNotification`** — Plasma notifications. Keep actions and urgency honest, and degrade gracefully when notifications are unavailable.
+- **`KIO`** — network and file access with KDE's worker model. Use it for non-sandboxed apps; use portals in a Flatpak.
+- **KWallet** — use the KWallet framework for a non-sandboxed KDE app. In a Flatpak, prefer `org.freedesktop.portal.Secret` and the toolkit's secret-service integration; do not talk to `org.kde.kwalletd6` directly unless the manifest grants it.
+- **`KConfig`** — application settings in the XDG config location. Do not write a private config format into `$HOME` directly.
+
+The [Qt & Kirigami](/engineering/qt/) chapter has the code for these APIs; this section is the Fedora/KDE-specific checklist.
+
+### Services and network
+
+- **systemd user units** — use `systemctl --user` and `~/.config/systemd/user/`. `loginctl enable-linger` is only for a service that must run without an active login; it changes the resource and security model, so do not enable it for a normal desktop app.
+- **firewalld** — only for a service that listens on the network. Open the smallest service or port, and prefer a loopback binding. A desktop app should not need an open port; if it does, document it and test the denial case.
+- **SELinux** — read [SELinux](/platform/security/#selinux) before shipping a system service. Do not ask users to disable it.
+- **Flatpak** — a sandboxed app should not install a system service. Use portals or a separate host service with an explicit interface.
+
+### Fedora Atomic and Kinoite
+
+Fedora Kinoite is the Plasma-based Atomic desktop. The app path is Flatpak first: users install from Flathub, not by layering an RPM onto the host. `rpm-ostree install` is an administrator action that changes the host image and needs a reboot; it is not an app distribution channel. Test the Flatpak on Kinoite and keep the host immutable.
+
+Use [Toolbx](https://containertoolbx.org/) for the development environment; the target's `toolbox` commands above are the supported path. For the native package, see [RPM packages](/platform/packaging/#rpm-packages).
+
 ## Golden path
 
 1. [Qt & Kirigami](/engineering/qt/) — the complete C++/QML project, `QAbstractListModel`, `KDBusService`, KConfig, KNotification, KIO, CMake, tests, and accessibility.
@@ -117,6 +148,13 @@ Before you call the app ready on this target:
 - [KDE Frameworks 6.31.0](https://kde.org/announcements/frameworks/6/6.31.0/)
 - [KDE developer documentation](https://develop.kde.org/)
 - [KDE Human Interface Guidelines](https://develop.kde.org/hig/)
+- [KDE Frameworks API](https://api.kde.org/)
+- [xdg-desktop-portal-kde](https://invent.kde.org/plasma/xdg-desktop-portal-kde)
+- [Fedora SELinux Wiki](https://fedoraproject.org/wiki/SELinux)
+- [audit2allow(1)](https://man7.org/linux/man-pages/man1/audit2allow.1.html)
+- [firewalld documentation](https://firewalld.org/documentation/)
+- [Fedora Kinoite](https://docs.fedoraproject.org/en-US/fedora-kinoite/)
+- [Toolbx](https://containertoolbx.org/)
 - [Qt 6 documentation](https://doc.qt.io/qt-6/)
 - [QAccessible](https://doc.qt.io/qt-6/qaccessible.html)
 - [Flathub setup for Fedora](https://flathub.org/en/setup/Fedora)
