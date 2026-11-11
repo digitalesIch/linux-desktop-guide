@@ -218,8 +218,9 @@ The guide is published for human readers and agents from the same source. The ag
 - [llms-full.txt](/llms-full.txt) — the complete guide in one Markdown file.
 - **Per-page Markdown** — append `.md` to a route: `/start/why-linux.md`, `/platform/ubuntu.md`, `/reference/baseline.md`.
 - **Discovery** — every HTML page advertises its Markdown sibling with `<link rel="alternate" type="text/markdown">` and points to `/llms.txt` with `rel="describedby"`.
+- **Local MCP server** — `npm run mcp:docs` starts a read-only stdio server with `search_docs`, `get_page`, `list_pages`, `get_related`, and `get_baseline`.
 
-Content negotiation (`Accept: text/markdown`) depends on host or CDN support and is not enabled by the static site. The `.md` endpoints work on any static host.
+The MCP server runs locally over stdio; the project does not operate a remote endpoint. Content negotiation (`Accept: text/markdown`) depends on host or CDN support and is not enabled by the static site. The `.md` endpoints work on any static host.
 
 ## How to keep this current
 
