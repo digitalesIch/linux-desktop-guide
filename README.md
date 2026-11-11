@@ -11,6 +11,8 @@ The companion app in `examples/notes/` is a complete GTK 4 + libadwaita referenc
 
 Repository: [digitalesIch/linux-desktop-guide](https://github.com/digitalesIch/linux-desktop-guide).
 
+Live: <https://digitalesich.github.io/linux-desktop-guide/>
+
 ## Platform targets
 
 The guide is not a distro-agnostic tutorial. It supports a small, evidence-based target matrix:

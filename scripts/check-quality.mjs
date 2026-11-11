@@ -14,13 +14,14 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const dist = join(root, 'dist');
 
 // Representative pages: landing, tutorial, framework guide, design, packaging.
+const base = BASE_PATH === '/' ? '' : BASE_PATH;
 const pages = [
-	{ path: '/', name: 'landing' },
-	{ path: '/start/why-linux/', name: 'start' },
-	{ path: '/targets/', name: 'targets' },
-	{ path: '/engineering/gtk/', name: 'engineering' },
-	{ path: '/design/accessibility/', name: 'design' },
-	{ path: '/platform/packaging/', name: 'platform' },
+	{ path: `${base}/`, name: 'landing' },
+	{ path: `${base}/start/why-linux/`, name: 'start' },
+	{ path: `${base}/targets/`, name: 'targets' },
+	{ path: `${base}/engineering/gtk/`, name: 'engineering' },
+	{ path: `${base}/design/accessibility/`, name: 'design' },
+	{ path: `${base}/platform/packaging/`, name: 'platform' },
 ];
 
 // Accessibility, best practices, and SEO must be perfect. Performance has a
