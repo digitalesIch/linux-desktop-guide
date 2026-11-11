@@ -79,7 +79,7 @@ GNOME and KDE are the two reference stacks because they combine mature HIGs, Way
 | elementary OS | 1 | 2 | 1 | 2 | 1 | 1.45 | Watch |
 | Manjaro | 1 | 1 | 1 | 2 | 0 | 1.10 | Watch |
 
-The scores do not select the matrix by themselves. Ubuntu is the GNOME reference because it pairs a long LTS window with a Wayland-only GNOME session and a reproducible developer environment. Fedora is the KDE reference because it is the strongest upstream-current KDE edition, with Flatpak and Flathub ready out of the box. Fedora also serves as the GNOME validation target: the same stack on a current, non-LTS base. Debian is the compatibility target because its value is longevity and stability, not the newest libraries. Arch is the rolling validation target because it carries the newest GTK and Qt packages and has an official container image, but it has no support promise.
+The scores do not select the matrix by themselves. Ubuntu is the GNOME reference because it pairs a long LTS window with a Wayland-only GNOME session and a reproducible developer environment. Fedora is the KDE reference because it is the strongest upstream-current KDE edition, with Flatpak and Flathub ready out of the box. Fedora also serves as the GNOME validation target: the next version of the same stack family on a current, non-LTS base. Debian is the compatibility target because its value is longevity and stability, not the newest libraries. Arch is the rolling validation target because it carries the newest GTK and Qt packages and has an official container image, but it has no support promise.
 
 ## Coverage gates
 
