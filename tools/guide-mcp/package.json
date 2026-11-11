@@ -1,6 +1,6 @@
 {
 	"name": "linux-desktop-guide-mcp",
-	"version": "0.1.1",
+	"version": "0.1.0",
 	"description": "Read-only MCP server for the published Linux Desktop Guide.",
 	"type": "module",
 	"license": "MIT",

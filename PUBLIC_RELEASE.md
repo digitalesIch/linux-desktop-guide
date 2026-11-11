@@ -32,11 +32,12 @@ Scope: the guide ships a static site and local stdio MCP servers. No remote MCP 
 
 ## 4. Guide MCP package
 
-- ☑ The package exists on npm. The initial `0.0.0-stage` placeholder reserved the name; `0.1.0` conflicted with a staged version, so `0.1.1` is the first real release.
+- ☑ `linux-desktop-guide-mcp@0.1.0` is published and is the first real release. The initial `0.0.0-stage` placeholder reserved the name; a staged `0.1.1` from the recovery attempt is not published.
 - ☑ Trusted publishing is configured for `linux-desktop-guide-mcp`, the repository `digitalesIch/linux-desktop-guide`, and the workflow file `.github/workflows/publish-guide-mcp.yml`. The workflow signs provenance without a long-lived token.
-- ☐ For each release: update `tools/guide-mcp/package.json`, commit, push a tag such as `guide-mcp-v0.1.1`, and let the workflow build, test, check the tag, and publish with provenance.
+- ☐ Confirm the trusted relationship allows `publish`, not only stage publish: `npm trust list linux-desktop-guide-mcp`. The workflow now fails if the version is not visible on the registry after publishing.
+- ☐ For each release: update `tools/guide-mcp/package.json`, commit, push a tag such as `guide-mcp-v0.1.2` (skip `0.1.1` while the staged copy exists), and let the workflow build, test, check the tag, and publish with provenance.
+- ☐ Reject the leftover `0.0.0-stage` placeholder and the staged `0.1.1` on npmjs.com; neither is the published server.
 - ☐ Verify `npx -y linux-desktop-guide-mcp --version`, `npm pack`, and the provenance badge on the package page.
-- ☐ Reject or ignore the leftover `0.0.0-stage` placeholder and any staged `0.1.0` on npmjs.com; neither is the published server.
 - ☐ Verify the published contract with `npm run check:mcp -- https://digitalesich.github.io/linux-desktop-guide/` after the deployment that includes `reference/baseline.json`.
 - ☐ Keep the `docs` server as the offline authoring path. Publishing the package does not replace it.
 - ☐ Confirm the package has no runtime dependencies, no telemetry, and no write path outside its cache directory.

@@ -47,3 +47,17 @@ jobs:
       - name: Publish with provenance
         working-directory: tools/guide-mcp
         run: npm publish --provenance --access public
+
+      - name: Verify the published version
+        run: |
+          version=$(node -e "console.log(JSON.parse(require('node:fs').readFileSync('tools/guide-mcp/package.json','utf8')).version)")
+          for attempt in 1 2 3 4 5 6; do
+            published=$(npm view "linux-desktop-guide-mcp@${version}" version 2>/dev/null || true)
+            if [ "$published" = "$version" ]; then
+              echo "Published linux-desktop-guide-mcp@${version}."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::linux-desktop-guide-mcp@${version} is not visible on the registry. The trusted publisher may only allow staging; approve the staged version or grant publish permission."
+          exit 1
