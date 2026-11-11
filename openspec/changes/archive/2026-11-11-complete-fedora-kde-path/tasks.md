@@ -24,8 +24,8 @@
 - [x] 4.2 Run `npm run check:docs`; verify links, anchors, target consistency, and agent-doc validation.
 - [x] 4.3 Run `npm run check:quality -- --no-build` and review the Qt chapter at desktop and narrow widths.
 - [x] 4.4 Run `openspec validate complete-fedora-kde-path --strict`; verify only the planned content and change artifacts are touched.
-- [ ] 4.5 Commit and push; verify the Pages deployment and the live Qt chapter.
-- [ ] 4.6 Archive the change.
+- [x] 4.5 Commit and push; verify the Pages deployment and the live Qt chapter.
+- [x] 4.6 Archive the change.
 
 ## Workflow follow-up
 
