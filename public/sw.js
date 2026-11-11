@@ -1,6 +1,6 @@
 // Linux Desktop Guide service worker.
 // Bump CACHE_VERSION when the shell or cache strategy changes.
-const CACHE_VERSION = 'ldg-v6';
+const CACHE_VERSION = 'ldg-v7';
 const SCOPE = self.registration.scope;
 const BASE = new URL(SCOPE).pathname;
 const CORE = [

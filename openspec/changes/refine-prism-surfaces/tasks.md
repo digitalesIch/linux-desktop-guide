@@ -52,3 +52,9 @@
 - [x] 7.2 Remove the CSS drop shadow and the SVG window shadow and green backdrop glow, then verify the hero illustration in light and dark
 - [x] 7.3 Bump the service-worker cache version so the updated header spacing and hero artwork replace cached copies
 - [x] 7.4 Run `npm run check:docs`, `npm run check:pwa`, and `npm run check:quality -- --no-build`, then verify the deployed page after the Pages workflow completes
+
+## 8. Header line scoping
+
+- [x] 8.1 Scope header chrome to the outer `header.header` element and verify the inner wrapper has no border and only one line remains about 24 px below the search control
+- [x] 8.2 Bump the service-worker cache version so the corrected header chrome replaces cached copies
+- [ ] 8.3 Run `npm run check:docs`, `npm run check:pwa`, and `npm run check:quality -- --no-build`, then verify the deployed page after the Pages workflow completes

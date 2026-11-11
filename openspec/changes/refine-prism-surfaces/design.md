@@ -20,6 +20,7 @@ See proposal.md for motivation. The existing Starlight CSS provides theme tokens
 - Keep the target chips as the single target signal: remove the decorative ticker and fabricated quote panel, and add the same pointer-local glow to the agent panel.
 - Reset Starlight's adjacent-sibling `margin-top` inside the grid, bar, and metric containers rather than counter-offsetting individual cards. Increase the desktop nav height so the search field clears the hairline with a 24 px gap, give step columns a left gutter, align step links with auto margins, and present agent access as a bordered panel with a spectrum edge and a primary CTA.
 - Remove both the CSS drop shadow on the hero artwork and the SVG's heavy `feDropShadow` and lime backdrop glow. The window border and the hero's own soft light provide enough separation.
+- Scope header chrome (background, blur, border, spectrum line) to the outer `header.header` element so the inner layout wrapper does not draw a second line directly under the search control.
 
 ## Risks / Trade-offs
 

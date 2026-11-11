@@ -40,7 +40,7 @@ The landing page SHALL keep inherited document spacing from shifting custom layo
 
 #### Scenario: Desktop header spacing
 - **WHEN** a reader views a page on a desktop viewport
-- **THEN** the search control keeps visible space above the header hairline
+- **THEN** the search control keeps visible space above a single header hairline
 
 #### Scenario: Wide landing layout
 - **WHEN** a reader views the landing page on a wide desktop viewport
