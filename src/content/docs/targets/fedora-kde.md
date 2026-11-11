@@ -116,6 +116,18 @@ Use [Toolbx](https://containertoolbx.org/) for the development environment; the 
 
 The first-app tutorial is GTK/Python. For this target, the Qt chapter is the complete starting project; do not follow the GTK tutorial and then try to make it look like a KDE app.
 
+## Validation checklist
+
+Run these on the exact Fedora 45 release before you call the target validated:
+
+- `plasmashell --version` and `rpm -q qt6-qtbase kf6-kirigami` match the matrix; record the versions.
+- `getenforce` reports `Enforcing`; do not validate on a permissive host.
+- A clean Toolbx build passes `cmake`, `ctest`, `qmllint`, and `qmlcachegen`.
+- The RPM builds in `mock -r fedora-45-x86_64` and passes `rpmlint`.
+- The Flatpak builds and runs with the manifest; install it on Fedora Kinoite as well.
+- Orca and Accerciser cover the main flows; the window works at 200% scaling and high contrast.
+- The RPM and Flatpak installs both launch, show the correct desktop entry, and pass AppStream validation.
+
 ## Quality gates
 
 Before you call the app ready on this target:

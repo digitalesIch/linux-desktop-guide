@@ -381,6 +381,7 @@ A release pipeline should produce:
 
 - a Flatpak build that passes `flatpak-builder-lint`;
 - a deb source and binary package that passes `lintian`;
+- an RPM built in `mock` on Fedora 45 that passes `rpmlint`;
 - a Snap that installs and launches on a clean VM;
 - an AppImage (optional) with a checksum;
 - a source tarball with a signed tag.
@@ -416,7 +417,20 @@ jobs:
       - uses: snapcore/action-build@v1
         id: build
       - run: sudo snap install --dangerous ${{ steps.build.outputs.snap }}
+  rpm:
+    runs-on: ubuntu-26.04
+    container: fedora:45
+    steps:
+      - uses: actions/checkout@v4
+      - run: dnf5 install -y rpmdevtools rpmlint
+      - run: rpmdev-setuptree
+      - run: cp notes.spec ~/rpmbuild/SPECS/
+      - run: spectool -g -R ~/rpmbuild/SPECS/notes.spec
+      - run: rpmbuild -ba ~/rpmbuild/SPECS/notes.spec
+      - run: rpmlint ~/rpmbuild/SPECS/notes.spec ~/rpmbuild/RPMS/*/*.rpm
 ```
+
+`mock` is the stronger clean-chroot check. Run it on a Fedora 45 host or VM; the container job is a fast spec/build check, not a substitute for a clean chroot.
 
 Pin the runner image and the runtime. A release that depends on "whatever was latest" is not reproducible.
 
@@ -427,6 +441,7 @@ Pin the runner image and the runtime. A release that depends on "whatever was la
 | Flatpak | OSTree deltas via Flathub; runtime branch has its own EOL | Rebase before runtime EOL; do not self-update |
 | Snap | snapd automatic refresh | Nothing; handle restart gracefully |
 | deb | apt / unattended-upgrades | Nothing; do not self-update |
+| RPM | dnf / dnf-automatic | Nothing; do not self-update |
 | AppImage | Manual | Check for updates only with consent; link to download |
 
 Never replace your own binary from inside the app. It breaks package ownership, signatures, and sandboxing. If the app needs a newer version of itself, tell the user and link to the store.
@@ -439,6 +454,7 @@ Never replace your own binary from inside the app. It breaks package ownership, 
 - ☐ The metainfo passes `appstreamcli validate --no-net`.
 - ☐ The Flatpak passes `flatpak-builder-lint`.
 - ☐ The deb passes `lintian`.
+- ☐ The RPM builds in `mock` on Fedora 45 and passes `rpmlint`.
 - ☐ The Snap uses `core26`, installs and launches on a clean VM with `strict` confinement, and passes `snapcraft lint`.
 - ☐ The app launches with no home directory access (Flatpak) and degrades gracefully.
 - ☐ The channel choice passes the [quality signals](/reference/quality-signals/) check; Flatpak setup is documented separately from stock Ubuntu.
