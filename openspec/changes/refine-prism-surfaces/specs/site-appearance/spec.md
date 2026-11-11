@@ -34,3 +34,14 @@ The logo SHALL be predominantly monochrome with at most a small spectrum accent,
 #### Scenario: Header in either theme
 - **WHEN** a reader views the header in light or dark mode
 - **THEN** the title is readable in a neutral color and the logo has no rainbow-filled outer surface
+
+### Requirement: Landing layout rhythm
+The landing page SHALL keep inherited document spacing from shifting custom layouts, and the agent section SHALL be a distinct panel.
+
+#### Scenario: Desktop header spacing
+- **WHEN** a reader views a page on a desktop viewport
+- **THEN** the search control keeps visible space above the header hairline
+
+#### Scenario: Wide landing layout
+- **WHEN** a reader views the landing page on a wide desktop viewport
+- **THEN** paired cards match the feature card edges, metric headings share a row baseline, and step links align at the bottom of their columns

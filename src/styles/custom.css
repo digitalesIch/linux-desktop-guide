@@ -168,6 +168,15 @@
 	--sl-color-purple-high: #f3e8ff;
 }
 
+/* Starlight centers the header content in the nav height. A little more
+   room keeps the search field clear of the hairline on wide screens. */
+@media (min-width: 50em) {
+	:root {
+		--sl-nav-height: 4.5rem;
+		--sl-nav-pad-y: 1rem;
+	}
+}
+
 /* ------------------------------------------------------------------ */
 /* Base                                                               */
 /* ------------------------------------------------------------------ */
@@ -770,6 +779,7 @@ site-search button[data-open-modal] > kbd {
 	display: flex;
 	align-items: center;
 	gap: 2.75rem;
+	margin: 0;
 }
 
 .ldg-ticker span {
@@ -880,6 +890,83 @@ site-search button[data-open-modal] > kbd {
 	max-width: 48ch;
 }
 
+/* Agent panel */
+
+.ldg-agent-panel {
+	position: relative;
+	overflow: hidden;
+	padding: clamp(1.75rem, 4vw, 3rem);
+	border: 1px solid var(--ldg-line-strong);
+	border-radius: 24px;
+	background: var(--ldg-surface);
+	box-shadow: var(--ldg-shadow);
+}
+
+.ldg-agent-panel::before {
+	content: '';
+	position: absolute;
+	inset-inline: 0;
+	top: 0;
+	height: 2px;
+	background: var(--ldg-spectrum);
+	opacity: 0.8;
+	pointer-events: none;
+}
+
+.ldg-agent-panel .ldg-eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.9rem;
+	padding: 0.32rem 0.65rem;
+	border: 1px solid var(--ldg-line);
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--ldg-violet) 5%, var(--ldg-surface));
+}
+
+.ldg-agent-panel .ldg-eyebrow::before {
+	content: '';
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--ldg-spectrum);
+}
+
+.ldg-agent-panel .ldg-title {
+	max-width: 26ch;
+	margin-bottom: 0.85rem;
+	font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+}
+
+.ldg-agent-panel .ldg-lede {
+	max-width: 68ch;
+	font-size: 1rem;
+}
+
+.ldg-agent-panel .ldg-after {
+	margin-top: 1.6rem;
+}
+
+.ldg-agent-panel .ldg-after .ldg-textlink {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.6rem 0.9rem;
+	border: 1px solid transparent;
+	border-radius: 999px;
+	background:
+		linear-gradient(var(--ldg-ink), var(--ldg-ink)) padding-box,
+		var(--ldg-spectrum) border-box;
+	color: var(--ldg-paper);
+	font-size: 0.85rem;
+}
+
+.ldg-agent-panel .ldg-after .ldg-textlink:hover {
+	color: var(--ldg-paper);
+	text-decoration: none;
+	box-shadow: 0 12px 30px -18px color-mix(in srgb, var(--ldg-violet) 55%, transparent);
+}
+
 .ldg-grid-3,
 .ldg-grid-4,
 .ldg-grid-2 {
@@ -900,6 +987,13 @@ site-search button[data-open-modal] > kbd {
 .ldg-grid-2 {
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 1.15rem;
+}
+
+.ldg-grid-2 > *,
+.ldg-grid-3 > *,
+.ldg-grid-4 > *,
+.ldg-bar > * {
+	margin: 0;
 }
 
 .ldg-card {
@@ -1286,10 +1380,14 @@ site-search button[data-open-modal] > kbd {
 }
 
 .ldg-step p {
-	margin: 0 0 1.1rem;
+	margin: 0 0 1.5rem;
 	color: var(--ldg-ink-2);
 	font-size: 0.87rem;
 	line-height: 1.62;
+}
+
+.ldg-step .ldg-textlink {
+	margin-top: auto;
 }
 
 /* bar / metrics */
@@ -1315,6 +1413,7 @@ site-search button[data-open-modal] > kbd {
 }
 
 .ldg-metrics div {
+	margin: 0;
 	border-inline-start: 2px solid var(--ldg-line);
 	padding-inline-start: 0.85rem;
 }

@@ -24,3 +24,13 @@
 - [x] 4.2 Capture light and dark screenshots at desktop and mobile widths and verify hero, cards, articles, and header in a local production preview
 - [x] 4.3 Run `npm run check:quality -- --no-build` and record observed Lighthouse scores without weakening thresholds
 - [x] 4.4 Stage only the design, asset, and OpenSpec files for this change, leaving concurrent content edits unstaged, and verify the staged diff before committing
+
+## 5. Landing layout polish
+
+- [x] 5.1 Increase the desktop nav height and padding, then verify the search control keeps a 17 px gap above the header hairline at a 2816 px viewport
+- [x] 5.2 Reset inherited top margins on the ticker sets and verify both marquee copies start on the same line
+- [x] 5.3 Reset inherited top margins on grid children and verify both feature-card grids align the paired cards with the feature card's top and bottom edges
+- [x] 5.4 Reset inherited top margins on metric items and verify both metric headings share a row baseline
+- [x] 5.5 Push step links to the bottom of their columns with auto margins and verify all three links share the same top edge
+- [x] 5.6 Present the agent section as a bordered panel with a spectrum edge and primary CTA, and verify it in light, dark, and mobile screenshots
+- [x] 5.7 Run `npm run check:docs`, `npm run check:pwa`, and `npm run check:quality -- --no-build`, and verify the deployed page after the Pages workflow completes
