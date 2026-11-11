@@ -53,3 +53,11 @@ The landing page SHALL present the target matrix once and SHALL NOT include a de
 #### Scenario: Landing content signals
 - **WHEN** a reader views the landing page
 - **THEN** the target chips are the only target list and no standards ticker or quote panel appears
+
+
+### Requirement: Hero illustration presentation
+The hero illustration SHALL sit on the hero surface without a heavy outer drop shadow.
+
+#### Scenario: Hero in either theme
+- **WHEN** a reader views the hero in light or dark mode
+- **THEN** the illustration is separated by its own border and the hero surface without a heavy shadow

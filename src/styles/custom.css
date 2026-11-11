@@ -172,8 +172,8 @@
    room keeps the search field clear of the hairline on wide screens. */
 @media (min-width: 50em) {
 	:root {
-		--sl-nav-height: 5rem;
-		--sl-nav-pad-y: 1.25rem;
+		--sl-nav-height: 5.5rem;
+		--sl-nav-pad-y: 1.5rem;
 	}
 }
 
@@ -601,11 +601,6 @@ site-search button[data-open-modal] > kbd {
 	width: 100%;
 	max-width: 38rem;
 	margin-inline: auto;
-	filter: drop-shadow(0 30px 55px rgba(17, 19, 24, 0.16));
-}
-
-:root[data-theme='dark'] .hero .hero-html {
-	filter: drop-shadow(0 30px 55px rgba(0, 0, 0, 0.55));
 }
 
 .hero .hero-html img,
